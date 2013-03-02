@@ -1,0 +1,44 @@
+<table cellspacing="0" id="page-table">
+    <tr>
+        <td align="center">
+        <div style="font:12px '\5B8B\4F53',san-serif;">
+        	<form action="" onsubmit="return pageControlGo(this);">
+	        	&nbsp;共<b> <{$count}> </b>条记录
+	        	&nbsp;&nbsp;本页 <b><{$pageSize}></b> 条
+	        	&nbsp;&nbsp;本页从 <b><{$startRow}>-<{$endRow}></b> 条
+	        	&nbsp;&nbsp;<b><{$currentPage}>/<{$pageCount}></b>页
+	        	&nbsp;&nbsp;
+	        	<{if ($currentPage > 1)}>
+	        	<a href="#nogo" onclick="<{$goPage}>(1)">首页</a>&nbsp;&nbsp;
+	        	<a href="#nogo" onclick="<{$goPage}>(<{$currentPage - 1}>)">上一页</a>&nbsp;&nbsp;
+	        	<{/if}>
+	        	<b>
+	        		<{for (;$start <= $end; $start++)}>
+	        			<{if ($start == $currentPage)}>
+	        				<span style="padding:1px 2px;background:#BBB;color:white"><{$start}></span>&nbsp;
+	        			<{else}>
+	        				<a href="#nogo" onclick="<{$goPage}>(<{$start}>)"><{$start}></a>&nbsp;
+	        			<{/if}>
+	        		<{/for}>
+	        	</b>&nbsp;
+	        	<{if ($currentPage < $pageCount)}>
+	        	<a href="#nogo" onclick="<{$goPage}>(<{$currentPage + 1}>)">下一页</a>&nbsp;&nbsp;
+	        	<a href="#nogo" onclick="<{$goPage}>(<{$pageCount}>)">末页</a>&nbsp;&nbsp;
+	        	<{/if}>
+	        	<{if ($pageCount > 1)}>
+	        	
+	        	<input type="text" name="pagenumber" value="1" style="width:20px;height:17px !important;height:18px;border:1px solid #CCCCCC;">
+	        	<input type="submit" onclick="" value="GO" style="cursor:pointer;width:25px;height:18px;border:1px solid #CCCCCC;">&nbsp;
+	        	<{/if}>
+        	</form>
+       	</div>
+       	</td>
+    </tr>
+</table>
+<script>
+function pageControlGo(obj) {
+	var page = obj.pagenumber.value;
+	<{$goPage}>(page);
+	return false;
+}
+</script>

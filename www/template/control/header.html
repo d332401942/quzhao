@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title><{$meta->Title}></title>
+	<link rel="shortcut icon" href="/favicon.ico"> 
+	<meta content="<{$meta->Description}>" name="description">
+	<meta content="<{$meta->Keywords}>" name="keyword">
+	<{foreach ($css as $val)}>
+	<link type="text/css" rel="stylesheet" href="__RESOURCE__/css/<{$val}>.css">
+	<{/foreach}>
+	<{foreach ($js as $val)}>
+	<script type="text/javascript" src="__RESOURCE__/js/<{$val}>.js"></script>
+	<{/foreach}>
+	<script>
+	function changeType(obj) {
+		var currentObj = $('#js-search-type');
+		var currentName = currentObj.html();
+		var typeName = $(obj).html();
+		currentObj.html(typeName);
+		$(obj).html(currentName);
+	}
+
+	function mySubmit(obj) {
+		var currentObj = $('#js-search-type');
+		var currentName = currentObj.html();
+		var url = '__APP__';
+		if (currentName == '团购') {
+			url += '/tuan';
+		}
+		else if (currentName == '商品') {
+			url += '/search';
+		}
+		var keyword = $(obj).find('input[name="keyword"]').val();
+		url += '__LIMIT__keyword/' + encodeURI(keyword);
+		window.open(url);
+		$(obj).attr('action',url);
+		return false;
+	}
+	
+	function hitsLog(type,id) {
+		var data = {type:type,id:id};
+		$.ajax({
+			url: '__AJAX__/hits/log?stmp=' + new Date().toString(),
+			type: 'get',
+			data: data,
+			dataType: 'json',
+			//async: false,
+			success: function(data) {
+				return false;
+			}
+		});
+		return true;
+	}
+	</script>
+</head>
+<body>
+
+<div class="box">
+	<div  id="nav_left_layout">
+		<!-- <div class="mini_nav" >
+		<div class="mini_nav_box">
+		<h1>商品分类</h1>
+		<ul>
+		<li><a href="#" class="mini_nav_box_1"><span></span>女装</a></li>
+		<li><a href="#" class="mini_nav_box_2"><span></span>男装</a></li>
+		<li><a href="#" class="mini_nav_box_3"><span></span>鞋子</a></li>
+		<li><a href="#" class="mini_nav_box_4"><span></span>包包</a></li>
+		<li><a href="#" class="mini_nav_box_5"><span></span>内衣</a></li>
+		<li><a href="#" class="mini_nav_box_6"><span></span>母婴</a></li>
+		<li><a href="#" class="mini_nav_box_7"><span></span>家居</a></li>
+		<li><a href="#" class="mini_nav_box_8"><span></span>化妆品</a></li>
+		<li><a href="#" class="mini_nav_box_9"><span></span>电器</a></li>
+		</ul>
+		</div>
+		<div><img src="__RESOURCE__/images/l_nav_bt.png" class="png"/></div>
+		</div> -->
+	</div>
+	<div class="top">
+		<div class="logo"><a href="/"><img src="__RESOURCE__/images/logo.gif" border="0" /></a></div>
+		<div class="search_box">
+			<div class="search_box1" >
+				<form id="js-index-search-form" action="" method="get" onsubmit="return mySubmit(this);">
+					<input type="text" name="keyword"class="search_in"  onmouseout="this.style.borderColor=''" onfocus="if (value =='<{$keyword}>'){value =''}" value="<{$keyword}>"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='<{$keyword}>'}"/>
+					<div class="search_in_lei">
+						<ul>
+							<li>
+								<a href="#nogo"><span style="position:static;" id="js-search-type">商品</span><span><img src="__RESOURCE__/images/bn.gif" /></span></a>
+								<ul>
+									<li>
+										<a href="#nogo" onclick="changeType(this)">团购</a>
+									</li>
+									<!-- <li>
+										<a href="#nogo">商家</a>
+									</li> -->
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="search_pnt">
+					<a href="#nogo" onclick="$('#js-index-search-form').submit();"></a>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="top_nav">
+			<{foreach ($menu->menu as $key => $arr)}>
+				<a href="<{$arr['url']}>" target="<{$arr['target']}>" <{if ($type == $key)}>class="nav_open"<{/if}> target="">
+					<img src="__RESOURCE__/images/<{$arr['image']}>" />
+					<h2><{$arr['name']}></h2>
+				</a>
+			<{/foreach}>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<{include '__TEMPLATE__/header.html'}>
+<form action="" method="post">
+	<input type="hidden" name="id" value="<{$model->Id}>" />
+	<table>
+		<tr>
+			<td>标题：</td><td><input value="<{$model->Title}>" name="title" type="text" /></td>
+		</tr>
+		<tr>
+			<td>时间：</td><td><{$date}></td>
+		</tr>
+		<tr>
+			<td>点击量：</td><td><input value="<{$model->Hits}>"  name="hits" type="text" /></td>
+		</tr>
+		<tr>
+			<td>Title：</td><td><input value="<{$model->SEOTitle}>"  name="seotitle" type="text" /></td>
+		</tr>
+		<tr>
+			<td>keywords：</td><td><input value="<{$model->SEOKeywords}>" name="seokeywords" type="text" /></td>
+		</tr>
+		<tr>
+			<td>description：</td><td><input value="<{$model->SEODescription}>" name="seodescription" type="text" /></td>
+		</tr>
+		<tr>
+			<td>状态：</td>
+			<td><input value="<{if ($model->Source)}><{$model->Source}><{else}>矮胖胖<{/if}>" name="source" type="text" /></td>
+		</tr>
+		<tr>
+			<td>来源：</td>
+			<td>
+				<select name="status">
+					<option <{if ($model->Status == NewsDataModel::STATUS_ON)}>selected<{/if}> value="<{echo NewsDataModel::STATUS_ON}>">开启</option>
+					<option <{if ($model->Status == NewsDataModel::STATUS_OFF)}>selected<{/if}> value="<{echo NewsDataModel::STATUS_OFF}>">关闭</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>内容：</td><td><textarea id="content" name="content" style="width:600px; height:200px;"><{$model->Content}></textarea><{$editor}></td>
+		</tr>
+		<tr>
+			<td></td><td><button type="submit">保存</button></td>
+		</tr>
+	</table>
+</form>
+
+<{include '__TEMPLATE__/footer.html'}>

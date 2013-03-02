@@ -1,0 +1,89 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post">
+	<table>
+		<tr>
+			<td>类名：</td>
+			<td>
+				<input name="name" type="text" />
+			</td>
+			<td>
+				排序：
+			</td>
+			<td>
+				<input name="sort" type="text" style="width:50px" />
+			</td>
+			<td>
+				<button type="submit">添加</button>
+			</td>
+		</tr>
+	</table>
+</form>
+<div class="list-div">
+	<table>
+		<tr>
+			<th>类名</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+		<{foreach ($models as $model)}>
+			<tr>
+				<td>
+					<span onclick="startUpdate(this);"><{$model->name}></span>
+					<input  style="display:none" onblur="update(this,<{$model->id}>,'name')" name="name" class="js-update-value" value="<{$model->name}>" />
+				</td>
+				<td>
+					<span onclick="startUpdate(this);"><{$model->sort}></span>
+					<input style="display:none" name="sort" onblur="update(this,<{$model->id}>,'sort')" class="js-update-value" value="<{$model->sort}>" />
+				</td>
+				<td>
+					<a href="#nogo" onclick="del(<{$model->id}>)"><button>删除</button></a>
+				</td>
+			</tr>
+		<{/foreach}>
+	</table>
+</div>
+<{include '__TEMPLATE__/footer.html'}>
+
+<script>
+function startUpdate(obj) {
+	$(obj).hide();
+	$(obj).next().show();
+}
+
+function update(obj,id,type) {
+	var oldValue = $(obj).prev().html();
+	var value = $(obj).val();
+	var data = {id:id,value:value};
+	console.log(data);
+	var url = '__AJAX__/homebs/updateClassSort?stmp=' + new Date().toString();
+	if (type == 'name') {
+		url = '__AJAX__/homebs/updateClassName?stmp=' + new Date().toString();
+	}
+	$.ajax({
+		url: url,
+		data: data,
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function del(id) {
+	if (!confirm('确定要删除该分类？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/homebs/delClass?stmp='+ new Date().toString(),
+		type: 'post',
+		data: {id:id},
+		success: function(data) {
+			window.location.reload();
+		}
+	})
+}
+</script>

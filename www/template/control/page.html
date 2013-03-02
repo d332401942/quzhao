@@ -1,0 +1,26 @@
+<{if ($start < $end)}>
+<div class="pag">
+		
+		<a href="#nogo" onclick="<{$goPage}>(<{$currentPage - 1}>)">上一页</a>
+		<{for (;$start <= $end; $start++)}>
+     		<{if ($start == $currentPage)}>
+     			<a href="#" class="pag_open"><{$start}></a>
+     		<{else}>
+     			<a href="#nogo" onclick="<{$goPage}>(<{$start}>)"><{$start}></a>
+     		<{/if}>
+     	<{/for}>
+     	<{if ($end < $pageCount)}>
+       		...
+       		<a href="#nogo" onclick="<{$goPage}>(<{$pageCount}>)"><{$pageCount}></a>
+       	<{/if}>
+       	<a href="#nogo" onclick="<{$goPage}>(<{$currentPage + 1}>)">下一页</a>
+	</div>
+<script>
+
+function pageControlGo(obj) {
+	var page = obj.pagenumber.value;
+	<{$goPage}>(page);
+	return false;
+}
+</script>
+<{/if}>

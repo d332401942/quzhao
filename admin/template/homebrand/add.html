@@ -1,0 +1,50 @@
+<{include '__TEMPLATE__/header.html'}>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data">
+	<input name="oldpic" value="<{$model->pic}>" type="hidden" />
+	<input name="id" value="<{$model->id}>" type="hidden" />
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>商家名称：</td>
+				<td>
+					<input name="name" type="text" value="<{$model->name}>" />
+				</td>
+			</tr>
+			<tr>
+				<td>图片：</td>
+				<td><input name="pic" type="file" /></td>
+			</tr>
+			<tr>
+				<td>链接：</td>
+				<td><input name="href" type="text" value="<{$model->href}>" /></td>
+			</tr>
+			<tr>
+				<td>介绍：</td>
+				<td>
+					<textarea rows="" cols="20" name="info"><{$model->info}></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>排序：</td>
+				<td><input name="sort" style="width:25px;" type="text" value="<{$model->sort}>" /></td>
+			</tr>
+			<tr>
+				<td>是否热门品牌：</td>
+				<td>
+					<select name="ishot">
+						<option value="0">否</option>
+						<option <{if ($model->ishot == 1)}>selected<{/if}> value="1">是</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="class="add-div add-div-img">
+		<img src="/<{$model->pic}>" />
+	</div>
+</form>
+
+<{include '__TEMPLATE__/footer.html'}>

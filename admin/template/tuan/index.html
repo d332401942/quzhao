@@ -1,0 +1,184 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+<div class="content-select">
+	<div>
+	<form id="js-go-form" action="" method="get" onsubmit="">
+		<input type="hidden" name="page" value="<{$pageCore->currentPage}>" />
+		<table>
+			<tr>
+				<td>地区</td>
+                <td>
+                    <select name="city">
+						<option value="">全部</option>
+                        <{foreach ($headToModels as $h => $headModel)}>
+                            <{foreach ($headModel as $model)}>
+                            <option <{if ($model->id == $city)}>selected<{/if}> value="<{$model->id}>"><{$h}> -- <{$model->name_cn}></option>
+                            <{/foreach}>
+                        <{/foreach}>
+                    </select>
+                </td>
+                <td>区域</td>
+                <td>
+                    <select name="region">
+                        <option value="">全部</option>
+                        <{foreach ($regionModels as $model)}>
+                            <option <{if ($region == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name_cn}></option>
+                        <{/foreach}>
+                    </select>
+                </td>
+			
+				<td>大类</td>
+				<td>
+					<select name="class1">
+					<option value="">全部</option>
+						<{foreach ($classModels as $model)}>
+							<option <{if ($class1 == $model->code)}>selected<{/if}> value="<{$model->code}>"><{$model->name}></option>
+						<{/foreach}>
+					</select>
+				</td>
+				<td>小类</td>
+				<td>
+					<select name="class2">
+					<option value="">全部</option>
+						<{foreach ($classModels2 as $model)}>
+							<option <{if ($class2 == $model->code)}>selected<{/if}> value="<{$model->code}>"><{$model->name}></option>
+						<{/foreach}>
+					</select>
+					<div style="display:none;">
+						<{foreach ($classModels as $model)}>
+							<div id="js-class-<{$model->code}>">
+								<option value="">全部</option>
+								<{foreach ($model->children as $m)}>
+									<option <{if ($class2 == $m->code)}>selected<{/if}> value="<{$m->code}>"><{$m->name}></option>
+								<{/foreach}>
+							</div>
+						<{/foreach}>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td>
+				<select name="sort">
+					<option value="id">默认</option>
+					<option <{if ($sortStr == 'bought')}>selected<{/if}> value="bought">人气</option>
+					<option <{if ($sortStr == 'cur_price')}>selected<{/if}> value="cur_price">最低价格</option>
+				</select>
+				</td>
+				<td>
+					关键词
+				</td>
+				<td>
+					<input name="keyword" value="<{$keyword}>" />
+				</td>
+				
+				<td colspan="4">
+					<button>筛选</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
+		<th style="width:15px;">ID</th>
+		<th>名称</th>
+		<th style="width:20px;">来源</th>
+		<th>URL</th>
+		<th>入库时间</th>
+		<th style="width:85px;">来源</th>
+		<th style="width:85px;">操作</th>
+	</tr>
+
+	<{foreach ($models as $model)}>
+	<tr>
+		<td><input type="checkbox" value="<{$model->id}>"/></td>
+		<td><{$model->id}></td>
+		<td><{$model->name}></td>
+		<td><{$model->webname}></td>
+		<td><a href="<{$model->pdt_url2}>" target="_blank"><{$model->pdt_url2|truncate:50}></a></td>
+		<td><{$model->ctime}></td>
+		<td><{$model->webname}></td>
+		<td>
+			<button onclick="recommend(<{$model->id}>)">推荐到主页</button>
+			<button onclick="del(<{$model->id}>)">删除</button>
+		</td>
+	</tr>
+	<{/foreach}>
+</table>
+</div>
+
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+$('select[name="city"]').change(function(){
+		var id = $(this).val();
+		getRegion(id);
+	}
+);
+
+$('select[name="class1"]').change(function(){
+	var html=$('#js-class-' + $(this).val()).html();
+	$('select[name="class2"]').html(html);
+});
+
+function goPage(page) {
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+}
+
+function getRegion(id) {
+	var obj = $('select[name="region"]');
+	$.ajax({
+		url:'__AJAX__/tuan/getRegionByCiy?stmp='+ new Date().toString(),
+		type: 'post',
+		data: {id:id},
+		dataType: 'json',
+		success: function(data) {
+			str = '<option value="">全部</option>';
+			if (data.result) {
+				for (var i in data.result) {
+					var info = data.result[i];
+					str += '<option value="'+info.id+'">'+info.name_cn+'</option>';
+				}
+			}
+			obj.html(str);
+		}		
+	});
+}
+
+function recommend(id) {
+	$.ajax({
+		url: '__AJAX__/tuan/changeIstj?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {id:id,istj:1},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				alert('推荐成功');
+			}
+		}
+	});
+}
+
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/tuan/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {id:id},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+</script>

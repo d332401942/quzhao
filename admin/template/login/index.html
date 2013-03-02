@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>登陆</title>
+	
+</head>
+<body style="background:#ccc;">
+<div style="width:100%">
+	<form action="" method="post" style="margin:200px auto;width:250px;">
+		<table>
+			<tr>
+				<td>账号：</td>
+				<td><input name="username" type="text" /></td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td><input name="password" type="password" /></td>
+			</tr>
+			<tr>
+				<td>验证码：</td>
+				<td>
+					<input name="verify" style="width:60px;" type="text" />
+					<img src="__APP__/verify" onclick="javascript:this.src='__APP__/verify?stmp='+new Date().toString();" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td><button style="float:right;" type="submit">登陆</button></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

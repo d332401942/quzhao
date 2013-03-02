@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理页面</title>
+
+<script src="__RESOURCE__/js/prototype.lite.js" type="text/javascript"></script>
+<script src="__RESOURCE__/js/moo.fx.js" type="text/javascript"></script>
+<script src="__RESOURCE__/js/moo.fx.pack.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function doclick(ob){
+        var nu = document.getElementsByTagName("div").length;
+        for (var i=0; i<nu; i++){
+            document.getElementsByTagName("div")[i].style.color="#000";
+        }
+        ob.style.color="green";
+    }
+</script>
+<link href="__RESOURCE__/css/left.css" rel="stylesheet" type="text/css" />
+<style>
+    body,ul,li{
+        width:50px;
+        margin:0px;
+        padding:0px;
+    }
+    .left_main {
+        font-size:16px;
+        background:url(__RESOURCE__/images/leftmbg1.gif) no-repeat 14px;
+        color: #475645;
+        cursor: pointer;
+        font-weight: bold;
+        width:30px;
+        height: 37px !important;
+        padding: 6px 4px 4px 10px;
+        word-wrap: break-word;
+    }
+    a {
+        font-weight:800;
+        text-decoration:none;
+    }
+    td {
+        width:20px;
+    }
+</style>
+</head>
+<body>
+    <div style="text-align:right;">
+        <table style="float:right;">
+            <{foreach ($menu as $val)}>
+            <tr>
+                <td><a href="__APP__/<{$val['url']}>" target="leftFrame"><div onclick="doclick(this)" class="left_main"><{$val['name']}></div></a></td></td>
+            </tr>
+            <{/foreach}>
+        </table>
+    </div>
+</body>
+</html>

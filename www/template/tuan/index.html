@@ -1,0 +1,396 @@
+<{uc class="HeaderControlView" meta=$meta keyword=$keyword type=NavmenuModel::MENU_TUAN css="css,city" js="jquery,jquery.form"}>
+<div class="box tian_banner js-banner-div">
+	<div > 
+		<{foreach ($adModels as $key => $model)}>
+			<a class="js-img-show-a" style="display:<{if ($key)}>none;<{else}>block;<{/if}>" href="<{$model->href}>" target="__blank"><img src="/<{$model->pic}>" /></a>
+		<{/foreach}>
+	</div>
+	<div class="tian_banner_list">
+		<{if (count($adModels) > 1)}>
+		<{foreach ($adModels as $key => $model)}>
+			<a href="#nogo" onclick="changeImg(this)" class="<{if (!$key)}>open3<{/if}> js-img-button"><{$key + 1}></a>
+		<{/foreach}>
+		<{/if}>
+	</div>
+</div>
+<script>
+<{if (count($adModels) > 1)}>
+var img_n = 1;
+var img_max = $('.js-img-button').length;
+var img_loop = null;
+for (var i=1; i < img_max; i++) {
+	doChangeImg(i,0);
+}
+doChangeImg(0,1);
+setLoop();
+function setLoop() {
+	img_loop = setInterval(function(){
+		if (img_n >= img_max) {
+			img_n = 0;
+		} 
+		doChangeImg(img_n);
+		img_n++;
+	},3000);
+}
+$('.js-banner-div').hover(function(){
+	if (img_loop) {
+		clearInterval(img_loop);
+		img_loop = null;
+	}
+},function(){
+	if (!img_loop) {
+		setLoop();
+	}
+});
+<{/if}>
+function changeImg(obj) {
+	var num = $('.js-img-button').index($(obj));
+	img_n = num + 1;
+	doChangeImg(num)
+}
+
+function doChangeImg(n,speed) {
+	
+	var imgObj = $('.js-img-show-a');
+	var showImgObj = $('.js-img-show-a:visible');
+	var buttonObj = $('.js-img-button');
+	buttonObj.removeClass('open3');
+	
+	buttonObj.eq(n).addClass('open3');
+	showImgObj.slideUp(speed);
+	imgObj.eq(n).slideDown(speed);
+}
+var hoverCode = null;
+</script>
+
+<div class="box tuan ">
+<div class="cont_title">
+	<!--<h1>精品团购</h1>-->
+	<h2><span id="js-city-name"><{$cityName}></span><font><a href="#nogo" onclick="showCity()">切换城市</a></font></h2>
+	<div class="sotuan">
+		<div class="sotuan_pnt"><a href="#nogo" onclick="doSearch()"></a></div>
+		<input name="" id="js-search-keyword" type="text"  class="sotuan_in" onmouseout="this.style.borderColor=''" onfocus="if (value =='搜团购'){value =''}" value="<{if ($keyword)}><{$keyword}><{else}>搜团购<{/if}>"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='搜团购'}"//>
+	</div>
+</div>
+<div class="tian_lei">
+<ul>
+	<li class="tian_lei_l">分类：</li>
+	<li class="tian_lei_r">
+		<a href="#nogo" class="js-search-class <{if (!$class1)}>open4<{/if}>" onclick="searchByClass(this,0)">全部</a>
+		<{foreach ($classModels as $model)}>
+			<a href="#nogo" code="<{$model->code}>" class="js-search-class js-search-class1 <{if ($class1 == $model->code)}>open4<{/if}>" onclick="searchByClass(this,<{$model->code}>)"><{$model->nickname}><span></span></a>
+			<div style="display:none;">
+				<{foreach ($model->children as $m)}>
+					<a href="#nogo" class="js-search-class js-search-class2 <{if ($class2 == $m->code)}>open4<{/if}>" onclick="searchByClass2(this,<{$m->code}>)"><{$m->nickname}><span></span></a>
+				<{/foreach}>
+			</div>
+		<{/foreach}>
+		<ul id="js-class-children" class="tian_x_lei" style="display:none;position:relative;">
+		</ul>
+		<script>
+			$('.js-search-class1').each(function(){
+				if ($(this).is('.open4')) {
+					var this_ = $(this);
+					var html = $(this).next().html();
+					html = '<li>' +html +'</li>';
+					$('#js-class-children').html(html).show();
+					hoverCode = $(this).attr('code');
+					$(function(){
+						setClassLeft(this_,$('#js-class-children'));
+					});
+				}
+			});
+		</script>
+	</li>
+</ul>
+
+<ul>
+<li class="tian_lei_l">区域：</li>
+<li class="tian_lei_r" id="js-region-div">
+	<a href="#nogo" class="js-search-region <{if (!$region)}>open4<{/if}>" onclick="searchByRegion(this,'')">全部</a>
+	<div>
+		<{foreach ($regionModels as $model)}>
+			<a href="#nogo" class="js-search-region <{if ($region == $model->id)}>open4<{/if}>" onclick="searchByRegion(this,<{$model->id}>)"><{$model->name_cn}><!-- <span>4364</span> --></a>
+		<{/foreach}>
+	</div>
+</li>
+</ul>
+
+<ul>
+<li class="tian_lei_l">排序：</li>
+<li class="tian_lei_r">
+	<a href="#nogo" class="js-search-sort <{if (!$sortStr)}>open4<{/if}>" onclick="setOrder(this,'')">默认</a>
+	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'bought')}>open4<{/if}>" onclick="setOrder(this,'bought')">人气</a>
+	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'cur_price')}>open4<{/if}>" onclick="setOrder(this,'cur_price')">最低价格</a>
+	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'id')}>open4<{/if}>" onclick="setOrder(this,'id')">最近</a>
+</li>
+</ul>
+
+
+</div>
+<div id="js-content">
+<{if ($models)}>
+<div class="nine">
+	<ul>
+		<{foreach ($models as $model)}>
+		<li dataId="<{$model->id}>">
+			<h2>
+				<a href="<{$model->pdt_url2|screenUrl}>" onclick="return hitsLog(3,<{$model->id}>)" target="_blank" title="<{$model->name}>"><{$model->name|truncate:80}></a>
+			</h2>
+			<div class="nine_tu">
+				<a href="<{$model->pdt_url2|screenUrl}>" onclick="return hitsLog(3,<{$model->id}>)" target="_blank" title="<{$model->name}>"> 
+					<img src="<{$model->pic_url}>" />
+				</a>
+			</div>
+			<div class="nine_cont">
+				<input name="id" type="hidden" value="<{$model->id}>" />
+				<h1><span>￥</span><{$model->cur_price}></h1>
+				<div class="tian_pnt"><a href="<{$model->pdt_url2|screenUrl}>" onclick="return hitsLog(3,<{$model->id}>)" target="_blank" >去看看</a></div>
+				<h3>
+				<span >原价：<{$model->ori_price}>元</span>
+				<span class="nine_cont_sale">折扣：<{$model->rebate|numerRound:1}>折</span>
+				<span class="nine_cont_post"><font><{$model->bought}></font>人已购买</span>
+				</h3>
+				<h3 id="js-tuan-over-time-<{$model->id}>">
+				<span>所剩时间<{echo (int)((strtotime($model->end_time) - time()) / 24 / 3600)}>天</span>
+				<span style="float:right; text-align:right;"><{$model->webname}></span>
+				<!--  <strong class="js-over-time">1</strong><strong class="js-over-time">2</strong>:<strong class="js-over-time">2</strong><strong class="js-over-time">3</strong>:<strong class="js-over-time">5</strong><strong class="js-over-time">8</strong> -->
+				</h3>
+				<script>
+					var overTime = "<{strtotime($model->end_time) - time() - 8*3600|date_format:'His'}>";
+					var timeObj = $('#js-tuan-over-time-<{$model->id}>').find('.js-over-time');
+					for (var i=0; i<=6; i++) {
+						timeObj.eq(i).html(overTime[i]);
+					}
+				</script>
+			</div>
+		</li>
+		<{/foreach}>
+	</ul>
+</div>
+<{uc class="PageControlView" pageCore="$pageCore"}>
+<{else}>
+<div class="error_box">
+	<div class="error_box_l">
+		<img src="__RESOURCE__/images/error.gif">
+	</div>
+	<div class="error_box_r">
+		<h2>很抱歉，没有找到有关<!-- ”<strong>ssd</strong> ” -->的团购信息。</h2>
+		<h3>建议您：</h3>
+		<ul>
+			<li>1. 查看输入是否有误</li>
+			<li>2. 在更多分类中查找</li>
+			<li>3. 调整关键词</li>
+		</ul>
+		<div class="error_box_r_pnt"><a href="#nogo" onclick="window.location.href='/tuan';">返回团购首页</a></div>
+	</div>
+</div>
+<{/if}>
+</div>
+
+
+</div>
+<{uc class="FooterControlView"}>
+<!-- 城市 start -->
+<div id="city_list" bk="" class="pop_city" style="top: 295px; left: 211.5px; display: none;">
+	<div class="radius_top"></div>
+	<div class="cont">
+		<h3>
+			城市列表<span class="close city_close" onclick="$('#city_list').hide();" title="关闭"></span>
+		</h3>
+		<div class="city_list">
+			<ul>
+				<li>
+					<h4>热门</h4>
+					<p>
+						<{foreach ($hotCityModels as $model)}>
+							<a city="<{$model->name_en}>" href="#nogo" onclick="goCity(<{$model->id}>,'<{$model->name_cn}>')"><{$model->name_cn}></a>
+						<{/foreach}>
+					</p>
+				</li>
+				<li>
+					<h4>拼音</h4>
+					<div class="filter_bar">
+						<{foreach ($cityHead as $value)}>
+							<a href="#nogo" class="<{if ($value == $headLetter)}>current<{/if}> js-city-head" onclick="selectCity(this,'<{$value}>')" class=""><{$value}></a>
+						<{/foreach}>
+					</div>
+					<div class="city_wrap">
+						<{foreach ($headToModels as $key => $models)}>
+							<p class="js-city-div" key="<{$key}>" style="display: <{if ($key == $headLetter)}>block<{else}>none<{/if}>;">
+								<{foreach ($models as $model)}>
+									<a href="#nogo" onclick="goCity(<{$model->id}>,'<{$model->name_cn}>')"><{$model->name_cn}></a>
+								<{/foreach}>
+							</p>
+						<{/foreach}>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="radius_bottom"></div>
+</div>  
+<!-- 城市 end -->
+<!-- 搜索使用的隐藏form -->
+<form id="js-search-form" method="post" style="display:none">
+	<input name="class1" value="<{$class1}>" />
+	<input name="class2" value="<{$class2}>" />
+	<input name="city" value="<{$city}>" />
+	<input name="region" value="<{$region}>" />
+	<input name="sort" value="<{$sortStr}>" />
+	<input name="page" value="<{$page}>" />
+</form>
+<!-- 搜索使用的隐藏form -->
+<script>
+//doSearch();
+function goPage(page) {
+	$('#js-search-form').find('input[name="page"]').val(page);
+	doSearch(true);
+}
+
+function doSearch(isPage) {
+	var contentObj = $('#js-content');
+	if (!isPage) {
+		$('#js-search-form').find('input[name="page"]').val(1);
+	}
+	var keyword = $('#js-search-keyword').val();
+	if (keyword == '搜团购') {
+		keyword = '';
+	}
+	var data = $('#js-search-form').formToArray();
+	var url = '__APP__/tuan';
+	if (data || keyword) {
+		url += '__LIMIT__';
+		for (var i in data) {
+			var info = data[i];
+			if (info.name && info.value) {
+				url += '/' + info.name;
+				url += '/' + info.value;
+			}
+		}
+		if (keyword) {
+			url += '/keyword/' + keyword;
+		}
+	}
+	url = encodeURI(url);
+	window.location.href = url;
+	return;
+	$('#js-search-form').ajaxSubmit({
+		url:'__APP__/tuan/search?stmp='+new Date().toString(),
+		data: {keyword:keyword},
+		success:function(html) {
+			contentObj.html(html);
+		}
+	});
+}
+
+function showCity() {
+	var obj = $('#city_list');
+	if (obj.is(':visible')) {
+		obj.hide();
+	} 
+	else {
+		obj.show();
+	}
+}
+
+function selectCity(obj,letter) {
+	$('.js-city-head').removeClass('current');
+	$(obj).addClass('current');
+	$('.js-city-div').hide();
+	$('.js-city-div[key="'+letter+'"]').show();
+}
+
+function goCity(code,name) {
+	$('#city_list').hide();
+	$('#js-city-name').html(name);
+	$('#js-search-form').find('input[name="city"]').val(code);
+	//获取城市下的区域
+	$.ajax({
+		url:'__AJAX__/tuan/getRegionByCiy?stmp='+ new Date().toString(),
+		data: {id:code},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				var result = data.result;
+				var str = '<a href="#nogo" class="js-search-region open4" onclick="searchByRegion(this,\'\')">全部</a>';
+				str += '<div>';
+				for (var i in result) {
+					str += '<a href="#nogo" class="js-search-region" onclick="searchByRegion(this,'+result[i].id+')">'+result[i].name_cn+'<!-- <span>4364</span> --></a>';
+				}
+				str += '</div>';
+				$('#js-region-div').html(str);
+			}
+		}
+	});
+	doSearch();
+}
+
+function searchByClass2(obj,id) {
+	$('.js-search-class').removeClass('open4');
+	
+//	$(obj).addClass('open4');
+	$('#js-search-form').find('input[name="class1"]').val(hoverCode);
+	$('#js-search-form').find('input[name="class2"]').val(id);
+	doSearch();
+}
+
+
+function searchByClass(obj,id) {
+	$('.js-search-class').removeClass('open4');
+	$(obj).addClass('open4');
+	$('#js-search-form').find('input[name="class2"]').val('');
+	$('#js-search-form').find('input[name="class1"]').val(id);
+	doSearch();
+}
+
+function searchByRegion(obj,id) {
+	$('.js-search-region').removeClass('open4');
+	$(obj).addClass('open4');
+	$('#js-search-form').find('input[name="region"]').val(id);
+	doSearch();
+}
+
+function setOrder(obj,field) {
+	$('.js-search-sort').removeClass('open4');
+	$(obj).addClass('open4');
+	$('#js-search-form').find('input[name="sort"]').val(field);
+	doSearch();
+}
+
+$('.js-search-class1').hover(function(e){
+	if (e.handleObj.type != 'mouseover') {
+		return;
+	}
+	if ($(this).attr('code') == hoverCode) {
+		return;
+	}
+	hoverCode = $(this).attr('code');
+	var childrenObj = $(this).next();
+	if (!childrenObj.find('a').length) {
+		$('#js-class-children').html('').hide();
+		return;
+	}
+	var html = childrenObj.html();
+	html = '<li>' +html +'</li>';
+	var ulObj = $('#js-class-children');
+	ulObj.html(html).show();
+	setClassLeft($(this),ulObj)
+});
+var liLeft;
+function setClassLeft(hoverObj,setObj) {
+	//得到它的LEFT
+	var left = hoverObj.offset().left;
+	if (!liLeft) {
+		liLeft = setObj.offset().left;
+	}
+	var diff = left - liLeft - (setObj.width() / 2) + 10;
+	//console.log(left +'-----'+liLeft +'-----'+ (setObj.width() / 2)+'-----'+1);
+	if (diff < 0) {
+		diff = 0;
+	}
+	setObj.find('li').attr('isset','1');
+	setObj.get(0).style.left = diff + 'px';
+}
+</script>

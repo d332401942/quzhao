@@ -1,0 +1,424 @@
+
+
+<{uc class="HeaderControlView" meta=$meta css="css" js="jquery,jquery.cookie"}>
+<script>
+var data = [];
+var overTiemFloatData = [];
+</script>
+<div class="box">
+	<div class="top_banner">
+		<div  class="top_banner_cont" ><a href="#"><img src="__RESOURCE__/images/top_banner.gif" /></a></div>
+		<div class="top_banner_pag">
+			<div class="top_banner_pag_l"><a href="#"><img src="__RESOURCE__/images/b_l.png"  class="png"/></a></div>
+			<div class="top_banner_pag_r"><a href="#"><img src="__RESOURCE__/images/b_r.png" class="png" /></a></div>
+		</div>
+	</div>
+	<div class="top_banner_r"><a href="__APP__/tuan__LIMIT__/class1/11/class2/1102/city/10100/page/1"><img src="__RESOURCE__/images/IMG_05.jpg" /></a></div>
+</div>
+<div class="box">
+<div class="cont_title">
+	<h1>9.9包邮<font>每天两场！11:00 秒杀正在进行</font></h1>
+	<h3><a href="__APP__/nine" target="_blank">更多</a></h3>
+</div>
+<div class="nine">
+<ul>
+<{foreach ($homeTjDataModels as $model)}>
+<li>
+	<h2>
+		<a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank"><{$model->name}></a>
+	</h2>
+	<div class="nine_tu">
+		<a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank" title="<{$model->name}>"> 
+		<img src="<{$model->pic|parsePicpath}>" /></a>
+	</div>
+	<div class="nine_cont <{if ($model->state == HomeTjDataDataModel::STATE_EMPTY)}>hui<{/if}>">
+		<h1><span>￥</span><{$model->price}></h1>
+		<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
+			<div class="nine_cont_pnt"><a class="over" target="_blank" onclick="return hitsLog(1,<{$model->id}>)" href="<{$model->href}>">卖光了</a></div>
+		<{else if($model->time_start > time())}>
+			<div class="nine_cont_pnt"><a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank" class="imm">即将开始</a></div>
+		<{else}>
+			<div class="nine_cont_pnt"><a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank">去抢购</a></div>
+		<{/if}>
+		<h3>
+			<span>原价：<{$model->sprice}>元</span>
+			<span class="nine_cont_sale"><{if ((int)$model->sprice)}>折扣：<{$model->price / $model->sprice|numerRound:1}>折<{/if}></span>
+			<span class="nine_cont_post">包邮</span>
+		</h3>
+		<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
+			<h3 class="zl">
+			明天早点来
+			</h3>
+		<{else if($model->time_start > time())}>
+			<h3>
+				开始时间：<font><{$model->time_start|date_format:'Y年m月d日'}></font>
+			</h3>
+		<{else}>
+			<h3 id="js-over-time-<{$model->id}>">
+			</h3>
+			<script>
+				var overTime = <{$model->time_end - time()}>;
+				data.push({obj:$('#js-over-time-<{$model->id}>'),time:overTime});
+			</script>
+		<{/if}>
+	</div>
+</li>
+<{/foreach}>
+
+
+</ul>
+</div>
+</div>
+
+<div class="box">
+	<div class="cont_title">
+		<h1>超值单品<font>趣找帮您淘最值的网购正品</font></h1>
+		<h3><a href="__APP__/dp" target="_blank">更多</a></h3>
+	</div>
+	<div class="dp_box">
+		<div class="dp_box_l">
+			<{foreach ($bomeBrandAdModels as $key => $model)}>
+ 				<a name="<{$model->name}>" price="<{$model->price}>" class="js-dp-ad-pic" href="<{$model->href}>" target="_blank">
+					<div class="dp_box_l_tu">
+						<img src="<{$model->pic|parsePicpath}>" alt="" />
+					</div>
+				</a>
+			<{/foreach}>
+			<div class="dp_box_l_dm">
+				<h1 id="js-name"><{$model->name}></h1>
+				<h2 id="js-price"><font>￥</font><{$model->price}></h2>
+			</div>
+			<div class="top_banner_pag2">
+				<div class="top_banner_pag2_l" onclick="changeDpAdL();"><a href="#nogo"><img src="__RESOURCE__/images/b_l2.png"  class="png"/></a></div>
+				<div class="top_banner_pag2_r" onclick="changeDpAdR();"><a href="#nogo"><img src="__RESOURCE__/images/b_r2.png" class="png" /></a></div>
+			</div>
+		</div>
+		<div class="dp_box_r">
+			<ul>
+				<{foreach($dpModels as $model)}>
+				<li>
+					<h2><a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank"><{$model->name}></a></h2>
+					<h3 ><font>￥</font><{$model->price}></h3>
+					<!-- <h4>原价<font><{$model->sprice}></font></h4> -->
+					<div class="dp_box_r_pnt ">
+						<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank">去购买</a>
+					</div>
+					<div class="dp_box_r_tu">
+					<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank">
+					<img src="<{$model->pic|parsePicpath}>" />
+					</a>
+					</div>
+				</li>
+				<{/foreach}>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="box">
+<div class="cont_title">
+	<h1>品牌特卖<font>100%品质保证，100%优惠</font></h1>
+	<h3><a href="__APP__/brand">更多</a></h3>
+</div>
+<div class="pp">
+	<{foreach ($brandDataModels as $model)}>
+	<ul>
+		<a href="<{$model->tjhref}>" onclick="return hitsLog(2,<{$model->id}>)" target="_blank">
+			<li class="pp_l">
+				<h2><img src="<{$model->pic|parsePicpath}>" /></h2>
+				<h2><{$model->title1}></h2>
+				<h1><{$model->title2}></h1>
+				<h2><{$model->time_start|date_format:'m月d日'}>-<{$model->time_end|date_format:'m月d日'}></h2>
+			</li>
+			<li class="pp_r"><img src="<{$model->tjpic|parsePicpath}>" /></li>
+			<li class="pp_fu" id="js-over-time-<{$model->id}>">
+			</li>
+			<script>
+				var overTimeDp = <{$model->time_end - time()}>;
+				overTiemFloatData.push({obj:$('#js-over-time-<{$model->id}>'),time:overTimeDp});
+			</script>
+		</a>
+	</ul>
+	<{/foreach}>
+
+</div>
+<div class="pp_rr">
+	<h2>热门品牌</h2>
+	<ul>
+		<{foreach ($hotHomeBrandModels as $model)}>
+		<li>
+			<a href="<{$model->href}>" target="_blank"><img src="<{$model->pic|parsePicpath}>" /></a>
+		</li>
+		<{/foreach}>
+	</ul>
+</div>
+</div>
+
+<div class="box">
+<div class="cont_title">
+<h1>精品团购<font>最热团购推荐，吃喝玩乐样样有</font></h1>
+<h3><a href="__APP__/tuan">更多</a></h3>
+</div>
+<div class="nine">
+	<ul>
+		<{foreach ($tuanModels as $model)}>
+		<li>
+			<h2>
+				<a href="<{$model->pdt_url2|screenUrl}>" onclick="return hitsLog(3,<{$model->id}>)" target="_blank" title="<{$model->name}>"><{$model->name|truncate:80}></a>
+			</h2>
+			<div class="nine_tu">
+				<a href="<{$model->pdt_url2|screenUrl}>" onclick="return hitsLog(3,<{$model->id}>)" target="_blank" title="<{$model->name}>"> 
+					<img src="<{$model->pic_url}>" />
+				</a>
+			</div>
+			<div class="nine_cont">
+				<input name="id" type="hidden" value="<{$model->id}>" />
+				<h1><span>￥</span><{$model->cur_price}></h1>
+				<div class="tian_pnt"><a href="<{$model->pdt_url2|screenUrl}>" onclick="return hitsLog(3,<{$model->id}>)" target="_blank" >去看看</a></div>
+				<h3>
+				<span >原价：<{$model->ori_price}>元</span>
+				<span class="nine_cont_sale">折扣：<{$model->rebate|numerRound:1}>折</span>
+				<span class="nine_cont_post"><font><{$model->bought}></font>人已购买</span>
+				</h3>
+				<h3 id="js-tuan-over-time-<{$model->id}>">
+				<span>所剩时间<{echo (int)((strtotime($model->end_time) - time()) / 24 / 3600)}>天</span>
+				<span style="float:right; text-align:right;"><{$model->webname}></span>
+				</h3>
+				<script>
+					var overTime = "<{strtotime($model->end_time) - time() - 8*3600|date_format:'His'}>";
+					var timeObj = $('#js-tuan-over-time-<{$model->id}>').find('.js-over-time');
+					for (var i=0; i<=6; i++) {
+						timeObj.eq(i).html(overTime[i]);
+					}
+				</script>
+			</div>
+		</li>
+		<{/foreach}>
+	</ul>
+</div>
+</div>
+<div class="box">
+<div class="cont_title">
+	<h1>热门商家<font>趣找共收录10万家优惠商家，每天为您最优惠网购内容</font></h1>
+	<h3><a href="__APP__/homebs">更多</a></h3>
+</div>
+<{cache getHomeBsModels}>
+<div class="shop">
+	<ul>
+		<{foreach ($homeBsModels as $model)}>
+		<li>
+			<h2><{$model->name}></h2>
+			<{foreach ($model->data as $key => $m)}>
+				<{if (!$key)}>
+					<a href="<{$m->href}>" target="_blank"><img src="<{$m->pic|parsePicpath}>" /></a>
+				<{else}>
+					<h3><a href="<{$m->href}>" target="_blank"><{$m->name}></a></h3>
+				<{/if}>
+			<{/foreach}>
+		</li>
+		<{/foreach}>
+	</ul>
+</div>
+<{/cache}>
+</div>
+<{uc class="FooterControlView"}>
+<script>
+for (var i in data) {
+	countdown(data[i].obj,data[i].time);
+}
+function countdown(obj,time) {
+	if (time <= 0) {
+		return;
+	}
+	var D = parseInt(time / 24 / 3600);
+	var H,M,S;
+	if (time <= 0) {
+		return false;
+	}
+	else if (time < 60) {
+		S = time;
+	}
+	else if (time < 3600) {
+		M = parseInt(time / 60);
+		S = time % 60;
+	}
+	else {
+		H = parseInt((time % (24*3600)) / 3600);
+		M = parseInt((time % 3600) / 60);
+		S = time % 60;
+	}
+	H = padNum(H);
+	M = padNum(M);
+	S = padNum(S);
+	timeStr = H + M + S;
+	showTime(obj,timeStr,D)
+	setTimeout(function(){
+		countdown(obj,time - 1);
+	},1000)
+}
+
+function padNum(num) {
+	if (!num) {
+		num = '00';
+	}
+	num = num.toString();
+	if (num.length <= 1) {
+		num = '0' + num;
+	}
+	return num;
+}
+
+function showTime(obj,str,D) {
+	var html = '所剩时间'+D + '天';
+	for (var i=0; i<6; i++) {
+		var v = str.substr(i,1);
+		html += '<strong>'+v+'</strong>';
+	}
+	obj.html(html);
+}
+var picObjs = $('.js-dp-ad-pic');
+var adPicWidth = picObjs.width();
+var i = 0;
+var maxLeft;
+picObjs.each(function(){
+	var w = i * adPicWidth;
+	if (w == 0) {
+		$('#js-name').html($(this).attr('name'));
+		$('#js-price').html('<font>￥</font>'+$(this).attr('price'));
+	}
+	maxLeft = w;
+	$(this).css('left',w);
+	i++;
+});
+if (picObjs.length > 1) {
+	maxLeft = maxLeft - adPicWidth;
+	picObjs.last().css('left',-adPicWidth);
+}
+
+var changeIng = 0;
+function changeDpAdL() {
+	if (picObjs.length <= 1) {
+		return;
+	}
+	if (changeIng != 0) {
+		return;
+	}
+	var lastObj = null;
+	var fistObj = null;
+	var tmpF = 0;
+	var tmpL = 0;
+	changeIng = 1;
+	$('.js-dp-ad-pic').each(function(){	
+		var l = parseInt(this.style.left) - adPicWidth;
+		if (l <= tmpF) {
+			tmpF = l;
+			fistObj = $(this);
+		}
+		if (l >= tmpL) {
+			tmpL = l;
+			lastObj = $(this);
+		}
+		if (l == 0) {
+			$('#js-name').html($(this).attr('name'));
+			$('#js-price').html('<font>￥</font>'+$(this).attr('price'));
+		}
+		$(this).animate({left: l},'slow');
+	});
+	if (picObjs.length > 1) {
+		picObjs.last().css('left',-adPicWidth);
+		setTimeout(function(){
+			changeIng = 0;
+			fistObj.css('left',maxLeft);
+		},801);	
+	} else {
+		changeIng = 0;
+	}
+}
+
+function changeDpAdR() {
+	if (picObjs.length <= 1) {
+		return;
+	}
+	if (changeIng != 0) {
+		return;
+	}
+	var lastObj = null;
+	var fistObj = null;
+	var tmpF = 0;
+	var tmpL = 0;
+	changeIng = 1;
+	$('.js-dp-ad-pic').each(function(){	
+		var l = parseInt(this.style.left) + adPicWidth;
+		if (l <= tmpF) {
+			tmpF = l;
+			fistObj = $(this);
+		}
+		if (l >= tmpL) {
+			tmpL = l;
+			lastObj = $(this);
+		}
+		if (l == 0) {
+			$('#js-name').html($(this).attr('name'));
+			$('#js-price').html('<font>￥</font>'+$(this).attr('price'));
+		}
+		$(this).animate({left: l},'slow');
+	});
+	if (picObjs.length > 1) {
+		picObjs.last().css('left',-adPicWidth);
+		setTimeout(function(){
+			changeIng = 0;
+			lastObj.css('left',-adPicWidth);
+		},801);	
+	} else {
+		changeIng = 0;
+	}
+}
+
+//倒计时
+showOverTimeDp();
+
+function showOverTimeDp() {
+	for (var i in overTiemFloatData) {
+		var obj = overTiemFloatData[i].obj;
+		var time = overTiemFloatData[i].time;
+		if (time <= 0) {
+		return;
+	}
+	var D = parseInt(time / 24 / 3600);
+	var H,M,S;
+	if (time <= 0) {
+		return false;
+	}
+	else if (time < 60) {
+		S = time;
+	}
+	else if (time < 3600) {
+		M = parseInt(time / 60);
+		S = time % 60;
+	}
+	else {
+		H = parseInt((time % (24*3600)) / 3600);
+		M = parseInt((time % 3600) / 60);
+		S = time % 60;
+	}
+	H = padNum(H);
+	M = padNum(M);
+	S = padNum(S);
+	timeStr = H + M + S;
+	showTimeDp(obj,timeStr,D)
+		overTiemFloatData[i].time--;
+	}
+	setTimeout(function(){
+		showOverTimeDp();
+	},1000);
+}
+
+function showTimeDp(obj,str,D) {
+	var html = '剩余'+D+'天';
+	
+	html += str.substr(0,2) +'时';
+	html += str.substr(2,2) +'分';
+	html += str.substr(4,2) +'秒';
+	obj.html(html);
+}
+</script>
+

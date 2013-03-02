@@ -1,0 +1,74 @@
+<{include '__TEMPLATE__/header.html'}>
+
+
+
+<div class="list-div">
+<div class="content-select">
+	<div>
+		<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
+		<input type="hidden" name="page" value="<{$pageCore->currentPage}>" />
+		<table>
+			<tr>
+				<td>是否推荐</td>
+				<td>
+					<select name="ishot">
+						<option>不限</option>
+						<option <{if ($ishot === 1)}>selected<{/if}> value="1">是</option>
+						<option <{if ($ishot === 0)}>selected<{/if}> value="0">否</option>
+					</select>
+				</td>
+				<td>
+					品牌名称：
+				</td>
+				<td>
+					<input name="name" value="<{$name}>" />
+				</td>
+				<td><button type="submit">筛选</button>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>名称</th>
+			<th>图片</th>
+			<th>连接</th>
+			<th>介绍</th>
+			<th>排序</th>
+			<th>是否推荐</th>
+			<th>操作</th>
+		</tr>
+		<{foreach ($models as $model)}>
+			<tr>
+				<td><{$model->id}></td>
+				<td><{$model->name}></td>
+				<td><img src="/<{$model->pic}>" /></td>
+				<td><a href="<{$model->href}>" target="_blank"><{$model->href}></a></td>
+				<td><{$model->info|truncate:20}></td>
+				<td><{$model->sort}></td>
+				<td><{if ($model->ishot)}>是<{else}>否<{/if}></td>
+				<td><a href="__APP__/homebrand/add?id=<{$model->id}>">编辑</a></td>
+			</tr>
+		<{/foreach}>
+	</table>
+</div>
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+}
+function search(obj) {
+	var formObj = $(obj);
+	if (!isGoPage) {
+		formObj.find('input[name="page"]').val(1);
+	}
+	return true;
+}
+</script>

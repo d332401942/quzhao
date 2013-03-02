@@ -1,0 +1,172 @@
+<{uc class="HeaderControlView" meta=$meta css="css" js="jquery" keyword=$keyword}>
+<script>
+var data = [];
+</script>
+<div class="box">
+	<{if ($nineModels)}>
+	<div class="cont_title">
+		<h1><a href="__APP__/nine">9.9包邮<font>每天两场！11:00 秒杀正在进行</font></a></h1>
+	</div>
+	<div class="nine">
+		<ul>
+			<{foreach ($nineModels as $model)}>
+			<li>
+				<h2>
+					<a href="<{$model->href}>" target="_blank"><{$model->name}></a>
+				</h2>
+				<div class="nine_tu">
+					<a href="<{$model->href}>" target="_blank" title="<{$model->name}>"> 
+					<img src="<{$model->pic|parsePicpath}>" /></a>
+				</div>
+				<div class="nine_cont <{if ($model->state == HomeTjDataDataModel::STATE_EMPTY)}>hui<{/if}>">
+					<h1><span>￥</span><{$model->price}></h1>
+					<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
+						<div class="nine_cont_pnt"><a class="over" target="_blank" href="<{$model->href}>">卖光了</a></div>
+					<{else if($model->time_start > time())}>
+						<div class="nine_cont_pnt"><a href="<{$model->href}>" target="_blank" class="imm">即将开始</a></div>
+					<{else}>
+						<div class="nine_cont_pnt"><a href="<{$model->href}>" target="_blank">去抢购</a></div>
+					<{/if}>
+					<h3>
+						<span>原价：<{$model->sprice}>元</span>
+						<span class="nine_cont_sale"><{if ((int)$model->sprice)}>折扣：<{$model->price / $model->sprice|numerRound:1}>折<{/if}></span>
+						<span class="nine_cont_post">包邮</span>
+					</h3>
+					<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
+						<h3 class="zl">
+						明天早点来
+						</h3>
+					<{else if($model->time_start > time())}>
+						<h3>
+							开始时间：<font><{$model->time_start|date_format:'Y年m月d日'}></font>
+						</h3>
+					<{else}>
+						<h3 id="js-over-time-<{$model->id}>">
+						所剩时间<ll class="js-over-day"></ll>天 <strong class="js-over-time">1</strong><strong class="js-over-time">0</strong>:<strong class="js-over-time">0</strong><strong class="js-over-time">0</strong>:<strong class="js-over-time">0</strong><strong class="js-over-time">0</strong>
+						</h3>
+						<script>
+							var overTime = <{$model->time_end - time()}>;
+							data.push({obj:$('#js-over-time-<{$model->id}>'),time:overTime});
+						</script>
+					<{/if}>
+				</div>
+			</li>
+			<{/foreach}>
+		</ul>
+	</div>
+	<{/if}>
+	<{if ($dpModels)}>
+	<div class="box dp">
+		<div class="cont_title">
+			<h1><a href="__APP__/dp">超值单品<font>趣找帮您淘最值的网购正品</font></a></h1><!--<h2><a href="#" class="open2">全部</a><a href="#">装饰</a><a href="#">餐具</a><a href="#">厨具</a><a href="#">生活日用</a><a href="#">家居</a><a href="#">照相机</a></h2> -->
+		</div>
+		<div class="dp_box2">
+			<div class="dp_box2_l_b">
+				<div class="dp_box2_l" id="js-index-content">
+					<{foreach ($dpModels as $model)}>
+					<ul>
+						<li class="dp_box2_l_l">
+						<a onclick="return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank"><img src="<{$model->pic|parsePicpath}>" /></a>
+						</li>
+						<li class="dp_box2_l_r">
+						<h1>
+							<a onclick="return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank" title="<{$model->name}>">
+							<!-- <span  style="color: #C74397;">￥<{$model->price}></span>&nbsp;&nbsp; --><{$model->name|truncate:100}><br />
+							<{$model->title}>
+							</a>
+						</h1>
+						<h2><{$model->info|truncate:'400'}></h2>
+						<div class="dp_box2_l_bt">
+						
+						<a onclick="return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank" >去购买</a>
+						</div>
+						</li>
+					</ul>
+					<{/foreach}>
+				</div>
+			</div>
+		</div>
+	</div>
+	<{/if}>
+	<{if (!$dpModels && !$nineModels)}>
+	<div class="error_box">
+		<div class="error_box_l">
+			<img src="__RESOURCE__/images/error.gif">
+		</div>
+		<div class="error_box_r">
+			<h2>很抱歉，没有找到有关<!-- ”<strong>ssd</strong> ” -->的商品信息。</h2>
+			<h3>建议您：</h3>
+			<ul>
+				<li>1. 查看输入是否有误</li>
+				<li>2. 在更多分类中查找</li>
+				<li>3. 调整关键词</li>
+			</ul>
+			<div class="error_box_r_pnt"><a href="/" onclick="">返回去找首页</a></div>
+		</div>
+	</div>
+	<{/if}>
+	<{uc class="PageControlView" pageCore="$pageCore"}>
+</div>
+<{uc class="FooterControlView"}>
+<script>
+function goPage(page) {
+	var keyword = '<{$keyword}>';
+	var url = '__APP__/search__LIMIT__page/' + page;
+	if (keyword) {
+		url += '/keyword/' + keyword;
+	}
+	window.location.href = url;
+}
+for (var i in data) {
+	countdown(data[i].obj,data[i].time);
+}
+function countdown(obj,time) {
+	if (time <= 0) {
+		return;
+	}
+	var D = parseInt(time / 24 / 3600);
+	var H,M,S;
+	if (time <= 0) {
+		return false;
+	}
+	else if (time < 60) {
+		S = time;
+	}
+	else if (time < 3600) {
+		M = parseInt(time / 60);
+		S = time % 60;
+	}
+	else {
+		H = parseInt((time % (24*3600)) / 3600);
+		M = parseInt((time % 3600) / 60);
+		S = time % 60;
+	}
+	H = padNum(H);
+	M = padNum(M);
+	S = padNum(S);
+	timeStr = H + M + S;
+	showTime(obj,timeStr,D)
+	setTimeout(function(){
+		countdown(obj,time - 1);
+	},1000)
+}
+
+function padNum(num) {
+	if (!num) {
+		num = '00';
+	}
+	num = num.toString();
+	if (num.length <= 1) {
+		num = '0' + num;
+	}
+	return num;
+}
+
+function showTime(obj,str,D) {
+	obj.find('.js-over-day').html(D);
+	var str = '' + str;
+	for (var i=0; i<=6; i++) {
+		obj.find('.js-over-time').eq(i).html(str[i]);
+	}
+}
+</script>

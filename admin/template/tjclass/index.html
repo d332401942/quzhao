@@ -1,0 +1,49 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post">
+	<table>
+		<tr>
+			<td>父类：</td>
+			<td>
+				<select name="pid">
+					<option value=0>根</option>
+					<{foreach ($rootClassModels as $model)}>
+						<option value="<{$model->id}>"><{$model->name}></option>
+					<{/foreach}>
+				</select>
+			</td>
+			<td>类名：</td>
+			<td>
+				<input name="name" type="text" />
+			</td>
+			<td>
+				排序
+			</td>
+			<td>
+				<input name="sort" type="text" style="width:50px" />
+			</td>
+			<td>
+				<button type="submit">添加</button>
+			</td>
+		</tr>
+	</table>
+</form>
+<ul>
+<{foreach ($allModels as $model)}>
+	<li>
+		<{$model->name}>&nbsp;||&nbsp;<a href="#nogo" onclick="del(<{$model->id}>)">删除</a>
+		<{foreach ($model->children as $m)}>
+		<ul>
+			<li><{$m->name}>&nbsp;||&nbsp;<a href="#nogo" onclick="del(<{$model->id}>)">删除</a></li>
+		</ul>
+		<{/foreach}>
+	</li>
+<{/foreach}>
+</ul>
+<{include '__TEMPLATE__/footer.html'}>
+
+<script>
+function del(id) {
+	alert('未完成')
+}
+</script>

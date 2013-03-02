@@ -1,0 +1,45 @@
+<{include '__TEMPLATE__/header.html'}>
+<div class="list-div">
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>图片</th>
+			<th>类别</th>
+			<th>名称</th>
+			<th>链接</th>
+			<th>排序</th>
+			<th style="width:115px;">操作</th>
+		</tr>
+		<{foreach ($models as $model)}>
+			<tr>
+				<td><{$model->id}></td>
+				<td><img src="/<{$model->pic}>" /></td>
+				<td><{$model->HomeClassName}></td>
+				<td><{$model->name}></td>
+				<td><a href="<{$model->href}>" target="_blank"><{$model->href}></a></td>
+				<td><{$model->sort}></td>
+				<td>
+					<a href="__APP__/homebs/add?id=<{$model->id}>"><button>编辑</button></a>
+					<a href="#nogo" onclick="del(<{$model->id}>,'<{$model->href}>')"><button>删除</button></a>
+				</td>
+			</tr>
+		<{/foreach}>
+	</table>
+</div>
+
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+function del(id,href) {
+	if (!confirm('确定要删除？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/homebs/delData?stmp='+ new Date(),
+		type: 'post',
+		data: {id:id,href:href},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+</script>

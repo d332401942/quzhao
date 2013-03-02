@@ -1,0 +1,119 @@
+<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_NINE css="css" js="jquery"}>
+<div class="box">
+	<img src="__RESOURCE__/images/nine_banner.jpg" />
+</div>
+<script>
+var data = [];
+</script>
+<div class="box">
+	<div class="cont_title">
+		<h1>9.9包邮<font>每天两场！11:00 秒杀正在进行</font></h1>
+	</div>
+	<div class="nine">
+		<ul>
+			<{foreach ($models as $model)}>
+			<li>
+				<h2>
+					<a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank"><{$model->name}></a>
+				</h2>
+				<div class="nine_tu">
+					<a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank" title="<{$model->name}>"> 
+					<img src="<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>" /></a>
+				</div>
+				<div class="nine_cont <{if ($model->state == HomeTjDataDataModel::STATE_EMPTY)}>hui<{/if}>">
+					<h1><span>￥</span><{$model->price}></h1>
+					<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
+						<div class="nine_cont_pnt"><a class="over" onclick="return hitsLog(1,<{$model->id}>)" target="_blank" href="<{$model->href}>">卖光了</a></div>
+					<{else if($model->time_start > time())}>
+						<div class="nine_cont_pnt"><a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank" class="imm">即将开始</a></div>
+					<{else}>
+						<div class="nine_cont_pnt"><a href="<{$model->href}>" onclick="return hitsLog(1,<{$model->id}>)" target="_blank">去抢购</a></div>
+					<{/if}>
+					<h3>
+						<span>原价：<{$model->sprice}>元</span>
+						<span class="nine_cont_sale"><{if ((int)$model->sprice)}>折扣：<{$model->price / $model->sprice|numerRound:1}>折<{/if}></span>
+						<span class="nine_cont_post">包邮</span>
+					</h3>
+					<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
+						<h3 class="zl">
+						明天早点来
+						</h3>
+					<{else if($model->time_start > time())}>
+						<h3>
+							开始时间：<font><{$model->time_start|date_format:'Y年m月d日'}></font>
+						</h3>
+					<{else}>
+						<h3 id="js-over-time-<{$model->id}>">
+						所剩时间<span class="js-over-day"></span>天
+						</h3>
+						<script>
+							var overTime = <{$model->time_end - time()}>;
+							data.push({obj:$('#js-over-time-<{$model->id}>'),time:overTime});
+						</script>
+					<{/if}>
+				</div>
+			</li>
+			<{/foreach}>
+		</ul>
+	</div>
+	<{uc class="PageControlView" pageCore="$pageCore"}>
+</div>
+<{uc class="FooterControlView"}>
+<script>
+function goPage(page) {
+	window.location.href = '__APP__/nine__LIMIT__page/' + page;
+}
+for (var i in data) {
+	countdown(data[i].obj,data[i].time);
+}
+function countdown(obj,time) {
+	if (time <= 0) {
+		return;
+	}
+	var D = parseInt(time / 24 / 3600);
+	var H,M,S;
+	if (time <= 0) {
+		return false;
+	}
+	else if (time < 60) {
+		S = time;
+	}
+	else if (time < 3600) {
+		M = parseInt(time / 60);
+		S = time % 60;
+	}
+	else {
+		H = parseInt((time % (24*3600)) / 3600);
+		M = parseInt((time % 3600) / 60);
+		S = time % 60;
+	}
+	H = padNum(H);
+	M = padNum(M);
+	S = padNum(S);
+	timeStr = H + M + S;
+	showTime(obj,timeStr,D)
+	setTimeout(function(){
+		countdown(obj,time - 1);
+	},1000)
+}
+
+function padNum(num) {
+	if (!num) {
+		num = '00';
+	}
+	num = num.toString();
+	if (num.length <= 1) {
+		num = '0' + num;
+	}
+	return num;
+}
+
+function showTime(obj,str,D) {
+	var html = '所剩时间'+D + '天';
+	for (var i=0; i<6; i++) {
+		var v = str.substr(i,1);
+		html += '<strong>'+v+'</strong>';
+	}
+	obj.html(html);
+}
+</script>

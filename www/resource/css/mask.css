@@ -1,0 +1,23 @@
+.lightBox .Boxheader,.Boxfooter,.Boxbody{ position:relative;}
+
+.lightBox .headerR,.FooterR,.BodyR{ float:left;width:20px; }
+.lightBox .headerL,.FooterL,.BodyL{ float:left;}
+
+.lightBox .headerR{background:url(../images/lightbox-header.png) no-repeat right 0; height:46px;}
+.lightBox .headerL{background:url(../images/lightbox-header.png) no-repeat left 0; height:46px;padding:0 0 0 20px;}
+.lightBox .headerL .close{float:right;background:url(../images/lightbox-close.png) no-repeat 0 center;display:inline-block;height:46px;width:16px;cursor:pointer;}
+.lightBox .FooterR{background:url(../images/lightbox-footer.png) no-repeat right 0;height:59px;}
+.lightBox .FooterL{background:url(../images/lightbox-footer.png) no-repeat left 0;height:39px;padding:10px 0 10px 20px;}
+
+
+
+.lightBox .BodyL{background:url(../images/lightbox-body.png) repeat-y left 0;padding:10px 0 10px 20px;}
+.lightBox .BodyR{background:url(../images/lightbox-body.png) repeat-y right 0;}
+
+.BoxMask{ height:100%; width:100%;left:0; top:0; background:#000;opacity:0.25;filter:alpha(opacity=25);}
+
+.lightBox .Boxfooter{height:59px; }
+.lightBox .Boxbody{overflow:hidden;}
+.lightBox .Boxheader{ height:46px;cursor:move; }
+.lightBox .Boxfooter .btn{ border: 0;display:inline-block; width:80px;height: 26px;float:right;cursor: pointer; margin:10px 10px 0 0;background: url(../images/cancel_button.gif)}
+.lightBox .Boxfooter .confirm{ border: 0;display:inline-block; width:59px;height: 26px;float:right;cursor: pointer; margin:10px 10px 0 0;background: url(../images/send_button.gif)}

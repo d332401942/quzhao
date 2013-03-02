@@ -1,0 +1,47 @@
+<{include '__TEMPLATE__/header.html'}>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="<{$dataModel->id}>" />
+	<input name="oldpic" type="hidden" value="<{$dataModel->pic}>" />
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>类别：</td>
+				<td>
+					<select name="bid">
+						<option value="">请选择分类</option>
+						<{foreach ($classModels as $model)}>
+							<option value="<{$model->id}>" <{if ($model->id == $dataModel->bid)}>selected<{/if}>><{$model->name}></option>
+						<{/foreach}>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>商家名称：</td>
+				<td>
+					<input name="name" type="text" value="<{$dataModel->name}>" />
+				</td>
+			</tr>
+			<tr>
+				<td>图片：</td>
+				<td><input name="pic" type="file" /></td>
+			</tr>
+			<tr>
+				<td>链接：</td>
+				<td><input style="width:270px;" name="href" type="text" value="<{$dataModel->href}>" /></td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td><input name="sort" style="width:25px;" type="text" value="<{$dataModel->sort}>" /></td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+	
+</form>
+<div class="class="add-div add-div-img">
+	<img src="<{if (!preg_match('/^http:\/\//',$dataModel->pic))}>/<{/if}><{$dataModel->pic}>" />
+</div>
+
+<{include '__TEMPLATE__/footer.html'}>

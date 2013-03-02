@@ -1,0 +1,78 @@
+<{include '__TEMPLATE__/header.html'}>
+<div class="list-div">
+<div class="content-select">
+	<div>
+	<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
+		<input type="hidden" name="page" value="<{$page}>" />
+	</form>
+	</div>
+</div>
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;"><input onclick="selectAll(this)" class="js-select-all" type="checkbox" /></th>
+		<th style="width:15px;">ID</th>
+		<th>名称</th>
+		<th>广告位置</th>
+		<th>是否投放代码</th>
+		<th>广告链接</th>
+		<th>排序</th>
+		<th>价格</th>
+		<th>是否有效</th>
+		<th>操作</th>
+	</tr>
+	<{foreach ($models as $model)}>
+		<tr>
+			<td><input type="checkbox" value="<{$model->id}>" class="js-index-id js-select-all"  /></td>
+			<td><{$model->id}></td>
+			<td><{$model->name}></td>
+			<td><{$arrStype[$model->stype]}></td>
+			<td><{$model->ishtml}></td>
+			<td><a href="<{$model->href}>" target="_blank"><{$model->href}></a></td>
+			<td><{$model->sort}></td>
+			<td><{$model->price}></td>
+			<td><{$model->isvalid}></td>
+			<td>
+				<a href="__APP__/homebrandad/add?id=<{$model->id}>"><button>编辑</button></a>
+				<button onclick="del(<{$model->id}>,'<{$model->pic}>')">删除</button>
+			</td>
+		</tr>
+	<{/foreach}>
+</table>
+</div>
+
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+
+function search(obj) {
+	var formObj = $(obj);
+	if (!isGoPage) {
+		formObj.find('input[name="page"]').val(1);
+	}
+	return true;
+}
+
+function del(id,pic) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/homebrandad/del?stmp='+ new Date().toString(),
+		type: 'post',
+		data: {id:id,pic:pic},
+		success: function(data) {
+			window.location.reload();
+		}
+	})
+}
+
+
+</script>

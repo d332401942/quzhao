@@ -1,0 +1,42 @@
+<{cache cacheData}> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>趣找购物搜索</title>
+	<link href="/favicon.ico" rel="shortcut icon">
+	<meta name="description" content="趣找购物搜索">
+	<meta name="keyword" content="趣找购物搜索">
+	<meta content="W7wqRWKumRxNOIcy" name="baidu-site-verification">
+	<link href="__RESOURCE__/css/footer.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<div class="about_box">
+<div class="bout_l">
+<div class="bout_l_logo"><a href="/"  ><img src="__RESOURCE__/images/logo.png" /></a></div>
+
+<div class="bout_nav">
+<{foreach ($models as $model)}>
+	<a href="__APP__/footer__LIMIT__id/<{$model->id}>" class="<{if ($id == $model->id)}>open<{/if}>"><{$model->title}></a>
+<{/foreach}>
+
+<a href="__APP__/homebs" >商家合作</a>   
+</div>
+  
+
+<div>
+<img src="__RESOURCE__/images/nav_btom.png" />
+</div>
+</div>
+<div class="bout_r">
+<div class="bout_r_cont ">
+	<{$detailModel->content}>
+</div>
+<div class="about_footer"> &copy;2013 quzhao.com 版权所有</div>
+</div>
+</div>
+</body>
+</html>
+<{/cache}>

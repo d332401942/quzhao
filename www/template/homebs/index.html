@@ -1,0 +1,91 @@
+﻿<{cache cacheData}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>趣找购物搜索</title>
+	<link href="/favicon.ico" rel="shortcut icon">
+	<meta name="description" content="趣找购物搜索">
+	<meta name="keyword" content="趣找购物搜索">
+	<meta content="W7wqRWKumRxNOIcy" name="baidu-site-verification">
+	<link href="__RESOURCE__/css/footer.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+</head> 
+<script>
+
+function selectClass(obj,id) {
+	$('.js-class').removeClass('oppe');
+	$(obj).addClass('oppe');
+	showData(id);
+}
+
+function showData(id) {
+	var jsonData = <{$jsonData}>;
+	var data = jsonData[id];
+	var html = '';
+	if (data) {
+		for (var i in data) {
+			html += '<li>';
+			html += '<a href="'+data[i].href+'" target="_blank">';
+			if (data[i].pic) {
+				html += '<img src="'+data[i].pic+'">';
+			}
+			html += '<h3>'+data[i].name+'</h3></a>';
+			html += '</li>';
+		}
+	}
+	$('#js-content').html(html);
+}
+</script>
+<body>
+<div class="about_box">
+<div class="bout_l">
+<div class="bout_l_logo"><a href="/"  ><img src="__RESOURCE__/images/logo.png" /></a></div>
+
+<div class="bout_nav">
+<{foreach ($titleModels as $model)}>
+	<a href="__APP__/footer__LIMIT__id/<{$model->id}>"><{$model->title}></a>
+<{/foreach}>
+
+<a href="__APP__/homebs" class="open">商家合作</a>   
+</div>
+  
+
+<div>
+<img src="__RESOURCE__/images/nav_btom.png" />
+</div>
+</div>
+<div class="bout_r">
+<div class="bout_r_cont ">
+		
+	<h1>热门商家</h1>
+	<div class="about_sj_nav">
+		<{foreach ($classModels as $key => $model)}>
+			<{if (!$key)}>
+				<script>
+					$(function(){showData(<{$model->id}>);});
+				</script>
+			<{/if}>
+			<a href="#nogo" onclick="selectClass(this,<{$model->id}>)" class="js-class<{if (!$key)}> oppe<{/if}>"><{$model->name}></a>
+		<{/foreach}>
+	</div>
+	<div class="about_contt">
+		<ul id="js-content">
+
+		</ul>
+	</div>
+	<div class="bout_r_box">
+	<h2>加盟联系</h2>
+	<p>
+	联系邮箱：bd@quzhao.com</p>
+	<p>
+	QQ：1470059880
+	</p>
+	</div>
+</div>
+<div class="about_footer"> &copy;2013 quzhao.com 版权所有</div>
+</div>
+</div>
+</body>
+</html>
+<{/cache}>

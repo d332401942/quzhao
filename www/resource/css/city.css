@@ -1,0 +1,116 @@
+.pop_city {
+    background: none repeat scroll 0 0 #FBFBFB;
+    display: none;
+    position: absolute;
+    width: 460px;
+    z-index: 1000;
+}
+.pop_city .radius_top, .pop_city .radius_bottom, .pop_city .close, .filter_bar .current {
+    background: url("../images/pop_city.png") no-repeat scroll 0 0 transparent;
+}
+.pop_city .radius_top, .pop_city .radius_bottom {
+    height: 3px;
+    overflow: hidden;
+}
+.pop_city .radius_bottom {
+    background-position: 0 -3px;
+}
+.pop_city h3 {
+    font-weight: normal;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    position: relative;
+}
+.pop_city .close {
+    background-position: 0 -7px;
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    line-height: 100px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 55px;
+}
+.pop_city .cont {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CFCFCF;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px;
+    padding: 7px 0;
+}
+.pop_city a {
+    color: #000000;
+}
+.pop_city a:hover {
+    color: #FF6600;
+}
+.pop_city .city_list {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E8E8E8;
+    margin: 5px 10px 0;
+    padding: 12px 12px 0;
+}
+.filter_bar {
+    border-bottom: 1px solid #D9D9D9;
+    height: 23px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.filter_bar a {
+    float: left;
+    font-family: simsun;
+    font-size: 14px;
+    height: 23px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 16px;
+}
+.filter_bar .current {
+    background-position: -441px -7px;
+    bottom: -1px;
+    color: #FF6600;
+    font-weight: bold;
+    position: relative;
+    width: 19px;
+}
+.pop_city li {
+    margin-bottom: 10px;
+    padding-left: 40px;
+    position: relative;
+    vertical-align: top;
+}
+.pop_city h4 {
+    color: #666666;
+    left: 0;
+    position: absolute;
+    top: 2px;
+}
+.pop_city p {
+    line-height: 18px;
+}
+.pop_city .city_wrap p {
+    display: none;
+    word-wrap: break-word;
+}
+.pop_city p a {
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    margin: 0 18px 5px 0;
+}
+.pop_city p .current, .pop_city p .current:hover {
+    background: none repeat scroll 0 0 #FFA200;
+    color: #FFFFFF;
+    padding: 0 3px;
+}
+.pop_city select {
+    border: 1px solid #E2E3EA;
+}

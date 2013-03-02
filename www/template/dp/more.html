@@ -1,0 +1,20 @@
+<{foreach ($models as $model)}>
+<ul dataId="<{$model->id}>">
+	<li class="dp_box2_l_l">
+	<a onclick="return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank"><img src="<{$model->pic}>" /></a>
+	</li>
+	<li class="dp_box2_l_r">
+	<h1>
+		<a onclick="return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank" title="<{$model->name}>">
+		<!-- <span  style="color: #C74397;">￥<{$model->price}></span>&nbsp;&nbsp; --><{$model->name|truncate:100}><br />
+		<{$model->title}>
+		</a>
+	</h1>
+	<h2><{$model->info|truncate:'400'}></h2>
+	<div class="dp_box2_l_bt">
+	
+	<a onclick="return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank" >去购买</a>
+	</div>
+	</li>
+</ul>
+<{/foreach}>

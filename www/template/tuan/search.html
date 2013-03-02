@@ -1,0 +1,57 @@
+<{if ($models)}>
+<div class="nine">
+	<ul>
+		<{foreach ($models as $model)}>
+		<li>
+			<h2>
+				<a href="<{$model->pdt_url2|screenUrl}>" target="_blank" title="<{$model->name}>"><{$model->name|truncate:80}></a>
+			</h2>
+			<div class="nine_tu">
+				<a href="<{$model->pdt_url2|screenUrl}>" target="_blank" title="<{$model->name}>"> 
+					<img src="<{$model->pic_url}>" />
+				</a>
+			</div>
+			<div class="nine_cont">
+				<input name="id" type="hidden" value="<{$model->id}>" />
+				<h1><span>￥</span><{$model->cur_price}></h1>
+				<div class="tian_pnt"><a href="<{$model->pdt_url2|screenUrl}>" target="_blank" >去看看</a></div>
+				<h3>
+				<span >原价：<{$model->ori_price}>元</span>
+				<span class="nine_cont_sale">折扣：<{$model->rebate|numerRound:1}>折</span>
+				<span class="nine_cont_post"><font><{$model->bought}></font>人已购买</span>
+				</h3>
+				<h3 id="js-tuan-over-time-<{$model->id}>">
+				<span>所剩时间<{echo (int)((strtotime($model->end_time) - time()) / 24 / 3600)}>天</span>
+				<span style="float:right; text-align:right;"><{$model->webname}></span>
+				<!--  <strong class="js-over-time">1</strong><strong class="js-over-time">2</strong>:<strong class="js-over-time">2</strong><strong class="js-over-time">3</strong>:<strong class="js-over-time">5</strong><strong class="js-over-time">8</strong> -->
+				</h3>
+				<script>
+					var overTime = "<{strtotime($model->end_time) - time() - 8*3600|date_format:'His'}>";
+					var timeObj = $('#js-tuan-over-time-<{$model->id}>').find('.js-over-time');
+					for (var i=0; i<=6; i++) {
+						timeObj.eq(i).html(overTime[i]);
+					}
+				</script>
+			</div>
+		</li>
+		<{/foreach}>
+	</ul>
+</div>
+<{uc class="PageControlView" pageCore="$pageCore"}>
+<{else}>
+<div class="error_box">
+	<div class="error_box_l">
+		<img src="__RESOURCE__/images/error.gif">
+	</div>
+	<div class="error_box_r">
+		<h2>很抱歉，没有找到有关<!-- ”<strong>ssd</strong> ” -->的团购信息。</h2>
+		<h3>建议您：</h3>
+		<ul>
+			<li>1. 查看输入是否有误</li>
+			<li>2. 在更多分类中查找</li>
+			<li>3. 调整关键词</li>
+		</ul>
+		<div class="error_box_r_pnt"><a href="#nogo" onclick="window.location.reload();">返回团购首页</a></div>
+	</div>
+</div>
+<{/if}>

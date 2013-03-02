@@ -1,0 +1,77 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data">
+	<input name="oldpic" value="<{$model->tjpic}>" type="hidden" />
+	<input name="id" value="<{$model->id}>" type="hidden" />
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>所属品牌：</td>
+				<td>
+					<select name="bid">
+						<option value="">请选择</option>
+						<{foreach ($homeBrandModels as $m)}>
+							<option <{if ($model->bid = $m->id)}>selected<{/if}> value="<{$m->id}>"><{$m->name}></option>
+						<{/if}>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>标题1：</td>
+				<td>
+					<input name="title1" type="text" value="<{$model->title1}>" />
+				</td>
+			</tr>
+			<tr>
+				<td>标题2：</td>
+				<td>
+					<input name="title2" type="text" value="<{$model->title2}>" />
+				</td>
+			</tr>
+			<tr>
+				<td>标题3：</td>
+				<td>
+					<input name="title3" type="text" value="<{$model->title3}>" />
+				</td>
+			</tr>
+			<tr>
+				<td>图片：</td>
+				<td><input name="pic" type="file" /></td>
+			</tr>
+			<tr>
+				<td>链接：</td>
+				<td><input name="tjhref" type="text" value="<{$model->tjhref}>" /></td>
+			</tr>
+			<tr>
+				<td>开始时间：</td>
+				<td>
+					<{$startTime}>
+				</td>
+			</tr>
+			<tr>
+				<td>结束时间：</td>
+				<td>
+					<{$endTime}>
+				</td>
+			</tr>
+			<tr>
+				<td>是否推荐：</td>
+				<td>
+					<input name="istj" checked type="radio" value="0" />否
+					<input name="istj" <{if ($model->istj)}>checked<{/if}> type="radio" value="1" />是
+				</td>
+			</tr>
+			<tr>
+				<td>排序：</td>
+				<td><input name="sort" style="width:25px;" type="text" value="<{$model->sort}>" /></td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="class="add-div add-div-img">
+		<img src="/<{$model->tjpic}>" />
+	</div>
+</form>
+<{include '__TEMPLATE__/footer.html'}>

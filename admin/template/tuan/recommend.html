@@ -1,0 +1,67 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
+		<th style="width:15px;">ID</th>
+		<th>名称</th>
+		<th style="width:20px;">来源</th>
+		<th>URL</th>
+		<th>入库时间</th>
+		<th style="width:85px;">来源</th>
+		<th style="width:85px;">操作</th>
+	</tr>
+
+	<{foreach ($models as $model)}>
+	<tr>
+		<td><input type="checkbox" value="<{$model->id}>"/></td>
+		<td><{$model->id}></td>
+		<td><{$model->name}></td>
+		<td><{$model->webname}></td>
+		<td><a href="<{$model->pdt_url2}>" target="_blank"><{$model->pdt_url2|truncate:50}></a></td>
+		<td><{$model->ctime}></td>
+		<td><{$model->webname}></td>
+		<td>
+			<button onclick="unRecommend(<{$model->id}>)">取消到主页</button>
+			<button onclick="del(<{$model->id}>)">删除</button>
+		</td>
+	</tr>
+	<{/foreach}>
+
+</table>
+</div>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+
+function unRecommend(id) {
+	$.ajax({
+		url: '__AJAX__/tuan/changeIstj?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {id:id,istj:0},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				alert('取消推荐成功');
+			}
+		}
+	});
+}
+
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/tuan/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {id:id},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+</script>

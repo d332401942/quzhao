@@ -1,0 +1,79 @@
+<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_DB css="css" js="jquery,jquery.cookie"}>
+<div class="box">
+	<img src="__RESOURCE__/images/dp_banner.jpg" />
+</div>
+<div class="box dp">
+	<div class="cont_title">
+		<h1>超值单品<font>趣找帮您淘最值的网购正品</font></h1><!--<h2><a href="#" class="open2">全部</a><a href="#">装饰</a><a href="#">餐具</a><a href="#">厨具</a><a href="#">生活日用</a><a href="#">家居</a><a href="#">照相机</a></h2> -->
+	</div>
+	<div class="dp_box2">
+		<div class="dp_box2_l_b">
+			<div class="dp_box2_l" id="js-index-content">
+				<{foreach ($models as $model)}>
+				<ul dataId="<{$model->id}>">
+					<li class="dp_box2_l_l">
+					<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank"><img src="<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>" /></a>
+					</li>
+					<li class="dp_box2_l_r">
+					<h1>
+						<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank" title="<{$model->name}>">
+						<!-- <span  style="color: #C74397;">￥<{$model->price}></span>&nbsp;&nbsp; --><{$model->name|truncate:100}><br />
+						<{$model->title}>
+						</a>
+					</h1>
+					<h2><{$model->info|truncate:'400'}></h2>
+					<div class="dp_box2_l_bt">
+					
+					<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank" >去购买</a>
+					</div>
+					</li>
+				</ul>
+				<{/foreach}>
+			</div>
+			<{uc class="PageControlView" pageCore="$pageCore"}>
+		</div>
+		<div class="pp_rr_box">
+		<div class=" pp_rr2">
+		<h2>热门推荐</h2>
+		<ul>
+			<{foreach ($tjModels as $model)}>
+			<li>
+				<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank">
+				<div><img src="<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>" /></div>
+				<!-- <div class="xl"><span>月销量：6438件</span></div> -->
+				<h2><{$model->name}></h2>
+				<h3>￥<{$model->price}></h3></a>
+			</li>
+			<{/foreach}>
+		</ul>
+		</div>
+		<{if ($dpBrowseHistoryModels)}>
+		<div class=" pp_rr2">
+		
+			<h2>浏览记录</h2>
+			<{foreach ($dpBrowseHistoryModels as $model)}>
+			<ul>
+				<li>
+					<a href="<{$model->href}>" target="_blank">
+					<div><img src="<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>" /></div>
+					<!-- <div class="xl"><span>月销量：6438件</span></div> -->
+					<h2><{$model->name}></h2>
+					<h3>￥<{$model->price}></h3></a>
+				</li>
+			</ul>
+			<{/foreach}>
+			<div style="float:right;margin-bottom: 5px;"><a onclick="clearHistory()" style="color:#777777;" href="javascript:;">清空</a></div>
+		
+		</div>
+		<{/if}>
+		
+		</div>
+	</div>
+</div>
+<{uc class="FooterControlView"}>
+<script>
+function goPage(page) {
+	window.location.href = '__APP__/dp__LIMIT__page/' + page;
+}
+</script>
+

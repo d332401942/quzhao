@@ -1,0 +1,64 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="oldpic" value="<{$model->pic}>" />
+	<input type="hidden" name="id" value="<{$model->id}>" />
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>广告名称：</td>
+				<td><input name="name" value="<{$model->name}>" type="text" class="addinput" /></td>
+			</tr>
+			<tr>
+				<td>是否投放代码：</td>
+				<td>
+					<input name="ishtml" checked value="0" type="radio" />否
+					<input name="ishtml" <{if ($model->ishtml)}>checked<{/if}> value="1" type="radio" />是
+				</td>
+			</tr>
+			<tr>
+				<td>广告位置：</td>
+				<td>
+					<{foreach (HomeBrandAdDataModel::getStype() as $key => $val)}>
+						<input name="stype" <{if ($model->stype == $key)}>checked<{/if}> value="<{$key}>" type="radio" /><{$val}>
+					<{/foreach}>
+				</td>
+			</tr>
+			<tr>
+				<td>图片：</td>
+				<td>
+					<input name="pic" value="" type="file" />
+				</td>
+			</tr>
+			<tr>
+				<td>广告链接：</td>
+				<td><input name="href" value="<{$model->href}>" type="text" class="addinput" /></td>
+			</tr>
+			<tr>
+				<td>价格：</td>
+				<td>
+					<input name="price" value="<{$model->price}>" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td><input style="width:55px;" name="sort" type="text" value="<{$model->sort}>" /></td>
+			</tr>
+			<tr>
+				<td>是否有效</td>
+				<td>
+					<input name="isvalid" checked value="1" type="radio" />是
+					<input name="isvalid" value="0" type="radio" />否
+				</td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="class="add-div add-div-img">
+		<img src="/<{$model->pic}>" />
+	</div>
+</form>
+
+<{include '__TEMPLATE__/footer.html'}>

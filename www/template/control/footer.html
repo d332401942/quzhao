@@ -1,0 +1,70 @@
+<div class="box">
+	<div class="footer">
+		<div class="footer_l">
+			<{foreach ($models as $model)}>
+				<a href="__APP__/footer__LIMIT__id/<{$model->id}>"><{$model->title}></a>
+			<{/foreach}>
+			<a href="__APP__/homebs" >商家合作</a>
+		</div>
+		<div class="footer_r"> &copy;2013 quzhao.com 版权所有</div>
+	</div>
+</div>
+</body>
+<script>
+var dpLogKey = 'dpBrowseLog';
+function dpLog(id) {
+	var ids = $.cookie(dpLogKey);
+	if (!ids) {
+		ids = [];
+	}
+	else {
+		ids = ids.split(',');
+	}
+	ids.unshift(id);
+	var arr = [];
+	var temp = {};
+	var j = 0
+	for (var i in ids) {
+		if (j >= 5) {
+			break;
+		}
+		if (!temp[ids[i]]) {
+			temp[ids[i]] = 1;
+			arr.push(ids[i]);
+			j++;
+		}
+	}
+	$.cookie(dpLogKey,arr,{expires:30})
+	return true;
+}
+
+function clearHistory() {
+	$.removeCookie(dpLogKey);
+	window.location.reload();
+}
+</script>
+<script type='text/javascript'>
+ var _jjl = new Date().toDateString().replace(/\s/g, '') + new Date().toTimeString().replace(/:\d{2}:\d{2}\sUTC[+]\d{4}$/g, '');
+ document.write(unescape("%3Cscript src='http://p.yiqifa.com/js/juejinlian.js' type='text/javascript'%3E%3C/script%3E"));
+ document.write(unescape("%3Cscript src='http://p.yiqifa.com/jj?_jjl.js' type='text/javascript'%3E%3C/script%3E"));
+ document.write(unescape("%3Cscript src='http://p.yiqifa.com/js/md.js' type='text/javascript'%3E%3C/script%3E"));
+</script> 
+<script type='text/javascript'>
+try{ 
+ var siteId = 598484;
+ document.write(unescape("%3Cscript src='http://p.yiqifa.com/jj?sid=" + siteId + "&_jjl.js' type='text/javascript'%3E%3C/script%3E"));
+ var jjl = JueJinLian._init(); 
+ jjl._addWid(siteId);
+ jjl._addE("");
+ jjl._addScope(0);
+ jjl._run(); 
+}catch(e){} 
+</script>
+<div style="display:none;">
+<script src="http://s22.cnzz.com/stat.php?id=5000059&web_id=5000059&show=pic" language="JavaScript"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9517251f0f0072bba882a6086daaaf9c' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+</html>

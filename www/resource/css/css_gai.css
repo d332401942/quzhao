@@ -1,0 +1,444 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 12px;
+    font-weight: normal;
+}
+ul {
+    list-style: none outside none;
+}
+li {
+    list-style-type: none;
+}
+a {
+    color: #5C5C5C;
+    text-decoration: none;
+}
+a:hover {
+    color: #FF0000;
+    text-decoration: none;
+}
+a img {
+    border: 0 none;
+}
+body {
+    background-color: #F9F9F9;
+    color: #5C5C5C;
+    font-family: "ËÎÌå",Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: left;
+}
+.clear {
+    clear: both;
+}
+.gai_top {
+    height: 120px;
+    margin: auto;
+    width: 958px;
+}
+.gai_logo {
+    float: left;
+    height: 120px;
+    width: 186px;
+}
+.gai_top dl {
+    float: right;
+    height: 120px;
+}
+.gai_top dl dt {
+    height: 27px;
+    padding-top: 20px;
+    text-align: right;
+}
+.gai_top dl dd {
+    height: 28px;
+    margin-top: 28px;
+}
+.gai_menu {
+    float: left;
+	margin-left:0;
+}
+.gai_menu li {
+    float: left;
+    height: 28px;
+	margin: auto 10px auto 10px ;
+}
+.gai_menu li a {
+	font-weight: 800;
+    display: block;
+    line-height: 28px;
+    margin: auto;
+	font-size:14px;
+ 	text-align:center;
+}
+.active a {
+	background: url("../images/red.jpg") repeat-x scroll 0 100% transparent;
+}
+
+.gai_menu li a:hover {
+	background: url("../images/red.jpg") repeat-x scroll 0 100% transparent;
+}
+.gai_menu li.gai_li a {
+}
+.gai_menu li.gai_a1 {
+    padding-left: 11px;
+    width: 31px;
+}
+.gai_menu li.gai_a1 a, .gai_menu li.gai_a1 a:hover {
+    background-position: -11px center;
+    width: 31px;
+}
+.gai_menu li.gai_a2 a, .gai_menu li.gai_a2 a:hover {
+    background-position: -67px center;
+}
+.gai_menu li.gai_a3 a, .gai_menu li.gai_a3 a:hover {
+    background-position: -150px center;
+}
+.gai_menu li.gai_a4 a, .gai_menu li.gai_a4 a:hover {
+    background-position: -233px center;
+}
+.gai_menu li.gai_a5 a, .gai_menu li.gai_a5 a:hover {
+    background-position: -315px center;
+}
+.gai_menu li.gai_a6 a, .gai_menu li.gai_a6 a:hover {
+    background-position: -398px center;
+}
+.gai_banner {
+    background: url("../images/onhoo-bg.jpg") no-repeat scroll center bottom transparent;
+    border-top: 4px solid #D8D8D8;
+    height: 290px;
+    margin: auto;
+}
+.gai_banner_t {
+    height: 249px;
+    width: 958px;
+}
+.gai_main {
+    margin: auto;
+    width: 958px;
+}
+.gai_main_l {
+    float: left;
+    width: 680px;
+}
+.gai_ycjy {
+    height: 196px;
+    width: 680px;
+}
+.gai_ycjy_t {
+    height: 18px;
+}
+.gai_ycjy_b {
+    background: url("../images/gai_36.jpg") no-repeat scroll 20px 86px transparent;
+    height: 165px;
+    padding-top: 13px;
+}
+.gai_ycjy_b dl {
+    float: left;
+    height: 68px;
+    padding-top: 5px;
+    width: 328px;
+}
+.gai_ycjy_b dl dt {
+    float: left;
+    width: 63px;
+}
+.gai_ycjy_b dl dd {
+    float: left;
+    font-family: "Î¢ÈíÑÅºÚ","microsoft Yahei";
+    width: 265px;
+}
+.gai_ycjy_b dl dd h2 {
+    color: #FF0000;
+}
+.gai_ycjy_b dl.gai_ts {
+    background: url("../images/index_24.jpg") no-repeat scroll left center transparent;
+    padding-left: 20px;
+}
+.gai_jdal {
+    height: 460px;
+    width: 680px;
+}
+.gai_jdal_t {
+    height: 18px;
+    width: 680px;
+}
+.gai_jdal_t dt {
+    float: left;
+    width: 156px;
+}
+.gai_jdal_t dd {
+    background: url("../images/index_51.jpg") repeat-x scroll 0 0 transparent;
+    float: left;
+    height: 18px;
+    line-height: 9px;
+    text-align: right;
+    width: 520px;
+}
+.gai_jdal_b {
+    float: left;
+    height: 440px;
+    width: 680px;
+}
+.gai_jdal_b li {
+    border-bottom: 1px dashed #D9D9D9;
+    float: left;
+    height: 118px;
+    margin: 15px 0 9px;
+    padding: 0 5px;
+    width: 216px;
+}
+.gai_jdal_b li img {
+    border: 1px solid #D8D8D8;
+    height: 88px;
+    padding: 1px;
+    width: 212px;
+}
+.gai_jdal_b li p {
+    font-family: "Î¢ÈíÑÅºÚ","microsoft Yahei";
+}
+.gai_zmkh {
+    height: 342px;
+    width: 680px;
+}
+.gai_zmkh_b {
+    float: left;
+    height: 324px;
+    width: 680px;
+}
+.gai_zmkh_b dl {
+    float: left;
+    height: 57px;
+    margin-top: 15px;
+    width: 226px;
+}
+.gai_zmkh_b dl dt {
+    float: left;
+    width: 116px;
+}
+.gai_zmkh_b dl dt img {
+    border: 1px solid #D8D8D8;
+    height: 55px;
+    width: 104px;
+}
+.gai_zmkh_b dl dd {
+    float: left;
+    font-family: "Î¢ÈíÑÅºÚ","microsoft Yahei";
+    height: 44px;
+    overflow: hidden;
+    padding-top: 5px;
+    text-transform: uppercase;
+    width: 110px;
+}
+.gai_jjfasjfx {
+    height: 313px;
+    width: 680px;
+}
+.gai_jjfa {
+    float: left;
+    height: 313px;
+    width: 330px;
+}
+.gai_jjfa_t {
+    width: 330px;
+}
+.gai_jjfa_t dt {
+    width: 146px;
+}
+.gai_jjfa_t dd {
+    width: 180px;
+}
+.gai_jjfa_b {
+    height: 295px;
+    width: 330px;
+}
+.gai_jjfa_b dl {
+    height: 75px;
+    margin-top: 17px;
+    width: 330px;
+}
+.gai_jjfa_b dl dt {
+    float: left;
+    width: 85px;
+}
+.gai_jjfa_b dl dt img {
+    border: 1px solid #D8D8D8;
+    height: 69px;
+    padding: 2px;
+    width: 69px;
+}
+.gai_jjfa_b dl dd {
+    float: left;
+    width: 230px;
+}
+.gai_jjfa_b dl dd h2 {
+    font-weight: bold;
+}
+.gai_sjfx {
+    float: left;
+    height: 313px;
+    padding-left: 40px;
+    width: 284px;
+}
+.gai_sjfx_t {
+    width: 284px;
+}
+.gai_sjfx_t dt {
+    width: 146px;
+}
+.gai_sjfx_t dd {
+    width: 138px;
+}
+.gai_sjfx_img {
+    height: 109px;
+    padding-top: 20px;
+}
+.gai_sjfx_ul {
+    height: 150px;
+    line-height: 30px;
+    width: 284px;
+}
+.gai_sjfx_ul li {
+    background: url("../images/index_103.jpg") no-repeat scroll 5px 10px transparent;
+    height: 30px;
+    padding-left: 14px;
+    width: 270px;
+}
+.gai_main_r {
+    float: right;
+    width: 245px;
+}
+.gai_dh {
+    height: 68px;
+    text-align: right;
+    width: 245px;
+}
+.gai_tc {
+    height: 150px;
+    margin-top: 18px;
+    text-align: left;
+    width: 245px;
+}
+.gai_tc img {
+    margin-bottom: 9px;
+}
+.gai_tc a {
+    background: url("../images/tupian.jpg") no-repeat scroll 0 0 transparent;
+    color: #626262;
+    display: block;
+    font-family: "Î¢ÈíÑÅºÚ";
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 9px;
+    padding-left: 14px;
+    width: 221px;
+}
+.gai_tc a:hover {
+    background: url("../images/tupian1.jpg") no-repeat scroll 0 0 transparent;
+    color: #D40000;
+}
+.gai_tc a span {
+    color: #080808;
+    font-size: 14px;
+    font-weight: bold;
+}
+.gai_jzcs {
+    height: 375px;
+    width: 245px;
+}
+.gai_jzcs_t {
+    width: 245px;
+}
+.gai_jzcs_t dt {
+    width: 146px;
+}
+.gai_jzcs_t dd {
+    width: 99px;
+}
+.gai_jzcs_ul {
+    height: 347px;
+    line-height: 30px;
+    margin-top: 10px;
+    width: 245px;
+}
+.gai_jzcs_ul li {
+    height: 30px;
+    width: 245px;
+}
+.gai_jzcs_ul li span {
+    color: #999999;
+}
+.gai_hydt {
+    height: 387px;
+    width: 245px;
+}
+.gai_hydt_ul {
+    height: 210px;
+    line-height: 30px;
+    margin-top: 10px;
+    width: 245px;
+}
+.gai_hydt_ul li {
+    height: 30px;
+    width: 245px;
+}
+.gai_hydt_ul li span {
+    color: #999999;
+}
+.gai_hydt_img {
+    height: 124px;
+    padding-top: 15px;
+}
+.gai_hydt_img img {
+    border: 1px solid #D8D8D8;
+    padding: 2px;
+}
+.gai_gsxw {
+    height: 313px;
+    width: 245px;
+}
+.gai_gsxw_ul {
+    height: 270px;
+    line-height: 30px;
+    margin-top: 10px;
+    width: 245px;
+}
+.gai_gsxw_ul li {
+    height: 30px;
+    width: 245px;
+}
+.gai_gsxw_ul li span {
+    color: #999999;
+}
+.gai_link {
+    margin: auto;
+    width: 958px;
+}
+.gai_link_t {
+    border-bottom: 1px solid #D9D9D9;
+    height: 26px;
+}
+.gai_link_b {
+    line-height: 26px;
+    padding: 10px;
+    width: 938px;
+}
+.gai_link_b a {
+    white-space: nowrap;
+}
+.gai_foot {
+    background: url("../images/index_110.jpg") repeat-x scroll 0 0 transparent;
+    height: 90px;
+}
+.gai_foot_n {
+    background: url("../images/index_112.jpg") no-repeat scroll 40px 15px transparent;
+    height: 70px;
+    margin: auto;
+    padding-top: 20px;
+    text-align: right;
+    width: 958px;
+}
+.onhoo-box {height:290px; width:958px; margin:auto;}

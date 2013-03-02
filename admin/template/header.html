@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="__RESOURCE__/css/skin.css">
+        <link type="text/css" rel="stylesheet" href="__RESOURCE__/css/main.css">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <style type="text/css">
+            body {
+                margin-left: 0px;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-bottom: 0px;
+                background-color: #EEF2FB;
+            }
+        </style>
+        <script src="__RESOURCE__/js/jquery.js"></script>
+        <script>
+			function checkAll(obj) {
+				var checkInputObj = $('.js-checkall-input');
+				if ($(obj).attr('checked')) {
+					checkInputObj.attr('checked',true);
+				} 
+				else {
+					checkInputObj.attr('checked',false);
+				}
+			}
+		</script>
+    </head>
+    <body>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td style="width:17px;"valign="top" background="__RESOURCE__/images/mail_leftbg.gif"><img width="17" height="29" alt="" src="__RESOURCE__/images/left-top-right.gif"></td>
+                    <td valign="top" background="__RESOURCE__/images/content-bg.gif">
+                        <table width="100%" height="31" cellspacing="0" cellpadding="0" border="0" id="table2" class="left_topbg">
+                            <tbody><tr>
+                                    <td height="31">
+                                        <div class="titlebt"><{$title}></div>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                    </td>
+                    <td width="16" valign="top" background="__RESOURCE__/images/mail_rightbg.gif"><img width="16" height="29" alt="" src="__RESOURCE__/images/nav-right-bg.gif"></td>
+                </tr>
+                <tr>
+                    <td valign="middle" background="__RESOURCE__/images/mail_leftbg.gif">&nbsp;</td>
+                    <td valign="top" bgcolor="#F7F8F9">

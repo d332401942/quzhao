@@ -1,0 +1,354 @@
+<{include '__TEMPLATE__/header.html'}>
+
+
+
+<div class="list-div">
+<div class="content-select">
+	<div>
+	<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
+		<input type="hidden" name="page" value="<{$page}>" />
+		<input type="hidden" name="state" value="<{$state}>" />
+		<table>
+			<tr>
+				<td>频道类容</td>
+				<td>
+					<select name="cid">
+						<option value="">全部</option>
+						<{foreach ($classModels as $model)}>
+							<option <{if ($cid == $model->SearchId)}>selected<{/if}> value="<{$model->SearchId}>"><{$model->name}></option>
+							<{foreach ($model->children as $m)}>
+								<option <{if ($cid == $m->id)}>selected<{/if}> value="<{$m->id}>">----<{$m->name}></option>
+							<{/foreach}>
+						<{/foreach}>
+					</select>
+				</td>
+				<td>商品网站</td>
+				<td>
+					<select name="fid">
+						<option value="">全部</option>
+						<{foreach ($sourceModels as $model)}>
+							<option <{if ($fid == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name}></option>
+						<{/foreach}>
+					</select>
+				</td>
+				<td>抓取网站</td>
+				<td>
+					<select name="site">
+						<option value="">全部</option>
+						<{foreach ($siteModels as $model)}>
+							<option <{if ($site == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name}></option>
+						<{/foreach}>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					推荐：
+				</td>
+				<td>
+					<label>全部<input class="js-search-state" value="" type="checkbox" /></label>&nbsp;
+					<label>有货<input <{if (in_array(1,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="1" type="checkbox" /></label>&nbsp;
+					<label>无货<input <{if (in_array(2,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="2" type="checkbox" /></label>&nbsp;
+					<label>待审核<input <{if (in_array(0,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
+				</td>
+				<td>
+					是否推荐
+				</td>
+				<td>
+					<select name="istj">
+						<option value="">全部</option>
+						<option value="1" <{if ($istj == 1)}>selected<{/if}>>是</option>
+						<option value="0" <{if ($istj === 0)}>selected<{/if}>>否</option>
+					</select>
+				</td>
+				<td>
+					是否热门
+				</td>
+				<td>
+					<select name="ishot">
+						<option value="">全部</option>
+						<option value="1" <{if ($ishot == 1)}>selected<{/if}>>是</option>
+						<option value="0" <{if ($ishot === 0)}>selected<{/if}>>否</option>
+					</select>
+				</td>
+				<td><button type="submit">筛选</button>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;"><input onclick="selectAll(this)" class="js-select-all" type="checkbox" /></th>
+		<th style="width:15px;">ID</th>
+		<th style="width:15px;">排序</th>
+		<th style="width:50px;">状态</th>
+		<th>名称</th>
+		<th style="width:100px;">商品网站</th>
+		<th style="width:100px;">抓取网站</th>
+		<th style="width:20px;">价格</th>
+		<th>类别</th>
+		<th>描述</th>
+		<th>操作时间</th>
+		<th>操作人</th>
+		<th>有效时间</th>
+		<th>推荐/热门</th>
+		<th style="width:120px;">操作</th>
+	</tr>
+	<{foreach ($models as $model)}>
+		<tr>
+			<td><input type="checkbox" value="<{$model->id}>" class="js-index-id js-select-all"  /></td>
+			<td><{$model->id}></td>
+			<td><{$model->sort}></td>
+			<td>
+				<select onchange="changeState(this,<{$model->id}>)">
+					<option <{if ($model->state == 1)}>selected<{/if}> value="1">有货</option>
+					<option <{if ($model->state == 2)}>selected<{/if}> value="2">无货</option>
+					<option <{if ($model->state == 0)}>selected<{/if}> value="0">待审核</option>
+				</select>
+			</td>
+			<td title="<{$model->name}>"><{$model->name|truncate:'10'}></td>
+			<td><{$model->SoureName}></td>
+			<td><{$model->SiteName}></td>
+			<td><{$model->price}></td>
+			<td><{$model->jtClassName}></td>
+			<td title="<{$model->info}>"><{$model->info|truncate:'10'}></td>
+			<td><{$model->ltime|date_format:'Y-m-d'}></td>
+			<td>操作人</td>
+			<td><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
+			<td><{if ($model->istj)}>是<{else}>否<{/if}>/<{if ($model->ishot)}>是<{else}>否<{/if}></td>
+			<td>
+				<a href="__APP__/content/add?id=<{$model->id}>"><button>编辑</button></a>
+				<a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a>
+			</td>
+		</tr>
+	<{/foreach}>
+	<tr>
+		<td>
+			<input  onclick="selectAll(this)" class="js-select-all" type="checkbox" />
+		</td>
+		<td colspan="14" style="text-align:left">
+			<select id="js-selec-state">
+				<option value="1">有货</option>
+				<option value="2">无货</option>
+				<option value="0">待审核</option>
+			</select>
+			<button onclick="changeAll()">保存</button>
+			<button onclick="clearSort()">清除选中排序</button>
+			<button onclick="clearTj()">清除选中推荐</button>
+			<button onclick="clearHot()">清除选中热门</button>
+		</td>
+	</tr>
+</table>
+</div>
+
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+function changeState(obj,id) {
+	var state = $(obj).val();
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	doChangeState(ids,state);
+} 
+function selectAll(obj) {
+	if ($(obj).attr('checked')) {
+		$('.js-select-all').attr('checked',true);
+	}
+	else {
+		$('.js-select-all').attr('checked',false);
+	}
+}
+
+function changeAll() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	var state = $('#js-selec-state').val();
+	doChangeState(ids,state,true)
+}
+
+function clearSort() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	if (!ids) {
+		alert('没有选中内容');
+		return;
+	}
+	if (!confirm('确定要清除所选的排序吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/clearSort?stmp='+ new Date().toString(),
+		data: {ids:ids},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function clearTj() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	if (!ids) {
+		alert('没有选中内容');
+		return;
+	}
+	if (!confirm('确定要清除所选的推荐吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/clearTj?stmp='+ new Date().toString(),
+		data: {ids:ids},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function clearHot() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	if (!ids) {
+		alert('没有选中内容');
+		return;
+	}
+	if (!confirm('确定要清除所选的推荐吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/clearHot?stmp='+ new Date().toString(),
+		data: {ids:ids},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function search(obj) {
+	var formObj = $(obj);
+	if (!isGoPage) {
+		formObj.find('input[name="page"]').val(1);
+	}
+	var all = false;
+	var stateStr = '';
+	$('.js-search-state:checked').each(function(){
+		var value = $(this).val();
+		if (!value) {
+			all = true;
+		}
+		else if (!stateStr) {
+			stateStr = value;
+		}
+		else {
+			stateStr += ',' + value;
+		}
+	});
+	if (!all) {
+		formObj.find('input[name="state"]').val(stateStr);
+	}
+	return true;
+}
+
+function doChangeState(ids,state,isReload) {
+	if (!ids) {
+		alert('请选择类容');
+		return false;
+	}
+	if (!state) {
+		alert('请选择状态');
+		return false;
+	}
+	$.ajax({
+		url: '__AJAX__/content/changeState',
+		data: {ids:ids,state:state},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data && data.result) {
+				alert('修改成功');
+				window.location.reload()
+			}
+			else {
+				alert('修改失败');
+			}
+		},
+		error: function() {
+			alert('操作失败');
+		}
+	});
+}
+
+function selectClass(obj) {
+	var cid = $(obj).val();
+	if (cid) {
+		window.location.href = '__APP__/content?cid='+cid;
+	}
+	else {
+		window.location.href = '__APP__/content';
+	}
+}
+
+function del(id,pic) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
+		data: {id:id,pic:pic},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+</script>
