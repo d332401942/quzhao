@@ -25,4 +25,10 @@ class AdminUserDataModel extends BaseDataModel
      * @var unknown_type
      */
     public $LastLoginTime;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->setTableName('adminuser');
+	}
 }

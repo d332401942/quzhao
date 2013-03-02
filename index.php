@@ -6,8 +6,10 @@ define('APP_URL','');
 include '../feng/main.php';
 include './request.php';
 $regulation = array(
-    '/(.*?)__(.*)/' => array('httpRequest', 1, 2),
-    '/.*/' => array('httpRequest', 0),
+	'/^\/?ajax(.*?)__(.*)/' => array('ajaxRequest', 1, 2),
+	'/^\/?ajax(.*)/' => array('ajaxRequest', 1),
+	'/(.*?)__(.*)/' => array('httpRequest', 1, 2),
+	'/.*/' => array('httpRequest', 0),
 );
 $mainClass = new Main();
 $notFoundFileName = 'www/404.html';
