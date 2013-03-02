@@ -12,6 +12,6 @@ class FooterDataModel extends BaseDataModel
     public function __construct()
     {
         parent::__construct();
-        $this->getTableName('footer_column');
+        $this->setTableName('footer');
     }
 }
