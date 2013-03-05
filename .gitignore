@@ -3,3 +3,4 @@ admin/compile
 www/log
 admin/log
 public/uploads
+*.swp
