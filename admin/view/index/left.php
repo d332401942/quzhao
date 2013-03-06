@@ -86,6 +86,17 @@ class LeftIndexView extends BaseView
                     'url' => 'footer/add'
                 ),
             ),
+			'友情链接' => array(
+				array(
+					'name' => '列表',
+					'url' => 'friendlink',
+				),
+				array(
+					'name' => '添加',
+					'url' => 'friendlink/add',
+				),
+
+			),
         );
         $this->assign('menu', $menu);
     }

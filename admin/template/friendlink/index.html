@@ -1,0 +1,47 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post">
+	<table>
+		
+	</table>
+</form>
+<div class="list-div">
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>站点名称</th>
+			<th>LOGO</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+		<{foreach ($models as $model)}>
+		<tr>
+			<td><{$model->id}></td>
+			<td><{$model->name}></td>
+			<td><img src="<{$model->logo|parsePicpath}>" /></td>
+			<td><{$model->sort}></td>
+			<td>
+				<button onclick="del(<{$model->id}>)">删除</button>
+			</td>
+		</tr>
+		<{/foreach}>
+	</table>
+	
+</div>
+<{include '__TEMPLATE__/footer.html'}>
+
+<script>
+function del(id) {
+	if (!confirm('确定要删除该分类？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/friendlink/del?stmp='+ new Date().toString(),
+		type: 'post',
+		data: {id:id},
+		success: function(data) {
+			window.location.reload();
+		}
+	})
+}
+</script>

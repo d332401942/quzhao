@@ -11,32 +11,6 @@
 	<link href="__RESOURCE__/css/footer.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
 </head> 
-<script>
-
-function selectClass(obj,id) {
-	$('.js-class').removeClass('oppe');
-	$(obj).addClass('oppe');
-	showData(id);
-}
-
-function showData(id) {
-	var jsonData = <{$jsonData}>;
-	var data = jsonData[id];
-	var html = '';
-	if (data) {
-		for (var i in data) {
-			html += '<li>';
-			html += '<a href="'+data[i].href+'" target="_blank">';
-			if (data[i].pic) {
-				html += '<img src="'+data[i].pic+'">';
-			}
-			html += '<h3>'+data[i].name+'</h3></a>';
-			html += '</li>';
-		}
-	}
-	$('#js-content').html(html);
-}
-</script>
 <body>
 <div class="about_box">
 <div class="bout_l">
@@ -47,8 +21,8 @@ function showData(id) {
 	<a href="__APP__/footer__LIMIT__id/<{$model->id}>"><{$model->title}></a>
 <{/foreach}>
 
-<a href="__APP__/homebs" class="open">商家合作</a>   
-<a href="__APP__/friendlink" class="">友情链接</a>   
+<a href="__APP__/homebs" class="">商家合作</a>   
+<a href="#nogo" class="open">友情链接</a>   
 </div>
   
 
@@ -59,29 +33,17 @@ function showData(id) {
 <div class="bout_r">
 <div class="bout_r_cont ">
 		
-	<h1>热门商家</h1>
-	<div class="about_sj_nav">
-		<{foreach ($classModels as $key => $model)}>
-			<{if (!$key)}>
-				<script>
-					$(function(){showData(<{$model->id}>);});
-				</script>
-			<{/if}>
-			<a href="#nogo" onclick="selectClass(this,<{$model->id}>)" class="js-class<{if (!$key)}> oppe<{/if}>"><{$model->name}></a>
-		<{/foreach}>
-	</div>
 	<div class="about_contt">
 		<ul id="js-content">
-
+			<{foreach ($models as $model)}>
+			<li>
+				<a target="_blank" href="<{$model->href}>">
+				<img src="<{$model->logo|screenUrl}>">
+				<h3><{$model->name}></h3>
+				</a>
+			</li>
+			<{/foreach}>
 		</ul>
-	</div>
-	<div class="bout_r_box">
-	<h2>加盟联系</h2>
-	<p>
-	联系邮箱：bd@quzhao.com</p>
-	<p>
-	QQ：1470059880
-	</p>
 	</div>
 </div>
 <div class="about_footer"> &copy;2013 quzhao.com 版权所有</div>
