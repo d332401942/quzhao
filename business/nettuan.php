@@ -148,4 +148,10 @@ class NetTuanBusiness extends BaseBusiness
         $data->setOrder(array('id' => 'desc'));
         return $data->findAll();
     }
+
+	public function changeStatus($id, $status)
+	{
+		$data = new NetTuanData('NetTuanDataDataModel');
+		$data->changeStatus($id, $status);
+	}
 }

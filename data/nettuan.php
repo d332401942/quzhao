@@ -16,4 +16,26 @@ class NetTuanData extends BaseData
         $sql = 'update net_tuan_data set istj = '.$istj .' where id = '.$id;
         $this->exec($sql);
     }
+
+	public function changeStatus($id, $status)
+	{
+		$ids = null;
+		if (is_array($id))
+		{
+			foreach ($id as $v)
+			{
+				if ((int)$v)
+				{
+					$ids .= ',' . (int)$v;
+				}
+			}
+		}
+		else
+		{	
+			$ids = (int)$id;
+		}
+		$ids = trim($ids, ',');
+		$sql = 'update net_tuan_data set sort = ' .(int)$status . ' where id in ('. $ids .')';
+		$this->exec($sql);
+	}
 }

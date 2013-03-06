@@ -61,14 +61,17 @@ class IndexTuanView extends BaseView
 		{
 			case 'bought':
 				$sort['bought'] = 'desc';
+				$sort['sort'] = 'desc';
 				break;
 			case 'cur_price':
 				$sort['cur_price'] = 'asc';
+				$sort['sort'] = 'desc';
 				break;
 			case 'id':
 				$sort['id'] = 'desc';
 				break;
             default :
+				$sort['sort'] = 'desc';
 				$sort['id'] = 'desc';
 				break;
 		}

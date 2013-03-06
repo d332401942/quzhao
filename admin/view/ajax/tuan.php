@@ -22,6 +22,15 @@ class TuanAjaxView extends AjaxCoreLib
         $business->changeIstj($id,$istj);
         $this->response(true);
     }
+
+	public function changeStatus() 
+	{
+		$id = $_POST['id'];
+		$sort = $_POST['sort'];
+		$business = M('NetTuanBusiness');
+		$business->changeStatus($id, $sort);
+		$this->response(true);
+	}
     
     public function del()
     {

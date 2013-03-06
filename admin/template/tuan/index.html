@@ -103,7 +103,7 @@
 		<td><a href="<{$model->pdt_url2}>" target="_blank"><{$model->pdt_url2|truncate:50}></a></td>
 		<td><{$model->ctime}></td>
 		<td><{$model->webname}></td>
-		<td><input type="text" value="<{$model->sort}>" style="width:55px;" /></td>
+		<td><input type="text" onblur="changeSort(this,<{$model->id}>)" oldvalue="<{$model->sort}>" value="<{$model->sort}>" style="width:55px;" /></td>
 		<td>
 			<button onclick="recommend(<{$model->id}>)">推荐到主页</button>
 			<button onclick="del(<{$model->id}>)">删除</button>
@@ -182,5 +182,23 @@ function del(id) {
 			}
 		}
 	});
+}
+
+function changeSort(obj,id) {
+	var value = $(obj).val();
+	var oldvalue = $(obj).attr('oldvalue');
+	if (value != oldvalue) {
+		$.ajax({
+			url: '__AJAX__/tuan/changeStatus?stmp=' + new Date().toString(),	
+			type: 'post',
+			data: {id:id, sort:value},
+			dataType: 'json',
+			success: function(data) {
+				if (data.result) {
+					$(obj).attr('oldvalue',value);	
+				}
+			}
+		});	
+	}
 }
 </script>

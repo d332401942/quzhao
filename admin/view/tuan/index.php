@@ -50,22 +50,25 @@ class IndexTuanView extends BaseView
         $sortStr = !empty($_GET['sort']) ? $_GET['sort'] : null;
         $keyword = !empty($_GET['keyword']) ? $_GET['keyword'] : null;
         $sort = array();
-        $sort['id'] = 'desc';
 		switch ($sortStr)
 		{
 			case 'bought':
 				$sort['bought'] = 'desc';
+				$sort['sort'] = 'desc';
 				break;
 			case 'cur_price':
 				$sort['cur_price'] = 'asc';
+				$sort['sort'] = 'desc';
 				break;
 			case 'id':
 				$sort['id'] = 'desc';
+				$sort['sort'] = 'desc';
 				break;
             default :
-				$sort['id'] = 'desc';
+				$sort['sort'] = 'desc';
 				break;
 		}
+		$sort['id'] = 'desc';
 		//根据当前城市获取城市地区
 		$regionModels = $this->getCityRegion($city);
         //得到小类
