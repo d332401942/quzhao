@@ -68,8 +68,10 @@ var hoverCode = null;
 	<!--<h1>精品团购</h1>-->
 	<h2><span id="js-city-name"><{$cityName}></span><font><a href="#nogo" onclick="showCity()">切换城市</a></font></h2>
 	<div class="sotuan">
-		<div class="sotuan_pnt"><a href="#nogo" onclick="doSearch()"></a></div>
-		<input name="" id="js-search-keyword" type="text"  class="sotuan_in" onmouseout="this.style.borderColor=''" onfocus="if (value =='搜团购'){value =''}" value="<{if ($keyword)}><{$keyword}><{else}>搜团购<{/if}>"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='搜团购'}"//>
+		<form onsubmit="return doSearch()" id="js-content-search">
+			<div class="sotuan_pnt"><a href="#nogo" onclick="$('#js-content-search).submit();"></a></div>
+			<input name="" id="js-search-keyword" type="text"  class="sotuan_in" onmouseout="this.style.borderColor=''" onfocus="if (value =='搜团购'){value =''}" value="<{if ($keyword)}><{$keyword}><{else}>搜团购<{/if}>"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='搜团购'}"//>
+		</form>
 	</div>
 </div>
 <div class="tian_lei">
@@ -238,7 +240,7 @@ var hoverCode = null;
 	<input name="city" value="<{$city}>" />
 	<input name="region" value="<{$region}>" />
 	<input name="sort" value="<{$sortStr}>" />
-	<input name="page" value="<{$page}>" />
+	<input name="page" value="" />
 </form>
 <!-- 搜索使用的隐藏form -->
 <script>
@@ -274,7 +276,7 @@ function doSearch(isPage) {
 	}
 	url = encodeURI(url);
 	window.location.href = url;
-	return;
+	return false;
 	$('#js-search-form').ajaxSubmit({
 		url:'__APP__/tuan/search?stmp='+new Date().toString(),
 		data: {keyword:keyword},

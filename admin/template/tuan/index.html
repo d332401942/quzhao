@@ -90,6 +90,7 @@
 		<th>URL</th>
 		<th>入库时间</th>
 		<th style="width:85px;">来源</th>
+		<th>排序</th>
 		<th style="width:85px;">操作</th>
 	</tr>
 
@@ -102,6 +103,7 @@
 		<td><a href="<{$model->pdt_url2}>" target="_blank"><{$model->pdt_url2|truncate:50}></a></td>
 		<td><{$model->ctime}></td>
 		<td><{$model->webname}></td>
+		<td><input type="text" value="<{$model->sort}>" style="width:55px;" /></td>
 		<td>
 			<button onclick="recommend(<{$model->id}>)">推荐到主页</button>
 			<button onclick="del(<{$model->id}>)">删除</button>
