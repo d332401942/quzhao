@@ -57,7 +57,6 @@ class IndexTuanView extends BaseView
         $sortStr = !empty($parameters['sort']) ? $parameters['sort'] : null;
         $keyword = !empty($parameters['keyword']) ? $parameters['keyword'] : null;
         $sort = array();
-        $sort['id'] = 'desc';
 		switch ($sortStr)
 		{
 			case 'bought':
@@ -73,6 +72,7 @@ class IndexTuanView extends BaseView
 				$sort['id'] = 'desc';
 				break;
 		}
+        $sort['id'] = 'desc';
 		//根据当前城市获取城市地区
 		$regionModels = $this->getCityRegion($city);
         //得到城市名称
