@@ -15,6 +15,10 @@ class IndexFriendlinkView extends BaseView
         $this->assign('titleModels', $titleModels);
 		$business = M('FriendLinkBusiness');   
 		$models = $business->findAll();
+		if (!$models)
+		{
+			$models = array();
+		}
 		$this->assign('models', $models);
     }
 }
