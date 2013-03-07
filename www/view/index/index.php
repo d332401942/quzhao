@@ -8,6 +8,9 @@ class IndexIndexView extends BaseView
     
 	public function index()
 	{
+		//得到当前城市的城市code
+		$cityCommon = new CityCommon();
+		$cityCode = $cityCommon->getCurrentCityId();
 		//得到单品的分类数据
 		$homeClassBusiness = new HomeTjClassBusiness();
 		$classModels = $homeClassBusiness->findAll();

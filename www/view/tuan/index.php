@@ -50,7 +50,20 @@ class IndexTuanView extends BaseView
         $pageCore->pageSize = 21;
         $pageCore->currentPage = (!empty($parameters['page']) && (int)$parameters['page']) ? (int)$parameters['page'] : 1;
         //TODO 默认为北京以后根据IP判断
-        $city = !empty($parameters['city']) ? $parameters['city'] : 10100;
+        //$city = !empty($parameters['city']) ? $parameters['city'] : 10100;
+		if (!empty($parameters['city']))
+		{
+			$city = $parameters['city'];
+		}
+		else
+		{
+			$cityCommon = new CityCommon();
+			$city = $cityCommon->getCurrentCityId();
+			if (!$city) 
+			{
+				$city = 10100;
+			}
+		}
         $region = !empty($parameters['region']) ? $parameters['region'] : null;
         $class1 = !empty($parameters['class1']) ? $parameters['class1'] : null;
         $class2 = !empty($parameters['class2']) ? $parameters['class2'] : null;
