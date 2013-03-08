@@ -10,7 +10,7 @@ class CityCommon extends Feng
 
     public function getCurrentCityId()
     {
-        //$ip = $_SERVER['REMOTE_ADDR'];
+		$ip = $_SERVER['REMOTE_ADDR'];
         $ips = explode('.', $ip);
         $n = ($ips[0] * pow(256, 3)) + ($ips[1] * pow(256, 2)) + ($ips[2] * pow(256, 1)) + ($ips[3] * pow(256, 0));
         switch (true)

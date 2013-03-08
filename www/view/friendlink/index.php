@@ -5,7 +5,7 @@ class IndexFriendlinkView extends BaseView
     
     public function index()
     {
-		$this->cache('cacheData');
+		$this->cache('cacheData', -1);
     }
     
     public function cacheData()
