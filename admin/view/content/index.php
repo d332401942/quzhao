@@ -88,8 +88,26 @@ class IndexContentView extends BaseView
         {
             $ishot = (int)$_GET['ishot'];
         }
+
+		$id = null;
+		if (!empty($_GET['id']))
+		{
+			$id = $_GET['id'];
+			$this->assign('id', $id);
+		}
 		$pageCore->currentPage = $page;
-		$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot);
+		if ($id)
+		{
+			$model = $business->getOneById($id);
+			if ($model)
+			{
+				$models = array($model);
+			}
+		}
+		else
+		{
+			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot);
+		}
 		$models = $models ?  $models : array();
 		foreach ($models as $model)
 		{
@@ -113,6 +131,7 @@ class IndexContentView extends BaseView
 				$model->SiteName = $siteModels[$model->site]->name;
 			}
 		}
+		$this->assign('id', $id);
 		$this->assign('page',$page);
 		$this->assign('state',implode(',',$state));
 		$this->assign('cid',$cidStr);
