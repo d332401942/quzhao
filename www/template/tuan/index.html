@@ -69,7 +69,7 @@ var hoverCode = null;
 	<h2><span id="js-city-name"><{$cityName}></span><font><a href="#nogo" onclick="showCity()">切换城市</a></font></h2>
 	<div class="sotuan">
 		<form onsubmit="return doSearch()" id="js-content-search">
-			<div class="sotuan_pnt"><a href="#nogo" onclick="$('#js-content-search).submit();"></a></div>
+			<div class="sotuan_pnt"><a href="#nogo" onclick="$('#js-content-search').submit();"></a></div>
 			<input name="" id="js-search-keyword" type="text"  class="sotuan_in" onmouseout="this.style.borderColor=''" onfocus="if (value =='搜团购'){value =''}" value="<{if ($keyword)}><{$keyword}><{else}>搜团购<{/if}>"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='搜团购'}"//>
 		</form>
 	</div>
