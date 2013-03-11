@@ -95,7 +95,17 @@ class LeftIndexView extends BaseView
 					'name' => '添加',
 					'url' => 'friendlink/add',
 				),
+			),
 
+			'商品点击统计' => array(
+				array(
+					'name' => '9.9包邮',
+					'url' => 'hits/nine',
+				),
+				array(
+					'name' => '超值单品',
+					'url' => 'friendlink/add',
+				),
 			),
         );
         $this->assign('menu', $menu);

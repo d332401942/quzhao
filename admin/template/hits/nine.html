@@ -1,0 +1,46 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post">
+	<table>
+		<tr>
+			<td>期限：</td>
+			<td>
+				<select name="time">
+					<option <{if ($time == 1)}>selected<{/if>}> value="1">一天内</option>
+					<option <{if ($time == 7)}>selected<{/if>}> value="7">一周内</option>
+					<option <{if ($time == 30)}>selected<{/if}> value="30">一月内</option>
+					<option <{if (!$time)}>selected<{/if}> value="">全部</option>
+				</select>
+			</td>
+			<td>商品ID：</td>
+			<td><input name="dataid" type="text" value="<{$dataId}>" /></td>
+			<td><button type="submit">查询</button></td>
+		</tr>
+	</table>
+</form>
+<div class="list-div">
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;"><input onclick="selectAll(this)" class="js-select-all" type="checkbox" /></th>
+		<th style="width:15px;">ID</th>
+		<th>商品名称</th>
+		<th>点击次数</th>
+		<th style="width:120px;">操作</th>
+	</tr>
+	<{foreach ($models as $model)}>
+		<tr>
+			<td><input type="checkbox" value="<{$model->id}>" class="js-index-id js-select-all"  /></td>
+			<td><{$model->id}></td>
+			<td><{$model->name}></td>
+			<td><{$model->hitnum}></td>
+			<td>
+				<a href="__APP__/content/add?id=<{$model->id}>"><button>编辑</button></a>
+			</td>
+		</tr>
+	<{/foreach}>
+</table>
+</div>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+function selectAll(obj) {}
+</script>

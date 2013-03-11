@@ -4,3 +4,4 @@ www/log
 admin/log
 public/uploads
 *.swp
+/nbproject/private/
