@@ -3,8 +3,21 @@
 class DemoIndexView extends BaseView
 {
 
+	const A_B = 1;
+
+	const D_B = 2;
+
+	public $db_d = 13;
+
 	public function index()
 	{
+		$this->responseError('ddd');
+		$a = 'A';
+		$d = 'D';
+		$b = '_B';
+		$z = $a . $b;
+
+		exit;
 		$this->cache('cacheData', 0);
 	}
 
