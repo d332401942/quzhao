@@ -9,8 +9,22 @@ class DemoIndexView extends BaseView
 
 	public $db_d = 13;
 
-	public function index()
+	public function index($params)
 	{
+		$arr = array(
+			0 => array(
+				'id' => 0,
+				'name' => 'a',
+				'chidren' => array(
+					3 => array(
+						'id' => 3,
+						'name' => 'a1',
+						'chidren' => array(),
+					),
+				),
+			),
+		);
+		P($arr);
 		$this->responseError('ddd');
 		$a = 'A';
 		$d = 'D';
