@@ -37,9 +37,11 @@ var data = [];
 					<{if ($model->state == HomeTjDataDataModel::STATE_EMPTY or $model->time_end <= time())}>
 						<h3 class="zl">
 						明天早点来
+						</h3>
 					<{else if($model->time_start > time())}>
 						<h3>
 							开始时间：<font><{$model->time_start|date_format:'Y年m月d日'}></font>
+						</h3>
 					<{else}>
 						<h3 id="js-over-time-<{$model->id}>">
 						所剩时间<span class="js-over-day"></span>天
@@ -47,6 +49,7 @@ var data = [];
 							var overTime = <{$model->time_end - time()}>;
 							data.push({obj:$('#js-over-time-<{$model->id}>'),time:overTime});
 						</script>
+						</h3>
 					<{/if}>
 					<span style="float: right;width:20px;">
 					<script type="text/javascript" charset="utf-8">
@@ -71,7 +74,6 @@ var data = [];
 					})()
 					</script>
 					</span>
-					</h3>
 
 				</div>
 			</li>
