@@ -27,4 +27,11 @@ class HitsDataModel extends BaseDataModel
     public $user_id;
     
     public $type;
+
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->setTableName('hits');
+	}
 }
