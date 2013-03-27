@@ -1,5 +1,7 @@
 www/compile
+www/config.php
 admin/compile
+admin/config.php
 www/log
 admin/log
 public/uploads
