@@ -13,7 +13,7 @@
 		<{/if}>
 	</div>
 </div>
-<script>
+<script  type="text/javascript">
 <{if (count($adModels) > 1)}>
 var img_n = 1;
 var img_max = $('.js-img-button').length;
@@ -89,7 +89,7 @@ var hoverCode = null;
 		<{/foreach}>
 		<ul id="js-class-children" class="tian_x_lei" style="display:none;position:relative;">
 		</ul>
-		<script>
+		<script  type="text/javascript">
 			$('.js-search-class1').each(function(){
 				if ($(this).is('.open4')) {
 					var this_ = $(this);
@@ -180,7 +180,7 @@ var hoverCode = null;
 				</span>
 				<!--  <strong class="js-over-time">1</strong><strong class="js-over-time">2</strong>:<strong class="js-over-time">2</strong><strong class="js-over-time">3</strong>:<strong class="js-over-time">5</strong><strong class="js-over-time">8</strong> -->
 				</h3>
-				<script>
+				<script  type="text/javascript">
 					var overTime = "<{strtotime($model->end_time) - time() - 8*3600|date_format:'His'}>";
 					var timeObj = $('#js-tuan-over-time-<{$model->id}>').find('.js-over-time');
 					for (var i=0; i<=6; i++) {
@@ -265,7 +265,7 @@ var hoverCode = null;
 	<input name="page" value="" />
 </form>
 <!-- 搜索使用的隐藏form -->
-<script>
+<script  type="text/javascript">
 //doSearch();
 function goPage(page) {
 	$('#js-search-form').find('input[name="page"]').val(page);
