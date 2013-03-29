@@ -5,6 +5,10 @@ class IndexTuanView extends BaseView
 	
 	public function index($parameters)
 	{
+		foreach ($parameters as $key => $val)
+		{
+			$parameters[$key] = htmlspecialchars($val);
+		}
 		$this->setMeta();
 		//得到城市信息
 		$cityModels = $this->getCity();
