@@ -10,6 +10,7 @@ class DemoIndexView extends BaseView
 
     public function index($params)
     {
+        //
         $arr = array(
             0 => array(
                 'id' => 0,
