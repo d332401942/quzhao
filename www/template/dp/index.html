@@ -56,7 +56,7 @@
 		<ul>
 			<{foreach ($tjModels as $model)}>
 			<li>
-				<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="dp/end__LIMIT__id/<{$model->id}>" target="_blank">
+				<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">
 				<div><img src="<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>" /></div>
 				<!-- <div class="xl"><span>月销量：6438件</span></div> -->
 				<h2><{$model->name}></h2>
@@ -72,7 +72,7 @@
 			<{foreach ($dpBrowseHistoryModels as $model)}>
 			<ul>
 				<li>
-					<a href="dp/end__LIMIT__id/<{$model->id}>" target="_blank">
+					<a href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">
 					<div><img src="<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>" /></div>
 					<!-- <div class="xl"><span>月销量：6438件</span></div> -->
 					<h2><{$model->name}></h2>
