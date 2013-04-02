@@ -11,7 +11,7 @@ class AddHomebsView extends BaseView
 			$this->add();
 		}
         $id = null;
-        if ($_GET['id'])
+        if (!empty($_GET['id']))
         {
             $id = (int)$_GET['id'];
         }

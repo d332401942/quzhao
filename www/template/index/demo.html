@@ -1,5 +1,4 @@
-<{cache cacheData}>
-<{$str}>
-<{/cache}>
+<{foreach ($arr as $key => $val)}>
+<{$key}>     --------------  <{$val|date_format:"Y-m月-d日"}> <br>
 
-1
+<{/foreach}>
