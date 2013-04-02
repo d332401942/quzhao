@@ -47,7 +47,7 @@ class endDpView extends BaseView
 		$this->assign('editorArr', $editorArr);
         $this->assign('tjModels', $tjModels);
         $this->assign('goods', $goods);
-        $this->assign('fid', $model);
+        $this->assign('model', $model);
     }
 }
 ?>
