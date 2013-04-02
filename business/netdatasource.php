@@ -31,4 +31,10 @@ class NetDataSourceBusiness extends BaseBusiness
 		$result = $data->findAll();
 		return $result;
 	}
+    
+    public function getOneById($id)
+    {
+        $data = new NetDataSourceData();
+        return $data->getOneById($id);
+    }
 }
