@@ -78,7 +78,7 @@ var overTiemFloatData = [];
 	<div class="dp_box">
 		<div class="dp_box_l">
 			<{foreach ($bomeBrandAdModels as $key => $model)}>
- 				<a name="<{$model->name}>" price="<{$model->price}>" class="js-dp-ad-pic" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">
+            <a name="<{$model->name}>" price="<{$model->price}>" class="js-dp-ad-pic" href="<{$model->href}>" target="_blank">
 					<div class="dp_box_l_tu">
 						<img src="<{$model->pic|parsePicpath}>" alt="" />
 					</div>
