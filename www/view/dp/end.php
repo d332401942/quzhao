@@ -4,12 +4,13 @@ class endDpView extends BaseView
 {
     public function index($parameters)
     {
+        $id = is_array($parameters)?intval($parameters['id']):'';
         $this->setMeta();
         $business = new HomeTjDataBusiness();
        //得到推荐产品
         $tjModels = $business->getTjDpModels(5);
         //得到产品详细
-        $goods = $business->getOneById($parameters['id']);
+        $goods = $business->getOneById($id);
        //得到产品商家
         $comefrom = new NetDataSourceBusiness();
         $fid = $comefrom->getOneById($goods->fid);
