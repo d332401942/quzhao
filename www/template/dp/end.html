@@ -1,0 +1,517 @@
+<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_DB css="end" js="lx,lx2"}>
+
+<div class="box dp">
+
+<div class="dp_box2">
+<div class="dp_box2_l_b">
+<div class="dp_box2_l end_box">
+<ul>
+<li class="dp_box2_l_title"><h1><a href="<{$goods->href}>"><{$goods->name}></a></h1>
+
+</li>
+<li class="dp_box2_l_l">
+    <a href="<{$goods->href}>" title="<{$goods->name}>"><img src="<{if (!preg_match('/^http:\/\//',$goods->pic))}>/<{/if}><{$goods->pic}>" /></a>
+</li>
+<li class="dp_box2_l_r">
+<h3>
+<span><img src="__RESOURCE__/images/tm.gif" /><{$goods->ctime|diffNow}>前更新</span>
+<span><img src="__RESOURCE__/images/us.gif" /><a href="#" class="uss"><{$editorArr[$goods->id % (count($editorArr))]}></a>推荐</span>
+<span><a href="#" title="喜欢"><img src="__RESOURCE__/images/love.gif" />7434</a></span>
+<span><a href="#" ><img src="__RESOURCE__/images/shr.gif" />分享</a></span>
+</h3>
+<div class="listed">
+<ul>
+<li class="listed_l">来源商家</li>
+<li><{if (empty($fid->name))}> 本站 <{else}> <{$fid->name}> <{/if}></li>
+</ul>
+
+<!--<ul>
+<li class="listed_l">商品编号</li>
+<li>ER85787969</li>
+</ul>-->
+
+<ul>
+<li class="listed_l">上架时间</li>
+<li><{$goods->ctime|date_format:'Y-m-d'}></li>
+</ul>
+
+<!--<ul>
+<li class="listed_l">接口</li>
+<li>USB</li>
+</ul>
+
+<ul>
+<li class="listed_l">工作方式</li>
+<li>光电</li>
+</ul>
+
+<ul>
+<li class="listed_l">颜色</li>
+<li>黑色</li>
+</ul>-->
+
+
+
+
+</div>
+<div class="mulist">推荐理由</div>
+<h2><{$goods->info}><a href="#">详细></a></h2>
+
+<div class="dp_box2_l_bt">
+
+    <a href="<{$goods->href}>">去购买</a
+></div>
+</li>
+</ul>
+<ul>
+<li>
+<!--<div class="comt">
+<div class="mulist">最新评论（129）</div>
+
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>1楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+我也来说几句，大家发现木有很多9.9包邮的商家都是卖的化妆品，或者居家小工具 ，手机壳等小玩意，为什
+么了？因为他们本来成本就是很低的，化妆品成本都是几毛钱的事情，很多居家小工具义乌批发市场都是按照
+斤卖的，手机壳都是按照斤来卖的，好吧！所以很多商家9.9元包邮情况下
+</div>
+</div>
+</div>
+
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>2楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+我个人觉得这个推荐可以上主页。即使满400-200，也没这个便宜。这一套质量、装订、内容都颇花
+心思，推荐有兴趣的朋友入手。既可装逼，又可充实自我。
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>3楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+梵蒂冈的个梵蒂冈
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>4楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+郭德纲的
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>5楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+是的风格个大概
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>6楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+考英语了
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>7楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+打个的 
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>8楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+个地方官热广告
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>9楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+打个的风格 
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>10楼</h2>
+</div>
+</div>
+<div class="comt_r_cont2">
+李开复:我个人觉得这个推荐可以上主页。即使满400-200，也没这个便宜。这一套质量、装订、内容都颇花
+心思，推荐有兴趣的朋友入手。既可装逼，又可充实自我。
+</div>
+<div class="comt_r_cont">
+光电热汤 
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>11楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+鬼地方而特
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>12楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+个大概大哥哥
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>13楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+郭德纲的个
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>14楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+我个人觉得这个推荐可以上主页。即使满400-200，也没这个便宜。这一套质量、装订、内容都颇花
+心思，推荐有兴趣的朋友入手。既可装逼，又可充实自我。
+</div>
+</div>
+</div>
+
+<div class="comt_box">
+<div class="comt_l">
+<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<div class="comt_r_top_l">
+<a href="#">李开复</a>013-03-13 09:14:49
+</div>
+<div class="comt_r_top_r">
+<a href="#">@他</a>
+<a href="#">引用原文</a>
+<a href="#">回复</a>
+<h2>15楼</h2>
+</div>
+</div>
+<div class="comt_r_cont">
+各方各若干
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="pag" style="width:680px; background-color:#fff; padding-top:0px; margin-top:0px;">
+<a href="#">上一页</a>
+<a href="#" class="pag_open">1</a>
+<a href="#">2</a>
+<a href="#">3</a>
+<a href="#">4</a>
+<a href="#">5</a>
+...
+<a href="#">67</a>
+<a href="#">下一页</a>
+</div>-->
+
+
+<!--<div class="ress_box">
+<div class="comt_l">
+<img src="__RESOURCE__/images/tx.gif" />
+</div>
+<div class="comt_r">
+<div class="comt_r_top">
+<textarea name="" cols="" rows="" class="ress"></textarea>
+</div>
+<div class="ress_login_box">
+<div class="ress_login_box_l">
+<a href="#"><strong>登录</strong></a>（没有趣找账户？<a href="#">注册</a>一个）
+</div>
+<div class="ress_login_box_r"><a href="#">发布</a></div>
+</div>
+</div>
+<div class="mulist">大家还看了</div>
+<div class="ress_more">
+<div class="ress_more_li">
+<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
+<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
+<h4>￥9.90</h4>
+<h2>
+<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+</h2>
+</div>
+
+<div class="ress_more_li">
+<p><a href="#"><img src="http://oimageb5.ydstatic.com/image?id=8774702224128533707&product=gouwu" /></a></p>
+<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
+<h4>￥9.90</h4>
+<h2>
+<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+</h2>
+</div>
+
+<div class="ress_more_li">
+<p><a href="#"><img src="http://oimageb5.ydstatic.com/image?id=892203967790220488&product=gouwu" /></a></p>
+<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮洗衣球</a></h3>
+<h4>￥9.90</h4>
+<h2>
+<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+</h2>
+</div>
+
+
+</div>
+
+
+</div>-->
+
+
+</li>
+</ul>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+<div class="pp_rr_box">
+<div class=" pp_rr2">
+<h2>猜你喜欢</h2>
+<ul>
+<{foreach ($tjModels as $v)}>
+<li>
+    <a href="__APP__/dp/end__LIMIT__/id/<{$v->id}>">
+<div><img src="<{if (!preg_match('/^http:\/\//',$v->pic))}>/<{/if}><{$v->pic}>" /></div>
+<!--<div class="xl"><span>月销量：6438件</span></div>-->
+<h2><{$v->name}></h2>
+<h3>￥<{$v->price}></h3></a>
+</li>
+<{/foreach}>
+
+</ul>
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+
+
+
+<{uc class="FooterControlView"}>
