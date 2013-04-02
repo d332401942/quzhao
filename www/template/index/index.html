@@ -78,7 +78,7 @@ var overTiemFloatData = [];
 	<div class="dp_box">
 		<div class="dp_box_l">
 			<{foreach ($bomeBrandAdModels as $key => $model)}>
- 				<a name="<{$model->name}>" price="<{$model->price}>" class="js-dp-ad-pic" href="<{$model->href}>" target="_blank">
+ 				<a name="<{$model->name}>" price="<{$model->price}>" class="js-dp-ad-pic" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">
 					<div class="dp_box_l_tu">
 						<img src="<{$model->pic|parsePicpath}>" alt="" />
 					</div>
@@ -97,14 +97,14 @@ var overTiemFloatData = [];
 			<ul>
 				<{foreach($dpModels as $model)}>
 				<li>
-					<h2><a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank"><{$model->name}></a></h2>
+					<h2><a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank"><{$model->name}></a></h2>
 					<h3 ><font>￥</font><{$model->price}></h3>
 					<!-- <h4>原价<font><{$model->sprice}></font></h4> -->
 					<div class="dp_box_r_pnt ">
-						<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank">去购买</a>
+						<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">去购买</a>
 					</div>
 					<div class="dp_box_r_tu">
-					<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank">
+					<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">
 					<img src="<{$model->pic|parsePicpath}>" />
 					</a>
 					</div>

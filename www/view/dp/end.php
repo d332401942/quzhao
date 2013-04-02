@@ -4,15 +4,16 @@ class endDpView extends BaseView
 {
     public function index($parameters)
     {
+        $id = is_array($parameters)?intval($parameters['id']):'';
         $this->setMeta();
         $business = new HomeTjDataBusiness();
        //得到推荐产品
         $tjModels = $business->getTjDpModels(5);
         //得到产品详细
-        $goods = $business->getOneById($parameters['id']);
+        $goods = $business->getOneById($id);
        //得到产品商家
         $comefrom = new NetDataSourceBusiness();
-        $fid = $comefrom->getOneById($goods->fid);
+        $model = $comefrom->getOneById($goods->fid);
         //推荐用户名
         $editorArr = array(
 			'珞邪',
@@ -46,7 +47,7 @@ class endDpView extends BaseView
 		$this->assign('editorArr', $editorArr);
         $this->assign('tjModels', $tjModels);
         $this->assign('goods', $goods);
-        $this->assign('fid', $fid);
+        $this->assign('model', $model);
     }
 }
 ?>
