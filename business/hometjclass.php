@@ -63,4 +63,16 @@ class HomeTjClassBusiness extends BaseBusiness
 		$result = $data->where(array('name' => $name))->findOne();
 		return $result;
 	}
+    
+    /**
+	 * 得到超值单品的数据
+	 */
+    public function getAllDp()
+	{
+		$data = new HomeTjClassData();
+		$data->where(array('pid' => array('=' => 2)));
+		$models = $data->setOrder(array('sort' => 'desc'))->findAll();
+		return $models;
+	}
+   
 }
