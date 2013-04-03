@@ -5,17 +5,9 @@
 <div class="mini_nav_box">
 <h1>商品分类</h1>
 <ul>
-
-<li><a href="#" class="mini_nav_box_1"><span></span>潮流服饰</a></li>
-<li><a href="#" class="mini_nav_box_2"><span></span>鞋帽箱包</a></li>
-<li><a href="#" class="mini_nav_box_3"><span></span>护肤彩妆</a></li>
-<li><a href="#" class="mini_nav_box_4"><span></span>珠宝手表</a></li>
-<li><a href="#" class="mini_nav_box_5"><span></span>手机数码</a></li>
-<li><a href="#" class="mini_nav_box_6"><span></span>家用电器</a></li>
-<li><a href="#" class="mini_nav_box_7"><span></span>运动户外</a></li>
-<li><a href="#" class="mini_nav_box_8"><span></span>食品保健</a></li>
-<li><a href="#" class="mini_nav_box_9"><span></span>母婴童装</a></li>
-<li><a href="#" class="mini_nav_box_10"><span></span>家居生活</a></li>
+<{foreach ($modelCate as $val)}>
+<li><a href="#" class="mini_nav_box_1"><span></span><{$val->name}></a></li>
+<{/foreach}>
 </ul>
 </div>
 <div><img src="__RESOURCE__/images/l_nav_bt.png" class="png" width="100%"/></div>
