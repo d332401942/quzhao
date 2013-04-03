@@ -23,19 +23,6 @@ class HeaderControlView extends BaseView
         {
             $keyword = '羽绒服';
         }
-       
-        //得到分类信息
-        $this->classModels = $this->getClassModels();
-        $this->assign('classModels',$this->classModels);
         $this->assign('keyword', $keyword);
     }
-    
-    private function getClassModels()
-	{
-		$business = new NetTuanBusiness();
-		$models = $business->getAllClassModels();
-		return $models;
-	}
-    
-
 }
