@@ -17,6 +17,11 @@ class IndexDpView extends BaseView
 		$tjModels = $business->getTjDpModels(5);
 		//得到历史记录
 		$dpBrowseHistoryModels = $this->dpBrowseHistoryModels();
+        
+        //得到超值单品分类
+        $business = new HomeTjClassBusiness();
+        $modelCate = $business->getAllDp();
+        $this->assign('modelCate', $modelCate);
 		$this->assign('models', $models);
 		$this->assign('tjModels', $tjModels);
 		$this->assign('dpBrowseHistoryModels', $dpBrowseHistoryModels);
