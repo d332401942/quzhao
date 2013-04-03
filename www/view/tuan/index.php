@@ -35,7 +35,7 @@ class IndexTuanView extends BaseView
 		//默认字母
 		$headLetter = 'L';
 		
-		//得到广告
+		//得到广告  
 		$adModels = $this->getAdModels();
         //得到团购数据
         $models = $this->getModels($parameters);
