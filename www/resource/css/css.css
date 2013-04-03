@@ -87,14 +87,14 @@ this.runtimeStyle.backgroundImage = "none")),this.pngSet=true);}
 .cont_title h1{ font-size:18px; color:#824b6d; float: left; padding-left:5px;}
 .cont_title h1 font{ margin-left:20px; font-weight:lighter; font-size:14px; color:#e08cbf;}
 .cont_title h3{ float:right; font-size:12px; font-weight:lighter; padding-right:5px;}
-.nine{ overflow:hidden; clear:both; width:1010px;_width:1000px;position:relative; padding-left:5px; margin-left:-5px; padding-top:5px; margin-top:-5px; margin-bottom:-20px;margin-bottom:-5px\9;_margin-bottom:-20px;}
+.nine{ overflow:hidden; clear:both; width:1010px;_width:1000px;padding-left:5px; margin-left:-5px; padding-top:5px; margin-top:-5px; margin-bottom:-20px;margin-bottom:-5px\9;_margin-bottom:-20px;}
 .nine ul{ width:1035px;}
 .nine ul li{ width:320px; height:397px; float:left; margin-bottom:20px; margin-right:20px; background-color:#fff;box-shadow: 1px 1px 3px #ccc;*border:1px solid #eee;*width:318px;*height:395px;} 
 .nine ul li:hover{box-shadow: 0px 0px 5px #c84597;-webkit-transition: all 0.2s;*border:1px solid #c84597;}
 .nine ul li h2{ font-size:14px; line-height:21px; padding-left:10px; font-weight:lighter; padding-right:10px ; height:50px; padding-top:8px;}
 .nine_tu{ width:320px; height:205px; overflow:hidden;*width:318px;text-align:center;}
 .nine_tu img{/*width:320px; height:205px;*width:318px;*/}
-.nine_cont{ padding:15px; width:290px;*width:288px; overflow:hidden; position:relative; }
+.nine_cont{ padding:15px; width:290px;*width:288px; overflow:hidden; }
 .nine .nine_cont h1{ font-size:30px; color:#bc5094; float:left; height:40px; padding-bottom:15px;*padding-bottom:0px;overflow:hidden;} 
 .nine .nine_cont h1 span{ font-size:16px;}
 .nine_cont_pnt a{ float:right; padding-left:15px; padding-right:15px;height:38px; display:inline-block; background-color:#c84597; text-align:center; line-height:38px; font-size:16px; color:#fff;}
@@ -483,6 +483,73 @@ filter:Alpha(opacity=100); }
 .tian_x_lei a{ /*color:#b65893;*/}			
 .tian_x_lei .openx{background-color:#d887ba; color:#fff; }
 			
-			
+/*  dp_mini_nav  */		
+	
+.mini_nav{ width:100px; left:-113px;}
+.mini_nav_box h1{ width:100px; }
+.mini_nav_box ul li a{  width:90px;  }
+.mini_nav_box_10{
+	background-image:url(../images/bg.png);
+	background-position: 5px -360px;
+}
+#nav_left_layout{width:100px; }
+	
+	
+	
+/*  tuan_mini_nav  */		
+
+.tuan_mini_nav .mini_nav_box  { overflow:visible;}
+
+.tuan_mini_nav  .mini_nav_box ul li a { width:98px; margin-left:-8px; height:45px; margin-bottom:-5px;*margin-bottom:-7px; position:relative; -webkit-transition: all 0s; color:#fff;}
+.tuan_mini_nav  .mini_nav_box ul li a :hover{-webkit-transition: all 0s;}
+.tuan_mini_nav1{background-image:url(../images/bg.png);
+	background-position: -105px 0px;}
+.tuan_mini_nav2{background-image:url(../images/bg.png);
+	background-position: -105px -45px;}
+.tuan_mini_nav3{background-image:url(../images/bg.png);
+	background-position: -105px -90px;}
+.tuan_mini_nav4{background-image:url(../images/bg.png);
+	background-position: -105px -135px;}
+.tuan_mini_nav5{background-image:url(../images/bg.png);
+	background-position: -105px -180px;}
+.tuan_mini_nav6{background-image:url(../images/bg.png);
+	background-position: -105px -225px;}
+	
+.tuan_open .tuan_mini_nav1{background-image:url(../images/bg.png);
+	background-position: -225px 0px;}
+.tuan_open .tuan_mini_nav2{background-image:url(../images/bg.png);
+	background-position: -225px -45px;}
+.tuan_open .tuan_mini_nav3{background-image:url(../images/bg.png);
+	background-position: -225px -90px;}
+.tuan_open .tuan_mini_nav4{background-image:url(../images/bg.png);
+	background-position: -225px -135px;}
+.tuan_open .tuan_mini_nav5{background-image:url(../images/bg.png);
+	background-position: -225px -180px;}
+.tuan_open .tuan_mini_nav6{background-image:url(../images/bg.png);
+	background-position: -225px -225px;}
+	
+.tuan_mini_nav  .mini_nav_box .tuan_open a span{ display:block;}
+
+.tuan_mini_nav1:hover{background-image:url(../images/bg.png);
+	background-position: -225px 0px;}
+.tuan_mini_nav2:hover{background-image:url(../images/bg.png);
+	background-position: -225px -45px;}
+.tuan_mini_nav3:hover{background-image:url(../images/bg.png);
+	background-position: -225px -90px;}
+.tuan_mini_nav4:hover{background-image:url(../images/bg.png);
+	background-position: -225px -135px;}
+.tuan_mini_nav5:hover{background-image:url(../images/bg.png);
+	background-position: -225px -180px;}
+.tuan_mini_nav6:hover{background-image:url(../images/bg.png);
+	background-position: -225px -225px;}
+.tuan_mini_nav  .mini_nav_box ul li a span{background-image:url(../images/jj.png);
+	background-position: left bottom;
+	background-repeat: no-repeat; position:absolute; left:0px; bottom:-7px; display:none;}
+.tuan_mini_nav  .mini_nav_box ul li a:hover span{ display:block; }
+.tuan_mini_nav  .mini_nav_box ul li{ position:relative;}
+.tuan_mini_nav  .mini_nav_box ul li  div{ position: absolute; left:100px; top:0px; width:100px; overflow:hidden;  background-color:#c74396; padding:10px; padding-bottom:12px; display:none;}
+.tuan_mini_nav  .mini_nav_box ul li   div a{ font-size:14px;  background-image:none; padding:0px; margin:0px; line-height:25px; height:25px; padding-left:4px;}	
+.tuan_mini_nav  .mini_nav_box ul li:hover div{ display:block;}
+.tuan_mini_nav  .mini_nav_box ul li   div a:hover{background-color:#c74396; text-decoration:underline; }			
 			
 			
