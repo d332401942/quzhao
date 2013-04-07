@@ -10,22 +10,28 @@
 		<div class="footer_r"> &copy;2013 quzhao.com 版权所有</div>
 	</div>
 </div>
-<div id="goto-top" style="position:fixed !important;bottom: 35px !important;margin-left: 1205px; display:none;">
+<div id="goto-top" style="position:fixed !important;bottom: 35px !important;right: 35px; display:none;">
 	<a href="javascript:;" onclick="goTop()" title="返回顶部"><img src="__RESOURCE__/images/top.png" /></a>
 <div>
 </body>
 <!-- 返回顶部滚动条事件 -->
 <script>
-
+var goTopIng = 0;
 function goTop() {
+	goTopIng++;
 	var obj = $('#goto-top');	
+	var height = $(window).height();
 	obj.animate({'top': 0},function(){
 		obj.hide();	
+		goTopIng--;
 	});
-	$('body').animate({scrollTop:0});
+	$(document).scrollTop(0);
 }
 
 $(window).bind('scroll', function(){
+	if (goTopIng != 0) {
+		return;
+	}
 	var scrollTop = $(document).scrollTop();
 	var obj = $('#goto-top');
 	var offset = obj.offset();
@@ -34,14 +40,13 @@ $(window).bind('scroll', function(){
 	var mid = height / 5 * 3; //火箭高度
 	if (scrollTop > 500) {
 		if (!obj.is(':visible')) {
-			obj.fadeIn('normal');	
+			console.log(height)
 			obj.offset({'top':height});
+			obj.show();	
 			obj.animate({'top': mid});
-		} else {
-			obj.offset({'top': mid});
 		}
 	} else {
-		obj.fadeOut('normal');
+		obj.hide();
 	}
 })
 </script>
