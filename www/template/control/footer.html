@@ -10,7 +10,44 @@
 		<div class="footer_r"> &copy;2013 quzhao.com 版权所有</div>
 	</div>
 </div>
+<div id="goto-top" style="position:fixed !important;bottom: 35px !important;margin-left: 1205px; display:none;">
+	<a href="javascript:;" onclick="goTop()" title="返回顶部"><img src="__RESOURCE__/images/top.png" /></a>
+<div>
 </body>
+<!-- 返回顶部滚动条事件 -->
+<script>
+
+function goTop() {
+	var obj = $('#goto-top');	
+	obj.animate({'top': 0},function(){
+		obj.hide();	
+	});
+	$('body').animate({scrollTop:0});
+}
+
+$(window).bind('scroll', function(){
+	var scrollTop = $(document).scrollTop();
+	var obj = $('#goto-top');
+	var offset = obj.offset();
+	var top = offset.top;
+	var height = $(window).height();
+	var mid = height / 5 * 3; //火箭高度
+	if (scrollTop > 500) {
+		if (!obj.is(':visible')) {
+			obj.fadeIn('normal');	
+			obj.offset({'top':height});
+			obj.animate({'top': mid});
+		} else {
+			obj.offset({'top': mid});
+		}
+	} else {
+		obj.fadeOut('normal');
+	}
+})
+</script>
+<!-- 返回顶部滚动条时间 end -->
+
+
 <script  type="text/javascript">
 var dpLogKey = 'dpBrowseLog';
 function dpLog(id) {
