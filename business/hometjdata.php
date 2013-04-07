@@ -322,8 +322,12 @@ class HomeTjDataBusiness extends BaseBusiness
         if ($netDataModel->classid == 0)
         {
             $model->cid = 1;
-            return;
         }
+		else
+		{
+			$model->cid = 2;
+		}
+		return;
         $tjClassid = $netDataModel->tjClassid;
         if ($tjClassid !== 1 && $tjClassid !== 2)
         {
