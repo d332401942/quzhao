@@ -6,48 +6,60 @@
 
 <ul>
 <li class="tuan_open"><a href="__APP__/tuan__LIMIT__class1/1" class="tuan_mini_nav1"><span></span></a>
-    <div>
+    <{if ($classModels[1]->children)}>
+	<div>
         <{foreach ($classModels[1]->children as $val)}>
             <a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
         <{/foreach}>   
     </div>
+	<{/if}>
 </li>
 
 <li><a href="__APP__/tuan__LIMIT__class1/10" class="tuan_mini_nav2"><span></span></a>
+	 <{if ($classModels[10]->children)}>
 	<div>
 		 <{foreach ($classModels[10]->children as $val)}>
 				<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
 		 <{/foreach}> 
 	</div>
+	<{/if}>
 </li>
 <li><a href="__APP__/tuan__LIMIT__class1/11" class="tuan_mini_nav3"><span></span></a>
+<{if ($classModels[11]->children)}>
 <div>
 <{foreach ($classModels[11]->children as $val)}>
 	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
 <{/foreach}> 
 </div>
+<{/if}>
 </li>
 
 <li><a href="__APP__/tuan__LIMIT__class1/12" class="tuan_mini_nav4"><span></span></a>
+<{if ($classModels[12]->children)}>
 <div>
 <{foreach ($classModels[12]->children as $val)}>
 	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
 <{/foreach}> 
 </div>
+<{/if}>
 </li>
 <li><a href="__APP__/tuan__LIMIT__class1/13" class="tuan_mini_nav5"><span></span></a>
+<{if ($classModels[13]->children)}>
 <div>
 <{foreach ($classModels[13]->children as $val)}>
 	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
 <{/foreach}> 
 </div>
+<{/if}>
 </li>
 <li><a href="__APP__/tuan__LIMIT__class1/14" class="tuan_mini_nav6"><span></span></a>
+<{if ($classModels[99]->children)}>
 <div>
 <{foreach ($classModels[99]->children as $val)}>
 	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
 <{/foreach}> 
 </div>
+<{/if}>
 </li>
 
 </ul>
