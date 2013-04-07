@@ -5,7 +5,7 @@ class IndexDpView extends BaseView
 
 	public function Index($parameters)
 	{
-        $cid = isset($parameters['cid'])?intval($parameters['cid']):'';
+        $cid = isset($parameters['cid']) ? intval($parameters['cid']) : '';
 		$this->setMeta();
 		// 得到超值单品的数据
 		$business = new HomeTjDataBusiness();
@@ -22,6 +22,11 @@ class IndexDpView extends BaseView
         //得到超值单品分类
         $business = new HomeTjClassBusiness();
         $modelCate = $business->getAllDp();
+		$count = count($modelCate);
+		for($i=0;$i<$count;$i++){
+			$modelCate[$i]->classid = $i+1;
+		}
+		$this->assign('cid', $cid);
         $this->assign('modelCate', $modelCate);
 		$this->assign('models', $models);
 		$this->assign('tjModels', $tjModels);
