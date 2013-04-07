@@ -4,6 +4,7 @@ class endDpView extends BaseView
 {
     public function index($parameters)
     {
+		
         $id = is_array($parameters)?intval($parameters['id']):'';
         $this->setMeta();
         $business = new HomeTjDataBusiness();

@@ -28,16 +28,7 @@ class NetTuanBusiness extends BaseBusiness
 		}
 		if ($class)
 		{
-			//查找今天发布的
-			if ($class == 1)
-			{
-				$dayTime = strtotime(date('Y-m-d'));
-				$query['ctime'] = array('>=' => date('Y-m-d H:i:s',$dayTime));
-			}
-			else 
-			{
 				$query['s_class_1'] = $class;
-			}
 		}
 		if ($class2)
 		{

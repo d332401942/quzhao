@@ -5,42 +5,50 @@
 <div class="mini_nav_box">
 
 <ul>
-<li class="tuan_open "><a href="#" class="tuan_mini_nav1"><span></span></a>
+<li class="tuan_open "><a href="__APP__/tuan__LIMIT__class1/1" class="tuan_mini_nav1"><span></span></a>
     <div>
-        <{foreach ($classModels['10'] as $val)}>
-            <a href="#"> <{$val->name}> </a>
+        <{foreach ($classModels[1]->children as $val)}>
+            <a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
         <{/foreach}>   
     </div>
 </li>
 
-<li><a href="#" class="tuan_mini_nav2"><span></span></a><div>
-<a href="#">火锅</a>
-<a href="#">自助</a>
-<a href="#">地方菜</a>
-<a href="#">烧烤</a>
-<a href="#">日韩料理</a>
-<a href="#">西餐海鲜</a>
-<a href="#">甜点饮品</a>
-</div></li>
-<li><a href="#" class="tuan_mini_nav3"><span></span></a>
+<li><a href="__APP__/tuan__LIMIT__class1/10" class="tuan_mini_nav2"><span></span></a>
+	<div>
+		 <{foreach ($classModels[10]->children as $val)}>
+				<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
+		 <{/foreach}> 
+	</div>
+</li>
+<li><a href="__APP__/tuan__LIMIT__class1/11" class="tuan_mini_nav3"><span></span></a>
 <div>
-<a href="#">电影</a>
-<a href="#">KTV</a>
-<a href="#">温泉</a>
-<a href="#">滑雪</a>
-<a href="#">旅游</a>
-<a href="#">运动</a>
-<a href="#">健身</a>
-<a href="#">游乐</a>
-<a href="#">电玩</a>
-<a href="#">演出</a>
-<a href="#">活动</a>
+<{foreach ($classModels[11]->children as $val)}>
+	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
+<{/foreach}> 
 </div>
 </li>
 
-<li><a href="#" class="tuan_mini_nav4"><span></span></a></li>
-<li><a href="#" class="tuan_mini_nav5"><span></span></a></li>
-<li><a href="#" class="tuan_mini_nav6"><span></span></a></li>
+<li><a href="__APP__/tuan__LIMIT__class1/12" class="tuan_mini_nav4"><span></span></a>
+<div>
+<{foreach ($classModels[12]->children as $val)}>
+	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
+<{/foreach}> 
+</div>
+</li>
+<li><a href="__APP__/tuan__LIMIT__class1/13" class="tuan_mini_nav5"><span></span></a>
+<div>
+<{foreach ($classModels[13]->children as $val)}>
+	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
+<{/foreach}> 
+</div>
+</li>
+<li><a href="__APP__/tuan__LIMIT__class1/14" class="tuan_mini_nav6"><span></span></a>
+<div>
+<{foreach ($classModels[99]->children as $val)}>
+	<a href="__APP__/tuan__LIMIT__class2/<{$val->code}>"> <{$val->name}> </a>
+<{/foreach}> 
+</div>
+</li>
 
 </ul>
 </div>
