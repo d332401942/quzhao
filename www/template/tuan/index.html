@@ -5,7 +5,14 @@
 <div class="mini_nav_box">
 
 <ul>
-<li class="tuan_open "><a href="#" class="tuan_mini_nav1"><span></span></a></li>
+<li class="tuan_open "><a href="#" class="tuan_mini_nav1"><span></span></a>
+    <div>
+        <{foreach ($classModels['10'] as $val)}>
+            <a href="#"> <{$val->name}> </a>
+        <{/foreach}>   
+    </div>
+</li>
+
 <li><a href="#" class="tuan_mini_nav2"><span></span></a><div>
 <a href="#">火锅</a>
 <a href="#">自助</a>

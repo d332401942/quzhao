@@ -5,6 +5,7 @@ class IndexDpView extends BaseView
 
 	public function Index($parameters)
 	{
+        $cid = isset($parameters['cid'])?intval($parameters['cid']):'';
 		$this->setMeta();
 		// 得到超值单品的数据
 		$business = new HomeTjDataBusiness();

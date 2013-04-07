@@ -29,7 +29,13 @@ class IndexTuanView extends BaseView
 		sort($cityHead);
 		ksort($headToModels);
 		//得到分类信息
-		$this->classModels = $this->getClassModels();
+		$this->classModels = array();
+		$result = $this->getClassModels();
+		foreach ($result as $model)
+		{
+			$this->classModels[$model->code] = $model;
+		}
+        //P($this->classModels[10]);
 		//TODO 获取当前城市
 		
 		//默认字母
