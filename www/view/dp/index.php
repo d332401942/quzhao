@@ -13,7 +13,7 @@ class IndexDpView extends BaseView
         $pageCore->currentPage = !empty($parameters['page']) ? (int)$parameters['page'] : 1;
         $pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
         $pageCore->pageSize = 16;
-		$models = $business->getDp($pageCore);
+		$models = $business->getDp($pageCore,$cid);
 		//得到推荐的单品
 		$tjModels = $business->getTjDpModels(5);
 		//得到历史记录

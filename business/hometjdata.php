@@ -26,10 +26,10 @@ class HomeTjDataBusiness extends BaseBusiness
     /**
      * 得到单品栏目页面数据
      */
-    public function getDp($pageCore)
+    public function getDp($pageCore,$cateId)
     {
         $data = new HomeTjDataData();
-        return $data->getDp($pageCore);
+        return $data->getDp($pageCore,$cateId);
     }
 
     /**

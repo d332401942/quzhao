@@ -71,7 +71,7 @@ class HomeTjClassBusiness extends BaseBusiness
 	{
 		$data = new HomeTjClassData();
 		$data->where(array('pid' => array('=' => 2)));
-		$models = $data->setOrder(array('sort' => 'desc'))->findAll();
+		$models = $data->setOrder(array('sort' => 'desc','id'=>'desc'))->findAll();
 		return $models;
 	}
    

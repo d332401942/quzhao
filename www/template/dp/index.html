@@ -24,6 +24,7 @@
 	<div class="dp_box2">
 		<div class="dp_box2_l_b">
 			<div class="dp_box2_l" id="js-index-content">
+				<{if ($models)}>
 				<{foreach ($models as $model)}>
 				<ul dataId="<{$model->id}>">
 					<li class="dp_box2_l_title">
@@ -60,8 +61,24 @@
 						</div>
 					</li>
 				</ul>
-				
 				<{/foreach}>
+				<{else}>
+				<div class="error_box">
+					<div class="error_box_l">
+						<img src="__RESOURCE__/images/error.gif">
+					</div>
+					<div class="error_box_r">
+						<h2>很抱歉，没有找到有关分类的商品信息。</h2>
+						<h3>建议您：</h3>
+						<ul>
+							<li>1. 查看输入是否有误</li>
+							<li>2. 在更多分类中查找</li>
+							<li>3. 调整关键词</li>
+						</ul>
+						<div class="error_box_r_pnt"><a href="/" onclick="">返回去找首页</a></div>
+					</div>
+				</div>
+				<{/if}>
 			</div>
 			<{uc class="PageControlView" pageCore="$pageCore"}>
 		</div>
