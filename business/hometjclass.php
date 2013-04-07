@@ -74,5 +74,13 @@ class HomeTjClassBusiness extends BaseBusiness
 		$models = $data->setOrder(array('sort' => 'desc','id'=>'desc'))->findAll();
 		return $models;
 	}
+	/**
+	 * 删除分类
+	 */
+    public function delCate($id)
+	{
+		$data = new HomeTjClassData();
+		return $data->delById($id);
+	}
    
 }

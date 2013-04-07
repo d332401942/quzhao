@@ -28,4 +28,12 @@ class IndexTjclassView extends BaseView
 		$business = new HomeTjClassBusiness();
 		$business->add($model);
 	}
+	/**
+	 * 删除分类
+	**/
+	public function delCate($parameters){
+		//$business = new HomeTjClassBusiness();
+		//$business->delCate($id);
+		P($_POST);
+	}
 }
