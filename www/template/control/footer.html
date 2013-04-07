@@ -40,7 +40,6 @@ $(window).bind('scroll', function(){
 	var mid = height / 5 * 3; //火箭高度
 	if (scrollTop > 500) {
 		if (!obj.is(':visible')) {
-			console.log(height)
 			obj.offset({'top':height});
 			obj.show();	
 			obj.animate({'top': mid});
