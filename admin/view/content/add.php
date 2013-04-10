@@ -73,6 +73,7 @@ class AddContentView extends BaseView
 				}
 			}
 		}
+		
 		if (!$model->pic && !empty($_POST['oldpic']))
 		{
 			$model->pic = $_POST['oldpic'];
@@ -99,7 +100,10 @@ class AddContentView extends BaseView
 		}
 		$model->ltime = time();
 		
-		$model->state = HomeTjDataDataModel::STATE_DOWN;
+		if (!$model->id)
+		{
+			$model->state = HomeTjDataDataModel::STATE_DOWN;
+		}
 		$model->isvalid = HomeTjDataDataModel::ISVALID_YES;
         $model->ishot = (int)$model->ishot;
 		
@@ -107,9 +111,10 @@ class AddContentView extends BaseView
 		{
 			$model->sort = 0;
 		}
-		
-		$this->setPic($model);
-		
+		if($_FILES['pic']['name'] != '')
+		{
+			$this->setPic($model);
+		}
 		if ($model->id)
 		{
 			$business->updateModel($model);

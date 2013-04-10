@@ -81,12 +81,14 @@ class HomeTjDataData extends BaseData
 	{
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$end = $pageCore->pageSize;
-		if($cateId){
+		if($cateId)
+		{
 			$sql = 'select * from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE.' order by sort desc,id desc limit '.$start.','.$end;
+			$countSql = 'select count(*) from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE;
 		}else{
 			$sql = 'select t1.* from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE.' order by t1.sort desc, t1.id desc limit '.$start.','.$end;
+			$countSql = 'select count(*) from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE;
 		}
-        $countSql = 'select count(*) from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE;
         $count = $this->queryOne($countSql);
         if (!$count)
         {

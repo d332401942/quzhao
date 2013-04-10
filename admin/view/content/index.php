@@ -3,7 +3,7 @@
 class IndexContentView extends BaseView
 {
 	
-	public function index()
+	public function index($parameters)
 	{
 		$business = new HomeTjDataBusiness();
 		$classBusiness = new HomeTjClassBusiness();
@@ -63,8 +63,15 @@ class IndexContentView extends BaseView
 		{
 			$cidStr = $_GET['cid'];
 			$cid = explode(',',$cidStr);
+			
+		}else if (!isset($_GET['cid']))
+		{
+			if($parameters)
+			{
+				$cid = isset($parameters['cid'])?intval($parameters['cid']):'';
+				$cid = array($cid);
+			}
 		}
-		
 		$fid = null;
 		if (!empty($_GET['fid']) && (int)$_GET['fid'])
 		{
