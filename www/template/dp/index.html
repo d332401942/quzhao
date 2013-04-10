@@ -56,8 +56,20 @@
 							
 							<span style=""><img src="__RESOURCE__/images/us.gif" /><a href="#" class="uss"><{$editorArr[$model->id % (count($editorArr))]}></a>推荐</span>
 							<span style="display:none"><a href="javascript:;"><img src="__RESOURCE__/images/love.gif" />7434</a></span>
-							<span style="display:none"><a href="javascript:;"><img src="__RESOURCE__/images/shr.gif" />分享</a></span>
+							<span id="fx_zi"><a href="#"  class="fx_fx"><img src="__RESOURCE__/images/shr.gif" />分享</a></span>
 						</h3>
+						<div class="fx_box_nin" style="display:none">
+							<h2>
+								<a href="#"><img src="__RESOURCE__/images/fc_03.gif " /></a>
+								<a href="#"><img src="__RESOURCE__/images/fc_05.gif " /></a>
+								<a href="#"><img src="__RESOURCE__/images/fc_07.gif " /></a>
+								<a href="#"><img src="__RESOURCE__/images/fc_09.gif " /></a>
+								<a href="#"><img src="__RESOURCE__/images/fc_11.gif " /></a>
+							</h2>
+						</div>
+						<script>
+						
+						</script>
 						<div class="dp_box2_l_bt">
 							<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">去购买</a>
 						</div>
@@ -124,6 +136,12 @@
 </div>
 <{uc class="FooterControlView"}>
 <script>
+$('.fx_fx').mousemove(function(){
+	$('.fx_box_nin').show();
+})
+$('.fx_fx').mouseout(function(){
+	$('.fx_box_nin').hide();
+})
 function goPage(page) {
 	window.location.href = '__APP__/dp__LIMIT__page/' + page;
 }
