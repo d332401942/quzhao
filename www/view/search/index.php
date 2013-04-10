@@ -17,26 +17,12 @@ class IndexSearchView extends BaseView
 			$keyword = trim($parameters['keyword']);
 		}
         $keyword = urldecode($keyword);
-		$business = new HomeTjDataBusiness();
-		$models = $business->search($pageCore,$keyword);
-		if ($models)
-		{
-			foreach ($models as $model)
-			{
-				if ($model->cid == 1) 
-				{
-					$nineModels[] = $model;
-				}
-				else
-				{
-					$dpModels[] = $model;
-				}
-			}
-		}
+		$business = M('SearchBusiness');
+		$models = $business->search($pageCore, $keyword);
 		
-		$this->assign('nineModels',$nineModels);
-		$this->assign('dpModels',$dpModels);
+		//todo
 		$this->assign('pageCore',$pageCore);
+		$keyword = htmlspecialchars($keyword);
         $this->assign('keyword', $keyword);
 	}
 }
