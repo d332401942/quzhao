@@ -274,7 +274,7 @@ filter:Alpha(opacity=75); background:#fff;/*实现IE背景透明*/-webkit-transi
 .dp_box2_l_bt  a{
 	padding-right:15px;
 	height:36px;
-	background-image: url(images/buy.gif);
+	background-image: url(../images/buy.gif);
 	float:right;
 	line-height:36px;
 	padding-left:18px; padding-right:36px;
