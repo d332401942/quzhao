@@ -571,5 +571,7 @@ filter:Alpha(opacity=95);}
 .dp_box2_l_r   .fx_box_nin  a{ margin-left:0px; float:none;}
 .dp_box2_l_r   .fx_box_nin img{ float:none; } 
  #fx_zi { position:relative; z-index:20;} 
- #fx_zi  a{ position:relative;}			
+ #fx_zi  a{ position:relative;}	
+
+.dp_box2_l_r h3{ width:470px;} 
 			

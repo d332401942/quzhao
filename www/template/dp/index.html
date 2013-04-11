@@ -56,6 +56,7 @@
 							
 							<span style=""><img src="__RESOURCE__/images/us.gif" /><a href="#" class="uss"><{$editorArr[$model->id % (count($editorArr))]}></a>推荐</span>
 							<span style="display:none"><a href="javascript:;"><img src="__RESOURCE__/images/love.gif" />7434</a></span>
+							
 							<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 							<span id="fx_zi">
 							<h4 class="fx_box_nin" style="display:none;" id="js-hover-share-<{$model->id}>">
@@ -168,7 +169,9 @@ function showShare(id,name,pic) {
 		title:name,
 		pic:pic,
 		siteName:'趣找实惠',
-		nota: true
+		appkey:{
+			"tsina":"3197495784"
+		}
 	}
 	
 	divObj.show();
