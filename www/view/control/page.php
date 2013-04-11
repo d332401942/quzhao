@@ -5,6 +5,7 @@ class PageControlView extends BaseControlView
     public function index($parameters)
     {
         //设置最大显示页数
+		
         $showPage = 7;
         $goPage = empty($parameters['goPage']) ? 'goPage' : $parameters['goPage'];
         $pageCore = $parameters['pageCore'];
@@ -41,8 +42,9 @@ class PageControlView extends BaseControlView
         {
             $end = $end - 1;
         }
-        
-        
+        if(isset($parameters['width'])){
+			$this->assign('dp',$parameters['width']);
+		}
         $this->assign('start', $start);
         $this->assign('goPage', $goPage);
         $this->assign('end', $end);

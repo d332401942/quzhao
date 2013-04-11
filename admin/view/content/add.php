@@ -13,6 +13,7 @@ class AddContentView extends BaseView
 		{
 			$id = (int)$_GET['id'];
 			$model = $business->getOneById($id);
+			
 		}
 		else if (!empty($_GET['netdataid']) && (int)$_GET['netdataid'])
 		{
@@ -120,7 +121,13 @@ class AddContentView extends BaseView
 			$business->updateModel($model);
 		}
 		else
-		{
+		{	
+			$md5Url = md5($_POST['oldpic']);
+			$path = $this->getImagePath($md5Url);
+			CommUtilLib::rMkdir('./public/uploads/images/'.$path);
+			$pic = file_get_contents($_POST['oldpic']);
+			file_put_contents('./public/uploads/images/'.$path.'/'.$md5Url.'.jpg',$pic);
+			$model->pic = './public/uploads/images/'.$path.'/'.$md5Url.'.jpg';
 			$business->add($model);
 		}
 		$netdataid = null;
@@ -162,5 +169,16 @@ class AddContentView extends BaseView
 			}
 		}
 	}
+	protected function getImagePath($md5Url)
+	{
+		$path = '';
+		for ($i=0; $i<4; $i++)
+		{
+			$path .= '/' . substr($md5Url, $i * 2, 2);
+		}
+		$path = ltrim($path, '/');
+		return $path;
+	}
+
 	
 }

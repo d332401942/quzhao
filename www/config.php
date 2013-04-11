@@ -51,6 +51,6 @@ class Config extends Conf
 	 * redis 密码
 	 */
 	const REDIS_PASSWORD = '#$@quZhao';
- 
+	
 
 }
