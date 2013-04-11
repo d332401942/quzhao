@@ -534,7 +534,27 @@ filter:Alpha(opacity=100); }
 .ress_more_li h2 span a{ color:#333; cursor:hand; display:inline-block;}
 .ress_more_li h2 span a:hover{ text-decoration:none;}
 .ress_more_li h2 span img{ margin-right:5px; float:left;}
-	
+
+
+			
+/*  fc  */	
+		
+
+.fx_box{ z-index:20; position:relative; margin-top:-38px;margin-top:-40px\9;_margin-top:-30px; clear:both; float:right;padding-right:15px;}
+.fx_box h3{color:#999; text-align:right; font-size:12px; font-weight:lighter; padding-top:6px; line-height:16px;  }
+.fx_box img{ float:left; margin-right:5px; margin-top:0px;}
+
+.fx_box_nin  {  width:300px ;*width:298px;height:20px;margin-top:-51px;*margin-top:-53px;_margin-top:-44px; overflow:hidden;  padding:10px; padding-top:12px; padding-bottom:12px; position:relative; /*display:none;*/background-color:#f3f3f3;background:rgba(243, 243, 243, 0.95) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+filter:Alpha(opacity=95);}
+.fx_box_nin  h2{ position:absolute; right:60px; top:3px;}
+.fx_box_nin  h2 img{ float:left; margin-right:8px;}
+
+.dp_box2_l_r    .fx_box_nin { position:absolute; margin-top:-15px; background-color:#fff;background:rgba(255, 255, 255, 0.90) none repeat scroll 0 0 !important;filter:Alpha(opacity=90); height:18px; overflow:hidden; right:0px; top:0px; width:450px; /*display:none;*/}
+.dp_box2_l_r    .fx_box_nin  { text-align:right; padding-right:60px;  }
+.dp_box2_l_r   .fx_box_nin  a{ margin-left:0px; float:none;}
+.dp_box2_l_r   .fx_box_nin img{ float:none; } 
+ #fx_zi { position:relative; z-index:20;} 
+ #fx_zi  a{ position:relative;}		
 .dp_box2_l_r h3{ width:470px;} 
 	
 	
