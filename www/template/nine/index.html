@@ -155,7 +155,11 @@ function showShare(id,name,pic) {
 	var divObj = $('#js-hover-share-' + id);
 	jiathis_config = {
 		title:name,
-		pic:pic
+		pic:pic,
+		siteName:'趣找实惠',
+		appkey:{
+			"tsina":"3197495784"
+		}
 	}
 	divObj.show();
 	divObj.parents('li').bind('mousemove',function(e){

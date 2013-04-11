@@ -194,7 +194,7 @@ var hoverCode = null;
 				</h3>
 				<h3 id="js-tuan-over-time-<{$model->id}>" >
 				<span style="margin-top:5px;">所剩时间<{echo (int)((strtotime($model->end_time) - time()) / 24 / 3600)}>天</span>
-				<span style="float:right; text-align:right;margin-right:50px;margin-top:5px;"><{$model->webname}></span>
+				<span style="float:right; text-align:right;margin-right:70px;margin-top:5px;">来自：<{$model->webname}></span>
 				<!--  <strong class="js-over-time">1</strong><strong class="js-over-time">2</strong>:<strong class="js-over-time">2</strong><strong class="js-over-time">3</strong>:<strong class="js-over-time">5</strong><strong class="js-over-time">8</strong> -->
 				</h3>
 				<script  type="text/javascript">
@@ -474,7 +474,11 @@ function showShare(id,name,pic) {
 	var divObj = $('#js-hover-share-' + id);
 	jiathis_config = {
 		title:name,
-		pic:pic
+		pic:pic,
+		siteName:'趣找实惠',
+		appkey:{
+			"tsina":"3197495784"
+		}
 	}
 	divObj.show();
 	divObj.parents('li').bind('mousemove',function(e){
