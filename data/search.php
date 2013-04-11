@@ -64,15 +64,15 @@ class SearchData extends BaseData
 			'title',
 		);
 		$opts = array(
-			'before_match' => '<span style="color:red">',
-			'after_match' => '</span>',
+			'before_match' => '<strong>',
+			'after_match' => '</strong>',
 		);
 		foreach ($productModels as $key => $model)
 		{
 			$docs = array();
 			foreach ($needLightFileds as $key => $val)
 			{
-				$docs[$key] = $model->$val;
+				$docs[$key] = CommUtilLib::truncate($model->$val, 25);
 			}
 			$arr = $sphinx->buildExcerpts($docs, 'product', $keyword, $opts);
 			foreach ($needLightFileds as $key => $val)
@@ -81,8 +81,6 @@ class SearchData extends BaseData
 				$model->$field = $arr[$key];
 			}
 		}
-		P($arr);
-
 	}
 
 	private function setWeights()

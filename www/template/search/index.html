@@ -434,57 +434,58 @@
                 </ul>
             </div>
         </div>
+		
         <div class="list_cont">
 			<ul>
 			<{foreach ($productModels as $key => $model)}>
                 <li>
                     <div class="list_cont_tu">
                         <a href="#">
-                            <img src="http://img03.taobaocdn.com/imgextra/etao/i3/15987030451720138/T1GH3TXeXbXXXXXXXX_!!0-item_pic.jpg_b.jpg"
-                            />
+                            <img src="<{$model->pic}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
                             <a href="#">
-                                热卖可脱卸撞色两穿
-                                <strong>
-                                    羽绒服
-                                </strong>
+                                <{$model->lighttitle}>
                             </a>
                         </h2>
                         <div class="list_jg">
                             <div class="list_jg_l">
                                 <h1>
-                                    <font>
-                                        ￥
-                                    </font>
-                                    19.4
+                                    <font>￥</font>
+                                    <{$model->price}>
                                 </h1>
+								<!--
                                 <h2>
                                     ￥83.4
                                 </h2>
+								-->
                             </div>
+							<!--
                             <div class="list_jg_r">
                                 邮费：34元
                             </div>
                             <div class="list_jg_r">
                                 上海
                             </div>
+							-->
                         </div>
                         <div class="list_jg">
                             <div class="list_jg_l">
                                 月销量
                                 <strong>
-                                    7439
+                                    <{$model->sales}>
                                 </strong>
                                 件
                             </div>
                             <div class="list_jg_r">
+								<!--
                                 <a href="#">
                                     <img src="__RESOURCE__/images/bn.gif" />
                                     同款34件
                                 </a>
+								-->
                                 <div class="list_fu" style="display:none;">
                                     <div class="jiee">
                                         <img src="__RESOURCE__/images/jiee.png" class="png" />
