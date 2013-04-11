@@ -165,7 +165,6 @@ function goPage(page) {
 var mouseObj = null;
 function showShare(id,name,pic) {
 	var divObj = $('#js-hover-share-' + id);
-	console.log(divObj);
 	jiathis_config = {
 		title:name,
 		pic:pic
@@ -173,7 +172,6 @@ function showShare(id,name,pic) {
 	divObj.show();
 	divObj.parents('li').bind('mousemove',function(e){
 		mouseObj = $(e.target);
-		//console.log(obj);
 	});
 	setTimeout(function(){
 		hideDiv(divObj);
@@ -182,7 +180,6 @@ function showShare(id,name,pic) {
 
 function hideDiv(obj) {
 	var divId = obj.attr('id');
-	var mouseObjId = mouseObj.attr('id') ? mouseObj.attr('id') : '';
 	if (!mouseObj.parents('#' + divId).length) {
 		obj.fadeOut();
 		obj.parents('li').unbind('mousemove');

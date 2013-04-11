@@ -52,10 +52,10 @@ var data = [];
 						</h3>
 					<{/if}>
 				</div>
-				<div class="fx_box" onmouseover="showShare(this,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>')">
+				<div class="fx_box" onmouseover="showShare(<{$model->id}>,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>')">
 					<a href="#"><img src="__RESOURCE__/images/shr.gif" />分享</a>
 				</div>
-				<div class="fx_box_nin js-hover-share" style="display:none;" >
+				<div class="fx_box_nin" id="js-hover-share-<{$model->id}>" style="display:none;" >
 				<h2>
 					<script type="text/javascript">
 						(function(){
@@ -150,13 +150,30 @@ function showTime(obj,str,D) {
 	obj.html(html);
 }
 
-//var jiathis_config {};
-function showShare(obj,name,pic) {
-	var h2Obj = $(obj).parents('.js-share-li').find('.js-hover-share');
+var mouseObj = null;
+function showShare(id,name,pic) {
+	var divObj = $('#js-hover-share-' + id);
 	jiathis_config = {
 		title:name,
 		pic:pic
 	}
-	h2Obj.show();
+	divObj.show();
+	divObj.parents('li').bind('mousemove',function(e){
+		mouseObj = $(e.target);
+	});
+	setTimeout(function(){
+		hideDiv(divObj);
+	}, 1500);
+}
+function hideDiv(obj) {
+	var divId = obj.attr('id');
+	if (!mouseObj.parents('#' + divId).length) {
+		obj.fadeOut();
+		obj.parents('li').unbind('mousemove');
+	} else {
+		setTimeout(function(){
+			hideDiv(obj);
+		}, 1500);
+	}
 }
 </script>
