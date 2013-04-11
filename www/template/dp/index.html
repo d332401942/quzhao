@@ -56,7 +56,7 @@
 							
 							<span style=""><img src="__RESOURCE__/images/us.gif" /><a href="#" class="uss"><{$editorArr[$model->id % (count($editorArr))]}></a>推荐</span>
 							<span style="display:none"><a href="javascript:;"><img src="__RESOURCE__/images/love.gif" />7434</a></span>
-							
+							<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 							<span id="fx_zi">
 							<h4 class="fx_box_nin" style="display:none;" id="js-hover-share-<{$model->id}>">
 								<script type="text/javascript">
@@ -81,9 +81,8 @@
 								document.write(['<a title="分享到QQ空间" version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank"><img src="__RESOURCE__/images/fc_07.gif " /></a>'].join(''));
 								})();
 								</script>
-								<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
-								<a class="jiathis_button_tsina" style="cursor:pointer;background:url('') no-repeat scroll 0 0px transparent !important;padding:0px;"><img src="__RESOURCE__/images/fc_05.gif " /></a>
-								<a class="jiathis_button_kaixin001" style="cursor:pointer;background:url('') no-repeat scroll 0 0px transparent !important;padding:0px;"><img src="__RESOURCE__/images/fc_09.gif " /></a>
+								<a class="jiathis_button_tsina" style="margin:0;width:21px;height:20px;cursor:pointer;background:url('') no-repeat scroll 0 0px transparent !important;padding:0px;"><img src="__RESOURCE__/images/fc_05.gif " /></a>
+								<a class="jiathis_button_kaixin001" style="margin:0;width:21px;height:20px;cursor:pointer;background:url('') no-repeat scroll 0 0px transparent !important;padding:0px;"><img src="__RESOURCE__/images/fc_09.gif " /></a>
 								<a title="分享到豆瓣网" href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e('<{$model->name}>')+'&sel='+e(s)+'&v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><img src='__RESOURCE__/images/fc_11.gif' /></a>
 							</h4>
 							<a href="javascript:" onmouseover="showShare(<{$model->id}>,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>/<{/if}><{$model->pic}>')" ><img src="__RESOURCE__/images/shr.gif" />分享</a>
