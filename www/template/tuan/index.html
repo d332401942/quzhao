@@ -192,9 +192,9 @@ var hoverCode = null;
 				<span class="nine_cont_sale">折扣：<{$model->rebate|numerRound:1}>折</span>
 				<span class="nine_cont_post"><font><{$model->bought}></font>人已购买</span>
 				</h3>
-				<h3 id="js-tuan-over-time-<{$model->id}>">
-				<span>所剩时间<{echo (int)((strtotime($model->end_time) - time()) / 24 / 3600)}>天</span>
-				<span style="float:right; text-align:right;margin-right:50px;"><{$model->webname}></span>
+				<h3 id="js-tuan-over-time-<{$model->id}>" >
+				<span style="margin-top:5px;">所剩时间<{echo (int)((strtotime($model->end_time) - time()) / 24 / 3600)}>天</span>
+				<span style="float:right; text-align:right;margin-right:50px;margin-top:5px;"><{$model->webname}></span>
 				<!--  <strong class="js-over-time">1</strong><strong class="js-over-time">2</strong>:<strong class="js-over-time">2</strong><strong class="js-over-time">3</strong>:<strong class="js-over-time">5</strong><strong class="js-over-time">8</strong> -->
 				</h3>
 				<script  type="text/javascript">
