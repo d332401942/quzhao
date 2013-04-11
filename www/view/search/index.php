@@ -9,6 +9,7 @@ class IndexSearchView extends BaseView
 		$nineModels = array();
 		$dpModels = array();
 		$pageCore = new PageCoreLib();
+		$pageCore->pageSize = 18;
         $pageCore->currentPage = !empty($parameters['page']) ? (int)$parameters['page'] : 1;
 		$pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
 		$keyword = null;
@@ -18,9 +19,10 @@ class IndexSearchView extends BaseView
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
-		$models = $business->search($pageCore, $keyword);
-		
+		$productModels = $business->searchProduct($pageCore, $keyword);
+		$productModels = array_values($productModels);
 		//todo
+		$this->assign('productModels', $productModels);
 		$this->assign('pageCore',$pageCore);
 		$keyword = htmlspecialchars($keyword);
         $this->assign('keyword', $keyword);
