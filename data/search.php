@@ -17,7 +17,11 @@ class SearchData extends BaseData
 		//通过ID查询出来结果
 		$productData = M('ProductData');
 		$fileds = array();
-		$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds);
+		$productModels = array();
+		if ($productIds)
+		{
+			$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds);
+		}
 		$this->setLight($productModels, $keyword);
 		return $productModels;
 	}

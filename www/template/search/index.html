@@ -1,7 +1,7 @@
-<{uc class="HeaderControlView" meta=$meta css="css" js="jquery" keyword=$keyword}>
+<{uc class="HeaderControlView" meta=$meta css="css" js="jquery,jquery.form" keyword=$keyword}>
 <div class="box ">
     <div class="list_top">
-        在1617个商家中，找到“<strong><{$keyword}></strong>”相关商品383079件
+        在1617个商家中，找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
     </div>
     <div class="list_l">
         <div class="list_nav">
@@ -440,13 +440,13 @@
 			<{foreach ($productModels as $key => $model)}>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="#">
-                            <img src="http://static.quzhao.com/images/<{$model->pic}>" />
+                        <a href="#" title="<{$model->title}>">
+                            <img src="<{$Host->StaticHost}>/images/<{$model->pic}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="#">
+                            <a href="#" title="<{$model->title}>">
                                 <{$model->lighttitle}>
                             </a>
                         </h2>
@@ -584,33 +584,7 @@
 			<{/foreach}>
 			</ul>
         </div>
-        <div class="pag">
-            <a href="#">
-                上一页
-            </a>
-            <a href="#" class="pag_open">
-                1
-            </a>
-            <a href="#">
-                2
-            </a>
-            <a href="#">
-                3
-            </a>
-            <a href="#">
-                4
-            </a>
-            <a href="#">
-                5
-            </a>
-            ...
-            <a href="#">
-                67
-            </a>
-            <a href="#">
-                下一页
-            </a>
-        </div>
+        <{uc class="PageControlView" pageCore="$pageCore"}>
         <div class="list_hot_tag">
             <div class="list_hot_tag_l">
                 您是不是想找：
@@ -810,4 +784,34 @@
 </div>
 <div class="box ">
 </div>
+<form style="display:none" id="js-hide-form">
+	<input name="keyword" value="<{echo urlencode($keyword)}>" />
+	<input name="page" value="" />
+</form>
+<script>
+
+function formTogo() {
+	var formObj = $('#js-hide-form');
+	var data = formObj.formToArray();
+	var url = '__APP__/search__LIMIT__';
+	for (var i in data) {
+		var obj = data[i];
+		var pre = '';
+		if (i) {
+			pre = '/';
+		}
+		url += pre + obj.name + '/' + obj.value;
+	}
+	window.location.href = url;
+}
+
+function goPage(page) {
+	var formObj = $('#js-hide-form');
+	formObj.find('input[name="page"]').val(page);
+	formTogo();
+}
+</script>
+
+
 <{uc class="FooterControlView"}>
+
