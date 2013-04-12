@@ -7,7 +7,7 @@ class DemoIndexView extends BaseView
     {
 		$wz='电影';
 		require("sphinxapi.php" );
-		$cl=new SphinxClient2();
+		$cl=new SphinxClient();
 		$cl->SetServer('114.112.163.2',9300);
 		$cl->SetArrayResult(true);
 		$cl->SetMatchMode (SPH_MATCH_EXTENDED2);
@@ -17,17 +17,18 @@ class DemoIndexView extends BaseView
 
 		$cl->ResetGroupBy();
 		$cl->ResetFilters();
-		$cl->SetLimits(0,1,1000000);// limit 0,100
+		$cl->SetLimits(0,10,1000000);// limit 0,100
 		$cl->SetFilter('isdelete',Array(0));
 		$cl->SetSortMode(SPH_SORT_EXTENDED,'@weight desc');
 		$cl->SetFieldWeights(array('name'=>100,'brandname'=>50,'info'=>20));
 		//$cl->AddQuery($wz, "product");
 
 		$res= $cl->RunQueries();
-		P($res);
-
-		//$this->responseError('dd');
-    }
+		P($res[0]);exit;
+		print json_encode($res[0]);
+		print '<br>===========<br>';
+		print json_encode($res[1]);
+			}
 
     public function cacheData()
     {
