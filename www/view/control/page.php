@@ -43,7 +43,7 @@ class PageControlView extends BaseControlView
             $end = $end - 1;
         }
         if(isset($parameters['width'])){
-			$this->assign('dp',$parameters['width']);
+			$this->assign('width',$parameters['width']);
 		}
         $this->assign('start', $start);
         $this->assign('goPage', $goPage);
