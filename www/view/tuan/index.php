@@ -31,7 +31,7 @@ class IndexTuanView extends BaseView
 		//得到分类信息
 		$this->classModels = array();
 		$result = $this->getClassModels();
-		$this->assign('classModels2', $result);
+		//$this->assign('classModels2', $result);
 		foreach ($result as $model)
 		{
 			$this->classModels[$model->code] = $model;
