@@ -22,6 +22,8 @@ class CategoryDataModel extends ModelCoreLib
 	public $caiji_url;
 
 	public $caiji_memo;
+
+	public $path;
 	
 	public $children;
 	
@@ -30,5 +32,6 @@ class CategoryDataModel extends ModelCoreLib
 		parent::__construct();
 		$this->setPrimaryKey('categoryid');
 		$this->setIgoneFields('children');
+		$this->setIgoneFields('path');
 	}
 }

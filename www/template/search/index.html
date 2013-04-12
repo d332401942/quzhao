@@ -9,81 +9,36 @@
                 筛选分类
             </h2>
             <div class="list_nav_box">
+				<{foreach ($hostCategoryModels->children as $model)}>
                 <ul>
                     <h2>
                         <a href="#">
-                            女装
+                            <{$model->name}>
                         </a>
                     </h2>
+					<{foreach ($model->children as $m)}>
                     <li>
                         <a href="#">
-                            羽绒服
+                            <{$m->name}>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            上装
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            下装
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            流行
-                        </a>
-                    </li>
+                    <{/foreach}>
                 </ul>
-                <ul>
-                    <h2>
-                        <a href="#">
-                            男装
-                        </a>
-                    </h2>
-                    <li>
-                        <a href="#">
-                            羽绒服
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            上装
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            下装
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            流行潮流
-                        </a>
-                    </li>
-                </ul>
+				<{/foreach}>
+                
                 <ul>
                     <h2>
                         <a href="#">
                             其他
                         </a>
                     </h2>
+					<{foreach ($categoryModels as $model)}>
                     <li>
                         <a href="#">
-                            羽绒服
+                            <{$model->name}>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            上装
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            下装
-                        </a>
-                    </li>
+                    <{/foreach}>
                 </ul>
             </div>
         </div>

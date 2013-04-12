@@ -11,9 +11,6 @@ class SearchData extends BaseData
 	public function searchProduct($pageCore, $keyword)
 	{
 		$productIds = $this->getProductIds($pageCore, $keyword);
-		//查询分组
-		$categoryIdToCount = $this->getCategoryIdToCount($keyword);
-
 		//通过ID查询出来结果
 		$productData = M('ProductData');
 		$fileds = array();

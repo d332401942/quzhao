@@ -19,9 +19,13 @@ class IndexSearchView extends BaseView
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
+		$categoryBusiness = M('CategoryBusiness');
 		$productModels = $business->searchProduct($pageCore, $keyword);
 		$productModels = array_values($productModels);
-		//todo
+		$categoryModels = $categoryBusiness->search($keyword);
+		$hostCategoryModels = array_shift($categoryModels);
+		$this->assign('categoryModels', $categoryModels);
+		$this->assign('hostCategoryModels', $hostCategoryModels);
 		$this->assign('productModels', $productModels);
 		$this->assign('pageCore',$pageCore);
 		$keyword = htmlspecialchars($keyword);
