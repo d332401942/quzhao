@@ -23,7 +23,7 @@ class IndexSearchView extends BaseView
 		{
 			$category = (int)($parameters['category']);
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
-			P($attrModels);
+			//P($attrModels);
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
