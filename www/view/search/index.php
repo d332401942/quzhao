@@ -33,6 +33,7 @@ class IndexSearchView extends BaseView
 			}
 			$this->assign('attrModels',$attrModels);
 		}
+		
 		if (!empty($parameters['sort']))
 		{
 			$sort = $parameters['sort'];
