@@ -13,9 +13,14 @@ class IndexSearchView extends BaseView
         $pageCore->currentPage = !empty($parameters['page']) ? (int)$parameters['page'] : 1;
 		$pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
 		$keyword = null;
+		$category = null;
 		if (!empty($parameters['keyword']))
 		{
 			$keyword = trim($parameters['keyword']);
+		}
+		if (!empty($parameters['category']))
+		{
+			$category = (int)($parameters['category']);
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
@@ -30,5 +35,6 @@ class IndexSearchView extends BaseView
 		$this->assign('pageCore',$pageCore);
 		$keyword = htmlspecialchars($keyword);
         $this->assign('keyword', $keyword);
+        $this->assign('category', $category);
 	}
 }

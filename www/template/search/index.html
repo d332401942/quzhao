@@ -735,7 +735,8 @@
 </div>
 <form style="display:none" id="js-hide-form">
 	<input name="keyword" value="<{echo urlencode($keyword)}>" />
-	<input name="page" value="" />
+	<input name="category" value="<{$category}>" />
+	<input name="page" value="<{$pageCore->currentPage}>" />
 </form>
 <script>
 
@@ -756,6 +757,12 @@ function formTogo() {
 
 function searchByCategory(id) {
 	var formObj = $('#js-hide-form');
+	formObj.find('input[name="category"]').val(id);
+	formTogo();
+}
+
+function searchByAttr(filed, type, value) {
+	
 }
 
 function goPage(page) {
