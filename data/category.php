@@ -116,8 +116,8 @@ class CategoryData extends BaseData
 	public function getAttDb($categoryId)
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		SELECT t1.* FROM `attrdb` as t1 INNER JOIN category as t2 on t2.attrid = t1.attrid WHERE t2.categoryid = 282
-		$sql = 'select t1.attrid t2.* from category as t1 inner join attrdb as t2 on t2. ';
+		//SELECT t1.* FROM `attrdb` as t1 INNER JOIN category as t2 on t2.attrid = t1.attrid WHERE t2.categoryid = 282
+		$sql = 'select t1.attrid t2.* from category as t1 inner join attrdb as t2 on t2.attrid = t1.attrid where ';
 		
 	}
 	
