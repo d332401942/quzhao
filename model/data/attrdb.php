@@ -19,12 +19,12 @@ class AttrdbDataModel extends ModelCoreLib
 
 	public $isvalid;
 	
-	public $children;
+	public $extend;
 	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->setPrimaryKey('attrdbid');
-		$this->setIgoneFields('children');
+		$this->setIgoneFields('extend');
 	}
 }

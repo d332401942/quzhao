@@ -162,80 +162,23 @@
     </div>
     <div class="list_r">
         <div class="tian_lei">
-            <ul>
+            <{foreach ($attrModels as $val)}>
+			<ul>
                 <li class="tian_lei_l">
-                    品牌：
+                    <{$val->name}>：
                 </li>
                 <li class="tian_lei_r">
                     <a href="javascript:;">
                         全部
                     </a>
+					<{foreach ($val->extend as $v)}>
                     <a href="javascript:;">
-                        nike
+                        <{$v[0]}>
                         <span>
-                            4364
+                            6346
                         </span>
                     </a>
-                    <a href="javascript:;" class="open4">
-                        波司登
-                        <span>
-                            436
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        艾莱依
-                        <span>
-                            4367
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        千仞岗
-                        <span>
-                            89
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        冰洁
-                        <span>
-                            66
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        恒源祥
-                        <span>
-                            658
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        北极绒
-                        <span>
-                            658
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        雅鹿
-                        <span>
-                            658
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        梦特娇
-                        <span>
-                            658
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        康博
-                        <span>
-                            658
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        太平鸟
-                        <span>
-                            658
-                        </span>
-                    </a>
+                    <{/foreach}>
                 </li>
                 <li class="list_r_more">
                     <a href="javascript:;">
@@ -244,113 +187,7 @@
                     </a>
                 </li>
             </ul>
-            <!--<ul>
-                <li class="tian_lei_l">
-                    风格：
-                </li>
-                <li class="tian_lei_r">
-                    <a href="javascript:;" class="open4">
-                        全部
-                    </a>
-                    <a href="javascript:;">
-                        韩范
-                        <span>
-                            4364
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        甜美
-                        <span>
-                            689
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        欧美
-                        <span>
-                            356
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        复古
-                        <span>
-                            356
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        英伦
-                        <span>
-                            356
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        朋克/摇滚
-                        <span>
-                            356
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        日系
-                        <span>
-                            356
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        ol男友风
-                        <span>
-                            356
-                        </span>
-                    </a>
-                    <a href="javascript:;">
-                        森女系
-                        <span>
-                            356
-                        </span>
-                    </a>
-                </li>
-                <li class="list_r_more">
-                    <a href="javascript:;">
-                        更多
-                        <img src="__RESOURCE__/images/bn.gif" />
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="tian_lei_l">
-                    元素：
-                </li>
-                <li class="tian_lei_r">
-                    <a href="javascript:;" class="open4">
-                        全部
-                    </a>
-                    <a href="javascript:;">
-                        修身
-                    </a>
-                    <a href="javascript:;">
-                        短款
-                    </a>
-                    <a href="javascript:;">
-                        连帽
-                    </a>
-                    <a href="javascript:;">
-                        印花
-                    </a>
-                    <a href="javascript:;">
-                        代购
-                    </a>
-                    <a href="javascript:;">
-                        直筒
-                    </a>
-                    <a href="javascript:;">
-                        蝴蝶结
-                    </a>
-                </li>
-                <li class="list_r_more">
-                    <a href="javascript:;">
-                        更多
-                        <img src="__RESOURCE__/images/bn.gif" />
-                    </a>
-                </li>
-            </ul>-->
+			<{/foreach}>
         </div>
         <div class="list_r_minimo">
             <a href="javascript:;">

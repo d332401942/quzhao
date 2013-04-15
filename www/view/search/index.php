@@ -24,7 +24,14 @@ class IndexSearchView extends BaseView
 		{
 			$category = (int)($parameters['category']);
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
-			//P($attrModels);
+			
+			foreach($attrModels as $val){
+				$arr = explode('#',$val->info);
+				foreach($arr as $v){
+					$val->extend[] = explode(':',$v);
+				}
+			}
+			$this->assign('attrModels',$attrModels);
 		}
 		if (!empty($parameters['sort']))
 		{
