@@ -8,9 +8,9 @@ class SearchData extends BaseData
 
 	}
 
-	public function searchProduct($pageCore, $keyword , $categoryId = null)
+	public function searchProduct($pageCore, $keyword , $categoryIds = array())
 	{
-		$productIds = $this->getProductIds($pageCore, $keyword, $categoryId);
+		$productIds = $this->getProductIds($pageCore, $keyword, $categoryIds);
 		//通过ID查询出来结果
 		$productData = M('ProductData');
 		$fileds = array();
@@ -25,10 +25,10 @@ class SearchData extends BaseData
 
 	public function getCategoryIdToCount($keyword)
 	{
-		$sphinx = M('SphinxDbLib');
+		$sphinx = new SphinxDbLib();
 		$sphinx->setGroupBy('categoryid', SPH_GROUPBY_ATTR, '@count desc');
+		$this->setPublicFilter($sphinx);
 		$result = $sphinx->query($keyword, 'product');
-		$sphinx->clear();
 		$categoryIdToCount = array();
 		if (!empty($result['matches']))
 		{
@@ -50,8 +50,9 @@ class SearchData extends BaseData
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$sphinx = M('SphinxDbLib');
 		$sphinx->setLimits($start, $pageCore->pageSize, $start + $pageCore->pageSize);
-		$this->setWeights();
-		$this->setSortMode();
+		$this->setWeights($sphinx);
+		$this->setSortMode($sphinx);
+		$this->setPublicFilter($sphinx);
 		if ($categoryIds)
 		{
 			$sphinx->setFilter('categoryid', $categoryIds);
@@ -88,9 +89,8 @@ class SearchData extends BaseData
 		}
 	}
 
-	private function setWeights()
+	private function setWeights($sphinx)
 	{
-		$sphinx = M('SphinxDbLib');
 		$weights = array(
 			'name' => 100,
 			'brandname' => 50,
@@ -99,9 +99,13 @@ class SearchData extends BaseData
 		$sphinx->setFieldWeights($weights);
 	}
 
-	private function setSortMode()
+	private function setSortMode($sphinx)
 	{
-		$sphinx = M('SphinxDbLib');
 		$sphinx->setSortMode(SPH_SORT_EXTENDED, '@weight desc');
+	}
+
+	private function setPublicFilter($sphinx)
+	{
+		$sphinx->setFilter('isdelete', array(0));
 	}
 }

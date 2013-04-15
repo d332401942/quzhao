@@ -9,6 +9,7 @@
                 筛选分类
             </h2>
             <div class="list_nav_box">
+				<{if (!empty($hostCategoryModels->children))}>
 				<{foreach ($hostCategoryModels->children as $model)}>
                 <ul>
                     <h2>
@@ -21,7 +22,8 @@
                     <{/foreach}>
                 </ul>
 				<{/foreach}>
-                
+                <{/if}>
+				<{if (!empty($categoryModels))}>
                 <ul>
                     <h2>
                         <a href="javascript:;">
@@ -34,6 +36,7 @@
                     </li>
                     <{/foreach}>
                 </ul>
+				<{/if}>
             </div>
         </div>
         <div class="list_l_mo">
@@ -746,8 +749,11 @@ function formTogo() {
 	var url = '__APP__/search__LIMIT__';
 	for (var i in data) {
 		var obj = data[i];
+		if (!obj.value) {
+			continue;
+		}
 		var pre = '';
-		if (i) {
+		if (i !=0) {
 			pre = '/';
 		}
 		url += pre + obj.name + '/' + obj.value;
@@ -757,6 +763,7 @@ function formTogo() {
 
 function searchByCategory(id) {
 	var formObj = $('#js-hide-form');
+	formObj.find('input[name="page"]').val('');
 	formObj.find('input[name="category"]').val(id);
 	formTogo();
 }
