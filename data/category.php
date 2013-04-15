@@ -162,7 +162,14 @@ class CategoryData extends BaseData
 	public function getAttrId($categoryId)
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$result = $this->getOneById($categoryId);
+		$sql = 'select attrid from category where level <> 2 AND categoryid = '.$categoryId;
+		$statement = $this->run($sql);
+		$result = array();
+		while ($categoryDataModel = $statement->fetchObject('CategoryDataModel'))
+		{
+			$result[$categoryDataModel->categoryid] = $categoryDataModel;
+		}
+		//$result = $this->getOneById($categoryId);
 		return $result;
 	}
 	

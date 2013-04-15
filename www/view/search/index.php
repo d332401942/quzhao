@@ -15,6 +15,7 @@ class IndexSearchView extends BaseView
 		$keyword = null;
 		$category = null;
 		$sort = null;
+		$attrModels = array();
 		$categoryBusiness = M('CategoryBusiness');
 		if (!empty($parameters['keyword']))
 		{
@@ -24,14 +25,14 @@ class IndexSearchView extends BaseView
 		{
 			$category = (int)($parameters['category']);
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
-			
-			foreach($attrModels as $val){
-				$arr = explode('#',$val->info);
-				foreach($arr as $v){
-					$val->extend[] = explode(':',$v);
+				foreach($attrModels as $val)
+				{
+					$arr = explode('#',$val->info);
+					foreach($arr as $v)
+					{
+						$val->extend[] = explode(':',$v);
+					}
 				}
-			}
-			$this->assign('attrModels',$attrModels);
 		}
 		
 		if (!empty($parameters['sort']))
@@ -54,5 +55,6 @@ class IndexSearchView extends BaseView
         $this->assign('keyword', $keyword);
         $this->assign('category', $category);
         $this->assign('sort', $sort);
+		$this->assign('attrModels',$attrModels);
 	}
 }
