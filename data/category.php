@@ -134,27 +134,29 @@ class CategoryData extends BaseData
 		return $result;
 	}
 	
-	public function getAttrDb($attrId)
+	public function getAttrDbs($attrId)
 	{
+		
 		if (!empty(self::$attrdbModels[$attrId]))
 		{
-			return self::$attrdbModels;
+			return self::$attrdbModels[$attrId];
 		}
 		
 		self::$attrdbModels = $this->cacheAttrAll();
-		if (!empty(self::$attrdbModels))
+		
+		if (!empty(self::$attrdbModels[$attrId]))
 		{
-			return self::$attrdbModels;
+			return self::$attrdbModels[$attrId];
 		}
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = 'select * from attrdb order by sort desc where isvalid = 1';
+		$sql = 'select * from attrdb  where isvalid = 1 order by sort desc';
 		$statement = $this->run($sql);
-		while ($attrdbDataModel = $statement->fetchObject('attrdbDataModel'))
+		while ($attrdbDataModel = $statement->fetchObject('AttrdbDataModel'))
 		{
-			self::$attrdbModels = $attrdbDataModel;
+			self::$attrdbModels[$attrdbDataModel->attrid][$attrdbDataModel->attrdbid] = $attrdbDataModel;
 		}
 		$this->setAttrCache();
-		return self::$attrdbModels;
+		return self::$attrdbModels[$attrId];
 	}
 	
 	public function getAttrId($categoryId)
@@ -164,12 +166,13 @@ class CategoryData extends BaseData
 		return $result;
 	}
 	
-	/*private function setAttrCache()
+	private function setAttrCache()
 	{
 		$models = self::$attrdbModels;
+		
 		$memcache = M('MemcacheDbLib');
 		$json = json_encode($models);
-		$memcache->set(self::CACHE_ATTRDB_KEY, $json, 604800);
+		$memcache->set(self::CACHE_ATTRDB_KEY, $json);
 	}
 	
 	private function cacheAttrAll()
@@ -192,9 +195,9 @@ class CategoryData extends BaseData
 					$model->$k = $val[$k];
 				}
 			}
-			$models[$model->attrdbid] = $model;
+			$models[$model->attrid] = $model;
 		}
 		return $models;
-	}*/
+	}
 
 }

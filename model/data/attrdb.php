@@ -1,6 +1,6 @@
 <?php
 
-class CategoryDataModel extends ModelCoreLib
+class AttrdbDataModel extends ModelCoreLib
 {
 
 	public $attrdbid;

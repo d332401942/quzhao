@@ -29,10 +29,10 @@ class CategoryBusiness extends BaseBusiness
 	
 	public function getAttrModelsByCategoryId($categoryId)
 	{
+		
 		$data = M('CategoryData');
 		$attrId = $data->getAttrId($categoryId);
-		return $attrId;
-		$result = $data->getAttrDb($attrId->attrid);
+		$result = $data->getAttrDbs($attrId->attrid);
 		return $result;
 	}
 }

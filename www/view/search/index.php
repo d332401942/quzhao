@@ -14,6 +14,7 @@ class IndexSearchView extends BaseView
 		$pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
 		$keyword = null;
 		$category = null;
+		$categoryBusiness = M('CategoryBusiness');
 		if (!empty($parameters['keyword']))
 		{
 			$keyword = trim($parameters['keyword']);
@@ -21,12 +22,12 @@ class IndexSearchView extends BaseView
 		if (!empty($parameters['category']))
 		{
 			$category = (int)($parameters['category']);
+			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
+			P($attrModels);
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
-		$categoryBusiness = M('CategoryBusiness');
 		$productModels = $business->searchProduct($pageCore, $keyword , $category);
-		$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);
