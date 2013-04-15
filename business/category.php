@@ -26,4 +26,11 @@ class CategoryBusiness extends BaseBusiness
 		$models = $data->getCompleteCategoryByIds($ids);
 		return $models;
 	}
+	
+	public function getAttrModelsByCategoryId($categoryId)
+	{
+		$data = M('categoryData');
+		$result = $data->getAttDb($categoryId);
+		return $result;
+	}
 }

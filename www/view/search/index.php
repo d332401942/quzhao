@@ -26,7 +26,7 @@ class IndexSearchView extends BaseView
 		$business = M('SearchBusiness');
 		$categoryBusiness = M('CategoryBusiness');
 		$productModels = $business->searchProduct($pageCore, $keyword , $category);
-		$attrModels = $business->getAttrModelsByCategoryId($category);
+		$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 		$productModels = array_values($productModels);
 		$categoryModels = $categoryBusiness->search($keyword);
 		$hostCategoryModels = array_shift($categoryModels);

@@ -9,9 +9,4 @@ class SearchBusiness extends BaseBusiness
 		$result = $data->searchProduct($pageCore, $keyword , $categoryId);		
 		return $result;	
 	}
-	
-	public function getAttrModelsByCategoryId($categoryId)
-	{
-		$data = M('categoryData');
-	}
 }
