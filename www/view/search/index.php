@@ -15,6 +15,7 @@ class IndexSearchView extends BaseView
 		$keyword = null;
 		$category = null;
 		$sort = null;
+		$categoryBusiness = M('CategoryBusiness');
 		if (!empty($parameters['keyword']))
 		{
 			$keyword = trim($parameters['keyword']);
@@ -22,6 +23,8 @@ class IndexSearchView extends BaseView
 		if (!empty($parameters['category']))
 		{
 			$category = (int)($parameters['category']);
+			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
+			//P($attrModels);
 		}
 		if (!empty($parameters['sort']))
 		{

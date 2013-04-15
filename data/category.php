@@ -134,27 +134,29 @@ class CategoryData extends BaseData
 		return $result;
 	}
 	
-	public function getAttrDb($attrId)
+	public function getAttrDbs($attrId)
 	{
+		
 		if (!empty(self::$attrdbModels[$attrId]))
 		{
-			return self::$attrdbModels;
+			return self::$attrdbModels[$attrId];
 		}
 		
-		self::$attrdbModels = $this->cacheAttrAll();
-		if (!empty(self::$attrdbModels))
+		self::$attrdbModels = $this->cacheAttrAll($attrId);
+		
+		if (!empty(self::$attrdbModels[$attrId]))
 		{
-			return self::$attrdbModels;
+			return self::$attrdbModels[$attrId];
 		}
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = 'select * from attrdb order by sort desc where isvalid = 1';
+		$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by sort desc";
 		$statement = $this->run($sql);
-		while ($attrdbDataModel = $statement->fetchObject('attrdbDataModel'))
+		while ($attrdbDataModel = $statement->fetchObject('AttrdbDataModel'))
 		{
-			self::$attrdbModels = $attrdbDataModel;
+			self::$attrdbModels[$attrdbDataModel->attrid][$attrdbDataModel->attrdbid] = $attrdbDataModel;
 		}
-		$this->setAttrCache();
-		return self::$attrdbModels;
+		$this->setAttrCache($attrId);
+		return self::$attrdbModels[$attrId];
 	}
 	
 	public function getAttrId($categoryId)
@@ -164,18 +166,26 @@ class CategoryData extends BaseData
 		return $result;
 	}
 	
-	/*private function setAttrCache()
+	private function setAttrCache($attrId)
 	{
-		$models = self::$attrdbModels;
+		$models = self::$attrdbModels[$attrId];
 		$memcache = M('MemcacheDbLib');
 		$json = json_encode($models);
-		$memcache->set(self::CACHE_ATTRDB_KEY, $json, 604800);
+		$key = self::getCacheAttrDbKey($attrId);
+		$memcache->set($key, $json);
 	}
 	
-	private function cacheAttrAll()
+	private static function getCacheAttrDbKey($attrId)
+	{
+		$key = self::CACHE_ATTRDB_KEY . $attrId;
+		return $key;
+	}
+	
+	private function cacheAttrAll($attrId)
 	{
 		$memcache = M('MemcacheDbLib');
-		$json = $memcache->get(self::CACHE_ATTRDB_KEY);
+		$key = self::getCacheAttrDbKey($attrId);
+		$json = $memcache->get($key);
 		$arr = json_decode($json, true);
 		$models = array();
 		if (!$arr)
@@ -184,17 +194,20 @@ class CategoryData extends BaseData
 		}
 		foreach ($arr as $val)
 		{
-			$model = new AttrdbDataModel();
-			foreach ($model as $k => $v)
+			foreach($val as $vv)
 			{
-				if (isset($val[$k]))
+				$model = new AttrdbDataModel();
+				foreach ($model as $k => $v)
 				{
-					$model->$k = $val[$k];
+					if (isset($vv[$k]))
+					{
+						$model->$k = $vv[$k];
+					}
 				}
+				$models[$model->attrid] = $model;
 			}
-			$models[$model->attrdbid] = $model;
 		}
 		return $models;
-	}*/
+	}
 
 }
