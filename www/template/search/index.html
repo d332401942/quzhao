@@ -12,15 +12,11 @@
 				<{foreach ($hostCategoryModels->children as $model)}>
                 <ul>
                     <h2>
-                        <a href="#">
-                            <{$model->name}>
-                        </a>
+                        <a href="javascript:;" onclick="searchByCategory(<{$model->categoryid}>)"><{$model->name}></a>
                     </h2>
 					<{foreach ($model->children as $m)}>
                     <li>
-                        <a href="#">
-                            <{$m->name}>
-                        </a>
+                        <a href="javascript:;" onclick="searchByCategory(<{$m->categoryid}>)"><{$m->name}></a>
                     </li>
                     <{/foreach}>
                 </ul>
@@ -28,15 +24,13 @@
                 
                 <ul>
                     <h2>
-                        <a href="#">
+                        <a href="javascript:;">
                             其他
                         </a>
                     </h2>
 					<{foreach ($categoryModels as $model)}>
                     <li>
-                        <a href="#">
-                            <{$model->name}>
-                        </a>
+                        <a href="javascript:;" onclick="searchByCategory(<{$model->categoryid}>)"><{$model->name}></a>
                     </li>
                     <{/foreach}>
                 </ul>
@@ -48,14 +42,14 @@
             </h2>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <img src="http://img02.taobaocdn.com/bao/uploaded/i2/13110029268468209/T2FcF2Xh4dXXXXXXXX_!!1104543110-0-p4pbp.jpg_270x270.jpg"
                         />
                         唐狮新品促销,极致羽绒服 促销中!
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <img src="http://img04.taobaocdn.com/bao/uploaded/i4/12621030215384455/T25XRaXi8OXXXXXXXX_!!1104152621-0-p4pbp.jpg_270x270.jpg"
                         />
                         唐狮新品促销,极致羽绒服 促销中!
@@ -69,7 +63,7 @@
             </h2>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <div>
                             <img src="__RESOURCE__/images/dp_a2.jpg" />
                         </div>
@@ -87,7 +81,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <div>
                             <img src="http://img01.taobaocdn.com/bao/uploaded/i1/T1VjsSXbNXXXb1upjX.jpg"
                             />
@@ -106,7 +100,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <div>
                             <img src="__RESOURCE__/images/dp_a2.jpg" />
                         </div>
@@ -124,7 +118,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <div>
                             <img src="http://img01.taobaocdn.com/bao/uploaded/i1/T1VjsSXbNXXXb1upjX.jpg"
                             />
@@ -143,7 +137,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <div>
                             <img src="__RESOURCE__/images/dp_a2.jpg" />
                         </div>
@@ -170,70 +164,70 @@
                     品牌：
                 </li>
                 <li class="tian_lei_r">
-                    <a href="#">
+                    <a href="javascript:;">
                         全部
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         nike
                         <span>
                             4364
                         </span>
                     </a>
-                    <a href="#" class="open4">
+                    <a href="javascript:;" class="open4">
                         波司登
                         <span>
                             436
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         艾莱依
                         <span>
                             4367
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         千仞岗
                         <span>
                             89
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         冰洁
                         <span>
                             66
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         恒源祥
                         <span>
                             658
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         北极绒
                         <span>
                             658
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         雅鹿
                         <span>
                             658
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         梦特娇
                         <span>
                             658
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         康博
                         <span>
                             658
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         太平鸟
                         <span>
                             658
@@ -241,7 +235,7 @@
                     </a>
                 </li>
                 <li class="list_r_more">
-                    <a href="#">
+                    <a href="javascript:;">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>
@@ -252,58 +246,58 @@
                     风格：
                 </li>
                 <li class="tian_lei_r">
-                    <a href="#" class="open4">
+                    <a href="javascript:;" class="open4">
                         全部
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         韩范
                         <span>
                             4364
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         甜美
                         <span>
                             689
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         欧美
                         <span>
                             356
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         复古
                         <span>
                             356
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         英伦
                         <span>
                             356
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         朋克/摇滚
                         <span>
                             356
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         日系
                         <span>
                             356
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         ol男友风
                         <span>
                             356
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         森女系
                         <span>
                             356
@@ -311,7 +305,7 @@
                     </a>
                 </li>
                 <li class="list_r_more">
-                    <a href="#">
+                    <a href="javascript:;">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>
@@ -322,33 +316,33 @@
                     元素：
                 </li>
                 <li class="tian_lei_r">
-                    <a href="#" class="open4">
+                    <a href="javascript:;" class="open4">
                         全部
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         修身
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         短款
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         连帽
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         印花
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         代购
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         直筒
                     </a>
-                    <a href="#">
+                    <a href="javascript:;">
                         蝴蝶结
                     </a>
                 </li>
                 <li class="list_r_more">
-                    <a href="#">
+                    <a href="javascript:;">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>
@@ -356,34 +350,34 @@
             </ul>
         </div>
         <div class="list_r_minimo">
-            <a href="#">
+            <a href="javascript:;">
                 更多
                 <img src="__RESOURCE__/images/bn.gif" />
             </a>
         </div>
         <div class="list_r_menu">
             <div class="list_r_menu_l">
-                <a href="#">
+                <a href="javascript:;">
                     默认
                 </a>
-                <a href="#" class="open4">
+                <a href="javascript:;" class="open4">
                     销量
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     最新
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     最低价
                 </a>
             </div>
             <div class="list_r_menu_l list_r_menu_r">
                 <ul>
                     <li class="list_nav_l">
-                        <a href="#">
+                        <a href="javascript:;">
                         </a>
                     </li>
                     <li class="list_nav_r">
-                        <a href="#" class="open4">
+                        <a href="javascript:;" class="open4">
                         </a>
                     </li>
                 </ul>
@@ -395,13 +389,13 @@
 			<{foreach ($productModels as $key => $model)}>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="#" title="<{$model->title}>">
-                            <img src="<{$Host->StaticHost}>/images/<{$model->pic}>" />
+                        <a href="javascript:;" title="<{$model->title}>">
+                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="#" title="<{$model->title}>">
+                            <a href="javascript:;" title="<{$model->title}>">
                                 <{$model->lighttitle}>
                             </a>
                         </h2>
@@ -436,7 +430,7 @@
                             </div>
                             <div class="list_jg_r">
 								<!--
-                                <a href="#">
+                                <a href="javascript:;">
                                     <img src="__RESOURCE__/images/bn.gif" />
                                     同款34件
                                 </a>
@@ -447,13 +441,13 @@
                                     </div>
                                     <ul>
                                         <li class="list_fu_tu">
-                                            <a href="#">
+                                            <a href="javascript:;">
                                                 <img src="__RESOURCE__/images/dp_a.jpg" />
                                             </a>
                                         </li>
                                         <li class="list_fu_name">
                                             <h2>
-                                                <a href="#">
+                                                <a href="javascript:;">
                                                     唐狮新品促销,极致羽绒服促销中!
                                                 </a>
                                             </h2>
@@ -474,27 +468,27 @@
                                         </li>
                                         <li class="list_fu_logo">
                                             <h3>
-                                                <a href="#">
+                                                <a href="javascript:;">
                                                     <img src="__RESOURCE__/images/IMG_23.jpg" />
                                                 </a>
                                             </h3>
                                             所在地：上海
                                         </li>
                                         <li class="list_fu_pnt">
-                                            <a href="#">
+                                            <a href="javascript:;">
                                                 去购买
                                             </a>
                                         </li>
                                     </ul>
                                     <ul>
                                         <li class="list_fu_tu">
-                                            <a href="#">
+                                            <a href="javascript:;">
                                                 <img src="__RESOURCE__/images/dp_a.jpg" />
                                             </a>
                                         </li>
                                         <li class="list_fu_name">
                                             <h2>
-                                                <a href="#">
+                                                <a href="javascript:;">
                                                     唐狮新品促销,极致羽绒服促销中!
                                                 </a>
                                             </h2>
@@ -515,14 +509,14 @@
                                         </li>
                                         <li class="list_fu_logo">
                                             <h3>
-                                                <a href="#">
+                                                <a href="javascript:;">
                                                     <img src="__RESOURCE__/images/IMG_23.jpg" />
                                                 </a>
                                             </h3>
                                             所在地：上海
                                         </li>
                                         <li class="list_fu_pnt">
-                                            <a href="#">
+                                            <a href="javascript:;">
                                                 去购买
                                             </a>
                                         </li>
@@ -545,34 +539,34 @@
                 您是不是想找：
             </div>
             <div class="list_hot_tag_r">
-                <a href="#">
+                <a href="javascript:;">
                     中长款羽绒服
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     波司登羽绒服
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     厚外套修身
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     儿童羽绒服
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     大衣打底裤
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     厚外套修身
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     羽绒服女长款
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     儿童羽绒服
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     大衣打底裤
                 </a>
-                <a href="#">
+                <a href="javascript:;">
                     厚外套修身
                 </a>
             </div>
@@ -583,7 +577,7 @@
                     相关热卖
                 </h1>
                 <h3>
-                    <a href="#">
+                    <a href="javascript:;">
                         更多
                     </a>
                 </h3>
@@ -591,14 +585,14 @@
             <ul>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="#">
+                        <a href="javascript:;">
                             <img src="http://img03.taobaocdn.com/imgextra/etao/i3/15987030451720138/T1GH3TXeXbXXXXXXXX_!!0-item_pic.jpg_b.jpg"
                             />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="#">
+                            <a href="javascript:;">
                                 热卖可脱卸撞色两穿
                                 <strong>
                                     羽绒服
@@ -639,14 +633,14 @@
                 </li>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="#">
+                        <a href="javascript:;">
                             <img src="http://img03.taobaocdn.com/imgextra/etao/i3/11148018967158813/T1hN.EXi0aXXXXXXXX_!!0-item_pic.jpg_b.jpg"
                             />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="#">
+                            <a href="javascript:;">
                                 热卖可脱卸撞色两穿
                                 <strong>
                                     羽绒服
@@ -687,14 +681,14 @@
                 </li>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="#">
+                        <a href="javascript:;">
                             <img src="http://img03.taobaocdn.com/imgextra/etao/i3/15987030451720138/T1GH3TXeXbXXXXXXXX_!!0-item_pic.jpg_b.jpg"
                             />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="#">
+                            <a href="javascript:;">
                                 热卖可脱卸撞色两穿
                                 <strong>
                                     羽绒服
@@ -758,6 +752,10 @@ function formTogo() {
 		url += pre + obj.name + '/' + obj.value;
 	}
 	window.location.href = url;
+}
+
+function searchByCategory(id) {
+	var formObj = $('#js-hide-form');
 }
 
 function goPage(page) {
