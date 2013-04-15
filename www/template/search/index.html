@@ -360,18 +360,10 @@
         </div>
         <div class="list_r_menu">
             <div class="list_r_menu_l">
-                <a href="javascript:;">
-                    默认
-                </a>
-                <a href="javascript:;" class="open4">
-                    销量
-                </a>
-                <a href="javascript:;">
-                    最新
-                </a>
-                <a href="javascript:;">
-                    最低价
-                </a>
+                <a href="javascript:;" class="<{if (!$sort or $sort=='default')}>open4<{/if}>" onclick="setSort('default')">默认</a>
+                <a href="javascript:;" class="<{if ($sort=='sales')}>open4<{/if}>" onclick="setSort('sales')">销量</a>
+                <a href="javascript:;" class="<{if ($sort=='createtime')}>open4<{/if}>" onclick="setSort('createtime')">最新</a>
+                <a href="javascript:;" class="<{if ($sort=='price')}>open4<{/if}>" onclick="setSort('price')" >最低价</a>
             </div>
             <div class="list_r_menu_l list_r_menu_r">
                 <ul>
@@ -739,7 +731,9 @@
 <form style="display:none" id="js-hide-form">
 	<input name="keyword" value="<{echo urlencode($keyword)}>" />
 	<input name="category" value="<{$category}>" />
+	<input name="sort" value="<{echo urlencode($sort)}>" />
 	<input name="page" value="<{$pageCore->currentPage}>" />
+	
 </form>
 <script>
 
@@ -759,6 +753,13 @@ function formTogo() {
 		url += pre + obj.name + '/' + obj.value;
 	}
 	window.location.href = url;
+}
+
+function setSort(str) {
+	var formObj = $('#js-hide-form');
+	formObj.find('input[name="page"]').val('');
+	formObj.find('input[name="sort"]').val(str);
+	formTogo();
 }
 
 function searchByCategory(id) {

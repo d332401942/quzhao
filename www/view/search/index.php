@@ -14,6 +14,7 @@ class IndexSearchView extends BaseView
 		$pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
 		$keyword = null;
 		$category = null;
+		$sort = null;
 		$categoryBusiness = M('CategoryBusiness');
 		if (!empty($parameters['keyword']))
 		{
@@ -25,9 +26,15 @@ class IndexSearchView extends BaseView
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 			//P($attrModels);
 		}
+		if (!empty($parameters['sort']))
+		{
+			$sort = $parameters['sort'];
+		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
-		$productModels = $business->searchProduct($pageCore, $keyword , $category);
+		$categoryBusiness = M('CategoryBusiness');
+		$productModels = $business->searchProduct($pageCore, $keyword , $category, $sort);
+		$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);
@@ -38,5 +45,6 @@ class IndexSearchView extends BaseView
 		$keyword = htmlspecialchars($keyword);
         $this->assign('keyword', $keyword);
         $this->assign('category', $category);
+        $this->assign('sort', $sort);
 	}
 }
