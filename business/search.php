@@ -3,10 +3,12 @@
 class SearchBusiness extends BaseBusiness
 {
 	
-	public function searchProduct($pageCore, $keyword , $categoryId)
+	public function searchProduct($pageCore, $keyword , $categoryId = null)
 	{	
 		$data = M('SearchData');
-		$result = $data->searchProduct($pageCore, $keyword , $categoryId);		
+		$categoryData = M('CategoryData');
+		$categoryIds = $categoryData->getChildrenIds($categoryId);
+		$result = $data->searchProduct($pageCore, $keyword , $categoryIds);		
 		return $result;	
 	}
 }

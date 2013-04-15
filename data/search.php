@@ -8,16 +8,16 @@ class SearchData extends BaseData
 
 	}
 
-	public function searchProduct($pageCore, $keyword , $category)
+	public function searchProduct($pageCore, $keyword , $categoryId = null)
 	{
-		$productIds = $this->getProductIds($pageCore, $keyword);
+		$productIds = $this->getProductIds($pageCore, $keyword, $categoryId);
 		//通过ID查询出来结果
 		$productData = M('ProductData');
 		$fileds = array();
 		$productModels = array();
 		if ($productIds)
 		{
-			$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds , $category);
+			$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds);
 		}
 		$this->setLight($productModels, $keyword);
 		return $productModels;
@@ -45,13 +45,17 @@ class SearchData extends BaseData
 		return $categoryIdToCount;
 	}
 
-	public function getProductIds($pageCore, $keyword)
+	public function getProductIds($pageCore, $keyword, $categoryIds = array())
 	{
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$sphinx = M('SphinxDbLib');
-		$sphinx->setLimits($start, $pageCore->pageSize, 1000000);
+		$sphinx->setLimits($start, $pageCore->pageSize, $start + $pageCore->pageSize);
 		$this->setWeights();
 		$this->setSortMode();
+		if ($categoryIds)
+		{
+			$sphinx->setFilter('categoryid', $categoryIds);
+		}
 		$result = $sphinx->query($keyword, 'product');
 		$productIds = $sphinx->getResultIds($result, $pageCore);
 		$sphinx->clear();

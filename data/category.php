@@ -36,6 +36,23 @@ class CategoryData extends BaseData
 		}
 		return $models;
 	}
+
+	public function getChildrenIds($id)
+	{
+		$models = $this->findAll();
+		$childrenIds = array();
+		foreach ($models as $model)
+		{
+			$pathArr = explode('-', $model->path);
+			{
+				if (in_array($id, $pathArr))
+				{
+					$childrenIds[] = $model->categoryid;
+				}
+			}
+		}
+		return $childrenIds;
+	}
 	
 	public function findAll()
 	{
