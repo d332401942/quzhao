@@ -162,7 +162,7 @@
     </div>
     <div class="list_r">
         <div class="tian_lei">
-			<{if (isset($attrModels))}>
+			<{if (!empty($attrModels))}>
             <{foreach ($attrModels as $val)}>
 			<ul>
                 <li class="tian_lei_l">
@@ -175,9 +175,9 @@
 					<{foreach ($val->extend as $v)}>
                     <a href="javascript:;">
                         <{$v[0]}>
-                        <span>
+                        <!--<span>
                             6346
-                        </span>
+                        </span>-->
                     </a>
                     <{/foreach}>
                 </li>
