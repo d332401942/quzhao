@@ -8,9 +8,9 @@ class SearchData extends BaseData
 
 	}
 
-	public function searchProduct($pageCore, $keyword , $categoryIds = array())
+	public function searchProduct($pageCore, $keyword , $categoryIds = array(), $sort = null)
 	{
-		$productIds = $this->getProductIds($pageCore, $keyword, $categoryIds);
+		$productIds = $this->getProductIds($pageCore, $keyword, $categoryIds, $sort);
 		//通过ID查询出来结果
 		$productData = M('ProductData');
 		$fileds = array();
@@ -45,13 +45,13 @@ class SearchData extends BaseData
 		return $categoryIdToCount;
 	}
 
-	public function getProductIds($pageCore, $keyword, $categoryIds = array())
+	public function getProductIds($pageCore, $keyword, $categoryIds = array(), $sort = null)
 	{
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$sphinx = M('SphinxDbLib');
 		$sphinx->setLimits($start, $pageCore->pageSize, $start + $pageCore->pageSize);
 		$this->setWeights($sphinx);
-		$this->setSortMode($sphinx);
+		$this->setSortMode($sphinx, $sort);
 		$this->setPublicFilter($sphinx);
 		if ($categoryIds)
 		{
@@ -102,6 +102,7 @@ class SearchData extends BaseData
 	private function setSortMode($sphinx)
 	{
 		$sphinx->setSortMode(SPH_SORT_EXTENDED, '@weight desc');
+		$sphinx->setSortMode(SPH_SORT_EXTENDED, 'sales desc');
 	}
 
 	private function setPublicFilter($sphinx)
