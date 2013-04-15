@@ -99,10 +99,23 @@ class SearchData extends BaseData
 		$sphinx->setFieldWeights($weights);
 	}
 
-	private function setSortMode($sphinx)
+	private function setSortMode($sphinx, $sort)
 	{
-		$sphinx->setSortMode(SPH_SORT_EXTENDED, '@weight desc');
-		$sphinx->setSortMode(SPH_SORT_EXTENDED, 'sales desc');
+		$sortStr = '@weight desc';
+		$sort = strtolower($sort);
+		switch ($sort)
+		{
+			case 'sales':
+				$sortStr = 'sales desc';
+				break;
+			case 'createtime':
+				$sortStr = 'createtime desc';
+				break;
+			case 'price':
+				$sortStr = 'price asc';
+				break;
+		}
+		$sphinx->setSortMode(SPH_SORT_EXTENDED, $sortStr);
 	}
 
 	private function setPublicFilter($sphinx)
