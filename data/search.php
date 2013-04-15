@@ -8,7 +8,7 @@ class SearchData extends BaseData
 
 	}
 
-	public function searchProduct($pageCore, $keyword)
+	public function searchProduct($pageCore, $keyword , $category)
 	{
 		$productIds = $this->getProductIds($pageCore, $keyword);
 		//通过ID查询出来结果
@@ -17,7 +17,7 @@ class SearchData extends BaseData
 		$productModels = array();
 		if ($productIds)
 		{
-			$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds);
+			$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds , $category);
 		}
 		$this->setLight($productModels, $keyword);
 		return $productModels;
