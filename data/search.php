@@ -107,7 +107,7 @@ class SearchData extends BaseData
 			$docs = array();
 			foreach ($needLightFileds as $key => $val)
 			{
-				$docs[$key] = CommUtilLib::truncate($model->$val, 25);
+				$docs[$key] = CommUtilLib::truncate($model->$val, 45);
 			}
 			$arr = $sphinx->buildExcerpts($docs, 'product', $keyword, $opts);
 			foreach ($needLightFileds as $key => $val)
