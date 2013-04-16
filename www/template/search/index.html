@@ -174,9 +174,9 @@
                     </a>
 					<{foreach ($val->extend as $k => $v)}>
 						<{if ($k < 18)}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$v[1]}>')"><{$v[0]}></a>
+						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
 						<{else}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$v[1]}>')" class="js-extend-more-<{$val->attrdbid}>" style="display:none;"><{$v[0]}></a>
+						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" class="js-extend-more-<{$val->attrdbid}>" style="display:none;"><{$v[0]}></a>
 						<{/if}>
                     <{/foreach}>
                 </li>
@@ -569,6 +569,7 @@
 <form style="display:none" id="js-hide-form">
 	<input name="keyword" value="<{echo urlencode($keyword)}>" />
 	<input name="category" value="<{$category}>" />
+	<input name="attr" value="<{echo urlencode($attr)}>" />
 	<input name="sort" value="<{echo urlencode($sort)}>" />
 	<input name="page" value="<{$pageCore->currentPage}>" />
 	
@@ -607,8 +608,13 @@ function searchByCategory(id) {
 	formTogo();
 }
 
-function searchByAttr(filed, type, value) {
-	
+function searchByAttr(attr,type,val) {
+	var formObj = $('#js-hide-form');
+	var str = attr + '_' + type + '_' + val;
+	str = encodeURIComponent(str);
+	formObj.find('input[name="page"]').val('');
+	formObj.find('input[name="attr"]').val(str);
+	formTogo();
 }
 
 function goPage(page) {
@@ -617,7 +623,8 @@ function goPage(page) {
 	formTogo();
 }
 function attrShow(attrdbid){
-	$('.js-extend-more').toggle();
+	var moreObj = $('.js-extend-more');
+	moreObj+'-'+attrdbid.toggle();
 }
 </script>
 
