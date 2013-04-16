@@ -228,13 +228,13 @@
 			<{foreach ($productModels as $key => $model)}>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="javascript:;" title="<{$model->title}>">
+                        <a href="<{$model->url}>" target="__blank" title="<{$model->title}>">
                             <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="javascript:;" title="<{$model->title}>">
+                            <a href="<{$model->url}>" target="__blank" title="<{$model->title}>">
                                 <{$model->lighttitle}>
                             </a>
                         </h2>
