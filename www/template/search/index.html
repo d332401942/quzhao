@@ -164,7 +164,8 @@
 		<{if (!empty($attrModels))}>
         <div class="tian_lei">
             <{foreach ($attrModels as $key=>$val)}>
-			<ul class="js-attrdb-length">
+			<{if ($key < 3)}>
+			<ul>
                 <li class="tian_lei_l">
                     <{$val->name}>：
                 </li>
@@ -187,10 +188,35 @@
                     </a>
                 </li>
             </ul>
+			<{else}>
+			<ul class="js-attrdb-more" style="display:none;">
+                <li class="tian_lei_l">
+                    <{$val->name}>：
+                </li>
+                <li class="tian_lei_r">
+                    <a href="javascript:;">
+                        全部
+                    </a>
+					<{foreach ($val->extend as $k => $v)}>
+						<{if ($k < 18)}>
+						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
+						<{else}>
+						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" class="js-extend-more-<{$val->attrdbid}>" style="display:none;"><{$v[0]}></a>
+						<{/if}>
+                    <{/foreach}>
+                </li>
+                <li class="list_r_more">
+                    <a href="javascript:;" onclick="attrShow(<{$val->attrdbid}>)">
+                        更多
+                        <img src="__RESOURCE__/images/bn.gif" />
+                    </a>
+                </li>
+            </ul>
+			<{/if}>
 			<{/foreach}>
         </div>
         <div class="list_r_minimo">
-            <a href="javascript:;">
+            <a href="javascript:;" onclick="attrdbShow()">
                 更多
                 <img src="__RESOURCE__/images/bn.gif" />
             </a>
@@ -625,7 +651,9 @@ function goPage(page) {
 function attrShow(attrdbid){
 	$('.js-extend-more-'+attrdbid).toggle();
 }
-
+function attrdbShow(){
+	$('.js-attrdb-more').toggle();
+}
 </script>
 
 

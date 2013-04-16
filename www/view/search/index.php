@@ -41,8 +41,8 @@ class IndexSearchView extends BaseView
 					}
 				}
 			}	
+			$attrModels = array_values($attrModels);
 		}
-		
 		if (!empty($parameters['sort']))
 		{
 			$sort = $parameters['sort'];
