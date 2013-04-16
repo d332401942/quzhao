@@ -164,63 +164,43 @@
 		<{if (!empty($attrModels))}>
         <div class="tian_lei">
             <{foreach ($attrModels as $key=>$val)}>
-			<{if ($key < 3)}>
-			<ul>
-                <li class="tian_lei_l">
-                    <{$val->name}>：
-                </li>
-                <li class="tian_lei_r">
-                    <a href="javascript:;">
-                        全部
-                    </a>
-					<{foreach ($val->extend as $k => $v)}>
-						<{if ($k < 18)}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
-						<{else}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" class="js-extend-more-<{$val->attrdbid}>" style="display:none;"><{$v[0]}></a>
-						<{/if}>
-                    <{/foreach}>
-                </li>
-                <li class="list_r_more">
-                    <a href="javascript:;" onclick="attrShow(<{$val->attrdbid}>)">
-                        更多
-                        <img src="__RESOURCE__/images/bn.gif" />
-                    </a>
-                </li>
-            </ul>
+			<{if ($key > 2)}>
+				<ul class="js-attrdb-more" style="display:none;">
 			<{else}>
-			<ul class="js-attrdb-more" style="display:none;">
-                <li class="tian_lei_l">
+				<ul>
+			<{/if}>
+                <li class="tian_lei_l ">
                     <{$val->name}>：
                 </li>
                 <li class="tian_lei_r">
-                    <a href="javascript:;">
-                        全部
-                    </a>
+                    <a href="javascript:;" onclick="clearAttr('<{$val->attr}>')">全部</a>
 					<{foreach ($val->extend as $k => $v)}>
 						<{if ($k < 18)}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
+						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
 						<{else}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" class="js-extend-more-<{$val->attrdbid}>" style="display:none;"><{$v[0]}></a>
+						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}> js-extend-more-<{$val->attrdbid}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" style="display:none;"><{$v[0]}></a>
 						<{/if}>
                     <{/foreach}>
                 </li>
                 <li class="list_r_more">
+					<{if ($k >= 18)}>
                     <a href="javascript:;" onclick="attrShow(<{$val->attrdbid}>)">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>
+					<{/if}>
                 </li>
             </ul>
-			<{/if}>
 			<{/foreach}>
         </div>
+		<{if ($key >= 2)}>
         <div class="list_r_minimo">
             <a href="javascript:;" onclick="attrdbShow()">
                 更多
                 <img src="__RESOURCE__/images/bn.gif" />
             </a>
         </div>
+		<{/if}>
 		<{/if}>
         <div class="list_r_menu">
             <div class="list_r_menu_l">
@@ -593,11 +573,15 @@
 <div class="box ">
 </div>
 <form style="display:none" id="js-hide-form">
-	<input name="keyword" value="<{echo urlencode($keyword)}>" />
-	<input name="category" value="<{$category}>" />
-	<input name="attr" value="<{echo urlencode('{"attr0":"1_3384"}')}>" />
-	<input name="sort" value="<{echo urlencode($sort)}>" />
-	<input name="page" value="<{$pageCore->currentPage}>" />
+	<input name="keyword" value="<{echo urlencode($keyword)}>" type="hidden" />
+	<input name="category" value="<{$category}>" type="hidden" />
+	<input name="sort" value="<{echo urlencode($sort)}>" type="hidden" />
+	<div style="display:none" class="js-hide-form-attr">
+		<{foreach ($attrArr as $key => $val)}>
+			<input name="attr_<{$key}>" value="<{echo urlencode($val)}>" type="hidden" />
+		<{/foreach}>
+	</div>
+	<input name="page" value="<{$pageCore->currentPage}>" type="hidden" />
 	
 </form>
 <script>
@@ -631,24 +615,29 @@ function searchByCategory(id) {
 	var formObj = $('#js-hide-form');
 	formObj.find('input[name="page"]').val('');
 	formObj.find('input[name="category"]').val(id);
+	formObj.find('.js-hide-form-attr').html('');
 	formTogo();
 }
 
 function searchByAttr(attr,type,val) {
 	var formObj = $('#js-hide-form');
-	var obj = formObj.find('input[name="attr"]').val();
-	if (!obj) {
-		obj = {};
+	var key = 'attr_' + attr;
+	var obj = formObj.find('input[name="'+key+'"]');
+	if (!obj.length) {
+		obj = $('<input name="'+key+'" type="hidden" />');
+		formObj.find('.js-hide-form-attr').append(obj);
 	}
-	else {
-		obj = decodeURIComponent(obj);
-		obj = JSON.parse(obj);
-	}
-	obj[attr] = type + '_' + val;
-	str = JSON.stringify(obj);
-	str = encodeURIComponent(str);
+	val = val.replace(/,/, '-');
+	val = encodeURIComponent(type + '_' + val);
 	formObj.find('input[name="page"]').val('');
-	formObj.find('input[name="attr"]').val(str);
+	obj.val(val);
+	formTogo();
+}
+
+function clearAttr(attr) {
+	var formObj = $('#js-hide-form');
+	formObj.find('input[name="attr_'+attr+'"]').remove();
+	formObj.find('input[name="page"]').val('');
 	formTogo();
 }
 

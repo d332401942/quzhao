@@ -15,6 +15,7 @@ class IndexSearchView extends BaseView
 		$keyword = null;
 		$category = null;
 		$sort = null;
+		$attrArr = $this->getAttrArr($parameters);
 		$attrModels = array();
 		$categoryBusiness = M('CategoryBusiness');
 		if (!empty($parameters['keyword']))
@@ -38,6 +39,10 @@ class IndexSearchView extends BaseView
 					foreach($arr as $v)
 					{
 						$val->extend[] = explode(':',$v);
+						if (!empty($val->extend[1]))
+						{
+							$val->extend[1] = str_replace(',', '-', $val->extend[1]);
+						}
 					}
 				}
 			}	
@@ -49,7 +54,7 @@ class IndexSearchView extends BaseView
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
-		$productModels = $business->searchProduct($pageCore, $keyword , $category, $sort);
+		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);
@@ -62,5 +67,19 @@ class IndexSearchView extends BaseView
         $this->assign('category', $category);
         $this->assign('sort', $sort);
 		$this->assign('attrModels',$attrModels);
+		$this->assign('attrArr',$attrArr);
+	}
+
+	private function getAttrArr($parameters)
+	{
+		$attrArr = array();
+		foreach ($parameters as $key => $val)
+		{
+			if (strpos($key, 'attr_') === 0)
+			{
+				$attrArr[substr($key, 5)] = $val;
+			}
+		}
+		return $attrArr;
 	}
 }

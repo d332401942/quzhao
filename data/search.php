@@ -8,9 +8,9 @@ class SearchData extends BaseData
 
 	}
 
-	public function searchProduct($pageCore, $keyword , $categoryIds = array(), $sort = null)
+	public function searchProduct($pageCore, $keyword , $categoryIds = array(), $attrArr = array(), $sort = null)
 	{
-		$productIds = $this->getProductIds($pageCore, $keyword, $categoryIds, $sort);
+		$productIds = $this->getProductIds($pageCore, $keyword, $categoryIds,$attrArr, $sort);
 		//通过ID查询出来结果
 		$productData = M('ProductData');
 		$fileds = array();
@@ -45,7 +45,7 @@ class SearchData extends BaseData
 		return $categoryIdToCount;
 	}
 
-	public function getProductIds($pageCore, $keyword, $categoryIds = array(), $sort = null)
+	public function getProductIds($pageCore, $keyword, $categoryIds = array(),$attrArr = array(), $sort = null)
 	{
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$sphinx = M('SphinxDbLib');
@@ -56,6 +56,35 @@ class SearchData extends BaseData
 		if ($categoryIds)
 		{
 			$sphinx->setFilter('categoryid', $categoryIds);
+		}
+		foreach ($attrArr as $key => $val)
+		{
+			$arr = explode('_', $val);
+			if (count($arr) != 2) 
+			{
+				continue;
+			}
+			$type = $arr[0];
+			$value = $arr[1];
+			$array = explode('-', $value);
+			switch ($type)
+			{
+				case 0:
+					$sphinx->setFilter($key, $array);
+					break;
+				case 1:
+					if (count($array) == 2)
+					{
+						$sphinx->setFilter($key, $array[0], $array[1]);
+					}
+					break;
+				case 2:
+					if (count($array) == 2)
+					{
+						$sphinx->setFilterFloatRange($key, $array[0], $array[1]);
+					}
+					break;
+			}
 		}
 		$result = $sphinx->query($keyword, 'product');
 		$productIds = $sphinx->getResultIds($result, $pageCore);
