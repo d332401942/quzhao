@@ -569,7 +569,7 @@
 <form style="display:none" id="js-hide-form">
 	<input name="keyword" value="<{echo urlencode($keyword)}>" />
 	<input name="category" value="<{$category}>" />
-	<input name="attr" value="<{echo urlencode($attr)}>" />
+	<input name="attr" value="" />
 	<input name="sort" value="<{echo urlencode($sort)}>" />
 	<input name="page" value="<{$pageCore->currentPage}>" />
 	
@@ -610,11 +610,13 @@ function searchByCategory(id) {
 
 function searchByAttr(attr,type,val) {
 	var formObj = $('#js-hide-form');
-	var str = attr + '_' + type + '_' + val;
+	var str = {"'+ attr +'":"'+ type + '_' + val +'"};
+	alert(str);
 	str = encodeURIComponent(str);
+	alert(str);
 	formObj.find('input[name="page"]').val('');
 	formObj.find('input[name="attr"]').val(str);
-	formTogo();
+	//formTogo();
 }
 
 function goPage(page) {
