@@ -163,7 +163,7 @@
     <div class="list_r">
 		<{if (!empty($attrModels))}>
         <div class="tian_lei">
-            <{foreach ($attrModels as $val)}>
+            <{foreach ($attrModels as $key=>$val)}>
 			<ul>
                 <li class="tian_lei_l">
                     <{$val->name}>：
@@ -176,12 +176,12 @@
 						<{if ($k < 18)}>
 						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$v[1]}>')"><{$v[0]}></a>
 						<{else}>
-						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$v[1]}>')" class="js-extend-more" style="display:none;"><{$v[0]}></a>
+						<a href="javascript:;" onclick="searchByAttr('<{$val->attr}>','<{$v[1]}>')" class="js-extend-more-<{$val->attrdbid}>" style="display:none;"><{$v[0]}></a>
 						<{/if}>
                     <{/foreach}>
                 </li>
                 <li class="list_r_more">
-                    <a href="javascript:;">
+                    <a href="javascript:;" onclick="attrShow(<{$val->attrdbid}>)">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>
@@ -615,6 +615,9 @@ function goPage(page) {
 	var formObj = $('#js-hide-form');
 	formObj.find('input[name="page"]').val(page);
 	formTogo();
+}
+function attrShow(attrdbid){
+	$('.js-extend-more').toggle();
 }
 </script>
 
