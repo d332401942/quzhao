@@ -347,14 +347,14 @@
 				<{if ($key >= 2)}>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="<{$model->url}>" target="_blank">
+                        <a href="<{$model->url}>" target="_blank" title="<{$model->title}>>
                             <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="<{$model->url}>" target="_blank">
-                                <{$model->title|truncate:70}>
+                            <a href="<{$model->url}>" target="_blank" title="<{$model->title}>">
+                                <{$model->title|truncate:40}>
                             </a>
                         </h2>
                         <div class="list_jg">
