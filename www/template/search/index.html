@@ -175,7 +175,7 @@
                 <li class="tian_lei_r">
                     <a href="javascript:;" onclick="clearAttr('<{$val->attr}>')">全部</a>
 					<{foreach ($val->extend as $k => $v)}>
-						<{if ($k < 18)}>
+						<{if ($k < 17)}>
 						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
 						<{else}>
 						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}> js-extend-more-<{$val->attrdbid}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" style="display:none;"><{$v[0]}></a>
@@ -183,7 +183,7 @@
                     <{/foreach}>
                 </li>
                 <li class="list_r_more">
-					<{if ($k >= 18)}>
+					<{if ($k >= 17)}>
                     <a href="javascript:;" onclick="attrShow(<{$val->attrdbid}>)">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
