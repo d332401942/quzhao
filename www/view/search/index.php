@@ -18,6 +18,7 @@ class IndexSearchView extends BaseView
 		$attrArr = $this->getAttrArr($parameters);
 		$attrModels = array();
 		$categoryBusiness = M('CategoryBusiness');
+		
 		if (!empty($parameters['keyword']))
 		{
 			$keyword = trim($parameters['keyword']);
@@ -52,6 +53,8 @@ class IndexSearchView extends BaseView
 		{
 			$sort = $parameters['sort'];
 		}
+		//得到历史记录
+		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
@@ -71,6 +74,7 @@ class IndexSearchView extends BaseView
         $this->assign('sort', $sort);
 		$this->assign('attrModels',$attrModels);
 		$this->assign('attrArr',$attrArr);
+		$this->assign('searchBrowseHistoryModels', $searchBrowseHistoryModels);
 	}
 
 	private function getAttrArr($parameters)
@@ -84,5 +88,18 @@ class IndexSearchView extends BaseView
 			}
 		}
 		return $attrArr;
+	}
+	private function searchBrowseHistoryModels()
+	{
+		if (empty($_COOKIE['searchBrowseLog']))
+		{
+			return array();
+		}
+		$ids = $_COOKIE['searchBrowseLog'];
+		$arrIds = explode(',',$ids);
+		$business = new SearchBusiness();
+		$models = $business->searchBrowseHistoryModels($arrIds);
+		$models = $models ? $models : array();
+		return $models;
 	}
 }
