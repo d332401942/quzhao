@@ -164,7 +164,7 @@
 		<{if (!empty($attrModels))}>
         <div class="tian_lei">
             <{foreach ($attrModels as $key=>$val)}>
-			<ul>
+			<ul class="js-attrdb-length">
                 <li class="tian_lei_l">
                     <{$val->name}>：
                 </li>
@@ -625,9 +625,9 @@ function goPage(page) {
 	formTogo();
 }
 function attrShow(attrdbid){
-	var moreObj = $('.js-extend-more');
-	moreObj+'-'+attrdbid.toggle();
+	$('.js-extend-more-'+attrdbid).toggle();
 }
+
 </script>
 
 
