@@ -55,6 +55,9 @@ class IndexSearchView extends BaseView
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
+		//TODO 得到特别推荐
+		$recommendModels = $business->getRecommendModels($keyword);
+
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);

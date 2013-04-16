@@ -11,4 +11,8 @@ class SearchBusiness extends BaseBusiness
 		$result = $data->searchProduct($pageCore, $keyword , $categoryIds,$attrArr, $sort);		
 		return $result;	
 	}
+
+	public function getRecommendModels($keyword)
+	{
+	}
 }
