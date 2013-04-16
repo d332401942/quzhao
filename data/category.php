@@ -136,7 +136,6 @@ class CategoryData extends BaseData
 	
 	public function getAttrDbs($attrId)
 	{
-		
 		if (!empty(self::$attrdbModels[$attrId]))
 		{
 			return self::$attrdbModels[$attrId];
@@ -148,31 +147,30 @@ class CategoryData extends BaseData
 		{
 			return self::$attrdbModels[$attrId];
 		}
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by sort desc";
-		$statement = $this->run($sql);
-		while ($attrdbDataModel = $statement->fetchObject('AttrdbDataModel'))
+		if(!empty($attrId))
 		{
-			self::$attrdbModels[$attrdbDataModel->attrid][$attrdbDataModel->attrdbid] = $attrdbDataModel;
+			$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by sort desc";
+			$statement = $this->run($sql);
+			while ($attrdbDataModel = $statement->fetchObject('AttrdbDataModel'))
+			{
+				self::$attrdbModels[$attrdbDataModel->attrid][$attrdbDataModel->attrdbid] = $attrdbDataModel;
+			}
+			$this->setAttrCache($attrId);
+			return self::$attrdbModels[$attrId];
 		}
-		$this->setAttrCache($attrId);
-		return self::$attrdbModels[$attrId];
+		$result = '';
+		return $result;
 	}
 	
 	public function getAttrId($categoryId)
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = 'select attrid from category where level <> 2 AND categoryid = '.$categoryId;
-		$statement = $this->run($sql);
 		$result = array();
-		while ($categoryDataModel = $statement->fetchObject('CategoryDataModel'))
-		{
-			$result[$categoryDataModel->categoryid] = $categoryDataModel;
-		}
-		//$result = $this->getOneById($categoryId);
-		return $result;
+		//$this->where(array('level'=>array('!=' => 2)));
+		$result = $this->getOneById($categoryId);
+		return  $result ;
 	}
-	
 	private function setAttrCache($attrId)
 	{
 		$models = self::$attrdbModels[$attrId];

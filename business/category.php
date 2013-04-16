@@ -31,8 +31,9 @@ class CategoryBusiness extends BaseBusiness
 	{
 		$data = M('CategoryData');
 		$attrModel = $data->getAttrId($categoryId);
+		
 		$result = array();
-		if (empty($attrModel))
+		if (empty($attrModel->attrid))
 		{
 			return $result;
 		}

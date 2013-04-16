@@ -21,18 +21,26 @@ class IndexSearchView extends BaseView
 		{
 			$keyword = trim($parameters['keyword']);
 		}
+		
 		if (!empty($parameters['category']))
 		{
 			$category = (int)($parameters['category']);
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
+			if(!empty($attrModels))
+			{
 				foreach($attrModels as $val)
 				{
+					if (empty($val->info))
+					{
+						break;
+					}
 					$arr = explode('#',$val->info);
 					foreach($arr as $v)
 					{
 						$val->extend[] = explode(':',$v);
 					}
 				}
+			}	
 		}
 		
 		if (!empty($parameters['sort']))
@@ -41,9 +49,7 @@ class IndexSearchView extends BaseView
 		}
         $keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
-		$categoryBusiness = M('CategoryBusiness');
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $sort);
-		$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);

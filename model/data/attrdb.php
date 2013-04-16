@@ -19,7 +19,7 @@ class AttrdbDataModel extends ModelCoreLib
 
 	public $isvalid;
 	
-	public $extend;
+	public $extend = array();
 	
 	public function __construct()
 	{
