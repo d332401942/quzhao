@@ -11,4 +11,14 @@ class SearchBusiness extends BaseBusiness
 		$result = $data->searchProduct($pageCore, $keyword , $categoryIds,$attrArr, $sort);		
 		return $result;	
 	}
+	
+	/**
+     * 得到用户浏览搜索的记录
+     * @param array $arrIds 浏览的ID
+     */
+    public function searchBrowseHistoryModels($arrIds)
+    {
+        $data = new ProductData();
+        return $data->searchBrowseHistoryModels($arrIds);
+    }
 }

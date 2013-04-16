@@ -151,4 +151,6 @@ class SearchData extends BaseData
 	{
 		$sphinx->setFilter('isdelete', array(0));
 	}
+	
+	
 }
