@@ -44,20 +44,17 @@
                 特别推荐
             </h2>
             <ul>
+				<{foreach ($recommendModels as $key => $model)}>
+				<{if ($key >= 2)}><{break;}><{/if}>
                 <li>
-                    <a href="javascript:;">
-                        <img src="http://img02.taobaocdn.com/bao/uploaded/i2/13110029268468209/T2FcF2Xh4dXXXXXXXX_!!1104543110-0-p4pbp.jpg_270x270.jpg"
-                        />
-                        唐狮新品促销,极致羽绒服 促销中!
+                    <a href="<{$model->url}>" target="_blank">
+                        <div>
+                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                        </div>
+                        <{$model->title}>
                     </a>
                 </li>
-                <li>
-                    <a href="javascript:;">
-                        <img src="http://img04.taobaocdn.com/bao/uploaded/i4/12621030215384455/T25XRaXi8OXXXXXXXX_!!1104152621-0-p4pbp.jpg_270x270.jpg"
-                        />
-                        唐狮新品促销,极致羽绒服 促销中!
-                    </a>
-                </li>
+				<{/foreach}>
             </ul>
         </div>
         <div class=" pp_rr2">
@@ -346,46 +343,43 @@
                 </h3>
             </div>
             <ul>
+				<{foreach ($recommendModels as $key => $model)}>
+				<{if ($key >= 2)}>
                 <li>
                     <div class="list_cont_tu">
-                        <a href="javascript:;">
-                            <img src="http://img03.taobaocdn.com/imgextra/etao/i3/15987030451720138/T1GH3TXeXbXXXXXXXX_!!0-item_pic.jpg_b.jpg"
-                            />
+                        <a href="<{$model->url}>" target="_blank">
+                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
                         <h2>
-                            <a href="javascript:;">
-                                热卖可脱卸撞色两穿
-                                <strong>
-                                    羽绒服
-                                </strong>
+                            <a href="<{$model->url}>" target="_blank">
+                                <{$model->title|truncate:80}>
                             </a>
                         </h2>
                         <div class="list_jg">
                             <div class="list_jg_l">
-                                <h1>
-                                    <font>
-                                        ￥
-                                    </font>
-                                    19.4
-                                </h1>
+                                <h1><font>￥</font><{$model->price}></h1>
+								<!--
                                 <h2>
                                     ￥83.4
                                 </h2>
+								-->
                             </div>
+							<!--
                             <div class="list_jg_r">
                                 邮费：34元
                             </div>
                             <div class="list_jg_r">
                                 上海
                             </div>
+							-->
                         </div>
                         <div class="list_jg">
                             <div class="list_jg_l">
                                 月销量
                                 <strong>
-                                    7439
+                                    <{$model->sales}>
                                 </strong>
                                 件
                             </div>
@@ -394,102 +388,8 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="list_cont_tu">
-                        <a href="javascript:;">
-                            <img src="http://img03.taobaocdn.com/imgextra/etao/i3/11148018967158813/T1hN.EXi0aXXXXXXXX_!!0-item_pic.jpg_b.jpg"
-                            />
-                        </a>
-                    </div>
-                    <div class="list_cont_box">
-                        <h2>
-                            <a href="javascript:;">
-                                热卖可脱卸撞色两穿
-                                <strong>
-                                    羽绒服
-                                </strong>
-                            </a>
-                        </h2>
-                        <div class="list_jg">
-                            <div class="list_jg_l">
-                                <h1>
-                                    <font>
-                                        ￥
-                                    </font>
-                                    19.4
-                                </h1>
-                                <h2>
-                                    ￥83.4
-                                </h2>
-                            </div>
-                            <div class="list_jg_r">
-                                邮费：34元
-                            </div>
-                            <div class="list_jg_r">
-                                上海
-                            </div>
-                        </div>
-                        <div class="list_jg">
-                            <div class="list_jg_l">
-                                月销量
-                                <strong>
-                                    7439
-                                </strong>
-                                件
-                            </div>
-                            <div class="list_jg_r">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="list_cont_tu">
-                        <a href="javascript:;">
-                            <img src="http://img03.taobaocdn.com/imgextra/etao/i3/15987030451720138/T1GH3TXeXbXXXXXXXX_!!0-item_pic.jpg_b.jpg"
-                            />
-                        </a>
-                    </div>
-                    <div class="list_cont_box">
-                        <h2>
-                            <a href="javascript:;">
-                                热卖可脱卸撞色两穿
-                                <strong>
-                                    羽绒服
-                                </strong>
-                            </a>
-                        </h2>
-                        <div class="list_jg">
-                            <div class="list_jg_l">
-                                <h1>
-                                    <font>
-                                        ￥
-                                    </font>
-                                    19.4
-                                </h1>
-                                <h2>
-                                    ￥83.4
-                                </h2>
-                            </div>
-                            <div class="list_jg_r">
-                                邮费：34元
-                            </div>
-                            <div class="list_jg_r">
-                                上海
-                            </div>
-                        </div>
-                        <div class="list_jg">
-                            <div class="list_jg_l">
-                                月销量
-                                <strong>
-                                    7439
-                                </strong>
-                                件
-                            </div>
-                            <div class="list_jg_r">
-                            </div>
-                        </div>
-                    </div>
-                </li>
+				<{/if}>
+				<{/foreach}>
             </ul>
         </div>
     </div>

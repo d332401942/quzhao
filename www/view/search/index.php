@@ -60,6 +60,7 @@ class IndexSearchView extends BaseView
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
 		//TODO 得到特别推荐
 		$recommendModels = $business->getRecommendModels($keyword);
+		$recommendModels = array_values($recommendModels);
 
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
@@ -75,6 +76,7 @@ class IndexSearchView extends BaseView
 		$this->assign('attrModels',$attrModels);
 		$this->assign('attrArr',$attrArr);
 		$this->assign('searchBrowseHistoryModels', $searchBrowseHistoryModels);
+		$this->assign('recommendModels', $recommendModels);
 	}
 
 	private function getAttrArr($parameters)

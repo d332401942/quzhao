@@ -17,9 +17,29 @@ class SearchData extends BaseData
 		$productModels = array();
 		if ($productIds)
 		{
-			$productModels = $productData->searchProductByIds($productIds, $keyword, $fileds);
+			$productModels = $productData->searchProductByIds($productIds, $fileds);
 		}
 		$this->setLight($productModels, $keyword);
+		return $productModels;
+	}
+
+	public function getRecommendModels($keyword)
+	{
+		$sphinx = new SphinxDbLib();
+		$productModels = array();
+		$productData = M('ProductData');
+		$this->setWeights($sphinx);
+		$sort = '@weight desc';
+		$this->setSortMode($sphinx, $sort);
+		$this->setPublicFilter($sphinx);
+		$sphinx->setLimits(0, 5, 5);
+		$result = $sphinx->query($keyword, 'product');
+		$productIds = $sphinx->getResultIds($result);
+		if (empty($productIds))
+		{
+			return $productModels;
+		}
+		$productModels = $productData->searchProductByIds($productIds);
 		return $productModels;
 	}
 
@@ -151,6 +171,4 @@ class SearchData extends BaseData
 	{
 		$sphinx->setFilter('isdelete', array(0));
 	}
-	
-	
 }

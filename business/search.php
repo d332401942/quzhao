@@ -14,6 +14,9 @@ class SearchBusiness extends BaseBusiness
 
 	public function getRecommendModels($keyword)
 	{
+		$data = M('SearchData');
+		$recommendModels = $data->getRecommendModels($keyword);
+		return $recommendModels;
 	}
 	
 	/**

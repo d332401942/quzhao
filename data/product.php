@@ -3,7 +3,7 @@
 class ProductData extends BaseData
 {
 	
-	public function searchProductByIds($ids, $keyword, $fields = array())
+	public function searchProductByIds($ids, $fields = array())
 	{
 		if ($fields)
 		{
