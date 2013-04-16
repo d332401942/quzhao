@@ -1,4 +1,4 @@
-<{uc class="HeaderControlView" meta=$meta css="css" js="jquery,jquery.form" keyword=$keyword}>
+<{uc class="HeaderControlView" meta=$meta css="css" js="jquery,jquery.form,json" keyword=$keyword}>
 <div class="box ">
     <div class="list_top">
         在1617个商家中，找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
@@ -569,7 +569,7 @@
 <form style="display:none" id="js-hide-form">
 	<input name="keyword" value="<{echo urlencode($keyword)}>" />
 	<input name="category" value="<{$category}>" />
-	<input name="attr" value="" />
+	<input name="attr" value="<{echo urlencode('{"attr0":"1_3384"}')}>" />
 	<input name="sort" value="<{echo urlencode($sort)}>" />
 	<input name="page" value="<{$pageCore->currentPage}>" />
 	
@@ -610,13 +610,20 @@ function searchByCategory(id) {
 
 function searchByAttr(attr,type,val) {
 	var formObj = $('#js-hide-form');
-	var str = {"'+ attr +'":"'+ type + '_' + val +'"};
-	alert(str);
+	var obj = formObj.find('input[name="attr"]').val();
+	if (!obj) {
+		obj = {};
+	}
+	else {
+		obj = decodeURIComponent(obj);
+		obj = JSON.parse(obj);
+	}
+	obj[attr] = type + '_' + val;
+	str = JSON.stringify(obj);
 	str = encodeURIComponent(str);
-	alert(str);
 	formObj.find('input[name="page"]').val('');
 	formObj.find('input[name="attr"]').val(str);
-	//formTogo();
+	formTogo();
 }
 
 function goPage(page) {
