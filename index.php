@@ -24,6 +24,8 @@ catch (Exception $e)
     $mainClass->notFound($notFoundFileName);
     if (Config::FIRE_DEBUG)
     {
+		echo $e->getMessage();
+		echo "<br />\r\n";
         echo $e;
     }
 }
