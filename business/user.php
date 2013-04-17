@@ -17,6 +17,7 @@ class UserBusiness extends BaseBusiness
 		{
 			$this->throwException('用户名格式不正确',CodeException::USER_EAMIL_FORMAT);
 		}
+		
 		if(empty($model->password))
 		{
 			$this->throwException('密码不能为空',CodeException::USER_PASS_EMPTY);	
