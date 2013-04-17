@@ -2,9 +2,14 @@
 
 class UserData extends BaseData
 {
-	public function addUser($arr)
+	public function addUser($model)
 	{
-		$result = $this->add($arr);
+		$this->add($model);
+	}
+	
+	public function checkuser($name){
+		$this->where(array('email'=>array('='=>$name)));
+		$result = $this->findAll();
 		return $result;
 	}
 

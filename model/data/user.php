@@ -31,4 +31,9 @@ class UserDataModel extends BaseDataModel
 
 	public $status;
 	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->setTableName('user');
+	}
 }

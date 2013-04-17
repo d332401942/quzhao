@@ -91,6 +91,27 @@
 		}
 	});
 	
+	function checkuser(){
+		var name = $('.kuang').val();
+		var data = {name:name};
+		var url  = '__AJAX__/user/checkuser?stmp'+Math.random();
+		$.ajax({
+			type:'get',
+			url:url,
+			data:data,
+			dataType:'json',
+			success:function(data){
+				//console.log(data);
+				if (data.result) {
+					$('.left_san').html('<font color="green">用户名可用</font>');
+				}
+				else {
+					$('.left_san').html('<font color="red">'+data.message+'</font>');
+				}
+			}
+		});
+	}
+	
 	</script>
 </head>
 <body>
@@ -148,20 +169,22 @@
 	<form action="__APP__/user/add" method="post">
 		<div class="left">
 			<div class="left_yi"><span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;<a style="color:#c74396;" href="#">立即登录</a></div>
-			<div class="left_er"><input class="kuang" name="email" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style=""></div>
-			<div class="left_san">此账户已存在</div>
-			<div class="left_er"><input class="kuang2" name="password" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码'}" type="text" style=""></div>
+			<div class="left_er"><input onblur="checkuser()" class="kuang" name="email" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style=""></div>
+			<div class="left_san">用户名必须是邮箱</div>
+			<div class="left_er"><input class="kuang2" name="password" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码'}" type="password" style=""></div>
 			<div class="right2_yi">
 				<div class="right2_yi_zuo"><a href="#"><img src="__RESOURCE__/images/ruo.jpg" alt=""></a></div>
 				<div class="right2_yi_zhong"><a href="#"><img src="__RESOURCE__/images/zhong.jpg" alt=""></a></div>
 				<div class="right2_yi_you"><a href="#"><img src="__RESOURCE__/images/qiang.jpg" alt=""></a></div>
 			</div>
-			<div style="margin-top:20px;" class="left_er"><input class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证'){value =''}" value="验证" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证'}" type="text" style="" name="yzm" /></div>
+			<div class="left_si">
+				<div class="left_si_left"><input class="kuang3" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证码'){value =''}" value="验证码"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证码'}" type="text" name="verify" /></div>
+				<div class="left_si_right"><a href="#"><img src="quzhaoroot.php/verify" onclick="javascript:this.src='quzhaoroot.php/verify?stmp='+new Date().toString();" /></a></div>
+			</div>
 			<div class="left_wu2">
 				<div class="left_wu_left"><a href="#"><input type="image" name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
-				<div class="left_wu_right2"><input name="" type="checkbox" value="" checked="">同意<a href="#">用户协议</a></div>
+				<div class="left_wu_right2"><input name="agreement" type="checkbox" value="ok" checked="">同意<a href="#">用户协议</a></div>
 			</div>
-			
 		</div>
 	</form>
 	<div class="right">
