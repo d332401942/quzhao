@@ -18,9 +18,9 @@ class CodeException extends Feng
 	const USER_EAMIL_FORMAT = 10002;
 	
 	/*
-	*注册失败
+	*用户名已被占用
 	*/
-	const USER_ERROR		= 10003;
+	const USER_EMAIL_EXISTS	= 10003;
 	
 	/*
 	*密码为空

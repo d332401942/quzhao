@@ -17,11 +17,15 @@ class UserBusiness extends BaseBusiness
 		{
 			$this->throwException('用户名格式不正确',CodeException::USER_EAMIL_FORMAT);
 		}
+		$data = new UserData();
+		$result = $data->checkuser($name);
+		if($result){
+			$this->throwException('用户名已被占用',CodeException::USER_EMAIL_EXISTS);
+		}
 		if(empty($model->password))
 		{
 			$this->throwException('密码不能为空',CodeException::USER_PASS_EMPTY);	
 		}
-		$data = new UserData();
 		$data->addUser($model);
 		$this->throwException('注册成功',CodeException::USER_SUCCESS);
     }

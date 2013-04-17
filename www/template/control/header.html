@@ -101,17 +101,15 @@
 			data:data,
 			dataType:'json',
 			success:function(data){
-				//console.log(data);
 				if (data.result) {
 					$('.left_san').html('<font color="green">用户名可用</font>');
 				}
 				else {
-					$('.left_san').html('<font color="red">'+data.message+'</font>');
+					$('.left_san').html('<font color="red">'+data.error.message+'</font>');
 				}
 			}
 		});
 	}
-	
 	</script>
 </head>
 <body>
