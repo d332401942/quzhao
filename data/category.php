@@ -167,7 +167,6 @@ class CategoryData extends BaseData
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$result = array();
-		//$this->where(array('level'=>array('!=' => 2)));
 		$result = $this->getOneById($categoryId);
 		return  $result ;
 	}
