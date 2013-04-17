@@ -2,7 +2,7 @@
 
 class UserDataModel extends BaseDataModel
 {
-
+	
 	const REG_DEFAULT 	= 0;
 	
 	const OTHER_SITE_QQ = 1;
