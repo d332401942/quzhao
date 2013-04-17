@@ -1,14 +1,7 @@
-﻿/*全局属性*/
-body{ margin:0; padding:0; font-size:12px; font-family:"宋体"; color:#000;background:url('../images/bg-16.jpg'); padding:30px 0 45px 0; }
-div,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,h7,p,form,a{ margin:0; padding:0;}
-.user-reg ul,.user-reg li{ list-style-type:none;}
-.user-reg a{ text-decoration:none; color:#000;}
-.user-reg img{ border:0;}
-.user-reg .clear{clear:both;}
-.user-reg a:hover{ text-decoration:underline; color:blue;}
+﻿
 
 /*--------------------------login-------------------------*/
-#js-pop-reg{ width:649px; height:389px; background:url('../images/649-389.jpg') no-repeat; margin:0 auto;box-shadow: 0px 0px 8px #ccc; *border:1px gray solid; border:1px #e5e5e5 solid\9;}
+.user-reg{ width:649px; height:389px; background:url('../images/649-389.jpg') no-repeat; margin:0 auto;box-shadow: 0px 0px 8px #ccc; *border:1px gray solid; border:1px #e5e5e5 solid\9;}
 .user-reg .left{ float:left; width:240px; height:240px;  margin:50px 0 0 30px; _margin:50px 0 0 15px; }
 
 .user-reg .left_yi{ width:240px; height:20px; }

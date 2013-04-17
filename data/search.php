@@ -49,6 +49,7 @@ class SearchData extends BaseData
 		$sphinx->setGroupBy('categoryid', SPH_GROUPBY_ATTR, '@count desc');
 		$this->setPublicFilter($sphinx);
 		$result = $sphinx->query($keyword, 'product');
+		
 		$categoryIdToCount = array();
 		if (!empty($result['matches']))
 		{
@@ -69,6 +70,7 @@ class SearchData extends BaseData
 	{
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$sphinx = M('SphinxDbLib');
+		$sphinx->setMatchMode(SPH_MATCH_EXTENDED2);
 		$sphinx->setLimits($start, $pageCore->pageSize, $start + $pageCore->pageSize);
 		$this->setWeights($sphinx);
 		$this->setSortMode($sphinx, $sort);
@@ -95,7 +97,7 @@ class SearchData extends BaseData
 				case 1:
 					if (count($array) == 2)
 					{
-						$sphinx->setFilter($key, $array[0], $array[1]);
+						$sphinx->setFilterRange($key, $array[0], $array[1]);
 					}
 					break;
 				case 2:
