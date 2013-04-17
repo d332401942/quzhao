@@ -1,0 +1,33 @@
+.popupLayer *{margin:0;padding:0;list-style-type:none;}
+.popupLayer a,img{border:0;}
+.popupLayer a{text-decoration:none;}
+.popupLayer .clr{clear:both;overflow:hidden;height:0;}
+.popupLayer a.closeBtn{position:absolute;top:10px;right:10px;display:block;width:60px;padding:4px 0;text-align:center;background:#fff;border:1px solid #85B6E2;color:#333;}
+.popupLayer a.closeBtn:hover{color:#fff;border:1px solid #85B6E2;background:#85B6E2;}
+.popupLayer body{padding:10px 20px 50px;}
+.popupLayer h1{color:#85B6E2;text-align:center;padding-top:20px;font-size:18px;}
+/* example */
+.popupLayer .example{border:1px dashed #ccc;padding:40px;margin-top:10px;zoom:1;}
+.popupLayer .example .description{color:#85B6E2;float:left;padding:10px 20px 0 80px;font-size:14px;}
+.popupLayer .example .tigger{display:block;width:80px;padding:10px;text-align:center;background:#fff;border:1px solid #999;color:#333;cursor:pointer;float:left;}
+.popupLayer .example select{margin-top:10px;}
+/* blk */
+.popupLayer .blk{width:500px;position:relative;}
+.popupLayer .blk .head, .blk .head-right, .blk .foot, .blk .foot-right{background:url(../images/pop_up_bg.png);overflow:hidden;height:4px;}
+.popupLayer .blk .head{padding-left:4px;}
+.popupLayer .blk .head-right{background-position:right top;}
+.popupLayer .blk .foot{padding-left:4px;background-position:left bottom;_height:3px;}
+.popupLayer .blk .foot-right{background-position:right bottom;}
+.popupLayer .blk .main{border-left:2px solid #85B6E2;border-right:2px solid #85B6E2;position:relative;background:#fff;}
+.popupLayer .blk .main h2{font:bold 16px "Microsoft YaHei";padding:10px 20px 2px;color:#85B6E2;}
+.popupLayer .blk .main ul{padding:20px;zoom:1;overflow:hidden;font-size:12px;}
+.popupLayer .blk .main ul li{float:left;width:100px;text-align:center;line-height:30px;margin-bottom:10px;}
+.popupLayer .blk .main ul li a{color:#333;display:block;}
+.popupLayer .blk .main ul li a:hover{background:#85B6E2;color:#fff;font-weight:bold;font-size:14px;}
+/* 自定义样式 */
+.t5 .blk{width:700px;}
+.t5 .blk h2{color:#aaa;}
+.t5 .blk .main ul li a{color:#aaa;}
+.t5 .blk .head, .t5 .blk .head-right, .t5 .blk .foot, .t5 .blk .foot-right{background:url(../images/pop_up_bg2.png);}
+/* popup_iframe */
+.popupLayer * html .popup_iframe{width:expression(this.previousSibling.style.width);height:expression(this.previousSibling.style.height);}

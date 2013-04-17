@@ -9,9 +9,12 @@
 	<{foreach ($css as $val)}>
 	<link type="text/css" rel="stylesheet" href="__RESOURCE__/css/<{$val}>.css">
 	<{/foreach}>
+	<link type="text/css" rel="stylesheet" href="__RESOURCE__/css/pop_style.css">
+	<link type="text/css" rel="stylesheet" href="__RESOURCE__/css/login.css">
 	<{foreach ($js as $val)}>
 	<script type="text/javascript" src="__RESOURCE__/js/<{$val}>.js"></script>
 	<{/foreach}>
+	<script type="text/javascript" src="__RESOURCE__/js/popup_layer.js"></script>
 	<script  type="text/javascript">
 	function changeType(obj) {
 		var currentObj = $('#js-search-type');
@@ -52,6 +55,42 @@
 		});
 		return true;
 	}
+	
+	
+	//注册弹出层
+	$(function(){		
+		var pop = new PopupLayer({
+			trigger:"#js-reg",
+			popupBlk:"#js-pop-reg",
+			closeBtn:"#js-reg-close",
+			useOverlay:true,
+			useFx:true,
+			offsets:{
+				x:0,
+				y:0
+			}
+		});
+		pop.doEffects = function(way){
+			if(way == "open"){
+				var left = ($(document).width() - this.popupLayer.width())/2;
+				this.popupLayer.css({opacity:0.3}).show(300,function(){
+					this.popupLayer.animate({
+						left:left,
+						top:(document.documentElement.clientHeight - this.popupLayer.height())/2 + $(document).scrollTop(),
+						opacity:0.8
+					},300,function(){this.popupLayer.css("opacity",1)}.binding(this));
+				}.binding(this));
+			}
+			else{
+				this.popupLayer.animate({
+					left:this.trigger.offset().left,
+					top:this.trigger.offset().top,
+					opacity:0.1
+				},{duration:200,complete:function(){this.popupLayer.css("opacity",1);this.popupLayer.hide()}.binding(this)});
+			}
+		}
+	});
+	
 	</script>
 </head>
 <body>
@@ -70,6 +109,7 @@
 	</div>
 </div>
 -->
+
 <div class="top_bar">
 	<div class="top_bar_con">
 		<ul>
@@ -77,7 +117,7 @@
 			<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<li style="margin-left:790px;_margin-left:430px;"><a href="#">登录</a></li>
 			<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-			<li style="margin-left:15px;"><a href="#">注册</a></li>
+			<li style="margin-left:15px;"><a href="javascript:;" id="js-reg">注册</a></li>
 			<li style="margin-left:15px;"><a href="#">帮助</a></li>
 			<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		</ul>
@@ -103,6 +143,43 @@
 		</div>
 	</div>
 </div>
+<!-- 注册弹出层 start -->
+<div class="box user-reg" id="js-pop-reg" style="display:none">
+	<div class="left">
+		<div class="left_yi"><span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;<a style="color:#c74396;" href="#">立即登录</a></div>
+		<div class="left_er"><input class="kuang" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style=""></div>
+		<div class="left_san">此账户已存在</div>
+		<div class="left_er"><input class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码'}" type="text" style=""></div>
+		<div class="right2_yi">
+			<div class="right2_yi_zuo"><a href="#"><img src="__RESOURCE__/images/ruo.jpg" alt=""></a></div>
+			<div class="right2_yi_zhong"><a href="#"><img src="__RESOURCE__/images/zhong.jpg" alt=""></a></div>
+			<div class="right2_yi_you"><a href="#"><img src="__RESOURCE__/images/qiang.jpg" alt=""></a></div>
+		</div>
+		<div style="margin-top:20px;" class="left_er"><input class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证'){value =''}" value="验证" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证'}" type="text" style=""></div>
+		<div class="left_wu2">
+			<div class="left_wu_left"><a href="#"><img src="__RESOURCE__/images/61-33-.jpg" alt=""></a></div>
+			<div class="left_wu_right2"><input name="" type="checkbox" value="" checked="">同意<a href="#">用户协议</a></div>
+		</div>
+		
+	</div>
+	<div class="right">
+		<div class="right_yi"><a href="javascript:;" id="js-reg-close"><img src="__RESOURCE__/images/7-8.png" alt=""></a></div>
+		<div class="right_er">使用合作账号登录</div>
+		<div class="right_san2">
+			<div class="right_san2_zuo"><a href="#"><img src="__RESOURCE__/images/52-52-tao.png" alt=""></a></div>
+			<div class="right_san2_zhong"><a href="#"><img src="__RESOURCE__/images/52-52-wei.png" alt=""></a></div>
+			<div class="right_san2_you"><a href="#"><img src="__RESOURCE__/images/52-52-qq.png" alt=""></a></div>
+		</div>
+		<div class="right_zi">
+			<ul>
+				<li><a href="#">淘宝</a></li>
+				<li><a href="#">微博</a></li>
+				<li><a href="#">QQ</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 注册弹出层 end -->
 <div class="box">
 	<{if ($type != 'dp' && 0)}>
 	<div id="nav_left_layout">
