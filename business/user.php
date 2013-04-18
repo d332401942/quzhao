@@ -18,7 +18,7 @@ class UserBusiness extends BaseBusiness
 			$this->throwException('用户名格式不正确',CodeException::USER_EAMIL_FORMAT);
 		}
 		$data = new UserData();
-		$result = $data->checkuser($name);
+		$result = $data->checkuser($model->email);
 		if($result){
 			$this->throwException('用户名已被占用',CodeException::USER_EMAIL_EXISTS);
 		}
