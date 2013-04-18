@@ -10,24 +10,30 @@ class UserBusiness extends BaseBusiness
     {
 		if(empty($model->email))
 		{
-			 $this->throwException('用户名不能为空',CodeException::USER_EMAIL_EMPTY);
+			 //$this->throwException('用户名不能为空',CodeException::USER_EMAIL_EMPTY);
+			 die(json_encode(array('status'=>3,'message'=>'用户名不能为空')));
 		}
 		$emailRegular = '/^\w+@\w+(\.\w+){0,1}(\.\w+)$/';
 		if(preg_match($emailRegular,$model->email)==0)
 		{
-			$this->throwException('用户名格式不正确',CodeException::USER_EAMIL_FORMAT);
+			//$this->throwException('用户名格式不正确',CodeException::USER_EAMIL_FORMAT);
+			die(json_encode(array('status'=>3,'message'=>'用户名格式不正确')));
 		}
 		$data = new UserData();
 		$result = $data->checkuser($model->email);
 		if($result){
-			$this->throwException('用户名已被占用',CodeException::USER_EMAIL_EXISTS);
+			//$this->throwException('用户名已被占用',CodeException::USER_EMAIL_EXISTS);
+			die(json_encode(array('status'=>3,'message'=>'用户名已被占用')));
 		}
 		if(empty($model->password))
 		{
-			$this->throwException('密码不能为空',CodeException::USER_PASS_EMPTY);	
+			//$this->throwException('密码不能为空',CodeException::USER_PASS_EMPTY);	
+			die(json_encode(array('status'=>4,'message'=>'密码不能为空')));
 		}
+		$model->password = md5($model->password);
 		$data->addUser($model);
-		$this->throwException('注册成功',CodeException::USER_SUCCESS);
+		//$this->throwException('注册成功',CodeException::USER_SUCCESS);
+		die(json_encode(array('status'=>0,'message'=>'注册成功')));
     }
 	
 	public function checkuser($name){

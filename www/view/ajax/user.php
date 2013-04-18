@@ -12,7 +12,7 @@ class UserAjaxView extends AjaxCoreLib
 		$emailRegular = '/^\w+@\w+(\.\w+){0,1}(\.\w+)$/';
 		if(!preg_match($emailRegular,$_GET['name']))
 		{
-			$this->responseError('邮箱不正确');
+			$this->responseError('邮箱格式不正确');
 		}
 		$business = M('UserBusiness');
 		$row = $business->checkuser($_GET['name']);

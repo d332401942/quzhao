@@ -5,12 +5,12 @@ class AddUserView extends BaseView
 	{
 		if (empty($_POST['agreement']))
 		{
-			$this->responseError('没有接受用户注册协议');
+			die(json_encode(array('status'=>1,'message'=>'没有接受用户注册协议')));
 		}
 		$verify = $_POST['verify'];
 		if ($verify != VerifyUtilLib::getVerifyCode())
 		{
-			$this->responseError('验证码不正确！');
+			die(json_encode(array('status'=>2,'message'=>'验证码不正确！')));
 		}
 		
 		$business = M('UserBusiness');

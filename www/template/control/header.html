@@ -130,25 +130,6 @@
 			}
 		});
 	}
-	function checkform(){
-		var name = $('.kuang').val();
-		var verify = $('.kuang3').val();
-		var data = {name:name,verify:verify}
-		var url  = '__AJAX__/user/checkform?stmp'+Math.random();
-		$.ajax({
-			data:data,
-			url:url,
-			type:'get',
-			dataType:'json',
-			seccess:function(data){
-				if(data.result) {
-				
-				} else {
-					
-				}
-			}
-		});
-	}
 	//CharMode函数 
 	//测试某个字符是属于哪一类. 
 	function CharMode(iN) {
@@ -219,6 +200,35 @@
 			}
 		}
 	} 
+	$(function(){
+		$('#regForm').ajaxForm(function(data){
+			eval('data='+data);
+			if(data.status == 1) {
+				$('#agreement').html('<font color="red">'+data.message+'</font>');
+				return false;
+			}
+			else if(data.status == 2) {
+				$('#verify').html('<font color="red">'+data.message+'</font>');
+				return false;
+			}
+			else if(data.status == 3) {
+				$('#email').html('<font color="red">'+data.message+'</font>');
+				return false;
+			}
+			else if(data.status == 4) {
+				$('#pass').html('<font color="red">'+data.message+'</font>');
+				return false;
+			} 
+			else{
+				$('#email').html('');
+				$('#verify').html('');
+				$('#agreement').html('<font color="green">'+data.message+'</font>');
+				window.location.reload();
+				return true;
+			}
+			
+		});
+	});
 	</script>
 </head>
 <body>
@@ -273,7 +283,7 @@
 </div>
 <!-- 注册弹出层 start -->
 <div class="box user-reg" id="js-pop-reg" style="display:none">
-	<form action="__APP__/user/add" method="post" onsubmit="return checkform();">
+	<form action="__APP__/user/add" method="post" id="regForm">
 		<div class="left">
 			<div class="left_yi"><span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;<a style="color:#c74396;" href="#">立即登录</a></div>
 			<div class="left_er"><input onblur="checkuser()" class="kuang" name="email" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style=""></div>
@@ -294,6 +304,7 @@
 				<div class="left_wu_left"><a href="#"><input type="image" name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
 				<div class="left_wu_right2"><input name="agreement" type="checkbox" value="ok" checked="">同意<a href="#">用户协议</a></div>
 			</div>
+			<div class="left_san" id="agreement"></div>
 		</div>
 	</form>
 	<div class="right">
