@@ -32,7 +32,8 @@ class UserBusiness extends BaseBusiness
 		$data->addUser($model);
     }
 	
-	public function checkuser($name){
+	public function checkuser($name)
+	{
 		$data 	= new UserData();
 		$result = $data->checkuser($name);
 		return $result;

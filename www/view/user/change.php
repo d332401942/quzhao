@@ -42,8 +42,9 @@ class ChangeUserView extends BaseView
         $cityName = $this->getCityName($city);
 		//默认字母
 		$headLetter = 'L';
-		if($_POST){
-			$this->change($_POST);
+		if($_POST)
+		{
+			$this->change();
 		}
 		$this->assign('headLetter',$headLetter);
 		$this->assign('cityName', $cityName);
@@ -52,12 +53,13 @@ class ChangeUserView extends BaseView
 		$this->assign('cityHead',$cityHead);
 	}	
 	
-	private function change($_POST)
+	private function change()
 	{
 		$business = M('UserBusiness');
 		$model->head 		= '';
 		$model->nickname 	= trim($_POST['name']);
 		$model->city 	 	= trim($_POST['cityname']);
+		$model->setWorkFields(array('head', 'nickname', 'city'));
 		$business->updateData($model);
 	}
 	private function getCityName($code)
