@@ -26,4 +26,9 @@ class CodeException extends Feng
 	*密码为空
 	*/
 	const USER_PASS_EMPTY	= 10004;
+	
+	/*
+	*没有接受用户协议
+	*/
+	const USER_NO_AGREEMENT	= 10005;
 }

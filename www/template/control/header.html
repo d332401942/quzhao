@@ -106,31 +106,23 @@
 			success:function(data){
 				if (data.result) {
 					$('#email').html('<font color="green">用户名可用</font>');
+					$('.kuang').css('border-color','#cdcdcd');
 				}
 				else {
-					$('#email').html('<font color="red">'+data.error.message+'</font>');
+					$('#email').html('<font color="#E872C0">'+data.error.message+'</font>');
+					$('.kuang').css('border-color','#E872C0');
 				}
 			}
 		});
 	}
-	function checkverify(){
-		var verify = $('.kuang3').val();
-		var url	   = '__AJAX__/user/checkverify?stmp'+Math.random();
-		var data = {verify:verify};
-		$.ajax({
-			type:'get',
-			url:url,
-			data:data,
-			dataType:'json',
-			success:function(data){
-				if(data.result) {
-					$('#verify').html('<font color="green">验证码正确</font>');
-				}
-				else {
-					$('#verify').html('<font color="red">'+data.error.message+'</font>');
-				}
-			}
-		});
+	function checkpass(value){
+		if( $('#password').val() != value) {
+			$('#repeatpass').html('<font color="#E872C0">重复密码不一致</font>');
+			$('#repeat').css('border-color','#E872C0');
+		}else {
+			$('#repeatpass').html('');
+			$('#repeat').css('border-color','#cdcdcd');
+		}
 	}
 	//CharMode函数 
 	//测试某个字符是属于哪一类. 
@@ -173,12 +165,15 @@
 			$(".right2_yi_zuo").html('<img src="__RESOURCE__/images/ruo1.jpg">');
 			$(".right2_yi_zhong").html('<img src="__RESOURCE__/images/zhong.jpg">');
 			$(".right2_yi_you").html('<img src="__RESOURCE__/images/qiang.jpg">');
-			$('#pass').html('<font color="red">请填写密码</font>');
+			$('#pass').html('<font color="#E872C0">请填写密码</font>');
+			$('#password').css('border-color','#E872C0');
 		}else if(pwd.length > 32) {
-			$('#pass').html('<font color="red">密码不能超过32位</font>');
+			$('#pass').html('<font color="#E872C0">密码不能超过32位</font>');
+			$('#password').css('border-color','#E872C0');
 		}
 		else {
 			$('#pass').html('');	
+			$('#password').css('border-color','#cdcdcd');
 			S_level = checkStrong(pwd);
 			switch (S_level) {
 				case 0:
@@ -202,34 +197,12 @@
 			}
 		}
 	} 
-	$(function(){
-		$('#regForm').ajaxForm(function(data){
-			eval('data='+data);
-			if(data.status == 1) {
-				$('#agreement').html('<font color="red">'+data.message+'</font>');
-				return false;
-			}
-			else if(data.status == 2) {
-				$('#verify').html('<font color="red">'+data.message+'</font>');
-				return false;
-			}
-			else if(data.status == 3) {
-				$('#email').html('<font color="red">'+data.message+'</font>');
-				return false;
-			}
-			else if(data.status == 4) {
-				$('#pass').html('<font color="red">'+data.message+'</font>');
-				return false;
-			} 
-			else{
-				$('#email').html('');
-				$('#verify').html('');
-				$('#agreement').html('<font color="green">'+data.message+'</font>');
-				window.location.reload();
-				return true;
-			}
-			
-		});
+	$('#regForm').ajaxForm(function(data){
+		console.log(data);
+		eval('data='+data);
+		if(data.error.code == 10005){
+			$('#agreement').html('<font color="#E872C0">'+data.error.message+'</font>');
+		}
 	});
 	</script>
 </head>
@@ -288,23 +261,20 @@
 	<form action="__AJAX__/user/add" method="post" id="regForm">
 		<div class="left">
 			<div class="left_yi"><span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;<a style="color:#c74396;" href="#">立即登录</a></div>
-			<div class="left_er"><input onblur="checkuser()" class="kuang" name="email" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style=""></div>
+			<div class="left_er"><input onblur="checkuser()" class="kuang" name="email" tabindex="1" type="text" style=""></div>
 			<div class="left_san" id="email">用户名必须是邮箱</div>
-			<div class="left_er"><input onblur="pwStrength(this.value)" onkeyup="pwStrength(this.value)" class="kuang2" name="password"  tabindex="1"  type="password" style=""></div>
+			<div class="left_er"><input onblur="pwStrength(this.value)" id="password" onkeyup="pwStrength(this.value)" class="kuang2" name="password"  tabindex="1"  type="password" style=""></div>
 			<div class="right2_yi">
 				<div class="right2_yi_zuo"><a href="#"><img src="__RESOURCE__/images/ruo1.jpg" alt=""></a></div>
 				<div class="right2_yi_zhong"><a href="#"><img src="__RESOURCE__/images/zhong.jpg" alt=""></a></div>
 				<div class="right2_yi_you"><a href="#"><img src="__RESOURCE__/images/qiang.jpg" alt=""></a></div>
 			</div>
 			<div class="left_san" id="pass"></div>
-			<div class="left_si">
-				<div class="left_si_left"><input onblur="checkverify()" class="kuang3" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证码'){value =''}" value="验证码"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证码'}" type="text" name="verify" /></div>
-				<div class="left_si_right"><a href="#"><img src="quzhaoroot.php/verify" onclick="javascript:this.src='quzhaoroot.php/verify?stmp='+new Date().toString();" /></a></div>
-			</div>
-			<div class="left_san" id="verify"></div>
+			<div style="margin-top:20px;" class="left_er"><input onblur="checkpass(this.value)" onkeyup="checkpass(this.value)" id="repeat" class="kuang2" onfocus="if (value =='重复密码'){value =''}" value="重复密码" tabindex="1" onblur="if (value ==''){value='重复密码'}"  type="text"/></div>
+			<div class="left_san" id="repeatpass"></div>
 			<div class="left_wu2">
-				<div class="left_wu_left"><a href="#"><input type="image" name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
-				<div class="left_wu_right2"><input name="agreement" type="checkbox" value="ok" checked="">同意<a href="#">用户协议</a></div>
+				<div class="left_wu_left"><a href="#"><input type="image"  name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
+				<div class="left_wu_right2"><input name="agreement" class="agreement" type="checkbox" value="ok" checked="">同意<a href="#">用户协议</a></div>
 			</div>
 			<div class="left_san" id="agreement"></div>
 		</div>

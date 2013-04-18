@@ -15,7 +15,7 @@ class UserBusiness extends BaseBusiness
 		$emailRegular = '/^\w+@\w+(\.\w+){0,1}(\.\w+)$/';
 		if (!preg_match($emailRegular,$model->email))
 		{
-			$this->throwException('用户名格式不正确',CodeException::USER_EAMIL_FORMAT);
+			$this->throwException('邮箱格式不正确',CodeException::USER_EAMIL_FORMAT);
 		}
 		$data = new UserData();
 		$result = $data->checkuser($model->email);
@@ -28,6 +28,7 @@ class UserBusiness extends BaseBusiness
 			$this->throwException('密码不能为空',CodeException::USER_PASS_EMPTY);	
 		}
 		$model->password = md5($model->password);
+		$model->email	 = strtoupper($model->email);
 		$data->addUser($model);
     }
 	
