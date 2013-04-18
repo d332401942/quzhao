@@ -94,6 +94,8 @@
 	
 	function checkuser(){
 		var name = $('.kuang').val();
+		if (name =='用户名'){value =''}
+		if (name ==''){value='用户名'}
 		var data = {name:name};
 		var url  = '__AJAX__/user/checkuser?stmp'+Math.random();
 		$.ajax({

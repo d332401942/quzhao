@@ -33,6 +33,7 @@ class UserAjaxView extends AjaxCoreLib
 		{
 			$this->responseError('验证码错误');
 		}
+		$this->response(true);
 	}
 	
 }
