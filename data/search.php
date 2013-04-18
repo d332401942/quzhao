@@ -3,6 +3,8 @@
 class SearchData extends BaseData
 {
 
+	private $lightWords = array();
+
 	public function __construct()
 	{
 
@@ -19,7 +21,7 @@ class SearchData extends BaseData
 		{
 			$productModels = $productData->searchProductByIds($productIds, $fileds);
 		}
-		$this->setLight($productModels, $keyword);
+		$this->setLight($productModels);
 		return $productModels;
 	}
 
@@ -109,12 +111,14 @@ class SearchData extends BaseData
 			}
 		}
 		$result = $sphinx->query($keyword, 'product');
+		$lightWords = $sphinx->getLightWords($result);
+		$this->lightWords = $sphinx->getLightWords($result);
 		$productIds = $sphinx->getResultIds($result, $pageCore);
 		$sphinx->clear();
 		return $productIds;
 	}
 
-	private function setLight($productModels, $keyword)
+	private function setLight($productModels)
 	{
 		$sphinx = M('SphinxDbLib');
 		$needLightFileds = array(
@@ -124,22 +128,34 @@ class SearchData extends BaseData
 			'before_match' => '<strong>',
 			'after_match' => '</strong>',
 		);
-		foreach ($productModels as $key => $model)
+		foreach ($productModels as $model)
 		{
 			$docs = array();
-			foreach ($needLightFileds as $key => $val)
+			foreach ($needLightFileds as $val)
 			{
-				$docs[$key] = CommUtilLib::truncate($model->$val, 45);
-			}
-			$arr = $sphinx->buildExcerpts($docs, 'product', $keyword, $opts);
-			foreach ($needLightFileds as $key => $val)
-			{
-				$field = 'light' . $val;
-				$model->$field = $arr[$key];
+				$field = 'light' . $val;			
+				$str = CommUtilLib::truncate($model->$val, 45);
+				$model->$field = $this->replace($this->lightWords,$opts,$str);
 			}
 		}
 	}
-
+	
+	private function replace($words,$opts,$str)
+	{
+		return $str;
+		$words = array('小人物','小人','小');
+		$str = 'sdf小张是一[@@]个小人[\@@]，他小弟是个小人物吗？12';
+		foreach ($words as $v)
+		{
+			$i = mb_strpos($str, $v, 'utf-8');
+			$l = mb_strlen($v);
+			if ($i !== false)
+			{
+				$lastStr = mb_substr($str, $i + $l);
+			}
+		}
+	}
+	
 	private function setWeights($sphinx)
 	{
 		$weights = array(
