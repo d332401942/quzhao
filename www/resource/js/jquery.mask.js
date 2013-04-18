@@ -7,19 +7,16 @@ $.mask = {
 		popupLayerId: 'jquery-extend-mask-inner'
 	},
 	show: function(obj) {
-		
 		if (obj) {
 			this.obj = $(obj);
 			this.showObj = this.obj.clone(true);
-			var left = ($(document).width() - this.showObj.width())/2;
-			var top = (document.documentElement.clientHeight - this.showObj.height())/2 + $(document).scrollTop();
-			this.pop(left,top);
+			this.pop();
 		}
 		//加载遮罩
 		this.loadOverlay();
 	},
 	
-	pop: function(left,top) {
+	pop: function() {
 		
 		//初始化最外层容器
 		this.popupLayer?this.popupLayer.remove():null;
@@ -27,8 +24,11 @@ $.mask = {
 		console.log(this.popupLayer);
 		this.popupLayer.append(this.showObj.css({opacity:1}).show()).appendTo($(document.body));
 		this.popupLayer.css({position:"absolute",'z-index':2,width:this.showObj.get(0).offsetWidth,height:this.showObj.get(0).offsetHeight});
-		this.setPosition(left,top);
+		
 		this.popupLayer.fadeIn('fast')
+		var left = ($(document).width() - this.showObj.width())/2;
+		var top = (document.documentElement.clientHeight - this.showObj.height())/2 + $(document).scrollTop();
+		this.setPosition(left,top);
 	},
 	
 	close: function() {
