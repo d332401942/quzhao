@@ -23,6 +23,35 @@ class UserAjaxView extends AjaxCoreLib
 		$this->response(true);
 	}
 	
+	public function add()
+	{
+		if (empty($_POST['agreement']))
+		{
+			$this->responseError('没有接受用户注册协议');	
+		}
+		
+		$business = M('UserBusiness');
+		$model = new UserDataModel();
+		$model->email 		= trim($_POST['email']);
+		$model->password 	= trim($_POST['password']);
+		$model->regtype 	= UserDataModel::REG_DEFAULT;
+		$model->createtime	= time();
+		$model->ischecked	= 0;
+		$model->point		= 0;
+		$model->inviteid	= 0;
+		$model->otheraccount= UserDataModel::REG_DEFAULT;
+		$model->othersite	= 0;
+		$model->status		= 1;
+		try
+		{
+			$business->register($model);
+		}
+		catch(BusinessExceptionLib $e)
+		{
+			$this->responseError($e->getMessage(), $e->getCode());
+		}	
+	}
+	
 	public function checkverify()
 	{
 		$verify = trim($_GET['verify']);
