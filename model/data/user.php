@@ -31,6 +31,12 @@ class UserDataModel extends BaseDataModel
 
 	public $status;
 	
+	public $head;
+	
+	public $nickname;
+	
+	public $city;
+	
 	public function __construct()
 	{
 		parent::__construct();

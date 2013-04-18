@@ -37,4 +37,10 @@ class UserBusiness extends BaseBusiness
 		$result = $data->checkuser($name);
 		return $result;
 	}
+	
+	public function changeData()
+	{
+		$data = new UserData();
+		$data->update();
+	}
 }

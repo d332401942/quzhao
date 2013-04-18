@@ -12,5 +12,10 @@ class UserData extends BaseData
 		$result = $this->findAll();
 		return $result;
 	}
+	
+	public function change($model)
+	{
+		$this->update($model);
+	}
 
 }
