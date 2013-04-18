@@ -115,7 +115,7 @@
 			}
 		});
 	}
-	function checkpass(value){
+	/*function checkpass(value){
 		if( $('#password').val() != value) {
 			$('#repeatpass').html('<font color="#E872C0">重复密码不一致</font>');
 			$('#repeat').css('border-color','#E872C0');
@@ -123,6 +123,27 @@
 			$('#repeatpass').html('');
 			$('#repeat').css('border-color','#cdcdcd');
 		}
+	}*/
+	function checkverify(value) {
+		if (value ==''){value='验证码'}
+		var data = {verify:value};
+		var url  = '__AJAX__/user/checkverify?stmp'+Math.random();
+		$.ajax({
+			type:'get',
+			url:url,
+			data:data,
+			dataType:'json',
+			success:function(data){
+				if (data.result) {
+					$('.kuang3').css('border-color','#cdcdcd');
+					$('#verify').html('');
+				}
+				else {
+					$('#verify').html('<font color="#E872C0">'+data.error.message+'</font>');
+					$('.kuang3').css('border-color','#E872C0');
+				}
+			}
+		});
 	}
 	//CharMode函数 
 	//测试某个字符是属于哪一类. 
@@ -270,8 +291,12 @@
 				<div class="right2_yi_you"><a href="#"><img src="__RESOURCE__/images/qiang.jpg" alt=""></a></div>
 			</div>
 			<div class="left_san" id="pass"></div>
-			<div style="margin-top:20px;" class="left_er"><input onblur="checkpass(this.value)" onkeyup="checkpass(this.value)" id="repeat" class="kuang2" onfocus="if (value =='重复密码'){value =''}" value="重复密码" tabindex="1" onblur="if (value ==''){value='重复密码'}"  type="text"/></div>
-			<div class="left_san" id="repeatpass"></div>
+			<!--<div style="margin-top:20px;" class="left_er"><input onblur="checkpass(this.value)" onkeyup="checkpass(this.value)" id="repeat" class="kuang2" onfocus="if (value =='重复密码'){value =''}" value="重复密码" tabindex="1" onblur="if (value ==''){value='重复密码'}"  type="text"/></div>-->
+			<div class="left_si">
+				<div class="left_si_left"><input class="kuang3" onblur="checkverify(this.value)" name="verify" onfocus="if (value =='验证码'){value =''}" value="验证码" tabindex="1" type="text"/></div>
+				<div class="left_si_right"><a href="#"><img src="/quzhaoroot.php/verify" onclick="javascript:this.src='/quzhaoroot.php/verify?stmp='+new Date().toString();" alt=""/></a></div>
+			</div>
+			<div class="left_san" id="verify"></div>
 			<div class="left_wu2">
 				<div class="left_wu_left"><a href="#"><input type="image"  name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
 				<div class="left_wu_right2"><input name="agreement" class="agreement" type="checkbox" value="ok" checked="">同意<a href="#">用户协议</a></div>

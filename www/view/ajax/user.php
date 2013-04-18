@@ -2,7 +2,6 @@
 
 class UserAjaxView extends AjaxCoreLib
 {
-	private static $password;
 	public function checkuser()
 	{	
 		$name = trim($_GET['name']);
@@ -52,4 +51,18 @@ class UserAjaxView extends AjaxCoreLib
 		}	
 		$this->response(true);
 	}
+	
+	public function checkverify()
+	{
+		$verify = trim($_GET['verify']);
+		if(empty($verify)){
+			$this->responseError('请填写验证码');
+		}	
+		if ($_GET['verify'] != VerifyUtilLib::getVerifyCode())
+		{
+			$this->responseError('验证码错误');
+		}
+		$this->response(true);
+	}
+	
 }
