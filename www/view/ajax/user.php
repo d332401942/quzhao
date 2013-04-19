@@ -2,6 +2,7 @@
 
 class UserAjaxView extends AjaxCoreLib
 {
+    
 	public function checkuser()
 	{	
 		$name = trim($_GET['name']);
@@ -37,14 +38,20 @@ class UserAjaxView extends AjaxCoreLib
 		$email = strtolower(trim($_POST['email']));
 		$password = $_POST['password'];
 		$this->checkverify($_POST['verify']);
-		$userInfo = null;
+		$userModel = null;
 		$business = M('UserBusiness');
-		$userInfo = $business->getUserInfo($email, $password);
-		print_r($userInfo);
-		if (!$userInfo)
+		$userModel = $business->getUserInfo($email, $password);
+		
+		if (!$userModel)
 		{
 			$this->responseError('用户名或者密码错误');
 		}
+		else if ($userModel->status != BaseDataModel::IS_YES)
+		{
+		    $this->responseError('账号已被禁用，请联系管理员');
+		}
+		//把用户信息记入cookie
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($userModel), 0, '/');
 		$this->response(true);
 	}
 	

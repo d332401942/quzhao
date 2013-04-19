@@ -30,7 +30,13 @@ class UserBusiness extends BaseBusiness
 		
 		$data->addUser($model);
     }
-	
+    
+    public function getOneById($id)
+    {
+        $data = M('UserData');
+        return $data->getOneById;
+    }
+    
 	/**
 	 *	通过用户名和密码获取用户信息
 	 */

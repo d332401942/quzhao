@@ -1,6 +1,7 @@
 $.mask = {
 	obj: null,
 	showObj: null,
+	
 	options: {
 		popupLayer: null,
 		popupLayerClass: 'popupLayer',
@@ -47,4 +48,42 @@ $.mask = {
 		this.overlay.css({position:"absolute","z-index":1,left:0,top:0,zoom:1,display:"none",width:pageWidth,height:$(document).height()}).appendTo($(document.body)).append("<div style='position:absolute;z-index:2;width:100%;height:100%;left:0;top:0;opacity:0.3;filter:Alpha(opacity=30);background:#000'></div><iframe frameborder='0' border='0' style='width:100%;height:100%;position:absolute;z-index:1;left:0;top:0;filter:Alpha(opacity=0);'></iframe>")
 		this.overlay.fadeIn('fast');
 	}
+	
+	
 };
+
+
+$.fn.float = function(obj) {
+	var floatObj = $(this);
+	var showObj = $(obj);
+	var mouseObj;
+	floatObj.addClass('js-mask-float-tmp');
+	showObj.addClass('js-mask-float-tmp');
+	
+	showObj.fadeIn('fast');
+	if (!window.isMove) {
+		$('body').bind('mousemove',function(e){
+			mouseObj = $(e.target);
+			window.isMove = true;
+		});
+	}
+	var doHide = function() {
+		if (!mouseObj.closest('.js-mask-float-tmp').length) {
+			showObj.fadeOut('fast');
+			$('body').unbind('mousemove');
+			floatObj.removeClass('js-mask-float-tmp');
+			showObj.removeClass('js-mask-float-tmp');
+			window.isMove = false;
+		}
+		else {
+			setTimeout(function(){
+				doHide();
+			}, 500)
+		}
+	}
+	
+	setTimeout(function(){
+		doHide();
+	}, 1500)
+}
+
