@@ -35,8 +35,17 @@ class UserAjaxView extends AjaxCoreLib
 			$this->responseError('请输入密码');
 		}
 		$email = strtolower(trim($_POST['email']));
+		$password = $_POST['password'];
 		$this->checkverify($_POST['verify']);
-		
+		$userInfo = null;
+		$business = M('UserBusiness');
+		$userInfo = $business->getUserInfo($email, $password);
+		print_r($userInfo);
+		if (!$userInfo)
+		{
+			$this->responseError('用户名或者密码错误');
+		}
+		$this->response(true);
 	}
 	
 	public function add()
