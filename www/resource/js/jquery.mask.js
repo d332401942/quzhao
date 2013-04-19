@@ -23,7 +23,7 @@ $.mask = {
 		this.popupLayer?this.popupLayer.remove():null;
 		this.popupLayer = $(document.createElement("div")).addClass(this.options.popupLayerClass).attr('id',this.options.popupLayerId).css({display:'none'});   
 		this.popupLayer.append(this.showObj.css({opacity:1}).show()).appendTo($(document.body));
-		this.popupLayer.css({position:"absolute",'z-index':2,width:this.showObj.get(0).offsetWidth,height:this.showObj.get(0).offsetHeight});
+		this.popupLayer.css({position:"absolute",'z-index':99,width:this.showObj.get(0).offsetWidth,height:this.showObj.get(0).offsetHeight});
 		
 		this.popupLayer.fadeIn('fast')
 		var left = ($(document).width() - this.showObj.width())/2;
@@ -45,7 +45,7 @@ $.mask = {
 		this.overlay?this.overlay.remove():null;
 		this.overlay = $(document.createElement("div"));
 		
-		this.overlay.css({position:"absolute","z-index":1,left:0,top:0,zoom:1,display:"none",width:pageWidth,height:$(document).height()}).appendTo($(document.body)).append("<div style='position:absolute;z-index:2;width:100%;height:100%;left:0;top:0;opacity:0.3;filter:Alpha(opacity=30);background:#000'></div><iframe frameborder='0' border='0' style='width:100%;height:100%;position:absolute;z-index:1;left:0;top:0;filter:Alpha(opacity=0);'></iframe>")
+		this.overlay.css({position:"absolute","z-index":98,left:0,top:0,zoom:1,display:"none",width:pageWidth,height:$(document).height()}).appendTo($(document.body)).append("<div style='position:absolute;z-index:2;width:100%;height:100%;left:0;top:0;opacity:0.3;filter:Alpha(opacity=30);background:#000'></div><iframe frameborder='0' border='0' style='width:100%;height:100%;position:absolute;z-index:1;left:0;top:0;filter:Alpha(opacity=0);'></iframe>")
 		this.overlay.fadeIn('fast');
 	}
 	
@@ -68,7 +68,7 @@ $.fn.float = function(obj) {
 		});
 	}
 	var doHide = function() {
-		if (!mouseObj.closest('.js-mask-float-tmp').length) {
+		if (!mouseObj || !mouseObj.closest('.js-mask-float-tmp').length) {
 			showObj.fadeOut('fast');
 			$('body').unbind('mousemove');
 			floatObj.removeClass('js-mask-float-tmp');
