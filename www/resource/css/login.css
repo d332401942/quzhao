@@ -53,28 +53,28 @@ right_san2_you{ float:right; width:52px; height:52px; }
 
 
 /*--------------------------link-------------------------*/
-.user-reg .link{ width:600px; height:379px; margin:0 auto; padding-top:23px;box-shadow: 0px 0px 8px #ccc; *border:1px gray solid; border:1px #e5e5e5 solid\9;  }
-.user-reg .link_yi{ width:544px; height:37px; position:absolute; }
-.user-reg .link_kuang{ width:537px; height:35px; border:1px #d8d8d8 solid; background:white; margin-left:27px;  line-height:35px; padding-left:5px; color:#c1c1c1;  }
+.user-link{ width:600px; height:379px; margin:0 auto; padding-top:23px;box-shadow: 0px 0px 8px #ccc; *border:1px gray solid; border:1px #e5e5e5 solid\9;  background-color:#FFFFFF;}
+.user-link .link_yi{ width:544px; height:37px; position:absolute; }
+.user-link .link_kuang{ width:537px; height:35px; border:1px #d8d8d8 solid; background:white; margin-left:27px;  line-height:35px; padding-left:5px; color:#c1c1c1;  }
 
-.user-reg .link_er{ width:12px; height:11px;position:relative; top:14px; right:40px; float:right; }
+.user-link .link_er{ width:12px; height:11px;position:relative; top:14px; right:40px; float:right; }
 
-.user-reg .link_san{ width:450px; height:20px; font-size:20px; margin-left:27px; margin-top:55px; _margin-top:80px; color:#575757; }
+.user-link .link_san{ width:450px; height:20px; font-size:20px; margin-left:27px; margin-top:55px; _margin-top:80px; color:#575757; }
 
-.user-reg .link_si{ width:536px; height:220px; margin:19px 0 0 36px; _margin:14px 0 0 36px;  }
-.user-reg .link_pic{ float:left; width:141px; height:115px; margin-top:8px; }
-.user-reg .link_right{ float:right; width:354px; height:220px;  }
-.user-reg .link_title{ width:317px; height:100px;  color:#555555; }
-.user-reg .link_title ul { width:110%;}
-.user-reg .link_title ul li{ float:left; line-height:25px; width:170px;}
-.user-reg .link_title span{ color:#b4b4b4; width:60px; float:left; display:inline-block; }
+.user-link .link_si{ width:536px; height:220px; margin:19px 0 0 36px; _margin:14px 0 0 36px;  }
+.user-link .link_pic{ float:left; width:141px; height:115px; margin-top:8px; }
+.user-link .link_right{ float:right; width:354px; height:220px;  }
+.user-link .link_title{ width:317px; height:100px;  color:#555555; }
+.user-link .link_title ul { width:110%;}
+.user-link .link_title ul li{ float:left; line-height:25px; width:170px;}
+.user-link .link_title span{ color:#b4b4b4; width:60px; float:left; display:inline-block; }
 
-.user-reg .link_wenben{ width:354px; height:106px;margin-top:14px; }
-.user-reg .wenben{width:342px; height:104px; border:1px solid #d9d9d9; background:#FFFFFF; padding-left:10px; line-height:25px; font-size:12px; overflow-y:auto; color:#c1c1c1;}
+.user-link .link_wenben{ width:354px; height:106px;margin-top:14px; }
+.user-link .wenben{width:342px; height:104px; border:1px solid #d9d9d9; background:#FFFFFF; padding-left:10px; line-height:25px; font-size:12px; overflow-y:auto; color:#c1c1c1;}
 
-.user-reg .link_wu{ width:160px; height:45px; background:#f8f8f8; margin-top:20px; padding-left:440px; }
-.user-reg .link_fabu{ float:left; width:61px; height:32px; margin-top:7px; }
-.user-reg .link_quxiao{ float:right; width:61px; height:32px; margin-top:7px; margin-right:26px; _margin-right:13px;}
+.user-link .link_wu{ width:160px; height:45px; background:#f8f8f8; margin-top:20px; padding-left:440px; }
+.user-link .link_fabu{ float:left; width:61px; height:32px; margin-top:7px; }
+.user-link .link_quxiao{ float:right; width:61px; height:32px; margin-top:7px; margin-right:26px; _margin-right:13px;}
 
 
 
