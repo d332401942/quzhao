@@ -1,5 +1,5 @@
 <div class="link user-link">
-	<form action="__AJAX__/share/index" method="post" id="formShare">
+	<form action="__AJAX__/share/index" method="post" id="js-formShare" onsubmit="return doSubmit()">
 		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" id="js-url" /></div>
 		<div class="link_er"><a href="#"><input type="image" src="__RESOURCE__/images/12-11.jpg" name="btn_submit" /></a></div>
 	</form>
@@ -34,8 +34,8 @@
 </div>
 <script type="text/javascript" src="__RESOURCE__/js/jquery.form.js"></script>
 <script>
-$(function(){
-	$('#formShare').ajaxForm(function(data){
+function doSubmit() {
+	$('#js-formShare').ajaxSubmit(function(data){
 		eval('data='+data);
 		$('#js-hidden-origin').val(data.result.origin);
 		var url = $('#js-url').val();
@@ -49,7 +49,7 @@ $(function(){
 			$('#js-hidden-title').val(data.result.title.message);
 		}
 	});
-return false;
-})
-
+	return false;
+}
+	
 </script>
