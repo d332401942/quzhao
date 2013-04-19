@@ -79,12 +79,6 @@
 	}
 	
 	function showShareDiv() {
-		$.ajax({
-			url: '__APP__/user/share?stmp=' + new Date().toString(),
-			success: function(html) {
-				$.mask.show(html);
-			}
-		});
 		//如果用户没有登录先登录
 		if (!CurrentUserInfo) {
 			showLoginDiv();
