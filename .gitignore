@@ -9,3 +9,6 @@ public/uploads
 *.swp
 /nbproject/private/
 nbproject/*
+.buildpath
+.project
+.settings

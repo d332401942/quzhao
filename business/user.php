@@ -27,10 +27,19 @@ class UserBusiness extends BaseBusiness
 		{
 			$this->throwException('密码不能为空',CodeException::USER_PASS_EMPTY);	
 		}
-		$model->password = md5($model->password);
-		$model->email	 = strtolower($model->email); 
+		
 		$data->addUser($model);
     }
+	
+	/**
+	 *	通过用户名和密码获取用户信息
+	 */
+	public function getUserInfo($email, $password)
+	{
+		$data = M('UserData');
+		$userModel = $data->getUserInfo($email, $password);
+		return $userModel;
+	}
 	
 	public function checkuser($name)
 	{
