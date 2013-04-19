@@ -21,7 +21,6 @@ $.mask = {
 		//初始化最外层容器
 		this.popupLayer?this.popupLayer.remove():null;
 		this.popupLayer = $(document.createElement("div")).addClass(this.options.popupLayerClass).attr('id',this.options.popupLayerId).css({display:'none'});   
-		console.log(this.popupLayer);
 		this.popupLayer.append(this.showObj.css({opacity:1}).show()).appendTo($(document.body));
 		this.popupLayer.css({position:"absolute",'z-index':2,width:this.showObj.get(0).offsetWidth,height:this.showObj.get(0).offsetHeight});
 		
