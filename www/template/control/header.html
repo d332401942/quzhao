@@ -79,14 +79,12 @@
 	}
 	
 	function showShareDiv() {
-<<<<<<< HEAD
 		$.ajax({
 			url: '__APP__/user/share?stmp=' + new Date().toString(),
 			success: function(html) {
 				$.mask.show(html);
 			}
 		});
-=======
 		//如果用户没有登录先登录
 		if (!CurrentUserInfo) {
 			showLoginDiv();
@@ -100,7 +98,6 @@
 				}
 			});
 		}
->>>>>>> 18a33682d23dbe708920d606c17f6f02fb4fe19a
 	}
 	
 	$(function(){
