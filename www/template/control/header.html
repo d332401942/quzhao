@@ -14,6 +14,11 @@
 	<script type="text/javascript" src="__RESOURCE__/js/<{$val}>.js"></script>
 	<{/foreach}>	
 	<script type="text/javascript" src="__RESOURCE__/js/jquery.mask.js"></script>
+	<script type="text/javascript" src="__RESOURCE__/js/jquery.cookie.js"></script>
+	<script>
+		var CurrentUserInfo = <{echo json_encode($CurrentUser)}>;
+		var CookieCallBakKey = 'callbakfun';
+	</script>
 	<script  type="text/javascript">
 	function changeType(obj) {
 		var currentObj = $('#js-search-type');
@@ -74,13 +79,28 @@
 	}
 	
 	function showShareDiv() {
-		$.ajax({
-			url: '__APP__/user/share?stmp=' + new Date().toString(),
-			success: function(html) {
-				$.mask.show($(html));
-			}
-		});
+		//如果用户没有登录先登录
+		if (!CurrentUserInfo) {
+			showLoginDiv();
+			$.cookie(CookieCallBakKey,'showShareDiv');
+		}
+		else {
+			$.ajax({
+				url: '__APP__/user/share?stmp=' + new Date().toString(),
+				success: function(html) {
+					$.mask.show($(html));
+				}
+			});
+		}
 	}
+	
+	$(function(){
+		var callBak = $.cookie(CookieCallBakKey);
+		if (callBak) {
+			$.removeCookie(CookieCallBakKey);
+			eval(callBak + '()');		
+		}
+	});
 	
 	</script>
 </head>
@@ -93,7 +113,7 @@
 			<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<{if ($CurrentUser)}>
 				<li style="margin-left:780px;_margin-left:425px;"><a href="#">消息（0）</a></li>
-				<li style=" margin-top:-10px;"><a href="#"><img src="__RESOURCE__/images/24-24.jpg" alt=""></a></li>
+				<li style=" margin-top:-10px;"><a href="__APP__/user/change"><img src="__RESOURCE__/images/24-24.jpg" alt=""></a></li>
 			<{else}> 
 				<li style="margin-left:790px;_margin-left:430px;"><a href="javascript:;" onclick="showLoginDiv()">登录</a></li>
 				<li style=""><a href="javascript:;" ><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
