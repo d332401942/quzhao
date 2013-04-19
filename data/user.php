@@ -15,7 +15,7 @@ class UserData extends BaseData
 	
 	public function change($model)
 	{
-		$this->update($model);
+		$this->updateModel($model);
 	}
 
 }

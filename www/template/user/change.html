@@ -8,7 +8,7 @@
 			<div class="con_left_er_zuo">基本设置</div>
 			<div class="con_left_er_you">
 				<div class="you_name"><input class="yy" value="用户名" type="text" name="nickname" /></div>
-				<input type="hidden" name="cityname" id="cityname" value="<{$cityName}>" />
+				<input type="hidden" name="cityid" id="cityname" value="10100" />
 				<div class="dingwei"><a href="javascript:" onclick="showCity()"><img src="__RESOURCE__/images/12-16.jpg"/></a>&nbsp;<span id="js-city-name"><{$cityName}></span></div>
 			</div>
 		</div>
@@ -64,7 +64,7 @@
 					<h4>热门</h4>
 					<p>
 						<{foreach ($hotCityModels as $model)}>
-							<a city="<{$model->name_en}>" href="#nogo" onclick="goCity('<{$model->name_cn}>')"><{$model->name_cn}></a>
+							<a city="<{$model->name_en}>" href="#nogo" onclick="goCity(<{$model->id}>,'<{$model->name_cn}>')"><{$model->name_cn}></a>
 						<{/foreach}>
 					</p>
 				</li>
@@ -79,7 +79,7 @@
 						<{foreach ($headToModels as $key => $models)}>
 							<p class="js-city-div" key="<{$key}>" style="display: <{if ($key == $headLetter)}>block<{else}>none<{/if}>;">
 								<{foreach ($models as $model)}>
-									<a href="#nogo" onclick="goCity('<{$model->name_cn}>')"><{$model->name_cn}></a>
+									<a href="#nogo" onclick="goCity(<{$model->id}>,'<{$model->name_cn}>')"><{$model->name_cn}></a>
 								<{/foreach}>
 							</p>
 						<{/foreach}>
@@ -108,9 +108,9 @@ function selectCity(obj,letter) {
 	$('.js-city-div').hide();
 	$('.js-city-div[key="'+letter+'"]').show();
 }
-function goCity(name) {
+function goCity(id,name) {
 	$('#city_list').hide();
 	$('#js-city-name').html(name);
-	$('#cityname').val(name);
+	$('#cityname').val(id);
 }
 </script>

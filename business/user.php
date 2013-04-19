@@ -39,9 +39,9 @@ class UserBusiness extends BaseBusiness
 		return $result;
 	}
 	
-	public function changeData()
+	public function changeData($model)
 	{
 		$data = new UserData();
-		$data->update();
+		$data->change($model);
 	}
 }

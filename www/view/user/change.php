@@ -1,7 +1,7 @@
 <?php
 class ChangeUserView extends BaseView
 {
-	public function index($parameters)
+	public function index()
 	{
 		$this->setMeta();
 		//得到城市信息
@@ -24,19 +24,11 @@ class ChangeUserView extends BaseView
 		ksort($headToModels);
 		
 		//TODO 默认为北京以后根据IP判断
-        //$city = !empty($parameters['city']) ? $parameters['city'] : 10100;
-		if (!empty($parameters['city']))
+		$cityCommon = new CityCommon();
+		$city = $cityCommon->getCurrentCityId();
+		if (!$city) 
 		{
-			$city = $parameters['city'];
-		}
-		else
-		{
-			$cityCommon = new CityCommon();
-			$city = $cityCommon->getCurrentCityId();
-			if (!$city) 
-			{
-				$city = 10100;
-			}
+			$city = 10100;
 		}
 		//得到城市名称
         $cityName = $this->getCityName($city);
@@ -56,11 +48,13 @@ class ChangeUserView extends BaseView
 	private function change()
 	{
 		$business = M('UserBusiness');
+		$model = new UserDataModel();
+		$model->id 			= 1;
 		$model->head 		= '';
-		$model->nickname 	= trim($_POST['name']);
-		$model->city 	 	= trim($_POST['cityname']);
+		$model->nickname 	= trim($_POST['nickname']);
+		$model->city 		= intval($_POST['cityid']);
 		$model->setWorkFields(array('head', 'nickname', 'city'));
-		$business->updateData($model);
+		$business->changeData($model);
 	}
 	private function getCityName($code)
 	{
