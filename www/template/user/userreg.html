@@ -51,6 +51,7 @@ function checkuser(obj) {
 	var name = $(obj).val();
 	if (!name || name == '登录邮箱') {
 		$('#js-email').html('请填写email');
+		$(obj).css('border-color','#E872C0');
 		if (name =='') {
 			obj.value='登录邮箱'
 		}
