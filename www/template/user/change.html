@@ -7,7 +7,7 @@
 		<div class="con_left_er">
 			<div class="con_left_er_zuo">基本设置</div>
 			<div class="con_left_er_you">
-				<div class="you_name"><input class="yy" value="用户名" type="text" name="nickname" /></div>
+				<div class="you_name"><input class="yy" value="用户名" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" /></div>
 				<input type="hidden" name="cityid" id="cityname" value="10100" />
 				<div class="dingwei"><a href="javascript:" onclick="showCity()"><img src="__RESOURCE__/images/12-16.jpg"/></a>&nbsp;<span id="js-city-name"><{$cityName}></span></div>
 			</div>
