@@ -3,7 +3,7 @@ class ShareUserView extends BaseView
 {
 	public function index()
 	{
-		//$this->setMeta();		   
+		//$this->setMeta();		            
 	}
 }
 ?>
