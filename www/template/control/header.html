@@ -55,6 +55,14 @@
 		return true;
 	}
 	
+	function showLoginDiv() {
+		$.ajax({
+			url: '__APP__/user/userlogin?stmp=' + new Date().toString(),
+			success: function(html) {
+				$.mask.show($(html));
+			}
+		});
+	}
 	
 	function showRegDiv() {
 		$.ajax({
@@ -89,7 +97,7 @@
 		<ul>
 			<li style="margin-left:8px;"><a href="#">我要分享</a></li>
 			<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-			<li style="margin-left:790px;_margin-left:430px;"><a href="#">登录</a></li>
+			<li style="margin-left:790px;_margin-left:430px;"><a href="javascript:;" onclick="showLoginDiv()">登录</a></li>
 			<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
 			<li style="margin-left:15px;"><a href="#">帮助</a></li>
