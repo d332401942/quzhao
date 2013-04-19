@@ -1,17 +1,21 @@
 <div class="box user-reg" style="display:none;padding:0px;">
-	<form action="__AJAX__/user/add" method="post" id="regForm">
+	<form action="__AJAX__/user/add" method="post" id="js-regForm" onsubmit="return doReg(this);">
 		<div class="left">
 			<div class="left_yi"><span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;<a style="color:#c74396;" href="#">立即登录</a></div>
-			<div class="left_er"><input onblur="checkuser(this)" onfocus="if (value =='登录邮箱'){value =''}" class="kuang" name="email" value="登录邮箱" tabindex="1" type="text" style=""></div>
-			<div class="left_san" id="js-email">填写您的登录邮箱</div>
-			<div class="left_er"><input onblur="pwStrength(this.value)" id="password" onkeyup="pwStrength(this.value)" class="kuang2" name="password"  tabindex="1"  type="password" style=""></div>
+			<div class="left_er">
+				<input onblur="checkuser()" id="js-user-email" onfocus="if (value =='登录邮箱'){value =''}" class="kuang" name="email" value="登录邮箱" tabindex="1" type="text" style="">
+			</div>
+			<div class="left_san" id="js-email-error">填写您的登录邮箱</div>
+			<div class="left_er"><input onblur="pwStrength(this.value,'onblur')" id="js-password" onkeyup="pwStrength(this.value)" class="kuang2" name="password"  tabindex="1"  type="password" style=""></div>
 			<div class="right2_yi">
 				<div class="right2_yi_zuo"><a href="#"><img src="__RESOURCE__/images/ruo1.jpg" alt=""></a></div>
 				<div class="right2_yi_zhong"><a href="#"><img src="__RESOURCE__/images/zhong.jpg" alt=""></a></div>
 				<div class="right2_yi_you"><a href="#"><img src="__RESOURCE__/images/qiang.jpg" alt=""></a></div>
 			</div>
-			<div class="left_san" id="pass"></div>
-			<div style="margin-top:20px;" class="left_er"><input class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证'){value =''}" value="验证" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证'}" type="text" style=""></div>
+			<div class="left_san" id="js-pass-error"></div>
+			<div style="margin-top:20px;" class="left_er">
+				<input class="kuang2"  onmouseout="this.style.borderColor=''" onfocus="checkRePassword(this)" value="验证" onmouseover="this.style.borderColor=''" tabindex="1"  onblur="rePasswordBlur(this)" type="text" style="">
+			</div>
 			<div class="left_wu2">
 				<div class="left_wu_left"><a href="#"><input type="image"  name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
 				<div class="left_wu_right2"><input name="agreement" class="agreement" type="checkbox" value="ok" checked="">同意<a href="#">用户协议</a></div>
@@ -39,20 +43,46 @@
 <script type="text/javascript" src="__RESOURCE__/js/jquery.form.js"></script>
 <script>
 
-$('#regForm').ajaxForm(function(data){
-	console.log(data);
-	eval('data='+data);
-	if(data.error.code == 10005){
-		$('#agreement').html('<font color="#E872C0">'+data.error.message+'</font>');
-	}
-});
+var isOk = true;
 
-function checkuser(obj) {
-	var name = $(obj).val();
+function doReg(obj) {
+	$(obj).ajaxSubmit({
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.href = '__APP__/user';
+			}
+		}
+	});
+	return false;
+}
+
+function checkRePassword(obj) {
+	obj.type = 'password';
+	if (obj.value =='验证') {
+		obj.value = ''
+	}
+}
+
+function rePasswordBlur(obj) {
+	var password = $('#js-password').val();
+	if (obj.value == '') {
+		obj.value='验证'
+		obj.type = 'text';
+	}
+	else if (obj.value != password) {
+		$('#js-pass-error').html('两次密码输入的不一致');
+		$(obj).css('border-color','#E872C0');
+	}
+}
+
+function checkuser() {
+	obj = $('#js-user-email');
+	var name = obj.val();
 	if (!name || name == '登录邮箱') {
-		$('#js-email').html('请填写email');
+		$('#js-email-error').html('请填写email');
 		if (name =='') {
-			obj.value='登录邮箱'
+			obj.val('登录邮箱');
 		}
 		return false;
 	}
@@ -66,11 +96,11 @@ function checkuser(obj) {
 		dataType:'json',
 		success:function(data){
 			if (data.result) {
-				$('#js-email').html('<font color="green">用户名可用</font>');
+				$('#js-email-error').html('<font color="green">用户名可用</font>');
 				$(obj).css('border-color','#cdcdcd');
 			}
 			else {
-				$('#js-email').html('data.error.message');
+				$('#js-email-error').html(data.error.message);
 				$(obj).css('border-color','#E872C0');
 			}
 		}
@@ -134,20 +164,25 @@ function checkStrong(sPW) {
 }
 //pwStrength函数 
 //当用户放开键盘或密码输入框失去焦点时，根据不同的级别显示不同的颜色 
-function pwStrength(pwd) {
+function pwStrength(pwd, type) {
 	if (pwd == null || pwd == '') {
 		$(".right2_yi_zuo").html('<img src="__RESOURCE__/images/ruo1.jpg">');
 		$(".right2_yi_zhong").html('<img src="__RESOURCE__/images/zhong.jpg">');
 		$(".right2_yi_you").html('<img src="__RESOURCE__/images/qiang.jpg">');
-		$('#pass').html('<font color="#E872C0">请填写密码</font>');
+		$('#js-pass-error').html('请填写密码');
+		$('#js-password').css('border-color','#E872C0');
+	}
+	else if (type && type == 'onblur' && pwd.length < 6) {
+		$('#js-pass-error').html('密码不能低于6位');
 		$('#password').css('border-color','#E872C0');
-	}else if(pwd.length > 32) {
-		$('#pass').html('<font color="#E872C0">密码不能超过32位</font>');
+	}
+	else if(pwd.length > 32) {
+		$('#js-pass-error').html('密码不能超过32位');
 		$('#password').css('border-color','#E872C0');
 	}
 	else {
-		$('#pass').html('');	
-		$('#password').css('border-color','#cdcdcd');
+		$('#js-pass-error').html('');	
+		$('#js-password').css('border-color','#cdcdcd');
 		S_level = checkStrong(pwd);
 		switch (S_level) {
 			case 0:

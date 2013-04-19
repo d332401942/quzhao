@@ -12,7 +12,7 @@ class UserBusiness extends BaseBusiness
 		{
 			 $this->throwException('用户名不能为空',CodeException::USER_EMAIL_EMPTY);
 		}
-		$emailRegular = '/^\w+@\w+(\.\w+){0,1}(\.\w+)$/';
+		$emailRegular = CommUtility::EMAIL_PATTERN;
 		if (!preg_match($emailRegular,$model->email))
 		{
 			$this->throwException('邮箱格式不正确',CodeException::USER_EAMIL_FORMAT);
