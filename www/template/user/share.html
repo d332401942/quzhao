@@ -10,14 +10,19 @@
 
 <body>
 <div class="link user-link">
-	<div class="link_yi"><input class="link_kuang" type="text" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" /></div>
-	<div class="link_er"><a href="#"><img src="__RESOURCE__/images/12-11.jpg" alt=""/></a></div>
-	<div class="link_san">139元&nbsp;包邮&nbsp;Only&nbsp;玉兰油&nbsp;水感透白沁亮原液150ml</div>
+	<form action="__APP__/user/share" method="post">
+		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" /></div>
+		<div class="link_er"><a href="#"><input type="image" src="__RESOURCE__/images/12-11.jpg" name="btn_submit" /></a></div>
+	</form>
+	<div class="link_san"><{if (isset($title))}><{$title}><{else}>139元&nbsp;包邮&nbsp;Only&nbsp;玉兰油&nbsp;水感透白沁亮原液150ml<{/if}></div>
 	<div class="link_si">
-		<div class="link_pic"><a href="#"><img src="__RESOURCE__/images/141-115.jpg" alt=""/></a></div>
+		<div class="link_pic"><a href="#"><{if (isset($image))}><img src="<{$image}>" alt="" width="141" height="115" /><{else}><img src="__RESOURCE__/images/141-115.jpg" alt=""/><{/if}></a></div>
 		<div class="link_right">
 			<div class="link_title">
 				<ul>
+				<{if (isset($attribute))}>
+					<{$attribute}>
+				<{else}>
 					<li><span>来源商家</span> 天猫 乐扣旗舰</li>
 					<li><span>商品编号</span> 6749436</li>
 					<li><span>上架时间</span> 2013-01-23</li>
@@ -25,6 +30,7 @@
 					<li><span>接口</span>天猫 乐扣旗舰</li>
 					<li><span>工作方式</span>光电</li>
 					<li><span>颜色</span>天猫 乐扣旗舰</li>
+				<{/if}>
 				</ul>
 			</div>
 			<div class="link_wenben"><textarea class="wenben" name="" cols="" rows="">推荐理由600字以内</textarea></div>
@@ -35,6 +41,7 @@
 		<div class="link_quxiao"><a href="#"><img src="__RESOURCE__/images/qu.jpg" alt=""/></a></div>
 	</div>
 </div>
+
 </body>
 
 </html>
