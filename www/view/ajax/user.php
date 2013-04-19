@@ -22,6 +22,23 @@ class UserAjaxView extends AjaxCoreLib
 		$this->response(true);
 	}
 	
+	public function login()
+	{
+		$email = null;		
+		$password = null;
+		if (empty($_POST['email']))
+		{
+			$this->responseError('请输入登录邮箱');
+		}
+		if (empty($_POST['password']))
+		{
+			$this->responseError('请输入密码');
+		}
+		$email = strtolower(trim($_POST['email']));
+		$this->checkverify($_POST['verify']);
+		
+	}
+	
 	public function add()
 	{
 		if (empty($_POST['agreement']))
@@ -52,9 +69,8 @@ class UserAjaxView extends AjaxCoreLib
 		$this->response(true);
 	}
 	
-	public function checkverify()
+	public function checkverify($verify)
 	{
-		$verify = trim($_GET['verify']);
 		if(empty($verify))
 		{
 			$this->responseError('请填写验证码');
@@ -64,11 +80,11 @@ class UserAjaxView extends AjaxCoreLib
 		{
 			$this->responseError('验证码已过期');
 		}
-		if ($_GET['verify'] != $code)
+		if ($verify != $code)
 		{
 			$this->responseError('验证码错误');
 		}
-		$this->response(true);
+		return true;
 	}
 	
 }
