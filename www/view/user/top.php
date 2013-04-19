@@ -1,9 +1,10 @@
 <?php
 
-class UserregUserView extends BaseView
+class TopUserView extends BaseView
 {
 	
 	public function index()
 	{
+	
 	}
 }

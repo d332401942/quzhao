@@ -1,0 +1,87 @@
+<div class="top_bar_con">
+	<ul>
+		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
+		<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+		<{if ($CurrentUser)}>
+			<li style="margin-left:780px;_margin-left:425px;"><a href="#">消息（0）</a></li>
+			<li style=" margin-top:-10px;"><a href="__APP__/user/change"><img src="__RESOURCE__/images/24-24.jpg" alt=""></a></li>
+		<{else}> 
+			<li style="margin-left:790px;_margin-left:430px;"><a href="javascript:;" onclick="showLoginDiv()">登录</a></li>
+			<li style=""><a href="javascript:;" ><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
+		<{/if}>
+		<li style="margin-left:15px;"><a href="#">帮助</a></li>
+		<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+	</ul>	
+</div>
+<div class="dingwei2">
+	<ul class="youhui" id="js-header-share" style="display:none;">
+		<li><a href="javascript:;" onclick="showShareDiv()">优惠商品</a></li>
+		<li><a href="javascript:;">折扣活动</a></li>
+	</ul>
+	
+	<ul class="xiaoxi" style="display:none;">
+		<li class="chang">照片<a href="#">理业主的照片理业主</a>有了新回复</li>
+		<li class="duan"><a href="#">不再提醒</a></li>
+		<li class="chang">折扣活动</li>
+		<li class="duan"><a href="#">不再提醒</a></li>
+		<li class="chang">照片<a href="#">理业主助理业主|早起~</a>有了新回复</li>
+		<li class="duan"><a href="#">不再提醒</a></li>
+	</ul>
+</div>
+<script>
+var userCallBak = function(){};
+function showLoginDiv() {
+	$.ajax({
+		url: '__APP__/user/userlogin?stmp=' + new Date().toString(),
+		success: function(html) {
+			$.mask.show($(html));
+		}
+	});
+}
+
+function showRegDiv() {
+	$.ajax({
+		url: '__APP__/user/userreg?stmp=' + new Date().toString(),
+		success: function(html) {
+			$.mask.show($(html));
+		}
+	});
+}
+
+function showShareDiv() {
+	//如果用户没有登录先登录
+	if (!CurrentUserInfo) {
+		userCallBak = showShareDiv;
+		showLoginDiv();
+	}
+	else {
+		$.ajax({
+			url: '__APP__/user/share?stmp=' + new Date().toString(),
+			success: function(html) {
+				$.mask.show($(html));
+			}
+		});
+	}
+}
+
+function doLogin(obj) {
+	$(obj).ajaxSubmit({
+		type: 'post',
+		url: '__AJAX__/user/login?stmp=' + new Date().toString(),
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				CurrentUserInfo = data.result;
+				userCallBak();
+				showTop();
+			}
+			else {
+				var msg = data.error.message;
+				$('#js-error').html(msg);
+			}
+		}
+	});
+	return false;
+}
+</script>
