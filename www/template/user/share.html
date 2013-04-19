@@ -1,17 +1,19 @@
 <div class="link user-link">
-	<form action="__APP__/user/share" method="post">
-		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" /></div>
+	<form action="__AJAX__/share/index" method="post" id="formShare">
+		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" id="js-url" /></div>
 		<div class="link_er"><a href="#"><input type="image" src="__RESOURCE__/images/12-11.jpg" name="btn_submit" /></a></div>
 	</form>
-	<div class="link_san"><{if (isset($title))}><{$title}><{else}>139元&nbsp;包邮&nbsp;Only&nbsp;玉兰油&nbsp;水感透白沁亮原液150ml<{/if}></div>
+	<form action="__APP__/user/share" method="post">
+	<input type="hidden" name="url" id="js-hidden-url" />
+	<input type="hidden" name="origin" id="js-hidden-origin" />
+	<div class="link_san" id="js-title">139元&nbsp;包邮&nbsp;Only&nbsp;玉兰油&nbsp;水感透白沁亮原液150ml</div>
+	<input type="hidden" name="title" id="js-hidden-title" />
 	<div class="link_si">
-		<div class="link_pic"><a href="#"><{if (isset($image))}><img src="<{$image}>" alt="" width="141" height="115" /><{else}><img src="__RESOURCE__/images/141-115.jpg" alt=""/><{/if}></a></div>
+		<div class="link_pic"><a href="#" id="js-image"><img src="__RESOURCE__/images/141-115.jpg" alt=""/></a></div>
+		<input type="hidden" name="image" id="js-hidden-image" />
 		<div class="link_right">
 			<div class="link_title">
 				<ul>
-				<{if (isset($attribute))}>
-					<{$attribute}>
-				<{else}>
 					<li><span>来源商家</span> 天猫 乐扣旗舰</li>
 					<li><span>商品编号</span> 6749436</li>
 					<li><span>上架时间</span> 2013-01-23</li>
@@ -19,14 +21,36 @@
 					<li><span>接口</span>天猫 乐扣旗舰</li>
 					<li><span>工作方式</span>光电</li>
 					<li><span>颜色</span>天猫 乐扣旗舰</li>
-				<{/if}>
 				</ul>
 			</div>
-			<div class="link_wenben"><textarea class="wenben" name="" cols="" rows="">推荐理由600字以内</textarea></div>
+			<div class="link_wenben"><textarea class="wenben" name="content" cols="" rows="">推荐理由600字以内</textarea></div>
 		</div>
 	</div>
 	<div class="link_wu">
-		<div class="link_fabu"><a href="#"><img src="__RESOURCE__/images/61-32.jpg" alt=""/></a></div>
+		<div class="link_fabu"><a href="#"><input type="image" src="__RESOURCE__/images/61-32.jpg" /></a></div>
 		<div class="link_quxiao"><a href="javascript:;" onclick="$.mask.close()"><img src="__RESOURCE__/images/qu.jpg" alt=""/></a></div>
 	</div>
+	</form>
 </div>
+<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<script type="text/javascript" src="__RESOURCE__/js/jquery.form.js"></script>
+<script>
+$(function(){
+	$('#formShare').ajaxForm(function(data){
+		eval('data='+data);
+		$('#js-hidden-origin').val(data.result.origin);
+		var url = $('#js-url').val();
+		$('#js-hidden-url').val(url);
+		if(data.result.image.message) {
+			$('#js-image').html('<img src='+data.result.image.message+' width="141" height="115" />');
+			$('#js-hidden-image').val(data.result.image.message);
+		}
+		if(data.result.title.message) {
+			$('#js-title').html(data.result.title.message);
+			$('#js-hidden-title').val(data.result.title.message);
+		}
+	});
+return false;
+})
+
+</script>

@@ -77,7 +77,7 @@
 		$.ajax({
 			url: '__APP__/user/share?stmp=' + new Date().toString(),
 			success: function(html) {
-				$.mask.show($(html));
+				$.mask.show(html);
 			}
 		});
 	}
