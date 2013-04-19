@@ -1,51 +1,53 @@
 <div class="box user-reg" style="display:none;padding:0px;">
     <div class="left">
-        <div class="left_yi">
-            <span style="font-size:18px;">
-                登录
-            </span>
-            &nbsp;有没有账户?&nbsp;
-            <a style="color:#c74396;" href="#">
-                注册一个
-            </a>
-        </div>
-        <div class="left_er">
-            <input name="email" class="kuang" type="text" onmouseout="this.style.borderColor=''"
-            onfocus="if (value =='登录邮箱'){value =''}" value="登录邮箱" onmouseover="this.style.borderColor=''"
-            tabindex="1" onblur="if (value ==''){value='登录邮箱'}" style="">
-        </div>
-        <div class="left_san" id="js-error">
-            账号或者密码错误
-        </div>
-        <div class="left_er">
-            <input name="password" class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''} type='password'"
-            value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}"
-            type="text" style="">
-        </div>
-        <div class="left_si">
-            <div class="left_si_left">
-                <input class="kuang3" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证码'){value =''}"
-                value="验证码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证码'}"
-                type="text">
-            </div>
-            <div class="left_si_right">
-                <a href="#">
-					<img width="87px" height="30px" src="__APP__/verify" onclick="javascript:this.src='__APP__/verify?stmp='+new Date().toString();">
-                </a>
-            </div>
-        </div>
-        <div class="left_wu">
-            <div class="left_wu_left">
-                <a href="#">
-                    <img src="__RESOURCE__/images/61-33.jpg" alt="">
-                </a>
-            </div>
-            <div class="left_wu_right">
-                <a href="#">
-                    忘记密码
-                </a>
-            </div>
-        </div>
+		<form>
+			<div class="left_yi">
+				<span style="font-size:18px;">
+					登录
+				</span>
+				&nbsp;有没有账户?&nbsp;
+				<a style="color:#c74396;" href="#">
+					注册一个
+				</a>
+			</div>
+			<div class="left_er">
+				<input name="email" class="kuang" type="text" onmouseout="this.style.borderColor=''"
+				onfocus="if (value =='登录邮箱'){value =''}" value="登录邮箱" onmouseover="this.style.borderColor=''"
+				tabindex="1" onblur="if (value ==''){value='登录邮箱'}" style="">
+			</div>
+			<div class="left_san" id="js-error">
+				账号或者密码错误
+			</div>
+			<div class="left_er">
+				<input name="password" class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''} type='password'"
+				value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}"
+				type="text" style="">
+			</div>
+			<div class="left_si">
+				<div class="left_si_left">
+					<input name="verify" class="kuang3" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证码'){value =''}"
+					value="验证码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证码'}"
+					type="text">
+				</div>
+				<div class="left_si_right">
+					<a href="#">
+						<img width="87px" height="30px" src="__APP__/verify" onclick="javascript:this.src='__APP__/verify?stmp='+new Date().toString();">
+					</a>
+				</div>
+			</div>
+			<div class="left_wu">
+				<div class="left_wu_left">
+					<a href="#">
+						<img src="__RESOURCE__/images/61-33.jpg" alt="">
+					</a>
+				</div>
+				<div class="left_wu_right">
+					<a href="#">
+						忘记密码
+					</a>
+				</div>
+			</div>
+		</form>
     </div>
     <div class="right">
         <div class="right_yi">
@@ -73,3 +75,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>

@@ -80,7 +80,12 @@ function checkuser() {
 	obj = $('#js-user-email');
 	var name = obj.val();
 	if (!name || name == '登录邮箱') {
+<<<<<<< HEAD
 		$('#js-email-error').html('请填写email');
+=======
+		$('#js-email').html('请填写email');
+		$(obj).css('border-color','#E872C0');
+>>>>>>> 79a5e1956726cecceb6d47d4c552f63c2daa87ea
 		if (name =='') {
 			obj.val('登录邮箱');
 		}
