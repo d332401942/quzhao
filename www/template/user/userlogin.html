@@ -69,9 +69,16 @@
             </a>
         </div>
         <div class="right_san">
-            <a href="javascript:;">
+            <a href="javascript:;" id="qqLoginBtn" onclick="loginQQ()">
                 <img src="__RESOURCE__/images/181-33-qq.jpg" alt="">
             </a>
         </div>
     </div>
 </div>
+<script src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="100384287" data-redirecturi="passport.quanzho.com" charset="utf-8" >
+
+<script type="text/javascript">
+    QC.Login({
+       btnId:"qqLoginBtn"	//插入按钮的节点id
+});
+</script>
