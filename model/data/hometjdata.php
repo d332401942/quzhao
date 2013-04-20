@@ -178,6 +178,12 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $ltime;
 	
+	/**
+	 * 会员分享关联id
+	 * @var int
+	 */
+	public $shareid;
+	
 	
 	public function __construct()
 	{

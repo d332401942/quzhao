@@ -1,0 +1,89 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+<div class="content-select">
+</div>
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
+		<th style="width:15px;">ID</th>
+		<th style="width:80px;">类别</th>
+		<th style="width:150px;">名称</th>
+		<th style="width:80px;">价钱</th>
+		<th style="width:50px;">来源</th>
+		<th>来源URL</th>
+		<th>入库时间</th>
+		<th style="width:85px;">操作</th>
+	</tr>
+	<{if ($model)}>
+	<{foreach ($model as $val)}>
+		<tr>
+			<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
+			<td><{$val->id}></td>
+			<td>优惠商品</td>
+			<td title="<{$val->title}>"><{$val->title|truncate:35}></td>
+			<td><{$val->price}></td>
+			<td title="<{$val->origin}>"><{$val->origin}></td>
+			<td title="<{$val->url}>"><a target="_blank" href="<{$val->url}>"><{$val->url|truncate:30}></a></td>
+			<td><{$val->createtime|date_format:'Y-m-d'}></td>
+			<td>
+				<a href="__APP__/content/add?shareid=<{$val->id}>">编辑</a>&nbsp;
+				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
+			</td>
+		</tr>
+	<{/foreach}>
+	<{else}>
+		<tr>
+			<td colspan="8">暂无分享</td>
+		</tr>
+	<{/if}>	
+	<tr>
+		<td><input type="checkbox" onclick="checkAll(this)" class="js-checkall-input" /></td>
+		<td colspan="10" style="text-align:left;"><button onclick="del()">删除</button></td>
+	</tr>
+</table>
+</div>
+
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
+	if (!ids) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	
+	$.ajax({
+		url: '__AJAX__/share/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:ids},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+
+</script>
