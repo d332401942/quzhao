@@ -8,14 +8,18 @@ class BaseView extends ViewCoreLib
 	protected $Host;
 	
 	protected $CurrentUser;
+	
+	protected $ServerName;
 
 	public function __construct()
 	{
 		parent::__construct();
+		$this->ServerName = $_SERVER['SERVER_NAME'];
 		$this->getCookieUserInfo();
 		$this->Host = new HostModel();
 		$this->assign('Host', $this->Host);
 		$this->assign('CurrentUser', $this->CurrentUser);
+		$this->assign('ServerName',$this->ServerName);
 	}
 	
 	public function getDetailUserInfo()
