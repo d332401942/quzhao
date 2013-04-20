@@ -33,18 +33,16 @@
 
 var userCallBak = function(){};
 
-//绑定QQ登录时间
-function bindBtnQQ() {
-	//QC.Login({
-	//	btnId:"qqLoginBtn"
-	//});
+function loginQQ() {
+	var url = 'http://openapi.qzone.qq.com/oauth/show?which=ConfirmPage&display=pc&response_type=code&scope=all&client_id=100384287&redirect_uri=<{echo urlencode('http://'.$ServerName.'/callbak/qq')}>';
+	$.mask.show('<iframe src="'+url+'" style="width:800px;height:500px;"></iframe>');
 }
 
 function showLoginDiv() {
 	$.ajax({
 		url: '__APP__/user/userlogin?stmp=' + new Date().toString(),
 		success: function(html) {
-			$.mask.show($(html),bindBtnQQ);
+			$.mask.show($(html));
 		}
 	});
 }

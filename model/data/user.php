@@ -16,6 +16,8 @@ class UserDataModel extends BaseDataModel
 	public $password;
 
 	public $regtype;
+	
+	public $openid;
 
 	public $createtime;
 
@@ -29,13 +31,13 @@ class UserDataModel extends BaseDataModel
 
 	public $othersite;
 
-	public $status;
-	
 	public $head;
 	
 	public $nickname;
 	
 	public $city;
+	
+	public $status;
 	
 	public function __construct()
 	{

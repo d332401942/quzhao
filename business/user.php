@@ -31,6 +31,45 @@ class UserBusiness extends BaseBusiness
 		$data->addUser($model);
     }
     
+    /**
+     * 通过第三方登录数据获取用户信息
+     * 
+     */
+    public function getUserInfoByOther($openId, $userInfo, $type)
+    {
+    	$data = M('UserData');
+    	$model = $data->getUserInfoByOther($openId, $type);
+    	$nickname = null;
+    	if ($type == UserDataModel::OTHER_SITE_QQ)
+    	{
+    		$nickname = $userInfo['nickname'];
+    	}
+    	if (!$model)
+    	{
+    		//添加一个第三方注册用户
+    		$model = new UserDataModel();
+    		$model->regtype 	= UserDataModel::OTHER_SITE_QQ;
+    		$model->createtime	= time();
+    		$model->password	= 0;
+    		$model->ischecked	= 0;
+    		$model->point		= 0;
+    		$model->inviteid	= 0;
+    		$model->othersite	= 0;
+    		$model->status		= 1;
+    		$model->nickname = $nickname;
+    		$model->openid = $openId;
+    		foreach ($model as $key => $val)
+    		{
+    			if (empty($val))
+    			{
+    				$model->$key = 0;
+    			}
+    		}
+    		$this->addOtherModel($model);
+    	}
+    	return $model;
+    }
+    
     public function getOneById($id)
     {
         $data = M('UserData');
@@ -58,5 +97,15 @@ class UserBusiness extends BaseBusiness
 	{
 		$data = new UserData();
 		$data->change($model);
+	}
+	
+	/**
+	 * 添加一个其他网站登录的用户
+	 * @param unknown $model
+	 */
+	private function addOtherModel($model)
+	{
+		$data = M('UserData');
+		$data->add($model);
 	}
 }

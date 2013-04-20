@@ -18,7 +18,7 @@ class QqCallbakView extends BaseView
 			{
 				$this->responseError ( '参数错误' );
 			}
-			header ( 'HTTP/1.1 301 Moved Permanently' );
+			//header ( 'HTTP/1.1 301 Moved Permanently' );
 			header ( 'Location: ' . 'http://' . $this->ServerName . '/callbak/qq?' . $str );
 			exit ();
 		}
@@ -38,13 +38,23 @@ class QqCallbakView extends BaseView
 		{
 			$this->responseError ( '' );
 		}
-		$client_id = $arr ['client_id'];
-		$openid = $arr ['openid'];
+		$client_id = empty($arr ['client_id']) ? null : $arr ['client_id'];
+		$openid = empty($arr ['openid']) ? null : $arr ['openid'];
 		$getUserInfoUrl = 'https://graph.qq.com/user/get_user_info?';
 		$getUserInfoUrl .= 'access_token=' . $access_token;
 		$getUserInfoUrl .= '&oauth_consumer_key=100384287&openid=' . $openid;
 		$userStr = file_get_contents($getUserInfoUrl);
 		$userInfo = json_decode($userStr, true);
-		P($userInfo);exit;
+		if ($userInfo['ret'] != 0)
+		{
+			$this->responseError ( '' );
+		}
+		$userInfo['openid'] = $openid;
+		$business = new UserBusiness();
+		$userModel = $business->getUserInfoByOther($openid, $userInfo, UserDataModel::OTHER_SITE_QQ);
+		//把用户信息记入cookie
+		//P($userInfo);exit;
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($userModel), 0, '/');
+		
 	}
 }
