@@ -16,7 +16,17 @@ class HomeTjDataBusiness extends BaseBusiness
         $this->checkMustFill($model);
         $data->updateModel($model);
     }
-
+	
+	/**
+	 * 修改产品喜欢次数
+	 */
+	 public function loveNum($id)
+	 {
+		$data = new HomeTjDataData();
+		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
+		$data->exec($sql);
+	 }
+	 
     public function getOneById($id)
     {
         $data = new HomeTjDataData();

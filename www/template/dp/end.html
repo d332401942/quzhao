@@ -16,7 +16,7 @@
 <h3>
 <span><img src="__RESOURCE__/images/tm.gif" /><{$goods->ctime|diffNow}>前更新</span>
 <span><img src="__RESOURCE__/images/us.gif" /><a href="#" class="uss"><{$editorArr[$goods->id % (count($editorArr))]}></a>推荐</span>
-<span><a href="#" title="喜欢"><img src="__RESOURCE__/images/love.gif" />7434</a></span>
+<span><a href="#" title="喜欢" onclick="lovenum(<{$goods->id}>,<{$CurrentUser->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$goods->lovenumber}></a></span>
 
 <span id="fx_zi">
 <h4 class="fx_box_nin" style="display:none;" id="js-hover-share-<{$goods->id}>">
@@ -577,6 +577,23 @@ function hideDiv(obj) {
 			hideDiv(obj);
 		}, 1500);
 	}
+}
+function lovenum(pid,uid) {
+	var data = {pid:pid,userid:uid}
+	var	url = '__AJAX__/love/index?stmp=' + new Date().toString();
+	$.ajax({
+		data:data,
+		dataType:'json',
+		type:'post',
+		url:url,
+		success:function(data){
+			if(data.result) {
+				window.location.reload();
+			}else {
+				alert('该产品已经喜欢过');
+			}
+		}
+	});
 }
 </script>
 

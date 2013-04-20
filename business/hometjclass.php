@@ -16,6 +16,7 @@ class HomeTjClassBusiness extends BaseBusiness
 		$data->updateModel($model);
 	}
 	
+	
 	/**
 	 * 得到根分类的数据
 	 */
