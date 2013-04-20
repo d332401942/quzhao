@@ -3,7 +3,7 @@
 		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" id="js-url" /></div>
 		<div class="link_er"><a href="#"><input type="image" src="__RESOURCE__/images/12-11.jpg" name="btn_submit" /></a></div>
 	</form>
-	<form action="__APP__/user/share" method="post">
+	<form action="__APP__/user/share" method="post" onsubmit="return checkform()">
 	<input type="hidden" name="url" id="js-hidden-url" />
 	<input type="hidden" name="origin" id="js-hidden-origin" />
 	<input type="hidden" name="price" id="js-hidden-price" />
@@ -13,7 +13,7 @@
 		<div class="link_pic"><a href="#" id="js-image"><img src="__RESOURCE__/images/141-115.jpg" alt=""/></a></div>
 		<input type="hidden" name="image" id="js-hidden-image" />
 		<div class="link_right">
-			<div class="link_title">
+			<!--<div class="link_title">
 				<ul>
 					<li><span>来源商家</span> 天猫 乐扣旗舰</li>
 					<li><span>商品编号</span> 6749436</li>
@@ -23,8 +23,10 @@
 					<li><span>工作方式</span>光电</li>
 					<li><span>颜色</span>天猫 乐扣旗舰</li>
 				</ul>
-			</div>
-			<div class="link_wenben"><textarea class="wenben" name="content" cols="" rows="">推荐理由600字以内</textarea></div>
+			</div>-->
+			<div class="link_wenben"><textarea class="wenben" name="content" cols="" rows="" onfocus="if (value == '推荐理由600字以内'){ value=''}" onblur="checkcon()" id="js-content" onkeyup="checkcon()">推荐理由600字以内</textarea></div>
+			<br />
+			<div id="js-message"></div>
 		</div>
 	</div>
 	<div class="link_wu">
@@ -51,6 +53,24 @@ function doSubmit() {
 		}
 	});
 	return false;
+}
+function checkform() {
+	var con = $('#js-content').val();
+	if(con.length > 10) {
+		$('#js-message').html('<font style="color:red">推荐理由600字以内</font>');
+		return false;
+	}
+}
+function checkcon() {
+	var con = $('#js-content').val();
+	if(con != '推荐理由600字以内') {
+		if(con.length > 10) {
+			$('#js-message').html('<font style="color:red">推荐理由600字以内</font>');
+		}else{
+			$('#js-message').html('');
+		}
+	}
+	
 }
 	
 </script>

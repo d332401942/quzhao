@@ -15,7 +15,8 @@ class ShareUserView extends BaseView
 			$model->origin 		= trim($_POST['origin']);;
 			$model->createtime 	= time();
 			$business->addShare($model);
-		}           
+			$this->redirect(APP_URL.'/user');
+		}  
 	}
 	
 }
