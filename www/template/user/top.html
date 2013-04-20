@@ -33,15 +33,20 @@
 
 var userCallBak = function(){};
 
-function loginQQ() {
-	
+//绑定QQ登录时间
+function bindBtnQQ() {
+	QC.Login({
+		btnId:"qqLoginBtn",	//插入按钮的节点id
+		scope:"all",
+		size: "A_M"
+	});
 }
 
 function showLoginDiv() {
 	$.ajax({
 		url: '__APP__/user/userlogin?stmp=' + new Date().toString(),
 		success: function(html) {
-			$.mask.show($(html));
+			$.mask.show($(html),bindBtnQQ);
 		}
 	});
 }
