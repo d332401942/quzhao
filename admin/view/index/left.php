@@ -107,6 +107,16 @@ class LeftIndexView extends BaseView
 					'url' => 'friendlink/add',
 				),
 			),
+			'会员分享' => array(
+				array(
+					'name' => '优惠商品',
+					'url' => 'user/share',
+				),
+				array(
+					'name' => '折扣活动',
+					'url' => '',
+				),
+			),
         );
         $this->assign('menu', $menu);
     }
