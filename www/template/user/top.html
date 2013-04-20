@@ -82,6 +82,7 @@ function doLogin(obj) {
 		success: function(data) {
 			if (data.result) {
 				CurrentUserInfo = data.result;
+				$.mask.close()
 				userCallBak();
 				showTop();
 			}

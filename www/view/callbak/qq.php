@@ -33,19 +33,18 @@ class QqCallbakView extends BaseView
 		{
 			$json = trim ( $arr [1] );
 			$arr = json_decode ( $json, true );
-			P ( $arr );
-		} else
+		} 
+		else
 		{
 			$this->responseError ( '' );
 		}
 		$client_id = $arr ['client_id'];
 		$openid = $arr ['openid'];
 		$getUserInfoUrl = 'https://graph.qq.com/user/get_user_info?';
-		$getUserInfoUrl .= 'access_token=49D2D60F07633B2F20C9F49B0170CD26';
+		$getUserInfoUrl .= 'access_token=' . $access_token;
 		$getUserInfoUrl .= '&oauth_consumer_key=100384287&openid=' . $openid;
-		echo $str;
-		exit ();
-		$this->assign ( 'access_token', $access_token );
-		$this->assign ( 'str', $str );
+		$userStr = file_get_contents($getUserInfoUrl);
+		$userInfo = json_decode($userStr, true);
+		P($userInfo);exit;
 	}
 }
