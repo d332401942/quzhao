@@ -6,9 +6,10 @@ class ShareUserView extends BaseView
 		if($_POST){
 			$business = M('ShareBusiness');
 			$model = M('ShareDataModel');
-			$model->uid 		= 1;
+			$model->userid 		= $this->CurrentUser->id;
 			$model->url			= trim($_POST['url']);
 			$model->title		= trim($_POST['title']);
+			$model->price		= trim($_POST['price']);
 			$model->image 		= trim($_POST['image']);
 			$model->content 	= trim($_POST['content']);
 			$model->origin 		= trim($_POST['origin']);;

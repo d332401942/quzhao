@@ -1,6 +1,6 @@
 <?php 
 
-class UserAjaxView extends AjaxCoreLib
+class UserAjaxView extends BaseAjaxView
 {
     
 	public function checkuser()
@@ -73,6 +73,13 @@ class UserAjaxView extends AjaxCoreLib
 		$model->otheraccount= UserDataModel::REG_DEFAULT;
 		$model->othersite	= 0;
 		$model->status		= 1;
+		foreach ($model as $key => $val)
+		{
+			if (empty($val))
+			{
+				$model->$key = 0;
+			}
+		}
 		$this->password = $model->password;
 		try
 		{

@@ -1,8 +1,6 @@
 <?php
-class ShareAjaxView extends AjaxCoreLib
+class ShareAjaxView extends BaseAjaxView
 {
-	const IMAGE_CODE = 1;
-	const TITLE_CODE = 2;
 	public function index()
 	{
 		if(!empty($_POST['url']) && $_POST['url'] != '超值单品链接'){
@@ -36,8 +34,14 @@ class ShareAjaxView extends AjaxCoreLib
 		{	
 			//抛出异常
 		}
+		$pricePreg = '/<em class="tb-rmb-num">(.*)<\/em>/isUm';
+		$price = preg_match($pricePreg,$content,$priceCon);
+		if(!$price)
+		{	
+			//抛出异常
+		}
 		$titleCon = str_replace('<span class="tb-double-tag"></span>','',$titleCon[1]);
-		$success = array('image'=>array('message'=>$imageCon[1]),'title'=>array('message'=>$titleCon),'origin'=>'淘宝');
+		$success = array('image'=>array('message'=>$imageCon[1]),'title'=>array('message'=>$titleCon),'price'=>$priceCon[1],'origin'=>'淘宝');
 		$this->response($success);
 		//商品属性信息
 		/*$liPreg = '/<ul class="attributes-list">(.*)<\/ul>/isUm';
@@ -66,7 +70,13 @@ class ShareAjaxView extends AjaxCoreLib
 		{	
 			//抛出异常
 		}
-		$success = array('image'=>array('message'=>$imageCon[1]),'title'=>array('message'=>$titleCon[1]),'origin'=>'天猫');
+		$pricePreg = '/<strong class="J_originalPrice">(.*)<\/strong>/isUm';
+		$price = preg_match($pricePreg,$content,$priceCon);
+		if(!$price)
+		{	
+			//抛出异常
+		}
+		$success = array('image'=>array('message'=>$imageCon[1]),'title'=>array('message'=>$titleCon[1]),'price'=>$priceCon[1],'origin'=>'天猫');
 		$this->response($success);
 	}
 	

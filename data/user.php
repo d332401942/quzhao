@@ -48,6 +48,19 @@ class UserData extends BaseData
         $userModel = $this->findOne();
         return $userModel;
     }
+    
+    /**
+     * 通过第三方登录数据获取用户信息
+     *
+     */
+    public function getUserInfoByOther($openId, $type)
+    {
+    	$query = array();
+    	$query['regtype'] = $type;
+    	$query['openid'] = $openId;
+    	$this->where($query);
+    	return $this->findOne();
+    }
 
     public function change ($model)
     {

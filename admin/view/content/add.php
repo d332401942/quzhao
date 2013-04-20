@@ -19,12 +19,37 @@ class AddContentView extends BaseView
 		{
 			$model = $business->getNetDataToModel((int)$_GET['netdataid']);
 		}
+		else if(!empty($_GET['shareid']) && (int)$_GET['shareid'])
+		{
+			$business = M('ShareBusiness');
+			$shareModel = $business->getShareModel($_GET['shareid']);
+		}
 		if (!$model)
 		{
 			$model = new HomeTjDataDataModel();
 			$model->fid = HomeTjDataDataModel::FID_HAND_INPUT;
 		}
 		$this->model = $model;
+		if(!empty($shareModel))
+		{
+			$model = new HomeTjDataDataModel();
+			$model->name 	= $shareModel->title;
+			$model->info 	= $shareModel->content;
+			$model->pic  	= $shareModel->image;
+			$model->href 	= $shareModel->url;
+			$model->price 	= $shareModel->price;
+			$model->isvalid = HomeTjDataDataModel::ISVALID_YES;
+			$model->name 	= $shareModel->title;
+			$model->name 	= $shareModel->title;
+			$model->name 	= $shareModel->title;
+			$model->name 	= $shareModel->title;
+			$model->shareid = $shareModel->id;
+			$this->model = $model;
+			if (!empty($_POST))
+			{
+				$this->addShare();
+			}
+		}
 		if (!empty($_POST))
 		{
 			$this->add();
@@ -142,9 +167,93 @@ class AddContentView extends BaseView
 		{
 			$url = APP_URL. '/netdata';
 		}
+		if (empty($model->sort))
+		{
+			$model->sort = 0;
+		}
 		$this->success('操作成功',$url);
 	}
 	
+	public function addShare()
+	{
+		$model = $this->model;
+		$business = new HomeTjDataBusiness();
+		$file = new FileUploadUtilLib('pic');
+		$uploadInfo = $file->upload();
+		$picName = null;
+		if ($uploadInfo)
+		{
+			$fileName = $uploadInfo[0];
+			$model->pic = $fileName;
+			if (0 && file_exists($fileName))
+			{
+				$picName = $file->thumb($fileName,320,320);
+				unlink($fileName);
+				$model->pic = $picName;
+				if (!empty($_POST['oldpic']) && file_exists($_POST['oldpic']))
+				{
+					unlink($_POST['oldpic']);
+				}
+				if (!empty($_POST['oldpic']) && file_exists($_POST['oldpic']))
+				{
+					unlink($_POST['oldpic']);
+				}
+			}
+		}
+		
+		if (!$model->pic && !empty($_POST['oldpic']))
+		{
+			$model->pic = $_POST['oldpic'];
+		}
+		
+		foreach ($model as $key => $value)
+		{
+			if (isset($_POST[$key]))
+			{
+				$model->$key = $_POST[$key];
+			}
+		}
+		if($_FILES['pic']['name'] != '')
+		{
+			$this->setPic($model);
+		}
+		if(empty($_POST['eprice']))
+		{
+			$model->eprice = 0;
+		}
+		if ($model->time_start)
+		{
+			$model->time_start = strtotime($model->time_start);
+		}
+		if ($model->time_end)
+		{
+			$model->time_end = strtotime($model->time_end);
+		}
+		if (!$model->ctime)
+		{
+			$model->ctime = time();
+		}
+		$model->ltime = time();
+		if (!$model->id)
+		{
+			$model->state = HomeTjDataDataModel::STATE_DOWN;
+		}
+		$model->isvalid = HomeTjDataDataModel::ISVALID_YES;
+		if ($model->id)
+		{
+			$business->updateModel($model);
+		}
+		else
+		{	
+			$business->add($model);
+		}
+		if(!empty($_GET['shareid']) && (int)$_GET['shareid'])
+		{
+			$business = M('ShareBusiness');
+			$business->setState($_GET['shareid'],ShareDataModel::SHARE_STATUS_OK);
+		}
+		$this->success('操作成功',APP_URL.'content');
+	}
 	private function setPic($model)
 	{
 		$picUrl = $model->pic;

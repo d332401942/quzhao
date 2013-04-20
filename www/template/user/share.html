@@ -6,6 +6,7 @@
 	<form action="__APP__/user/share" method="post">
 	<input type="hidden" name="url" id="js-hidden-url" />
 	<input type="hidden" name="origin" id="js-hidden-origin" />
+	<input type="hidden" name="price" id="js-hidden-price" />
 	<div class="link_san" id="js-title">139元&nbsp;包邮&nbsp;Only&nbsp;玉兰油&nbsp;水感透白沁亮原液150ml</div>
 	<input type="hidden" name="title" id="js-hidden-title" />
 	<div class="link_si">
@@ -39,6 +40,7 @@ function doSubmit() {
 		$('#js-hidden-origin').val(data.result.origin);
 		var url = $('#js-url').val();
 		$('#js-hidden-url').val(url);
+		$('#js-hidden-price').val(data.result.price);
 		if(data.result.image.message) {
 			$('#js-image').html('<img src='+data.result.image.message+' width="141" height="115" />');
 			$('#js-hidden-image').val(data.result.image.message);
