@@ -10,10 +10,13 @@ class LoveBusiness extends BaseBusiness
 	/*
 	*查看该会员是不是喜欢过该产品
 	*/
-	public function getLove($userid)
+	public function getLove($pid,$userid)
 	{
 		$data = new LoveData();
-		$data->where(array('userid'=>$userid));
+		$query = array();
+		$query['home_tj_data_id'] = $pid;
+		$query['userid']		  = $userid;	
+		$data->where($query);
 		$result = $data->findOne();
 		return $result;
 	}

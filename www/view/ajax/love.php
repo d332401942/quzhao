@@ -7,14 +7,14 @@ class LoveAjaxView extends BaseAjaxView
 		if($_POST)
 		{
 			$business = M('LoveBusiness');
-			$result = $business->getLove($this->CurrentUser->id);
+			$result = $business->getLove((int)$_POST['pid'],$this->CurrentUser->id);
 			if($result)
 			{
 				$this->responseError('该产品已经喜欢过');
 			}
 			$model = M('LoveDataModel');
 			$model->home_tj_data_id		= (int)$_POST['pid'];
-			$model->userid				= (int)$_POST['userid'];
+			$model->userid				= $this->CurrentUser->id;
 			$model->status				= 0;
 			$business->add($model);
 			$business = M('HomeTjDataBusiness');
