@@ -1,5 +1,5 @@
 <?php
-class ShareAjaxView extends AjaxCoreLib
+class ShareAjaxView extends BaseAjaxView
 {
 	const IMAGE_CODE = 1;
 	const TITLE_CODE = 2;

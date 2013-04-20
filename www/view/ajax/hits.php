@@ -1,6 +1,6 @@
 <?php
 
-class HitsAjaxView extends AjaxCoreLib
+class HitsAjaxView extends BaseAjaxView
 {
     
     public function log()
