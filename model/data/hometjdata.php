@@ -188,7 +188,7 @@ class HomeTjDataDataModel extends BaseDataModel
 	 * 会员喜欢次数
 	 * @var int
 	 */
-	public $lovenumber;
+	public $lovenumber = 0;
 	
 	public function __construct()
 	{
