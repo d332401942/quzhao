@@ -40,6 +40,15 @@ class ShareAjaxView extends BaseAjaxView
 		{	
 			//抛出异常
 		}
+		if(isset($imageCon[1]) && empty($imageCon[1])){
+			$imageCon[1] = '暂未抓取到图片';
+		}
+		if(isset($titleCon[1]) && empty($titleCon[1])){
+			$titleCon[1] = '暂未抓取到标题';
+		}
+		if(isset($priceCon[1]) && empty($priceCon[1])){
+			$priceCon[1] = '暂未抓取到价钱';
+		}
 		$titleCon = str_replace('<span class="tb-double-tag"></span>','',$titleCon[1]);
 		$success = array('image'=>array('message'=>$imageCon[1]),'title'=>array('message'=>$titleCon),'price'=>$priceCon[1],'origin'=>'淘宝');
 		$this->response($success);
@@ -75,6 +84,15 @@ class ShareAjaxView extends BaseAjaxView
 		if(!$price)
 		{	
 			//抛出异常
+		}
+		if(isset($imageCon[1]) && empty($imageCon[1])){
+			$imageCon[1] = '暂未抓取到图片';
+		}
+		if(isset($titleCon[1]) && empty($titleCon[1])){
+			$titleCon[1] = '暂未抓取到标题';
+		}
+		if(isset($priceCon[1]) && empty($priceCon[1])){
+			$priceCon[1] = '暂未抓取到价钱';
 		}
 		$success = array('image'=>array('message'=>$imageCon[1]),'title'=>array('message'=>$titleCon[1]),'price'=>$priceCon[1],'origin'=>'天猫');
 		$this->response($success);
