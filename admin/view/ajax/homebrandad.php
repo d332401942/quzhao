@@ -1,6 +1,6 @@
 <?php 
 
-class HomebrandadAjaxView extends AjaxCoreLib
+class HomebrandadAjaxView extends BaseAjaxView
 {
 	
 	public function del()

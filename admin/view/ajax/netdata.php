@@ -1,6 +1,6 @@
 <?php 
 
-class NetDataAjaxView extends AjaxCoreLib
+class NetDataAjaxView extends BaseAjaxView
 {
 	
 	public function del()

@@ -1,6 +1,6 @@
 <?php
 
-class ContentAjaxView extends AjaxCoreLib
+class ContentAjaxView extends BaseAjaxView
 {
 
 	public function changeState()

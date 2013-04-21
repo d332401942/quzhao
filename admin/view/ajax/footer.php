@@ -1,6 +1,6 @@
 <?php
 
-class FooterAjaxView extends AjaxCoreLib
+class FooterAjaxView extends BaseAjaxView
 {
     
     public function del()
