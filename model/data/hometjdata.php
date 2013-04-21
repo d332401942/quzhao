@@ -182,7 +182,7 @@ class HomeTjDataDataModel extends BaseDataModel
 	 * 会员分享关联id
 	 * @var int
 	 */
-	public $shareid;
+	public $shareid = 0;
 	
 	/**
 	 * 会员喜欢次数

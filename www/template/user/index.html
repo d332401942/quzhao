@@ -11,138 +11,24 @@
 		</div>
 		<div class="line"></div>
 		<ul>
+			<{if ($model)}>
+			<{foreach ($model as $val)}>
 			<li>
 				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
+				<p><a href="#"><img src="<{$val->pic|parsePicpath}>"/></a></p>
+				<h3><a href="<{$val->href}>" target="_blank" title="<{$val->name}>"><{$val->name|truncate:25}></a></h3>
+				<h4><{$val->price}></h4>
 				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+					<span><a href="<{$val->href}>" target="_blank"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
 				</h2>
 				</div>
 			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
-			<li>
-				<div class="ress_more_li">
-				<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-				<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-				<h4>￥9.90</h4>
-				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-				</h2>
-				</div>
-			</li>
+			<{/foreach}>
+			<{else}>
+				暂无喜欢商品
+			<{/if}>
 		</ul>
-		<div class="pag" style="width:680px; background-color:#fff; padding-top:60px; margin-top:0px;">
-<a href="#">上一页</a>
-<a href="#" class="pag_open">1</a>
-<a href="#">2</a>
-<a href="#">3</a>
-<a href="#">4</a>
-<a href="#">5</a>
-...
-<a href="#">67</a>
-<a href="#">下一页</a>
-</div>
+		<{uc class="PageControlView" pageCore="$pageCore"}>
 		
 	</div>
 	<div class="con_right2">
@@ -161,3 +47,8 @@
 	</div>
 </div>
 <{uc class="FooterControlView"}>
+<script>
+function goPage(page) {
+	window.location.href = '__APP__/user__LIMIT__page/' + page;
+}
+</script>

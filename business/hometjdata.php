@@ -21,12 +21,22 @@ class HomeTjDataBusiness extends BaseBusiness
 	 * 修改产品喜欢次数
 	 */
 	 public function loveNum($id)
-	 {
+	{
 		$data = new HomeTjDataData();
 		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
 		$data->exec($sql);
-	 }
+	}
 	 
+	 /*
+	*得到会员喜欢商品
+	*/
+	public function getUserLove($pageCore,$userid)
+	{
+		$data = new HomeTjDataData();
+		$result = $data->getUserLove($pageCore,$userid);
+		return $result;
+	}
+	
     public function getOneById($id)
     {
         $data = new HomeTjDataData();
