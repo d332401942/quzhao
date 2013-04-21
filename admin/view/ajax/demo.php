@@ -1,6 +1,6 @@
 <?php 
 
-class DemoAjaxView extends AjaxCoreLib
+class DemoAjaxView extends BaseAjaxView
 {
 	
 	public function demo()

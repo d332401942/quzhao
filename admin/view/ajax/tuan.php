@@ -1,6 +1,6 @@
 <?php 
 
-class TuanAjaxView extends AjaxCoreLib
+class TuanAjaxView extends BaseAjaxView
 {
 	
 	public function getRegionByCiy()

@@ -1,6 +1,6 @@
 <?php
 
-class UserAjaxView extends AjaxCoreLib
+class UserAjaxView extends BaseAjaxView
 {
 
     public function loginOut()

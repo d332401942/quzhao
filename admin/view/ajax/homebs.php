@@ -1,6 +1,6 @@
 <?php 
 
-class HomebsAjaxView extends AjaxCoreLib
+class HomebsAjaxView extends BaseAjaxView
 {
 	
 	public function delClass()

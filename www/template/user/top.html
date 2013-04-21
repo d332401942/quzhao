@@ -4,7 +4,15 @@
 		<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if ($CurrentUser)}>
 			<li style="margin-left:780px;_margin-left:425px;"><a href="#">消息（0）</a></li>
-			<li style=" margin-top:-10px;"><a href="__APP__/user/change"><img src="__RESOURCE__/images/24-24.jpg" alt=""></a></li>
+			<li style=" margin-top:-10px;">
+				<a href="__APP__/user/change">
+					<{if ($CurrentUser->regtype == 1 && 0)}>
+						<img src="__RESOURCE__/images/qq.png" alt="">
+					<{else}>
+						<img src="__RESOURCE__/images/24-24.jpg" alt="">
+					<{/if}>
+				</a>
+			</li>
 		<{else}> 
 			<li style="margin-left:790px;_margin-left:430px;"><a href="javascript:;" onclick="showLoginDiv()">登录</a></li>
 			<li style=""><a href="javascript:;" ><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>

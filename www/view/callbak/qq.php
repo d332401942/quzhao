@@ -53,7 +53,6 @@ class QqCallbakView extends BaseView
 		$business = new UserBusiness();
 		$userModel = $business->getUserInfoByOther($openid, $userInfo, UserDataModel::OTHER_SITE_QQ);
 		//把用户信息记入cookie
-		//P($userInfo);exit;
 		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($userModel), 0, '/');
 		
 	}

@@ -1,6 +1,6 @@
 <?php
 
-class FriendLinkAjaxView extends AjaxCoreLib
+class FriendLinkAjaxView extends BaseAjaxView
 {
 
 	public function del()
