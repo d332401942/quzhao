@@ -1,9 +1,9 @@
 <div class="top_bar_con">
 	<ul>
 		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
-		<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if ($CurrentUser)}>
-			<li style="margin-left:780px;_margin-left:425px;"><a href="#">消息（0）</a></li>
+			<li style="margin-left:750px;_margin-left:425px;"><a href="javascript:;">消息（0）</a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user/change">
 					<{if ($CurrentUser->regtype == 1 && 0)}>
@@ -18,8 +18,11 @@
 			<li style=""><a href="javascript:;" ><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
 		<{/if}>
-		<li style="margin-left:15px;"><a href="#">帮助</a></li>
-		<li style=""><a href="#"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+		<li style="margin-left:15px;"><a href="javascript:;">帮助</a></li>
+		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+		<{if ($CurrentUser)}>
+		<li style="margin-left:15px;"><a href="javascript:;" onclick="loginOut();">退出</a></li>
+		<{/if}>
 	</ul>	
 </div>
 <div class="dingwei2">
@@ -29,17 +32,29 @@
 	</ul>
 	
 	<ul class="xiaoxi" style="display:none;">
-		<li class="chang">照片<a href="#">理业主的照片理业主</a>有了新回复</li>
-		<li class="duan"><a href="#">不再提醒</a></li>
+		<li class="chang">照片<a href="javascript:;">理业主的照片理业主</a>有了新回复</li>
+		<li class="duan"><a href="javascript:;">不再提醒</a></li>
 		<li class="chang">折扣活动</li>
-		<li class="duan"><a href="#">不再提醒</a></li>
-		<li class="chang">照片<a href="#">理业主助理业主|早起~</a>有了新回复</li>
-		<li class="duan"><a href="#">不再提醒</a></li>
+		<li class="duan"><a href="javascript:;">不再提醒</a></li>
+		<li class="chang">照片<a href="javascript:;">理业主助理业主|早起~</a>有了新回复</li>
+		<li class="duan"><a href="javascript:;">不再提醒</a></li>
 	</ul>
 </div>
 <script type="text/javascript">
 
 var userCallBak = function(){};
+
+function loginOut() {
+	$.ajax({
+		url: '__AJAX__/user/loginOut?stmp=' + new Date().toString(),
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
 
 function loginQQ() {
 	var url = 'http://openapi.qzone.qq.com/oauth/show?which=ConfirmPage&display=pc&response_type=code&scope=all&client_id=100384287&redirect_uri=<{echo urlencode('http://'.$ServerName.'/callbak/qq')}>';
