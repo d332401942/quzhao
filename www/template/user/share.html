@@ -1,13 +1,13 @@
 <div class="link user-link">
 	<form action="__AJAX__/share/index" method="post" id="js-formShare" onsubmit="return doSubmit()">
-		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接'){value =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" id="js-url" /></div>
+		<div class="link_yi"><input class="link_kuang" type="text" name="url" onmouseout="this.style.borderColor=''" onfocus="if (value =='超值单品链接' || value == '请填写商品连接'){value ='';this.style.color =''}" value="超值单品链接"  onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='超值单品链接'}" id="js-url" /></div>
 		<div class="link_er"><a href="#"><input type="image" src="__RESOURCE__/images/12-11.jpg" name="btn_submit" /></a></div>
 	</form>
 	<form action="__APP__/user/share" method="post" onsubmit="return checkform()">
 	<input type="hidden" name="url" id="js-hidden-url" />
 	<input type="hidden" name="origin" id="js-hidden-origin" />
 	<input type="hidden" name="price" id="js-hidden-price" />
-	<div class="link_san" id="js-title">139元&nbsp;包邮&nbsp;Only&nbsp;玉兰油&nbsp;水感透白沁亮原液150ml</div>
+	<div class="link_san" id="js-title">显示抓取商品标题</div>
 	<input type="hidden" name="title" id="js-hidden-title" />
 	<div class="link_si">
 		<div class="link_pic"><a href="#" id="js-image"><img src="__RESOURCE__/images/141-115.jpg" alt=""/></a></div>
@@ -55,8 +55,15 @@ function doSubmit() {
 	return false;
 }
 function checkform() {
+	var	url = $('#js-url').val();
+	var title = $('#js-title').html();
+	if(url == '超值单品链接' && title == '显示抓取商品标题') {
+		$('#js-url').val('请填写商品连接');
+		$('#js-url').css('color','red');
+		return false;
+	}
 	var con = $('#js-content').val();
-	if(con.length > 10) {
+	if(con.length > 600) {
 		$('#js-message').html('<font style="color:red">推荐理由600字以内</font>');
 		return false;
 	}
@@ -64,7 +71,7 @@ function checkform() {
 function checkcon() {
 	var con = $('#js-content').val();
 	if(con != '推荐理由600字以内') {
-		if(con.length > 10) {
+		if(con.length > 600) {
 			$('#js-message').html('<font style="color:red">推荐理由600字以内</font>');
 		}else{
 			$('#js-message').html('');

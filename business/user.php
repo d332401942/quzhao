@@ -44,11 +44,15 @@ class UserBusiness extends BaseBusiness
     	{
     		$nickname = $userInfo['nickname'];
     	}
+    	else if ($type == UserDataModel::OTHER_SITE_TAOBAO)
+    	{
+    		$nickname = $userInfo['taobao_user_nick'];
+    	}
     	if (!$model)
     	{
     		//添加一个第三方注册用户
     		$model = new UserDataModel();
-    		$model->regtype 	= UserDataModel::OTHER_SITE_QQ;
+    		$model->regtype 	= $type;
     		$model->createtime	= time();
     		$model->password	= 0;
     		$model->ischecked	= 0;

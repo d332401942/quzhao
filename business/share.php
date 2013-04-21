@@ -7,7 +7,6 @@ class ShareBusiness extends BaseBusiness
 		$data = new ShareData();
 		$model->image = $this->downImg($model->image);
 		$data->add($model);
-		
     }
 	
 	public function findAll($pageCore,$cateId)
