@@ -55,6 +55,12 @@ class UserAjaxView extends BaseAjaxView
 		$this->response(true);
 	}
 	
+	public function loginOut()
+	{
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, '', -1, '/');
+		$this->response(true);
+	}
+	
 	public function add()
 	{
 		if (empty($_POST['agreement']))
