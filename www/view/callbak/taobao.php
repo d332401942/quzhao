@@ -9,7 +9,7 @@ class TaobaoCallbakView extends BaseView
 		{
 			$msg = empty ( $_GET ['error_description'] ) ? null : $_GET ['error_description'];
 			$errorCode = empty ( $_GET ['error'] ) ? 0 : $_GET ['error'];
-			$this->responseError ( $msg, $errorCode );
+			$this->closeWindow ();
 		}
 		$code = $_GET['code'];
 		$taobaoInfo = $connectModel->getTaobaoInfo($code);
@@ -27,4 +27,6 @@ class TaobaoCallbakView extends BaseView
 		// 把用户信息记入cookie
 		setcookie ( BaseView::USER_INFO_COOKIE_KEY, json_encode ( $userModel ), 0, '/' );
 	}
+
+	
 }

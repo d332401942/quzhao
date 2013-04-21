@@ -18,6 +18,16 @@ try
 {
     $mainClass->run($regulation);
 }
+catch (OtherExceptionLib $e)
+{
+	if ($e->getMessage() == OtherExceptionLib::CLOSE_WINDOW)
+	{
+		echo '<script>';
+		echo 'window.close()';
+		echo '</script>';
+		exit;
+	}
+}
 catch (Exception $e)
 {
     header("HTTP/1.0 404 Not Found");
