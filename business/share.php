@@ -35,7 +35,7 @@ class ShareBusiness extends BaseBusiness
 		CommUtilLib::rMkdir('./public/uploads/images/'.$path);
 		$pic = file_get_contents($url);
 		file_put_contents('./public/uploads/images/'.$path.'/'.$md5Url.'.jpg',$pic);
-		$url = './public/uploads/images/'.$path.'/'.$md5Url.'.jpg';
+		$url = '/public/uploads/images/'.$path.'/'.$md5Url.'.jpg';
 		return $url;
 	}
 	

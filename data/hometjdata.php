@@ -144,4 +144,17 @@ class HomeTjDataData extends BaseData
 		}
 		return $result;
 	}
+	 /*
+	*得到会员喜欢商品
+	*/
+	public function getUserLove($pageCore,$userid)
+	{
+		$sql = 'select count(*) as num from love as t1 join home_tj_data as t2 on t2.id = t1.home_tj_data_id where t1.userid = '.$userid;
+		$row = $this->query($sql);
+		$pageCore->count = $row[0]['num'];
+		$pageCore->pageCount = ceil($pageCore->count / $pageCore->pageSize);
+		$sql = 'select t2.* from love as t1 join home_tj_data as t2 on t2.id = t1.home_tj_data_id where t1.userid = '.$userid.' order by id desc limit '.($pageCore->currentPage - 1)*$pageCore->pageSize.','.$pageCore->pageSize;
+		$result = $this->query($sql,'HomeTjDataDataModel');
+		return $result;
+	}
 }
