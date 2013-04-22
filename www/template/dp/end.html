@@ -10,7 +10,7 @@
 
 </li>
 <li class="dp_box2_l_l">
-    <a href="<{$goods->href}>" title="<{$goods->name}>"><img src="<{if (!preg_match('/^http:\/\//',$goods->pic))}>/<{/if}><{$goods->pic}>" /></a>
+    <a href="<{$goods->href}>" title="<{$goods->name}>"><img src="<{$goods->pic|parsePicpath}>" /></a>
 </li>
 <li class="dp_box2_l_r">
 <h3>
