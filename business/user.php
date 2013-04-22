@@ -43,6 +43,7 @@ class UserBusiness extends BaseBusiness
     	if ($type == UserDataModel::OTHER_SITE_QQ)
     	{
     		$nickname = $userInfo['nickname'];
+    		$nickname = mb_convert_encoding($nickname, 'utf-8', 'gbk');
     	}
     	else if ($type == UserDataModel::OTHER_SITE_TAOBAO)
     	{
