@@ -15,9 +15,12 @@ class MessageDataModel extends BaseDataModel
 	
 	public $revert = '';
 	
+	public $replys = array();
+	
 	public function __construct()
 	{
 		parent::__construct();
+		$this->setIgoneFields('replays');
 		$this->setTableName('message');
 	}
 }

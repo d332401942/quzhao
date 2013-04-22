@@ -25,7 +25,7 @@ class ConnectModel extends Feng
 
 	public $stepTaobao1;
 
-	private $stepTaobao2;
+	public $stepTaobao2;
 
 	public $appIdWeibo;
 
@@ -79,32 +79,6 @@ class ConnectModel extends Feng
 		$this->stepTaobao1 .= '?client_id=' . $this->appIdTaobao;
 		$this->stepTaobao1 .= '&response_type=code';
 		$this->stepTaobao1 .= '&redirect_uri=' . urlencode ( $this->redirectUriTaobao );
-	}
-
-	public function getTaobaoInfo($code)
-	{
-		$content = 'grant_type=authorization_code';
-		$content .= '&client_id=' . $this->appIdTaobao;
-		$content .= '&client_secret=' . $this->appKeyTaobao;
-		$content .= '&code=' . $code;
-		$content .= '&redirect_uri=' . urlencode ( $this->redirectUriTaobao );
-		$context = array (
-						'http' => array (
-										'method' => 'post',
-										'content' => $content 
-						) 
-		);
-		$stream_context = stream_context_create ( $context );
-		$data = file_get_contents ( $this->stepTaobao2 . '/token', FALSE, $stream_context );
-		$info = json_decode ( $data, true );
-		foreach ( $info as $key => $val )
-		{
-		if ($val && is_string($val))
-			{
-				$info [$key] = urldecode ( $val );
-			}
-		}
-		return $info;
 	}
 
 }
