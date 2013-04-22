@@ -97,6 +97,7 @@
 
     <a href="<{$goods->href}>" target="_blank">去购买</a
 ></div>
+
 </li>
 </ul>
 <ul>
@@ -104,18 +105,18 @@
 <!--评论 start-->
 <div class="comt" id="js-comt"></div>
 <!--评论 end-->
+<a name="html-revert" id="html-revert"> </a>
 <div class="ress_box">
+<div id="js-revert" style="margin:0 0 10px 60px;color:#999;"></div>
+<input type="hidden" id="js-hidden-revert" name="revert" value="" />
 <div class="comt_l">
 <img src="__RESOURCE__/images/tx.gif" />
 </div>
-
-
 <div class="comt_r">
 <div class="comt_r_top">
 <textarea name="message" cols="" rows="" class="ress" id="js-message" onkeyup="checkmsg()"></textarea>
 </div>
 <div style="margin-bottom:15px;" id="js-empty-message"></div>
-
 <div class="ress_login_box">
 <div class="ress_login_box_l" id="js-login">
 <a href="javascript:;" onclick="showLoginDiv();"><strong>登录</strong></a>（没有趣找账户？<a href="javascript:;" onclick="showRegDiv();">注册</a>一个）
@@ -123,8 +124,6 @@
 <div class="ress_login_box_r"><a href="javascript:" onclick="message()">发布</a></div>
 </div>
 </div>
-
-
 <!--<div class="mulist">大家还看了</div>
 <div class="ress_more">
 <div class="ress_more_li">
@@ -275,7 +274,8 @@ function message() {
 		$('#js-empty-message').html('<font style="color:red">评论内容不能为空</font>');
 		return false;
 	}
-	data = {message:msg,pid:<{$id}>};
+	revertMsg = $('#js-revert').html();
+	data = {message:msg,pid:<{$id}>,revert:revertMsg};
 	url = '__AJAX__/message/add?stmp=' + new Date().toString();
 	$.ajax({
 		dataType:'json',
@@ -285,6 +285,8 @@ function message() {
 		success:function(data){
 			if(data.result) {
 				$('#js-message').val('');
+				$('#js-revert').html('');
+				$('#js-revert').hide();
 				showComt(0);
 			}
 		}
@@ -294,8 +296,20 @@ function checkmsg() {
 	$('#js-empty-message').html('');
 }
 function cite(id) {
+	if (!CurrentUserInfo) {
+		showLoginDiv();
+		return false;
+	}
 	msg = $('#js-getMessage-'+id).html();
 	$('#js-message').val(msg);
+}
+function revert(id,nickname) {
+	if (!CurrentUserInfo) {
+		showLoginDiv();
+		return false;
+	}
+	msg = $('#js-getMessage-'+id).html();
+	$('#js-revert').html(nickname+'：'+msg);
 }
 </script>
 <script>showComt();</script>

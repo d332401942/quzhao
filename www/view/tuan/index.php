@@ -36,7 +36,7 @@ class IndexTuanView extends BaseView
 		{
 			$this->classModels[$model->code] = $model;
 		}
-       
+       //P($this->classModels);
 		//TODO 获取当前城市
 		
 		//默认字母
