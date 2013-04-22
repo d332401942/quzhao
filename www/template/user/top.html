@@ -58,18 +58,17 @@ function loginOut() {
 
 function loginTaobao() {
 	var url = '<{$connectModel->stepTaobao1}>';  //测试地址
-	window.open(url,'logintaobao','channelmode=yes,width=800,height=500,directories=no,left=400,top=100');
+	window.open(url,'logintaobao','channelmode=yes,width=800,height=500,left=400,top=100');
 }
 
 function loginWeibo() {
-
+	var url = '<{$connectModel->stepWeibo1}>';
+	window.open(url,'logintaobao','channelmode=yes,width=800,height=500,left=400,top=100');
 }
 
 function loginQQ() {
 	var url = '<{$connectModel->stepQQ1}>';
-	window.open(url,'loginqq','channelmode=yes,width=800,height=500,directories=no,left=400,top=100');
-	return;
-	$.mask.show('<iframe src="' + url + '" style="width:800px;height:500px;"></iframe>');
+	window.open(url,'loginqq','channelmode=yes,width=800,height=500,left=400,top=100');
 }
 
 function showLoginDiv() {
