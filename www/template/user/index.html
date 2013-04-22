@@ -15,11 +15,11 @@
 			<{foreach ($model as $val)}>
 			<li>
 				<div class="ress_more_li">
-				<p><a href="#"><img src="<{$val->pic|parsePicpath}>"/></a></p>
+				<p><a href="<{$val->href}>" target="_blank"><img src="<{$val->pic|parsePicpath}>"/></a></p>
 				<h3><a href="<{$val->href}>" target="_blank" title="<{$val->name}>"><{$val->name|truncate:25}></a></h3>
 				<h4><{$val->price}></h4>
 				<h2>
-					<span><a href="<{$val->href}>" target="_blank"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+					<span><a href="#"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
 				</h2>
 				</div>
 			</li>
