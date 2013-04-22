@@ -188,5 +188,6 @@ class SearchData extends BaseData
 	private function setPublicFilter($sphinx)
 	{
 		$sphinx->setFilter('isdelete', array(0));
+		$sphinx->setFilter('siteid', array(111), true);
 	}
 }
