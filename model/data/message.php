@@ -13,13 +13,8 @@ class MessageDataModel extends BaseDataModel
 	
 	public $storey;
 	
-<<<<<<< HEAD
-=======
-	public $revert = '';
-	
 	public $replys = array();
 	
->>>>>>> 5de9a0546b1777b7e41822904a32fd9daad57dad
 	public function __construct()
 	{
 		parent::__construct();
