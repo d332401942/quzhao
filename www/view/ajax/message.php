@@ -13,7 +13,6 @@ class MessageAjaxView extends BaseAjaxView
 				$model->pid 		=	(int)$_POST['pid'];
 				$model->creattime 	=	time();
 				$model->message 	=	trim($_POST['message']);
-				$model->revert		=   trim($_POST['revert']);
 				$business->add($model);
 				$this->response(true);
 			}

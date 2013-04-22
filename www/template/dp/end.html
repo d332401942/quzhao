@@ -105,10 +105,7 @@
 <!--评论 start-->
 <div class="comt" id="js-comt"></div>
 <!--评论 end-->
-<a name="html-revert" id="html-revert"> </a>
 <div class="ress_box">
-<div id="js-revert" style="margin:0 0 10px 60px;color:#999;"></div>
-<input type="hidden" id="js-hidden-revert" name="revert" value="" />
 <div class="comt_l">
 <img src="__RESOURCE__/images/tx.gif" />
 </div>
@@ -274,8 +271,11 @@ function message() {
 		$('#js-empty-message').html('<font style="color:red">评论内容不能为空</font>');
 		return false;
 	}
-	revertMsg = $('#js-revert').html();
-	data = {message:msg,pid:<{$id}>,revert:revertMsg};
+	if(msg.length > 600) {
+		$('#js-empty-message').html('<font style="color:red">评论内容600字以内</font>');
+		return false;
+	}
+	data = {message:msg,pid:<{$id}>};
 	url = '__AJAX__/message/add?stmp=' + new Date().toString();
 	$.ajax({
 		dataType:'json',
@@ -285,8 +285,6 @@ function message() {
 		success:function(data){
 			if(data.result) {
 				$('#js-message').val('');
-				$('#js-revert').html('');
-				$('#js-revert').hide();
 				showComt(0);
 			}
 		}
@@ -308,8 +306,6 @@ function revert(id,nickname) {
 		showLoginDiv();
 		return false;
 	}
-	msg = $('#js-getMessage-'+id).html();
-	$('#js-revert').html(nickname+'：'+msg);
 }
 </script>
 <script>showComt();</script>
