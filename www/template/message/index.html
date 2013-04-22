@@ -3,12 +3,12 @@
 <{foreach ($model as $val)}>
 <div class="comt_box">
 <div class="comt_l">
-<img src="http://tp3.sinaimg.cn/1197161814/50/1290146312/1" />
+<img src="__RESOURCE__/images/tx.gif" />
 </div>
 <div class="comt_r">
 <div class="comt_r_top">
 <div class="comt_r_top_l">
-<a href="#">用户名</a><{$val->creattime|date_format:'Y-m-d H:i:s'}>
+<a href="#"><{$val->nickname}></a><{$val->creattime|date_format:'Y-m-d H:i:s'}>
 </div>
 <div class="comt_r_top_r">
 <!--<a href="#">@他</a>-->
@@ -22,15 +22,15 @@
 </div>
 <{if (!empty($val->replys))}>
 <{foreach ($val->replys as $v)}>
-<div class="comt_r_cont2">用户名：<{$v->content}></div>
+<div class="comt_r_cont2"><{$v->nickname}>:<{$v->content}></div>
 <{/foreach}>
 <{/if}>
 <div style="display:none;" id="js-hiddenReply-<{$val->id}>">
-<textarea name="content" id="js-reply-content" onkeyup="checkReply();"></textarea>
+<textarea name="content" id="js-reply-content-<{$val->id}>" onkeyup="checkReply();"></textarea>
 <br />
 <input type="submit" value="提交" onclick="reply(<{$val->id}>);" />
 </div>
-<div id="js-empty-reply"></div>
+<div id="js-empty-reply-<{$val->id}>"></div>
 </div>
 </div>
 <{/foreach}>
@@ -58,13 +58,13 @@ function reply(messageId) {
 		showLoginDiv();
 		return false;
 	}
-	msg = $('#js-reply-content').val();
+	msg = $('#js-reply-content-'+messageId).val();
 	if(msg == '') {
-		$('#js-empty-reply').html('<font style="color:red">回复内容不能为空</font>');
+		$('#js-empty-reply-'+messageId).html('<font style="color:red">回复内容不能为空</font>');
 		return false;
 	}
 	if(msg.length > 600) {
-		$('#js-empty-reply').html('<font style="color:red">回复内容600字以内</font>');
+		$('#js-empty-reply-'+messageId).html('<font style="color:red">回复内容600字以内</font>');
 		return false;
 	}
 	data = {content:msg,messageId:messageId};
@@ -76,7 +76,7 @@ function reply(messageId) {
 		url:url,
 		success:function(data){
 			if(data.result) {
-				showComt();
+				showComt(<{$pageCore->currentPage}>);
 			}
 		}
 	});

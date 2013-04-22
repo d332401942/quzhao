@@ -222,6 +222,10 @@ class HomeTjDataBusiness extends BaseBusiness
         {
             $this->throwException('商品介绍必须填写');
         }
+        if (empty($model->fitsex))
+        {
+        	$this->throwException('商品适合性别必须选择');
+        }
     }
 
     /**
