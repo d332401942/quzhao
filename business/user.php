@@ -31,10 +31,6 @@ class UserBusiness extends BaseBusiness
 		$data->addUser($model);
     }
     
-    /**
-     * 通过第三方登录数据获取用户信息
-     * 
-     */
     public function getUserInfoByOther($openId, $userInfo, $type)
     {
     	$data = M('UserData');
