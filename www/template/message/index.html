@@ -76,7 +76,7 @@ function reply(messageId) {
 		url:url,
 		success:function(data){
 			if(data.result) {
-				showComt();
+				showComt(<{$pageCore->currentPage}>);
 			}
 		}
 	});
