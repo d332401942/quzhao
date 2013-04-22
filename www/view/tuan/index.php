@@ -46,6 +46,9 @@ class IndexTuanView extends BaseView
 		$adModels = $this->getAdModels();
         //得到团购数据
         $models = $this->getModels($parameters);
+		//新浪微博appKey
+		$sina = new ConnectModel();
+		$this->assign('sinaApp',$sina->appIdWeibo);
         $this->assign('models', $models);
 		$this->assign('headLetter',$headLetter);
 		$this->assign('hotCityModels',$hotCityModels);

@@ -49,6 +49,9 @@ class endDpView extends BaseView
 			'单小V_V',
 			'糊大人cocoa',
 		);
+		//新浪微博appKey
+		$sina = new ConnectModel();
+		$this->assign('sinaApp',$sina->appIdWeibo);
 		$this->assign('editorArr', $editorArr);
         $this->assign('tjModels', $tjModels);
         $this->assign('goods', $goods);

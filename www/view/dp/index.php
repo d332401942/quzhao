@@ -26,6 +26,9 @@ class IndexDpView extends BaseView
 		for($i=0;$i<$count;$i++){
 			$modelCate[$i]->classid = $i+1;
 		}
+		//新浪微博appKey
+		$sina = new ConnectModel();
+		$this->assign('sinaApp',$sina->appIdWeibo);
 		$this->assign('cid', $cid);
         $this->assign('modelCate', $modelCate);
 		$this->assign('models', $models);
