@@ -61,6 +61,10 @@ class ConnectModel extends Feng
 		$stream_context = stream_context_create ( $context );
 		$data = file_get_contents ( $this->stepTaobao2 . '/token', FALSE, $stream_context );
 		$info = json_decode($data, true);
+		foreach ($info as $key => $val)
+		{
+			$info[$key] = urldecode($val);
+		}
 		return $info;
 	}
 }
