@@ -12,7 +12,7 @@
 </div>
 <div class="comt_r_top_r">
 <a href="#">@他</a>
-<a href="#">引用原文</a>
+<a href="javascript:;" onclick="cite(<{$val->id}>)">引用原文</a>
 <a href="#">回复</a>
 <h2><{$val->storey}>楼</h2>
 </div>
@@ -21,7 +21,7 @@
 李开复:我个人觉得这个推荐可以上主页。即使满400-200，也没这个便宜。这一套质量、装订、内容都颇花
 心思，推荐有兴趣的朋友入手。既可装逼，又可充实自我。
 </div>-->
-<div class="comt_r_cont">
+<div class="comt_r_cont" id="js-getMessage-<{$val->id}>">
 <{$val->message}> 
 </div>
 </div>
