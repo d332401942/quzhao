@@ -18,7 +18,7 @@ class MessageDataModel extends BaseDataModel
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setIgoneFields('replays');
+		$this->setIgoneFields('replys');
 		$this->setTableName('message');
 	}
 }
