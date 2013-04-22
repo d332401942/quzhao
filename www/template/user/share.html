@@ -57,7 +57,7 @@ function doSubmit() {
 function checkform() {
 	var	url = $('#js-url').val();
 	var title = $('#js-title').html();
-	if(url == '超值单品链接' && title == '显示抓取商品标题') {
+	if(url == '超值单品链接' || url == '请填写商品连接' && title == '显示抓取商品标题') {
 		$('#js-url').val('请填写商品连接');
 		$('#js-url').css('color','red');
 		return false;
