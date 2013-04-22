@@ -61,6 +61,17 @@ class UserData extends BaseData
     	$this->where($query);
     	return $this->findOne();
     }
+    
+    /**
+     * 修改用户的用户名
+     * @param unknown $userId
+     * @param unknown $nickname
+     */
+    public function updateNickName($userId, $nickname)
+    {
+    	$sql = 'update user set nickname = "'.$nickname.'" where id = '.$userId;
+    	$this->exec($sql);
+    }
 
     public function change ($model)
     {
