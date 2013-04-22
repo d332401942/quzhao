@@ -43,7 +43,6 @@ class MessageData extends BaseData
 		$userIds = array();
 		while ($result = $statement->fetch(PDO::FETCH_ASSOC))
 		{
-			P($result);
 			if (isset($userIds[$result['m_userid']]))
 			{
 				array_push($userIds, $result['m_userid']);

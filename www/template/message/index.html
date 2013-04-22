@@ -17,16 +17,14 @@
 <h2><{$val->storey}>楼</h2>
 </div>
 </div>
-<!--
-<{if (!empty($val->replys))}>
-<{foreach ($val->replys as $v)}>
-<div class="comt_r_cont2"><{$v->nickname}><{$v->content}></div>
-<{/foreach}>
-<{/if}>
--->
 <div class="comt_r_cont" id="js-getMessage-<{$val->id}>">
 <{$val->message}> 
 </div>
+<{if (!empty($val->replys))}>
+<{foreach ($val->replys as $v)}>
+<div class="comt_r_cont2">用户名：<{$v->content}></div>
+<{/foreach}>
+<{/if}>
 <div style="display:none;" id="js-hiddenReply-<{$val->id}>">
 <textarea name="content" id="js-reply-content" onkeyup="checkReply();"></textarea>
 <br />
