@@ -19,6 +19,18 @@ class BaseAjaxView extends AjaxCoreLib
 		$this->Host = new HostModel();
 	}
 	
+	protected function mustLogin($mustEmail = true)
+	{
+		if (!$this->CurrentUser)
+		{
+			
+		}
+		else if (empty($this->CurrentUser->email))
+		{
+			$this->redirect(APP_URL . '/user/preset');
+		}
+	}
+	
 	private function getCookieUserInfo()
 	{
 		if (empty($_COOKIE[self::USER_INFO_COOKIE_KEY]))

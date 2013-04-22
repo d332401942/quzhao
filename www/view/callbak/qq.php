@@ -1,9 +1,11 @@
 <?php
-class QqCallbakView extends BaseView
+
+class QqCallbakView extends BaseCallbakView
 {
+
 	public function index()
 	{
-		$connectModel = new ConnectModel($this->ServerName);
+		$connectModel = new ConnectModel ( $this->ServerName );
 		$access_token = empty ( $_GET ['access_token'] ) ? null : $_GET ['access_token'];
 		$code = empty ( $_GET ['code'] ) ? null : $_GET ['code'];
 		$url = '';
@@ -33,7 +35,8 @@ class QqCallbakView extends BaseView
 		{
 			$json = trim ( $arr [1] );
 			$arr = json_decode ( $json, true );
-		} else
+		}
+		else
 		{
 			$this->responseError ( '' );
 		}
@@ -51,7 +54,7 @@ class QqCallbakView extends BaseView
 		$userInfo ['openid'] = $openid;
 		$business = new UserBusiness ();
 		$userModel = $business->getUserInfoByOther ( $openid, $userInfo, UserDataModel::OTHER_SITE_QQ );
-		// 把用户信息记入cookie
-		setcookie ( BaseView::USER_INFO_COOKIE_KEY, json_encode ( $userModel ), 0, '/' );
+		$this->gotoSet($userModel);
 	}
+
 }

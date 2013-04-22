@@ -71,13 +71,25 @@ function loginQQ() {
 	window.open(url,'loginqq','channelmode=yes,width=800,height=500,left=400,top=100');
 }
 
-function showLoginDiv() {
-	var interval = setInterval(function(){
-		var userInfo = $.cookie('UserInfo');
-		if (userInfo) {
-			clearInterval(interval);
+function listenUserInfo(interval) {
+	var userInfo = $.cookie('UserInfo');
+	if (userInfo) {
+		eval('userInfo = ' + userInfo);
+	}
+	if (typeof(userInfo) == 'object') {
+		clearInterval(interval);
+		if (!userInfo.email) {
+			window.location.href = '__APP__/user/preset';
+		}
+		else {
 			window.location.reload();
 		}
+	}
+}
+
+function showLoginDiv() {
+	var interval = setInterval(function(){
+		listenUserInfo(interval);
 	},30);
 	$.ajax({
 		url: '__APP__/user/userlogin?stmp=' + new Date().toString(),
@@ -89,11 +101,7 @@ function showLoginDiv() {
 
 function showRegDiv() {
 	var interval = setInterval(function(){
-		var userInfo = $.cookie('UserInfo');
-		if (userInfo) {
-			clearInterval(interval);
-			window.location.reload();
-		}
+		listenUserInfo(interval);
 	},30);
 	$.ajax({
 		url: '__APP__/user/userreg?stmp=' + new Date().toString(),

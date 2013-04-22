@@ -22,7 +22,7 @@ class BaseView extends ViewCoreLib
 		$this->assign('ServerName',$this->ServerName);
 	}
 	
-	public function getDetailUserInfo()
+	protected function getDetailUserInfo()
 	{
 	    if (!$this->CurrentUser)
 	    {
@@ -41,6 +41,18 @@ class BaseView extends ViewCoreLib
         $meta->Keywords = $keywords;
         $meta->Description = $description;
         $this->assign('meta', $meta);
+    }
+    
+    protected function mustLogin()
+    {
+    	if (!$this->CurrentUser)
+    	{
+    		$this->redirect(APP_URL . '/user/login');
+    	}
+    	else if (empty($this->CurrentUser->email))
+    	{
+    		$this->redirect(APP_URL . '/user/preset');
+    	}
     }
     
     private function getCookieUserInfo()

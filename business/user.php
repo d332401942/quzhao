@@ -36,9 +36,11 @@ class UserBusiness extends BaseBusiness
     	$data = M('UserData');
     	$model = $data->getUserInfoByOther($openId, $type);
     	$nickname = null;
+    	$head = 0;
     	if ($type == UserDataModel::OTHER_SITE_QQ)
     	{
     		$nickname = $userInfo['nickname'];
+    		$head = $userInfo['figureurl_2'];
     	}
     	else if ($type == UserDataModel::OTHER_SITE_TAOBAO)
     	{
@@ -47,6 +49,7 @@ class UserBusiness extends BaseBusiness
     	else if ($type == UserDataModel::OTHER_SITE_WEIBO)
     	{
     		$nickname = $userInfo['name'];
+    		$head = $userInfo['avatar_large'];
     	}
     	if (!$model)
     	{
@@ -62,6 +65,7 @@ class UserBusiness extends BaseBusiness
     		$model->status		= 1;
     		$model->nickname = $nickname;
     		$model->openid = $openId;
+    		$model->head = $head;
     		foreach ($model as $key => $val)
     		{
     			if (empty($val))
@@ -74,7 +78,7 @@ class UserBusiness extends BaseBusiness
     	//修改用户昵称
     	else if ($nickname && empty($model->email))
     	{
-    		$data->updateNickName($model->id, $nickname);
+    		$data->updateNickNameAndHead($model->id, $nickname, $head);
     	}
     	return $model;
     }

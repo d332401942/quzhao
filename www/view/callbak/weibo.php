@@ -1,6 +1,6 @@
 <?php
 
-class WeiboCallbakView extends BaseView
+class WeiboCallbakView extends BaseCallbakView
 {
 
 	private $connectModel;
@@ -19,8 +19,7 @@ class WeiboCallbakView extends BaseView
 		$weiboInfo = $this->getWeiboInfo ( $code );
 		$business = new UserBusiness ();
 		$userModel = $business->getUserInfoByOther ( $weiboInfo['id'], $weiboInfo, UserDataModel::OTHER_SITE_WEIBO );
-		// 把用户信息记入cookie
-		setcookie ( BaseView::USER_INFO_COOKIE_KEY, json_encode ( $userModel ), 0, '/' );
+		$this->gotoSet($userModel);
 	}
 
 	private function getWeiboInfo($code)

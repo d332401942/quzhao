@@ -1,5 +1,5 @@
 <?php
-class TaobaoCallbakView extends BaseView
+class TaobaoCallbakView extends BaseCallbakView
 {
 	
 	public $connectModel;
@@ -27,8 +27,7 @@ class TaobaoCallbakView extends BaseView
 		}
 		$business = new UserBusiness ();
 		$userModel = $business->getUserInfoByOther ( $taobaoInfo['taobao_user_id'], $taobaoInfo, UserDataModel::OTHER_SITE_TAOBAO );
-		// 把用户信息记入cookie
-		setcookie ( BaseView::USER_INFO_COOKIE_KEY, json_encode ( $userModel ), 0, '/' );
+		$this->gotoSet($userModel);
 	}
 
 	private function getTaobaoInfo($code)
