@@ -25,15 +25,16 @@ class MessageData extends BaseData
 
 	public function getAll($pageCore, $pid, $isLastPage = false)
 	{
-		$sql = 'select count(*) as num from message as t1 join user as t2 on t2.id = t1.userid where pid = ' . $pid;
+		$sql = 'SELECT count(*) as num FROM message AS m LEFT JOIN reply AS r ON r.messageid = m.id  where pid = ' . $pid;
 		$row = $this->query ( $sql );
+		//P($row);exit;
 		$pageCore->count = $row [0] ['num'];
 		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
 		if ($isLastPage)
 		{
 			$pageCore->currentPage = $pageCore->pageCount;
 		}
-		$sql = 'SELECT m.id AS m_id, m.pid AS m_pid, m.userid AS m_userid, m.creattime AS m_creattime, m.message AS m_message, r.id AS r_id, r.userid AS r_userid, r.content AS r_content FROM message AS m LEFT JOIN reply AS r ON r.messageid = m.id ';
+		$sql = 'SELECT m.storey as m_storey ,m.id AS m_id, m.pid AS m_pid, m.userid AS m_userid, m.creattime AS m_creattime, m.message AS m_message, r.id AS r_id, r.userid AS r_userid, r.content AS r_content FROM message AS m LEFT JOIN reply AS r ON r.messageid = m.id ';
 		$sql .= ' where m.pid = ' . $pid . ' order by m.id asc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 		
 		//$sql = 'select t1.*,t2.nickname from message as t1 join user as t2 on t2.id = t1.userid where pid = ' . $pid . ' order by id asc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
@@ -43,11 +44,11 @@ class MessageData extends BaseData
 		$userIds = array();
 		while ($result = $statement->fetch(PDO::FETCH_ASSOC))
 		{
-			if (isset($userIds[$result['m_userid']]))
+			if (isset($result['m_userid']))
 			{
 				array_push($userIds, $result['m_userid']);
 			}
-			if (isset($userIds[$result['r_userid']]))
+			if (isset($result['r_userid']))
 			{
 				array_push($userIds, $result['r_userid']);
 			}
@@ -77,10 +78,35 @@ class MessageData extends BaseData
 				$messageModels[$messageId]->replys[$replyModel->id] = $replyModel;
 			}
 		}
-		//P($userIds);
+		$userIds = array_unique($userIds);
+		$user = $this->getUserMessage($userIds);
+		foreach($user as $val)
+		{
+			foreach($messageModels as $k=>$v)
+			{
+				if($v->userid == $val->id)
+				{
+					$messageModels[$k]->nickname = $val->nickname;
+				}
+				foreach($v->replys as $kk=>$vv)
+				{
+					if($vv->userid == $val->id)
+					{
+						$v->replys[$kk]->nickname = $val->nickname;
+					}
+				}
+			}
+		}
 		//P($messageModels);
-		//exit;
 		return $messageModels;
 	}
+	
+	private function getUserMessage($ids)
+	{
+		$user = new UserData();
+		return $user->getUserByIds($ids);
+	}
+	
+	
 
 }

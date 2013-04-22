@@ -72,6 +72,15 @@ class UserData extends BaseData
 		$sql = 'update user set nickname = "' . $nickname . '",head = "' . $head . '" where id = ' . $userId;
 		$this->exec ( $sql );
 	}
+	
+	public function getUserByIds($ids)
+	{
+		$query = array();
+		$query['id'] = array('in' => $ids);
+		$this->where($query);
+		$result = $this->findAll();
+		return $result;
+	}
 
 	public function change($model)
 	{
