@@ -82,6 +82,14 @@
 				</td>
 			</tr>
 			<tr>
+				<td>商品适合性别：</td>
+				<td>
+					<label>男<input name="fitsex" <{if ($dataModel->fitsex == 1)}>checked<{/if}> value="1" type="radio" /></label>
+					<label>女<input name="fitsex" <{if ($dataModel->fitsex == 2)}>checked<{/if}> value="2" type="radio" /></label>
+					<label>中性<input name="fitsex" <{if ($dataModel->fitsex == 3)}>checked<{/if}> value="3" type="radio" /></label>
+				</td>
+			</tr>
+			<tr>
 				<td>备注：</td>
 				<td>
 					<textarea name="remark" class="addinput"><{$dataModel->remark}></textarea>

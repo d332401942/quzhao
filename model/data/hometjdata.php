@@ -190,6 +190,11 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $lovenumber = 0;
 	
+	/**
+	 * 商品适合性别
+	 */
+	public $fitsex;
+	
 	public function __construct()
 	{
 		parent::__construct();
