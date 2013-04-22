@@ -103,7 +103,7 @@
 		</table>
 	</div>
 	<div class="class="add-div add-div-img">
-		<img src="<{if (!preg_match('/^http:\/\//',$dataModel->pic))}>/<{/if}><{$dataModel->pic}>" />
+		<img src="<{$dataModel->pic|parsePicpath}>" />
 	</div>
 </form>
 
