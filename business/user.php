@@ -48,6 +48,10 @@ class UserBusiness extends BaseBusiness
     	{
     		$nickname = $userInfo['taobao_user_nick'];
     	}
+    	else if ($type == UserDataModel::OTHER_SITE_WEIBO)
+    	{
+    		$nickname = $userInfo['name'];
+    	}
     	if (!$model)
     	{
     		//添加一个第三方注册用户

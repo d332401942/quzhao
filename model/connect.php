@@ -37,6 +37,8 @@ class ConnectModel extends Feng
 
 	public $stepWeibo2;
 
+	public $stepWeibo3;
+
 	private $serverName;
 
 	public function __construct($serverName = 'www.quzhao.com')
@@ -65,6 +67,7 @@ class ConnectModel extends Feng
 		$this->stepWeibo1 = 'https://api.weibo.com/oauth2/authorize';
 		$this->stepWeibo1 .= '?client_id=' . $this->appIdWeibo;
 		$this->stepWeibo1 .= '&response_type=code&redirect_uri=' . urlencode ( $this->redirectUriWeibo );
+		$this->stepWeibo2 .= 'https://api.weibo.com';
 		
 		if ($serverName != 'www.quzhao.com')
 		{
@@ -96,7 +99,10 @@ class ConnectModel extends Feng
 		$info = json_decode ( $data, true );
 		foreach ( $info as $key => $val )
 		{
-			$info [$key] = urldecode ( $val );
+		if ($val && is_string($val))
+			{
+				$info [$key] = urldecode ( $val );
+			}
 		}
 		return $info;
 	}

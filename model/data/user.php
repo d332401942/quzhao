@@ -7,7 +7,7 @@ class UserDataModel extends BaseDataModel
 	
 	const OTHER_SITE_QQ = 1;
 	
-	const OTHER_SITE_SINA = 2;
+	const OTHER_SITE_WEIBO = 2;
 	
 	const OTHER_SITE_TAOBAO = 3;
 
