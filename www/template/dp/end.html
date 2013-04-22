@@ -293,6 +293,10 @@ function message() {
 function checkmsg() {
 	$('#js-empty-message').html('');
 }
+function cite(id) {
+	msg = $('#js-getMessage-'+id).html();
+	$('#js-message').val(msg);
+}
 </script>
 <script>showComt();</script>
 <{uc class="FooterControlView"}>

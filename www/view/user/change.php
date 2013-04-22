@@ -49,7 +49,7 @@ class ChangeUserView extends BaseView
 	{
 		$business = M('UserBusiness');
 		$model = new UserDataModel();
-		$model->id 			= 1;
+		$model->id 			= $this->CurrentUser->id;
 		$model->head 		= '';
 		$model->nickname 	= trim($_POST['nickname']);
 		$model->city 		= intval($_POST['cityid']);
