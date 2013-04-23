@@ -24,5 +24,16 @@ class MessageAjaxView extends BaseAjaxView
 			}
 		}
 	}
+	public function del()
+	{
+		$this->mustLogin();
+		if(!empty($_POST['ids']) && (int)$_POST['ids'])
+		{
+			$buesiness = M('MessageBusiness');
+			$buesiness->deleteMessage($_POST['ids'],$this->CurrentUser->id);
+			$this->response(true);
+		}
+		
+	}
 }
 ?>

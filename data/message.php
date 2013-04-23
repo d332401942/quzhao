@@ -112,10 +112,16 @@ class MessageData extends BaseData
 		return $result;
 	}
 	
-	public function delMsg($id)
+	public function delMsg($id,$userid=false)
 	{
 		$ids = is_array($id) ? $id : array($id);
-		$sql = 'delete from message where id in ('.implode(',', $ids).')';
+		if($userid)
+		{
+			$sql = 'delete from message where id in ('.implode(',', $ids).') AND userid = '.$userid;
+		}else{
+			$sql = 'delete from message where id in ('.implode(',', $ids).')';
+		}
+		
 		$this->exec($sql);
 	}
 	
