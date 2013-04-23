@@ -446,7 +446,7 @@ filter:Alpha(opacity=100); }
 .list_hot_tag_r{ width:690px; float:left;}
 .list_hot_tag_r a{ width:127px; display:inline-block; padding-bottom:10px; float:left; }
 
-.list_fu{ position:absolute; background-color:#fff; margin-top:8px; margin-left:-179px;*margin-left:-248px; z-index:100; width:804px;*width:802px;  border:1px solid #ddd;box-shadow: 1px 1px 3px #ccc; } 
+.list_fu{ position:absolute; background-color:#fff; margin-top:8px; margin-left:-179px;*margin-left:-248px; z-index:3; width:804px;*width:802px;  border:1px solid #ddd;box-shadow: 1px 1px 3px #ccc; } 
 .list_fu ul { border-bottom:1px solid #e5e5e5; padding:10px; overflow:hidden; width:785px;*width:782px; clear:both; height:70px; margin-bottom:-1px;}
 .list_cont .list_fu ul li{ float:left; box-shadow: 0px 0px 0px ; border:0px; height:inherit; width:inherit;text-align:left;}
 .list_cont .list_fu ul li:hover{ border:0px;}
