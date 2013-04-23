@@ -7,4 +7,11 @@ class ReplyData extends BaseData
 	{
 		$this->add ( $model );
 	}
+	
+	public function delRely($id,$userid=false)
+	{
+		
+		$sql = 'delete from reply where id = '.$id.' AND userid = '.$userid;
+		$this->exec($sql);
+	}
 }

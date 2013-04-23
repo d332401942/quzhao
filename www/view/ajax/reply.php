@@ -19,5 +19,17 @@ class ReplyAjaxView extends BaseAjaxView
 			}
 		}
 	}
+	
+	public function del()
+	{
+		$this->mustLogin();
+		if(!empty($_POST['ids']) && (int)$_POST['ids'])
+		{
+			$buesiness = M('ReplyBusiness');
+			$buesiness->deleteReply($_POST['ids'],$this->CurrentUser->id);
+			$this->response(true);
+		}
+		
+	}
 }
 ?>

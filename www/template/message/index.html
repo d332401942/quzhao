@@ -23,7 +23,7 @@
 		</div>
 		<{if (!empty($val->replys))}>
 		<{foreach ($val->replys as $v)}>
-		<div class="comt_r_cont2"><{$v->nickname}>:<{$v->content}></div>
+		<div class="comt_r_cont2" style="float:left;"><{$v->nickname}>:<{$v->content}></div><{if (isset($v->del))}><div style="float:right;"><a href="javascript:;" style="color:#C74396;"  onclick="delReply(<{$v->id}>);">删除</a></div><{/if}>
 		<{/foreach}>
 		<{/if}>
 		<div style="display:none;" class="js-hiddenreply" id="js-hiddenReply-<{$val->id}>">
@@ -110,6 +110,23 @@ function del(id) {
 	}
 	$.ajax({
 		url: '__AJAX__/message/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:id},
+		success: function(data) {
+			showComt();
+		}
+	});
+}
+function delReply(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	if (!id) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/reply/del?stmp=' + new Date().toString(),
 		type: 'post',
 		data: {ids:id},
 		success: function(data) {
