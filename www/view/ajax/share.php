@@ -3,6 +3,7 @@ class ShareAjaxView extends BaseAjaxView
 {
 	public function index()
 	{
+		$this->mustLogin();
 		if(!empty($_POST['url']) && $_POST['url'] != '超值单品链接'){
 			$tmall = stristr($_POST['url'],'tmall.com');
 			if($tmall)
@@ -18,7 +19,7 @@ class ShareAjaxView extends BaseAjaxView
 		            
 	}
 	
-	public function collectTaobao()
+	private function collectTaobao()
 	{
 		$content = file_get_contents($_POST['url']);	
 		$content = iconv('gbk','utf-8//IGNORE',$content);
@@ -64,7 +65,7 @@ class ShareAjaxView extends BaseAjaxView
 		
 	}
 	
-	public function collectTmall()
+	private function collectTmall()
 	{
 		$content = file_get_contents($_POST['url']);
 		$content = iconv('gbk','utf-8//IGNORE',$content);
