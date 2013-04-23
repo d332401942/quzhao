@@ -113,7 +113,7 @@ function del(id) {
 		type: 'post',
 		data: {ids:id},
 		success: function(data) {
-			showComt();
+			showComt(<{$pageCore->currentPage}>);
 		}
 	});
 }
@@ -130,7 +130,7 @@ function delReply(id) {
 		type: 'post',
 		data: {ids:id},
 		success: function(data) {
-			showComt();
+			showComt(<{$pageCore->currentPage}>);
 		}
 	});
 }
