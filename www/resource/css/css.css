@@ -839,3 +839,20 @@ filter:Alpha(opacity=95);}
 .Register3_box_r_pnt a:active{ background-color:#b43384;}
 .off a{ position:absolute; right:15px; top:8px; font-size:14px; color:#999;}
 .off a:hover{ text-decoration:none; color:#666;}
+
+/*  list_list  */	
+
+.list_fu2{ position:relative; margin-left:0px; border:0px; margin-bottom:5px;}
+.list_fu2 ul{ padding-top:15px; padding-bottom:15px; height:90px;}
+.list_cont  .list_fu2 ul .list_fu_tu{ width:90px; height:90px; text-align:center;}
+.list_cont  .list_fu2 ul .list_fu_tu  img{ width:90px;}
+.list_fu2  ul img{ width: auto;} 
+.list_cont  .list_fu2 ul .list_fu_name h2{ font-size:15px; line-height:18px; font-weight:lighter; padding-bottom:8px; padding-top:3px;}
+.list_cont  .list_fu2 ul .list_fu_name{ width:220px; padding-right:70px;}
+.list_cont  .list_fu2 ul .list_fu_name strong{ font-weight:bold;}
+.list_cont  .list_fu2 ul .list_fu_jg { width:160px;}
+.list_cont  .list_fu2 ul .list_fu_logo{ text-align:center;}
+.list_cont  .list_fu2 ul .list_fu_logo img{ width:80px;}
+.list_cont  .list_fu2 ul .list_fu_logo h4{ font-size:12px; padding-bottom:5px;}
+.list_r_menu_r{*padding-right:3px;}
+.list_r_menu_r li { *width:42px; }
