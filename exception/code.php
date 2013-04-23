@@ -31,4 +31,14 @@ class CodeException extends Feng
 	*没有接受用户协议
 	*/
 	const USER_NO_AGREEMENT	= 10005;
+	
+	/**
+	 * 没有登录
+	 */
+	const USER_NOT_LOGIN = 50001;
+	
+	/**
+	 * 没有设置用户email
+	 */
+	const USER_NO_EAMIL = 50002;
 }
