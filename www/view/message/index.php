@@ -23,9 +23,15 @@ class IndexMessageView extends BaseView
 				{
 					$result[$key]->del = true; 
 				}
+				foreach($val->replys as $k=>$v)
+				{
+					if($v->userid == $this->CurrentUser->id)
+					{
+						$val->replys[$k]->del = true;
+					}
+				}
 			}
 		}
-		//P($result);
 		$this->assign('model',$result);
 		$this->assign('pageCore',$pageCore);
 	}
