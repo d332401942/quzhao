@@ -39,6 +39,13 @@
 function doSubmit() {
 	$('#js-formShare').ajaxSubmit(function(data){
 		eval('data='+data);
+		if(data.error.code == 50001) {
+			showLoginDiv();
+			return false;
+		}
+		if(data.error.code == 50002) {
+			window.location.href="__APP__/user/preset";
+		}
 		$('#js-hidden-origin').val(data.result.origin);
 		var url = $('#js-url').val();
 		$('#js-hidden-url').val(url);

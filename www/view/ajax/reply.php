@@ -8,7 +8,6 @@ class ReplyAjaxView extends BaseAjaxView
 		{
 			if(!empty($_POST['content']))
 			{
-				//P($_POST);exit;
 				$business = M('ReplyBusiness');
 				$model = M('ReplyDataModel');
 				$model->userid 		= 	$this->CurrentUser->id;
