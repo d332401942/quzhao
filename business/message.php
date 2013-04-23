@@ -28,10 +28,10 @@ class MessageBusiness extends BaseBusiness
 	/*
 	*删除评论
 	*/
-	public function deleteMessage($ids)
+	public function deleteMessage($ids,$userid)
 	{
 		$data = new MessageData();
-		$data->delMsg($ids);
+		$data->delMsg($ids,$userid);
 	}
 	
 	public function getMsgOne($id)
