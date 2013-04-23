@@ -37,7 +37,7 @@ $.mask = {
 			this.overlay.fadeOut('fast',function(){
 				func();
 			});
-		} else {
+		} else if (func){
 			func()
 		}
 	},
