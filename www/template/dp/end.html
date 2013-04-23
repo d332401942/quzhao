@@ -298,7 +298,8 @@ function cite(id) {
 		showLoginDiv();
 		return false;
 	}
-	msg = $('#js-getMessage-'+id).html();
+	var msg = $('#js-getMessage-'+id).html();
+	msg = $.trim(msg);
 	$('#js-message').val(msg);
 }
 </script>
