@@ -13,7 +13,8 @@ class NetTuanData extends BaseData
     
     public function changeIstj($id,$istj)
     {
-        $sql = 'update net_tuan_data set istj = '.$istj .' where id = '.$id;
+    	$ids = is_array($id) ? $id : array($id);
+        $sql = 'update net_tuan_data set istj = '.$istj .' where id in ('.implode(',', $ids).')';
         $this->exec($sql);
     }
 

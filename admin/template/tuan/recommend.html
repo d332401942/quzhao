@@ -1,6 +1,7 @@
 <{include '__TEMPLATE__/header.html'}>
 
 <div class="list-div">
+<button onclick="unRecommends()">选中的取消到主页</button>
 <table style="width:100%">
 	<tr>
 		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
@@ -15,7 +16,7 @@
 
 	<{foreach ($models as $model)}>
 	<tr>
-		<td><input type="checkbox" value="<{$model->id}>"/></td>
+		<td><input type="checkbox"  class="js-check js-tuan-id" value="<{$model->id}>"/></td>
 		<td><{$model->id}></td>
 		<td><{$model->name}></td>
 		<td><{$model->webname}></td>
@@ -33,12 +34,38 @@
 </div>
 <{include '__TEMPLATE__/footer.html'}>
 <script>
-
+function checkAll(obj) {
+	if ($(obj).attr('checked')) {
+		$('.js-check').attr('checked', true);
+	}
+	else {
+		$('.js-check').attr('checked', false);		
+	}
+}
 function unRecommend(id) {
 	$.ajax({
 		url: '__AJAX__/tuan/changeIstj?stmp=' + new Date().toString(),
 		type: 'post',
 		data: {id:id,istj:0},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				alert('取消推荐成功');
+			}
+		}
+	});
+}
+
+function unRecommends() {
+	var ids = [];
+	$('.js-tuan-id:checked').each(function(){
+		var id = $(this).val();
+		ids.push(id);
+	})
+	$.ajax({
+		url: '__AJAX__/tuan/changeIstj?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {id:ids,istj:0},
 		dataType: 'json',
 		success: function(data) {
 			if (data.result) {
