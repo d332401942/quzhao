@@ -195,6 +195,11 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $fitsex;
 	
+	/**
+	 * 分享商品会员id
+	 */
+	public $userid;
+	
 	public function __construct()
 	{
 		parent::__construct();
