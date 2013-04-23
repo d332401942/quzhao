@@ -25,7 +25,7 @@ class IndexMessageView extends BaseView
 				}
 			}
 		}
-		P($result);
+		//P($result);
 		$this->assign('model',$result);
 		$this->assign('pageCore',$pageCore);
 	}
