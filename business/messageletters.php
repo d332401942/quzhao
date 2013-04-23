@@ -9,7 +9,7 @@ class MessagelettersBusiness
 	 * @param 商品ID $pid
 	 * @param 商品类型 $type
 	 */
-	public function add($userId, $pid = 0, $type = MessagelettersDataModel::TYPE_DP)
+	public function add($userId, $pid, $type = MessagelettersDataModel::TYPE_DP)
 	{
 		if (!$userId)
 		{
