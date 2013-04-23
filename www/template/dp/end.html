@@ -223,16 +223,17 @@ function lovenum(pid) {
 		type:'post',
 		url:url,
 		success:function(data){
-			if(data.error.code == 50001) {
+			if(data.result) {
+				window.location.reload();
+			}
+			else if(data.error.code == 50001) {
 				showLoginDiv();
 				return false;
 			}
-			if(data.error.code == 50002) {
+			else if(data.error.code == 50002) {
 				window.location.href="__APP__/user/preset";
 			}
-			if(data.result) {
-				window.location.reload();
-			}else {
+			else {
 				alert('该产品已经喜欢过');
 			}
 		}
@@ -274,17 +275,18 @@ function message() {
 		data:data,
 		url:url,
 		success:function(data){
-			if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
 			if(data.result) {
 				$('#js-message').val('');
 				showComt(0);
 			}
+			else if(data.error.code == 50001) {
+				showLoginDiv();
+				return false;
+			}
+			else if(data.error.code == 50002) {
+				window.location.href="__APP__/user/preset";
+			}
+			
 		}
 	});
 }
