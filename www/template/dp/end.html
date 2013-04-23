@@ -267,7 +267,7 @@ function message() {
 		$('#js-empty-message').html('<font style="color:red">评论内容600字以内</font>');
 		return false;
 	}
-	data = {message:msg,pid:<{$id}>};
+	data = {message:msg,pid:<{$id}>,shareUserId:<{$goods->userid}>};
 	url = '__AJAX__/message/add?stmp=' + new Date().toString();
 	$.ajax({
 		dataType:'json',

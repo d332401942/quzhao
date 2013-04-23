@@ -9,7 +9,7 @@ class MessagelettersBusiness
 	 * @param 商品ID $pid
 	 * @param 商品类型 $type
 	 */
-	public function add($userId, $pid, $type = MessagelettersDataModel::TYPE_DP)
+	public function add($userId, $pid = 0, $type = MessagelettersDataModel::TYPE_DP)
 	{
 		
 		$model = new MessagelettersDataModel();
@@ -19,7 +19,7 @@ class MessagelettersBusiness
 		$model->createtime = time();
 		$model->type = $type;
 		$model->userid = $userId;
-		$data = M('MessagelettersData');
+		$data = new MessagelettersData();
 		$data->add($model);
 	}
 }
