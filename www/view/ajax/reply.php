@@ -3,6 +3,7 @@ class ReplyAjaxView extends BaseAjaxView
 {
 	public function add()
 	{
+		$this->mustLogin();
 		if($_POST)
 		{
 			if(!empty($_POST['content']))
