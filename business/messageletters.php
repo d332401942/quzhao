@@ -11,7 +11,10 @@ class MessagelettersBusiness
 	 */
 	public function add($userId, $pid, $type = MessagelettersDataModel::TYPE_DP)
 	{
-		
+		if (!$userId)
+		{
+			return ;
+		}
 		$model = new MessagelettersDataModel();
 		$model->isread = MessagelettersDataModel::IS_NO;
 		$model->readtime = 0;
