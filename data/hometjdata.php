@@ -157,4 +157,14 @@ class HomeTjDataData extends BaseData
 		$result = $this->query($sql,'HomeTjDataDataModel');
 		return $result;
 	}
+	
+	 /*
+	*得到会员喜欢商品
+	*/
+	public function getLoveModel()
+	{
+		$sql = 'select * from home_tj_data order by lovenumber desc limit 3';
+		$result = $this->query($sql,'HomeTjDataDataModel');
+		return $result;
+	}
 }

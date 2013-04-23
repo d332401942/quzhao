@@ -37,6 +37,15 @@ class HomeTjDataBusiness extends BaseBusiness
 		return $result;
 	}
 	
+	 /*
+	*得到喜欢商品次数最多的三个
+	*/
+	public function getLoveModel()
+	{
+		$data = new HomeTjDataData();
+		$result = $data->getLoveModel();
+		return $result;
+	}
     public function getOneById($id)
     {
         $data = new HomeTjDataData();

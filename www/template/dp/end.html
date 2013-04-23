@@ -16,7 +16,7 @@
 <h3>
 <span><img src="__RESOURCE__/images/tm.gif" /><{$goods->ctime|diffNow}>前更新</span>
 <span><img src="__RESOURCE__/images/us.gif" /><a href="#" class="uss"><{$editorArr[$goods->id % (count($editorArr))]}></a>推荐</span>
-<span><a href="#" title="喜欢" onclick="lovenum(<{$goods->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$goods->lovenumber}></a></span>
+<span><a href="javascript:;" title="喜欢" onclick="lovenum(<{$goods->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$goods->lovenumber}></a></span>
 
 <span id="fx_zi">
 <h4 class="fx_box_nin" style="display:none;" id="js-hover-share-<{$goods->id}>">
@@ -121,42 +121,26 @@
 <div class="ress_login_box_r"><a href="javascript:" onclick="message()">发布</a></div>
 </div>
 </div>
-<!--<div class="mulist">大家还看了</div>
+
+<div class="mulist">大家还看了</div>
 <div class="ress_more">
+<{if ($loveModel)}>
+<{foreach ($loveModel as $val)}>
 <div class="ress_more_li">
-<p><a href="#"><img src="http://s1.juancdn.com/bao/130329/t/2/51550a463a231_900x900.jpg_220x220.jpg" /></a></p>
-<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-<h4>￥9.90</h4>
+<p><a href="<{$val->href}>" target="_blank"><img src="<{$val->pic|parsePicpath}>" /></a></p>
+<h3><a href="<{$val->href}>" target="_blank"><{$val->name}></a></h3>
+<h4>￥<{$val->price}></h4>
 <h2>
-<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+<span><a href="javascript:;" onclick="lovenum(<{$val->id}>)"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><span><a href="javascript:;"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
 </h2>
 </div>
-
-<div class="ress_more_li">
-<p><a href="#"><img src="http://oimageb5.ydstatic.com/image?id=8774702224128533707&product=gouwu" /></a></p>
-<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮</a></h3>
-<h4>￥9.90</h4>
-<h2>
-<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-</h2>
-</div>
-
-<div class="ress_more_li">
-<p><a href="#"><img src="http://oimageb5.ydstatic.com/image?id=892203967790220488&product=gouwu" /></a></p>
-<h3><a href="#">超值洗衣组合洗衣袋 晾衣篮洗衣球</a></h3>
-<h4>￥9.90</h4>
-<h2>
-<span><a href="#"><img src="__RESOURCE__/images/like.gif" />3435</a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
-</h2>
-</div>
-
-
-</div>-->
-
+<{/foreach}>
+<{/if}>
 
 </div>
 
 
+</div>
 </li>
 </ul>
 
