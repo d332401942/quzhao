@@ -132,12 +132,12 @@
             </div>
             <div class="list_r_menu_l list_r_menu_r">
                 <ul>
-                    <li class="list_nav_l">
-                        <a href="javascript:;">
+                    <li class="list_nav_l" >
+                        <a href="javascript:;" onclick="showType('list')" class="<{if ($showType=='list')}>open4<{/if}>" title="列表">
                         </a>
                     </li>
                     <li class="list_nav_r">
-                        <a href="javascript:;" class="open4">
+                        <a href="javascript:;" title="详情" onclick="showType('detail')" class="<{if (empty($showType) or $showType=='detail')}>open4<{/if}>">
                         </a>
                     </li>
                 </ul>
@@ -145,154 +145,180 @@
         </div>
 		
         <div class="list_cont">
-			<ul>
-			<{foreach ($productModels as $key => $model)}>
-                <li>
-                    <div class="list_cont_tu">
-                        <a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
-                        </a>
-                    </div>
-                    <div class="list_cont_box">
-                        <h2>
-                            <a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
-                                <{$model->lighttitle}>
-                            </a>
-                        </h2>
-                        <div class="list_jg">
-                            <div class="list_jg_l">
-                                <h1>
-                                    <font>￥</font>
-                                    <{$model->price}>
-                                </h1>
+			<{if ($showType != 'list')}>
+				<ul>
+				<{foreach ($productModels as $key => $model)}>
+					<li>
+						<div class="list_cont_tu">
+							<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
+								<img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+							</a>
+						</div>
+						<div class="list_cont_box">
+							<h2>
+								<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
+									<{$model->lighttitle}>
+								</a>
+							</h2>
+							<div class="list_jg">
+								<div class="list_jg_l">
+									<h1>
+										<font>￥</font>
+										<{$model->price}>
+									</h1>
+									<!--
+									<h2>
+										￥83.4
+									</h2>
+									-->
+								</div>
+								
+								<div class="list_jg_r">
+									<{$model->sitename}>
+								</div>
 								<!--
-                                <h2>
-                                    ￥83.4
-                                </h2>
+								<div class="list_jg_r">
+									上海
+								</div>
 								-->
-                            </div>
-							
-                            <div class="list_jg_r">
-                                <{$model->sitename}>
-                            </div>
-							<!--
-                            <div class="list_jg_r">
-                                上海
-                            </div>
-							-->
-                        </div>
-                        <div class="list_jg">
-                            <div class="list_jg_l">
-                                月销量
-                                <strong>
-                                    <{$model->sales}>
-                                </strong>
-                                件
-                            </div>
-                            <div class="list_jg_r">
-								<!--
-                                <a href="javascript:;">
-                                    <img src="__RESOURCE__/images/bn.gif" />
-                                    同款34件
-                                </a>
-								-->
-                                <div class="list_fu" style="display:none;">
-                                    <div class="jiee">
-                                        <img src="__RESOURCE__/images/jiee.png" class="png" />
-                                    </div>
-                                    <ul>
-                                        <li class="list_fu_tu">
-                                            <a href="javascript:;">
-                                                <img src="__RESOURCE__/images/dp_a.jpg" />
-                                            </a>
-                                        </li>
-                                        <li class="list_fu_name">
-                                            <h2>
-                                                <a href="javascript:;">
-                                                    唐狮新品促销,极致羽绒服促销中!
-                                                </a>
-                                            </h2>
-                                            已售
-                                            <strong>
-                                                78
-                                            </strong>
-                                            件
-                                        </li>
-                                        <li class="list_fu_jg">
-                                            <h2>
-                                                <font>
-                                                    ￥
-                                                </font>
-                                                145.00
-                                            </h2>
-                                            包邮
-                                        </li>
-                                        <li class="list_fu_logo">
-                                            <h3>
-                                                <a href="javascript:;">
-                                                    <img src="__RESOURCE__/images/IMG_23.jpg" />
-                                                </a>
-                                            </h3>
-                                            所在地：上海
-                                        </li>
-                                        <li class="list_fu_pnt">
-                                            <a href="javascript:;">
-                                                去购买
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li class="list_fu_tu">
-                                            <a href="javascript:;">
-                                                <img src="__RESOURCE__/images/dp_a.jpg" />
-                                            </a>
-                                        </li>
-                                        <li class="list_fu_name">
-                                            <h2>
-                                                <a href="javascript:;">
-                                                    唐狮新品促销,极致羽绒服促销中!
-                                                </a>
-                                            </h2>
-                                            已售
-                                            <strong>
-                                                78
-                                            </strong>
-                                            件
-                                        </li>
-                                        <li class="list_fu_jg">
-                                            <h2>
-                                                <font>
-                                                    ￥
-                                                </font>
-                                                145.00
-                                            </h2>
-                                            包邮
-                                        </li>
-                                        <li class="list_fu_logo">
-                                            <h3>
-                                                <a href="javascript:;">
-                                                    <img src="__RESOURCE__/images/IMG_23.jpg" />
-                                                </a>
-                                            </h3>
-                                            所在地：上海
-                                        </li>
-                                        <li class="list_fu_pnt">
-                                            <a href="javascript:;">
-                                                去购买
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-				<{if (($key + 1) % 3 == 0 && $key < 17)}>
-					</ul>
+							</div>
+							<div class="list_jg">
+								<div class="list_jg_l">
+									月销量
+									<strong>
+										<{$model->sales}>
+									</strong>
+									件
+								</div>
+								<div class="list_jg_r">
+									<!--
+									<a href="javascript:;">
+										<img src="__RESOURCE__/images/bn.gif" />
+										同款34件
+									</a>
+									-->
+									<div class="list_fu" style="display:none;">
+										<div class="jiee">
+											<img src="__RESOURCE__/images/jiee.png" class="png" />
+										</div>
+										<ul>
+											<li class="list_fu_tu">
+												<a href="javascript:;">
+													<img src="__RESOURCE__/images/dp_a.jpg" />
+												</a>
+											</li>
+											<li class="list_fu_name">
+												<h2>
+													<a href="javascript:;">
+														唐狮新品促销,极致羽绒服促销中!
+													</a>
+												</h2>
+												已售
+												<strong>
+													78
+												</strong>
+												件
+											</li>
+											<li class="list_fu_jg">
+												<h2>
+													<font>
+														￥
+													</font>
+													145.00
+												</h2>
+												包邮
+											</li>
+											<li class="list_fu_logo">
+												<h3>
+													<a href="javascript:;">
+														<img src="__RESOURCE__/images/IMG_23.jpg" />
+													</a>
+												</h3>
+												所在地：上海
+											</li>
+											<li class="list_fu_pnt">
+												<a href="javascript:;">
+													去购买
+												</a>
+											</li>
+										</ul>
+										<ul>
+											<li class="list_fu_tu">
+												<a href="javascript:;">
+													<img src="__RESOURCE__/images/dp_a.jpg" />
+												</a>
+											</li>
+											<li class="list_fu_name">
+												<h2>
+													<a href="javascript:;">
+														唐狮新品促销,极致羽绒服促销中!
+													</a>
+												</h2>
+												已售
+												<strong>
+													78
+												</strong>
+												件
+											</li>
+											<li class="list_fu_jg">
+												<h2>
+													<font>
+														￥
+													</font>
+													145.00
+												</h2>
+												包邮
+											</li>
+											<li class="list_fu_logo">
+												<h3>
+													<a href="javascript:;">
+														<img src="__RESOURCE__/images/IMG_23.jpg" />
+													</a>
+												</h3>
+												所在地：上海
+											</li>
+											<li class="list_fu_pnt">
+												<a href="javascript:;">
+													去购买
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<{if (($key + 1) % 3 == 0 && $key < count($productModels) - 1)}>
+						</ul>
+						<ul>
+					<{/if}>
+				<{/foreach}>
+				</ul>
+			<{else}>
+				<div class="list_fu list_fu2">
+					<{foreach ($productModels as $key => $model)}>
 					<ul>
-				<{/if}>
-			<{/foreach}>
-			</ul>
+						<li class="list_fu_tu">
+							<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
+								<img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+							</a>
+						</li>
+						<li class="list_fu_name">
+							<h2>
+								<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);"><{$model->lighttitle}></a>
+							</h2>
+							已售 <strong>78</strong> 件
+						</li>
+						<li class="list_fu_jg">
+							<h2><font>￥</font><{$model->price}></h2>
+						</li>
+						<li class="list_fu_logo">
+							<h4><a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);"><{$model->sitename}></a></h4>
+						</li>
+					</ul>
+					<{/foreach}>
+				</div>
+			<{/if}>
         </div>
         <{uc class="PageControlView" pageCore="$pageCore"}>
 		<!--
@@ -403,6 +429,7 @@
 	<input name="keyword" value="<{echo urlencode($keyword)}>" type="hidden" />
 	<input name="category" value="<{$category}>" type="hidden" />
 	<input name="sort" value="<{echo urlencode($sort)}>" type="hidden" />
+	<input name="showtype" value="<{$showType}>" type="hidden" />
 	<div style="display:none" class="js-hide-form-attr">
 		<{foreach ($attrArr as $key => $val)}>
 			<input name="attr_<{$key}>" value="<{echo urlencode($val)}>" type="hidden" />
@@ -458,6 +485,12 @@ function searchByAttr(attr,type,val) {
 	val = encodeURIComponent(type + '_' + val);
 	formObj.find('input[name="page"]').val('');
 	obj.val(val);
+	formTogo();
+}
+
+function showType(type) {
+	var formObj = $('#js-hide-form');
+	formObj.find('input[name="showtype"]').val(type);
 	formTogo();
 }
 

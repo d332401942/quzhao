@@ -2,7 +2,7 @@
 	<ul>
 		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
 		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-		<{if ($CurrentUser)}>
+		<{if (!empty($CurrentUser->email))}>
 			<li style="margin-left:750px;_margin-left:425px;"><a href="javascript:;">消息（0）</a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user/change">
@@ -22,12 +22,12 @@
 		<{/if}>
 		<li style="margin-left:15px;"><a href="javascript:;">帮助</a></li>
 		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-		<{if ($CurrentUser)}>
+		<{if (!empty($CurrentUser->email))}>
 		<li style="margin-left:15px;"><a href="javascript:;" onclick="loginOut();">退出</a></li>
 		<{/if}>
 	</ul>	
 </div>
-<{if (!$CurrentUser)}>
+<{if (empty($CurrentUser->email))}>
 <form action="" method="post"  onsubmit="return doLogin(this)">
 	<div class="dingwei2" id="js-login-div" style="display:none">
 		<div class="login">
@@ -45,9 +45,9 @@
 			<div class="login_si">使用关联账户登录</div>
 			<div class="login_wu">
 				<ul>
-					<li><a href="javascript:;" onclick="loginTaobao();"><img src="__RESOURCE__/images/29-28-tao.jpg" alt=""></a></li>
-					<li><a href="javascript:;" onclick="loginWeibo();"><img src="__RESOURCE__/images/29-28-wei.jpg" alt=""></a></li>
-					<li><a href="javascript:;" onclick="loginQQ();"><img src="__RESOURCE__/images/29-28-qq.jpg" alt=""></a></li>
+					<li><a href="javascript:;" onclick="loginTaobao();hideLeftLogin();"><img src="__RESOURCE__/images/29-28-tao.jpg" alt=""></a></li>
+					<li><a href="javascript:;" onclick="loginWeibo();hideLeftLogin();"><img src="__RESOURCE__/images/29-28-wei.jpg" alt=""></a></li>
+					<li><a href="javascript:;" onclick="loginQQ();hideLeftLogin();"><img src="__RESOURCE__/images/29-28-qq.jpg" alt=""></a></li>
 				</ul>
 			</div>
 		</div>
@@ -87,12 +87,16 @@ function loginOut() {
 
 function showLeftLogin() {
 	var obj = $('#js-login-div');
+	$.removeCookie('UserInfo');
+	var interval = setInterval(function(){
+		listenUserInfo(interval);
+	},30);
 	if (!obj.is(':visible')) {	
 		obj.fadeIn('fast', function(){
 			$('body').bind('click',function(e) {
 				var _this = $(e.target);
 				if (!_this.closest('#js-login-div').length) {
-					hideLeftLogin()
+					hideLeftLogin();
 				}
 			});
 		});	

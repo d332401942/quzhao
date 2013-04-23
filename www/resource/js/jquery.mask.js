@@ -23,15 +23,17 @@ $.mask = {
 		this.popupLayer?this.popupLayer.remove():null;
 		this.popupLayer = $(document.createElement("div")).addClass(this.options.popupLayerClass).attr('id',this.options.popupLayerId).css({display:'none'});   
 		this.popupLayer.append(this.showObj.css({opacity:1}).show()).appendTo($(document.body));
-		this.popupLayer.css({position:"absolute",'z-index':99,width:this.showObj.get(0).offsetWidth,height:this.showObj.get(0).offsetHeight});
+		this.popupLayer.css({position:"absolute",'z-index':99,width:this.showObj.width() + 'px',height:this.showObj.height() + 'px'});
 		
 		this.popupLayer.fadeIn('fast',func)
 		var left = ($(document).width() - this.showObj.width())/2;
+		console.log(document.documentElement.clientHeight - this.showObj.height());
 		var top = (document.documentElement.clientHeight - this.showObj.height())/2 + $(document).scrollTop();
 		this.setPosition(left,top);
 	},
 	
 	close: function(func) {
+		func = func ? func : function(){};
 		this.popupLayer?this.popupLayer.remove():null;
 		if (this.overlay) {
 			this.overlay.fadeOut('fast',function(){
