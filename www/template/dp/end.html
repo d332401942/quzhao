@@ -258,7 +258,7 @@ function message() {
 		showLoginDiv();
 		return false;
 	}
-	msg = $('#js-message').val();
+	var msg = $('#js-message').val();
 	if(msg == '') {
 		$('#js-empty-message').html('<font style="color:red">评论内容不能为空</font>');
 		return false;
@@ -267,7 +267,11 @@ function message() {
 		$('#js-empty-message').html('<font style="color:red">评论内容600字以内</font>');
 		return false;
 	}
-	data = {message:msg,pid:<{$id}>,shareUserId:<{$goods->userid}>};
+	var shareUserId = "<{$goods->userid}>";
+	if(!shareUserId) {
+		 shareUserId = '';
+	}
+	var data = {message:msg,pid:<{$id}>,shareUserId:shareUserId};
 	url = '__AJAX__/message/add?stmp=' + new Date().toString();
 	$.ajax({
 		dataType:'json',
@@ -299,7 +303,7 @@ function cite(id) {
 		return false;
 	}
 	var msg = $('#js-getMessage-'+id).html();
-	msg = $.trim(msg);
+		msg = $.trim(msg);
 	$('#js-message').val(msg);
 }
 </script>
