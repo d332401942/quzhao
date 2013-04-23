@@ -26,7 +26,7 @@
 <{/foreach}>
 <{/if}>
 <div style="display:none;" id="js-hiddenReply-<{$val->id}>">
-<textarea name="content" id="js-reply-content-<{$val->id}>" onkeyup="checkReply();"></textarea>
+<textarea name="content" id="js-reply-content-<{$val->id}>" onkeyup="checkReply(<{$val->id}>);"></textarea>
 <br />
 <input type="submit" value="提交" onclick="reply(<{$val->id}>);" />
 </div>
@@ -50,8 +50,8 @@ function revert(id) {
 	}
 	$('#js-hiddenReply-'+id).toggle();
 }
-function checkReply() {
-	$('#js-empty-reply').html('');
+function checkReply(id) {
+	$('#js-empty-reply-'+id).html('');
 }
 function reply(messageId) {
 	if (!CurrentUserInfo) {
