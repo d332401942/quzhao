@@ -31,9 +31,15 @@ $.mask = {
 		this.setPosition(left,top);
 	},
 	
-	close: function() {
-		this.popupLayer.remove();
-		this.overlay.fadeOut('fast');
+	close: function(func) {
+		this.popupLayer?this.popupLayer.remove():null;
+		if (this.overlay) {
+			this.overlay.fadeOut('fast',function(){
+				func();
+			});
+		} else {
+			func()
+		}
 	},
 	
 	setPosition:function(left,top){          //通过传入的参数值改变弹出层的位置

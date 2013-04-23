@@ -37,7 +37,10 @@ class UserAjaxView extends BaseAjaxView
 		}
 		$email = strtolower(trim($_POST['email']));
 		$password = $_POST['password'];
-		$this->checkverify($_POST['verify']);
+		if (isset($_POST['verify']))
+		{
+			$this->checkverify($_POST['verify']);
+		}
 		$userModel = null;
 		$business = M('UserBusiness');
 		$userModel = $business->getUserInfo($email, $password);

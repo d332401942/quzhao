@@ -15,9 +15,9 @@
 			</li>
 		<{else}> 
 			<li style="margin-left:790px;_margin-left:430px;">
-				<a href="javascript:;" onclick="" onclick1="showLoginDiv()">登录</a>
+				<a href="javascript:;" onclick="showLeftLogin()">登录</a>
 			</li>
-			<li style=""><a href="javascript:;" ><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+			<li style=""><a href="javascript:;" onclick="showLeftLogin()"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
 		<{/if}>
 		<li style="margin-left:15px;"><a href="javascript:;">帮助</a></li>
@@ -28,29 +28,31 @@
 	</ul>	
 </div>
 <{if (!$CurrentUser)}>
-<div class="dingwei2" id="js-login-div">
-	<div class="login">
-		<div class="login_yi">
-			<input class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style="">
-		</div>
-		<div style="margin-top:15px; _margin-top:-17px;" class="login_yi">
-			<input class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码'}" type="text" style="">
-		</div>
-		<div class="login_er">
-			<div class="login_er_left"><input name="" type="checkbox" value="" checked="">记住密码</div>
-			<div class="login_er_right"><a href="javascript:;"><img src="__RESOURCE__/images/61-33.jpg" alt=""></a></div>
-		</div>
-		<div class="login_san"></div>
-		<div class="login_si">使用关联账户登录</div>
-		<div class="login_wu">
-			<ul>
-				<li><a href="javascript:;"><img src="__RESOURCE__/images/29-28-tao.jpg" alt=""></a></li>
-				<li><a href="javascript:;"><img src="__RESOURCE__/images/29-28-wei.jpg" alt=""></a></li>
-				<li><a href="javascript:;"><img src="__RESOURCE__/images/29-28-qq.jpg" alt=""></a></li>
-			</ul>
+<form action="" method="post"  onsubmit="return doLogin(this)">
+	<div class="dingwei2" id="js-login-div" style="display:none">
+		<div class="login">
+			<div class="login_yi">
+				<input name="email" class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style="">
+			</div>
+			<div style="margin-top:15px; _margin-top:-17px;" class="login_yi">
+				<input name="password" class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码'}" type="text" style="">
+			</div>
+			<div class="login_er">
+				<div class="login_er_left"><input name="" type="checkbox" value="" checked="">记住密码</div>
+				<div class="login_er_right"><a href="javascript:;"><input type="image" src="__RESOURCE__/images/61-33.jpg" alt=""></a></div>
+			</div>
+			<div class="login_san"></div>
+			<div class="login_si">使用关联账户登录</div>
+			<div class="login_wu">
+				<ul>
+					<li><a href="javascript:;" onclick="loginTaobao();"><img src="__RESOURCE__/images/29-28-tao.jpg" alt=""></a></li>
+					<li><a href="javascript:;" onclick="loginWeibo();"><img src="__RESOURCE__/images/29-28-wei.jpg" alt=""></a></li>
+					<li><a href="javascript:;" onclick="loginQQ();"><img src="__RESOURCE__/images/29-28-qq.jpg" alt=""></a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
+</form>
 <{/if}>
 <div class="dingwei2">
 	<ul class="youhui" id="js-header-share" style="display:none;">
@@ -83,8 +85,28 @@ function loginOut() {
 	});
 }
 
+function showLeftLogin() {
+	var obj = $('#js-login-div');
+	if (!obj.is(':visible')) {	
+		obj.fadeIn('fast', function(){
+			$('body').bind('click',function(e) {
+				var _this = $(e.target);
+				if (!_this.closest('#js-login-div').length) {
+					hideLeftLogin()
+				}
+			});
+		});	
+	}
+}
+
+function hideLeftLogin() {
+	var obj = $('#js-login-div');
+	obj.fadeOut('fast');
+	$('body').unbind('click');
+}
+
 function loginTaobao() {
-	var url = '<{$connectModel->stepTaobao1}>';  //测试地址
+	var url = '<{$connectModel->stepTaobao1}>';  
 	window.open(url,'logintaobao','channelmode=yes,width=800,height=500,left=400,top=100');
 }
 
@@ -105,16 +127,28 @@ function listenUserInfo(interval) {
 	}
 	if (typeof(userInfo) == 'object') {
 		clearInterval(interval);
-		if (!userInfo.email) {
-			window.location.href = '__APP__/user/preset';
+		if (!userInfo.email || userInfo.email == "0") {
+			preset();
 		}
 		else {
-			window.location.reload();
+			//window.location.reload();
 		}
 	}
 }
 
+function preset() {
+	$.ajax({
+		url: '__APP__/user/preset?stmp=' + new Date().toString(),
+		success: function(html) {
+			$.mask.close(function(){
+				$.mask.show($(html));
+			});	
+		}
+	});
+}
+
 function showLoginDiv() {
+	$.removeCookie('UserInfo');
 	var interval = setInterval(function(){
 		listenUserInfo(interval);
 	},30);
@@ -127,6 +161,7 @@ function showLoginDiv() {
 }
 
 function showRegDiv() {
+	$.removeCookie('UserInfo');
 	var interval = setInterval(function(){
 		listenUserInfo(interval);
 	},30);
