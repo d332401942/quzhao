@@ -223,6 +223,13 @@ function lovenum(pid) {
 		type:'post',
 		url:url,
 		success:function(data){
+			if(data.error.code == 50001) {
+				showLoginDiv();
+				return false;
+			}
+			if(data.error.code == 50002) {
+				window.location.href="__APP__/user/preset";
+			}
 			if(data.result) {
 				window.location.reload();
 			}else {
@@ -267,6 +274,13 @@ function message() {
 		data:data,
 		url:url,
 		success:function(data){
+			if(data.error.code == 50001) {
+				showLoginDiv();
+				return false;
+			}
+			if(data.error.code == 50002) {
+				window.location.href="__APP__/user/preset";
+			}
 			if(data.result) {
 				$('#js-message').val('');
 				showComt(0);

@@ -4,6 +4,7 @@ class LoveAjaxView extends BaseAjaxView
 {
     public function index()
 	{
+		$this->mustLogin();
 		if($_POST)
 		{
 			$business = M('LoveBusiness');

@@ -23,11 +23,11 @@ class BaseAjaxView extends AjaxCoreLib
 	{
 		if (!$this->CurrentUser)
 		{
-			
+			throw new AjaxExceptionLib('not login', CodeException::USER_NOT_LOGIN);
 		}
 		else if (empty($this->CurrentUser->email))
 		{
-			$this->redirect(APP_URL . '/user/preset');
+			throw new AjaxExceptionLib('not have email', CodeException::USER_NO_EAMIL);
 		}
 	}
 	

@@ -4,6 +4,7 @@ class ChangeUserView extends BaseView
 	public function index()
 	{
 		$this->setMeta();
+		$this->mustLogin();
 		//得到城市信息
 		$cityModels = $this->getCity();
 		$hotCityModels = array();

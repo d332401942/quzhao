@@ -3,6 +3,7 @@ class ShareUserView extends BaseView
 {
 	public function index()
 	{
+		$this->mustLogin();
 		if($_POST){
 			if(!empty($_POST['url']) && !empty($_POST['title']) && !empty($_POST['price']))
 			{
