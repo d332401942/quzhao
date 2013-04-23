@@ -76,7 +76,7 @@ class UserBusiness extends BaseBusiness
     		$this->addOtherModel($model);
     	}
     	//修改用户昵称
-    	else if ($nickname && empty($model->email))
+    	else if (empty($model->email))
     	{
     		$data->updateNickNameAndHead($model->id, $nickname, $head);
     	}

@@ -15,6 +15,11 @@ class MessageAjaxView extends BaseAjaxView
 				$model->creattime 	=	time();
 				$model->message 	=	trim($_POST['message']);
 				$business->add($model);
+				if(!empty($_POST['shareUserId']) && (int)$_POST['shareUserId'])
+				{
+					$business = M('MessagelettersBusiness');
+					$business->add($_POST['shareUserId'],(int)$_POST['pid']);
+				}
 				$this->response(true);
 			}
 		}

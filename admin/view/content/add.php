@@ -40,10 +40,8 @@ class AddContentView extends BaseView
 			$model->price 	= $shareModel->price;
 			$model->isvalid = HomeTjDataDataModel::ISVALID_YES;
 			$model->name 	= $shareModel->title;
-			$model->name 	= $shareModel->title;
-			$model->name 	= $shareModel->title;
-			$model->name 	= $shareModel->title;
 			$model->shareid = $shareModel->id;
+			$model->userid = $shareModel->userid;
 			$this->model = $model;
 			if (!empty($_POST))
 			{

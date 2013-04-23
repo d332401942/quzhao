@@ -223,16 +223,17 @@ function lovenum(pid) {
 		type:'post',
 		url:url,
 		success:function(data){
-			if(data.error.code == 50001) {
+			if(data.result) {
+				window.location.reload();
+			}
+			else if(data.error.code == 50001) {
 				showLoginDiv();
 				return false;
 			}
-			if(data.error.code == 50002) {
+			else if(data.error.code == 50002) {
 				window.location.href="__APP__/user/preset";
 			}
-			if(data.result) {
-				window.location.reload();
-			}else {
+			else {
 				alert('该产品已经喜欢过');
 			}
 		}
@@ -266,7 +267,7 @@ function message() {
 		$('#js-empty-message').html('<font style="color:red">评论内容600字以内</font>');
 		return false;
 	}
-	data = {message:msg,pid:<{$id}>};
+	data = {message:msg,pid:<{$id}>,shareUserId:<{$goods->userid}>};
 	url = '__AJAX__/message/add?stmp=' + new Date().toString();
 	$.ajax({
 		dataType:'json',
@@ -274,17 +275,18 @@ function message() {
 		data:data,
 		url:url,
 		success:function(data){
-			if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
 			if(data.result) {
 				$('#js-message').val('');
 				showComt(0);
 			}
+			else if(data.error.code == 50001) {
+				showLoginDiv();
+				return false;
+			}
+			else if(data.error.code == 50002) {
+				window.location.href="__APP__/user/preset";
+			}
+			
 		}
 	});
 }
