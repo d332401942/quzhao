@@ -159,7 +159,7 @@ class CategoryData extends BaseData
 			$this->setAttrCache($attrId);
 			return self::$attrdbModels[$attrId];
 		}
-		$result = '';
+		$result = array();
 		return $result;
 	}
 	
