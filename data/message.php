@@ -101,6 +101,30 @@ class MessageData extends BaseData
 		return $messageModels;
 	}
 	
+	public function getMessageAll($pageCore)
+	{
+		$sql = "select count(*) as count from message as t1 join user as t2 on t2.id = t1.userid";
+		$count = $this->query($sql);
+		$pageCore->count = $count[0]['count'];
+		$pageCore->pageCount = ceil($pageCore->count / $pageCore->pageSize);
+		$sql = 'select t1.*,t2.email from message as t1 join user as t2 on t2.id = t1.userid order by id desc limit '.($pageCore->currentPage-1)*$pageCore->pageSize.','.$pageCore->pageSize;
+		$result = $this->query($sql,'MessageDataModel');
+		return $result;
+	}
+	
+	public function delMsg($id,$userid=false)
+	{
+		$ids = is_array($id) ? $id : array($id);
+		if($userid)
+		{
+			$sql = 'delete from message where id in ('.implode(',', $ids).') AND userid = '.$userid;
+		}else{
+			$sql = 'delete from message where id in ('.implode(',', $ids).')';
+		}
+		
+		$this->exec($sql);
+	}
+	
 	private function getUserMessage($ids)
 	{
 		$user = new UserData();

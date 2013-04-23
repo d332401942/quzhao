@@ -117,6 +117,12 @@ class LeftIndexView extends BaseView
 					'url' => '',
 				),
 			),
+			'评论管理' => array(
+				array(
+					'name' => '评论查看',
+					'url' => 'message/show',
+				)
+			),
         );
         $this->assign('menu', $menu);
     }

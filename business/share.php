@@ -28,6 +28,13 @@ class ShareBusiness extends BaseBusiness
 		$result = $data->getOneById($id);
 		return $result;
 	}
+	
+	public function getShareTotal($pageCore,$userid)
+	{
+		$data = new ShareData();
+		$result = $data->getShareTotal($pageCore,$userid);
+		return $result;
+	}
 	private function downImg($url)
 	{
 		$md5Url = md5($url);

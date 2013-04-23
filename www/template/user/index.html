@@ -4,13 +4,13 @@
 	<div class="con_left2">
 		<div class="xinxi">
 			<ul>
-				<li class="aa"><a href="#">喜欢（20）</a></li>
-				<li ><a href="#">爆料（9）</a></li>
+				<li class="aa"><a href="javascript:;" onclick="love()">喜欢（<{$pageCore->count}>）</a></li>
+				<li ><a href="javascript:;" onclick="share();">爆料（<{$pageShareCore->count}>）</a></li>
 				<li ><a href="#">消息（2）</a></li>
 			</ul>
 		</div>
 		<div class="line"></div>
-		<ul>
+		<ul id="js-love">
 			<{if ($model)}>
 			<{foreach ($model as $val)}>
 			<li>
@@ -19,13 +19,30 @@
 				<h3><a href="<{$val->href}>" target="_blank" title="<{$val->name}>"><{$val->name|truncate:25}></a></h3>
 				<h4><{$val->price}></h4>
 				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>
+					<span><a href="#"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><!--<span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>-->
 				</h2>
 				</div>
 			</li>
 			<{/foreach}>
 			<{else}>
-				暂无喜欢商品
+				<h2 center="center">暂无喜欢商品</h2>
+			<{/if}>
+		</ul>
+		<ul style="display:none;" id="js-shareCore">
+			<{if ($shareModel)}>
+			<{foreach ($shareModel as $val)}>
+			<li>
+				<div class="ress_more_li">
+				<p><a href="<{$val->url}>" target="_blank"><img src="<{$val->image|parsePicpath}>"/></a></p>
+				<h3><a href="<{$val->url}>" target="_blank" title="<{$val->title}>"><{$val->title|truncate:25}></a></h3>
+				<h4><{$val->price}></h4>
+				<h2>
+				</h2>
+				</div>
+			</li>
+			<{/foreach}>
+			<{else}>
+				<h2 center="center">暂无爆料商品</h2>
 			<{/if}>
 		</ul>
 		<{uc class="PageControlView" pageCore="$pageCore"}>
@@ -50,5 +67,13 @@
 <script>
 function goPage(page) {
 	window.location.href = '__APP__/user__LIMIT__page/' + page;
+}
+function share() {
+	$('#js-love').hide();
+	$('#js-shareCore').show();
+}
+function love() {
+	$('#js-love').show();
+	$('#js-shareCore').hide();
 }
 </script>
