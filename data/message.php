@@ -35,7 +35,7 @@ class MessageData extends BaseData
 			$pageCore->currentPage = $pageCore->pageCount;
 		}
 		$sql = 'SELECT m.storey as m_storey ,m.id AS m_id, m.pid AS m_pid, m.userid AS m_userid, m.creattime AS m_creattime, m.message AS m_message, r.id AS r_id, r.userid AS r_userid, r.content AS r_content FROM message AS m LEFT JOIN reply AS r ON r.messageid = m.id ';
-		$sql .= ' where m.pid = ' . $pid . ' order by m.id asc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+		$sql .= ' where m.pid = ' . $pid . ' order by m.id asc,r.id asc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 		
 		//$sql = 'select t1.*,t2.nickname from message as t1 join user as t2 on t2.id = t1.userid where pid = ' . $pid . ' order by id asc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 		
