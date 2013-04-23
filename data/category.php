@@ -141,7 +141,7 @@ class CategoryData extends BaseData
 			return self::$attrdbModels[$attrId];
 		}
 		
-		self::$attrdbModels = $this->cacheAttrAll($attrId);
+		self::$attrdbModels[$attrId] = $this->cacheAttrAll($attrId);
 		
 		if (!empty(self::$attrdbModels[$attrId]))
 		{
@@ -198,18 +198,15 @@ class CategoryData extends BaseData
 		}
 		foreach ($arr as $val)
 		{
-			foreach($val as $vv)
+			$model = new AttrdbDataModel();
+			foreach ($model as $k => $v)
 			{
-				$model = new AttrdbDataModel();
-				foreach ($model as $k => $v)
+				if (isset($val[$k]))
 				{
-					if (isset($vv[$k]))
-					{
-						$model->$k = $vv[$k];
-					}
+					$model->$k = $val[$k];
 				}
-				$models[$model->attrid] = $model;
 			}
+			$models[$model->attrdbid] = $model;
 		}
 		return $models;
 	}
