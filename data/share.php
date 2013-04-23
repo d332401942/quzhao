@@ -30,5 +30,14 @@ class ShareData extends BaseData
 		$sql = 'update share set status = '.$status . ' where id in ('.implode(',', $ids).')';
 		$this->exec($sql);
 	}
+	
+	public function getShareTotal($pageCore,$userid)
+	{
+		$this->setPage($pageCore);
+		$this->setOrder(array('id'=>'desc'));
+		$this->where(array('userid'=>array('='=>$userid)));
+		$result = $this->findAll();
+		return $result;
+	}
     
 }
