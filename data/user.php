@@ -98,7 +98,7 @@ class UserData extends BaseData
 	public function preSet($model)
 	{
 		$model->password = md5 ( $model->password );
-		$model->setWorkFields(array('email', 'nikename', 'password'));	
+		$model->setWorkFields(array('email', 'nickname', 'password'));	
 		$this->updateModel($model);
 	}
 	
