@@ -4,9 +4,9 @@
 	<div class="con_left2">
 		<div class="xinxi">
 			<ul>
-				<li class="aa"><a href="javascript:;" onclick="love()">喜欢（<{$pageCore->count}>）</a></li>
-				<li ><a href="javascript:;" onclick="share();">爆料（<{$pageShareCore->count}>）</a></li>
-				<li ><a href="#">消息（2）</a></li>
+				<li class="js-user-menu aa"><a href="javascript:;" onclick="love(this)">喜欢（<{$pageCore->count}>）</a></li>
+				<li class="js-user-menu"><a href="javascript:;" onclick="share(this);">爆料（<{$pageShareCore->count}>）</a></li>
+				<li class="js-user-menu"><a href="#">消息（2）</a></li>
 			</ul>
 		</div>
 		<div class="line"></div>
@@ -68,11 +68,15 @@
 function goPage(page) {
 	window.location.href = '__APP__/user__LIMIT__page/' + page;
 }
-function share() {
+function share(obj) {
+	$('.js-user-menu').removeClass('aa');
+	$(obj).parent().addClass('aa');
 	$('#js-love').hide();
 	$('#js-shareCore').show();
 }
-function love() {
+function love(obj) {
+	$('.js-user-menu').removeClass('aa');
+	$(obj).parent().addClass('aa');
 	$('#js-love').show();
 	$('#js-shareCore').hide();
 }
