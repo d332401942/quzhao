@@ -19,7 +19,7 @@ class IndexMessageView extends BaseView
 		$pageCore->currentPage = $page;
 		$result = array ();
 		$result = $business->findAll ( $pageCore, $pid, $isLastPage );
-		if (! empty ( $result ) && ! $this->CurrentUser)
+		if (! empty ( $result ) && $this->CurrentUser)
 		{
 			foreach ( $result as $key => $val )
 			{
