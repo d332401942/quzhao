@@ -5,21 +5,9 @@ class UserAjaxView extends BaseAjaxView
     
 	public function checkuser()
 	{	
-		$name = trim($_GET['name']);
-		if(empty($name)){
-			$this->responseError('用户名不能为空',CodeException::USER_EMAIL_EMPTY);
-		}	
-		$emailRegular = CommUtility::EMAIL_PATTERN;
-		if(!preg_match($emailRegular,$_GET['name']))
-		{
-			$this->responseError('邮箱格式不正确',CodeException::USER_EAMIL_FORMAT);
-		}
+		$email = !empty($_GET['name']) ? trim($_GET['name']) : null;
 		$business = M('UserBusiness');
-		$row = $business->checkuser($_GET['name']);
-		if($row)
-		{
-			$this->responseError('用户名已被占用',CodeException::USER_EMAIL_EXISTS);	
-		}
+		$business->checkuser($email);
 		$this->response(true);
 	}
 	
@@ -61,6 +49,21 @@ class UserAjaxView extends BaseAjaxView
 	public function loginOut()
 	{
 		setcookie(BaseView::USER_INFO_COOKIE_KEY, '', -1, '/');
+		$this->response(true);
+	}
+	
+	public function preSet()
+	{
+		$nikename = empty($_POST['nikename']) ? null : trim($_POST['nikename']);
+		$email = empty($_POST['email']) ? null : trim($_POST['email']);
+		$password = empty($_POST['password']) ? null : trim($_POST['password']);
+		$this->mustLogin(false);
+		$userModel = $this->CurrentUser;
+		$userModel->nickname = $nikename;
+		$userModel->email = strtolower($email);
+		$userModel->password = $password;
+		$business = M('UserBusiness');
+		$business->preSet($userModel);
 		$this->response(true);
 	}
 	

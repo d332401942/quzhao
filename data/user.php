@@ -10,7 +10,7 @@ class UserData extends BaseData
 		$this->add ( $model );
 	}
 
-	public function checkuser($name)
+	public function getUserByEmail($name)
 	{
 		$this->where ( array (
 						'email' => array (

@@ -27,7 +27,6 @@ $.mask = {
 		
 		this.popupLayer.fadeIn('fast',func)
 		var left = ($(document).width() - this.showObj.width())/2;
-		console.log(document.documentElement.clientHeight - this.showObj.height());
 		var top = (document.documentElement.clientHeight - this.showObj.height())/2 + $(document).scrollTop();
 		this.setPosition(left,top);
 	},
