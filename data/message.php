@@ -79,8 +79,12 @@ class MessageData extends BaseData
 			}
 		}
 		$userIds = array_unique($userIds);
-		$user = $this->getUserMessage($userIds);
-		foreach($user as $val)
+		$userModels = array();
+		if ($userIds)
+		{
+			$userModels = $this->getUserMessage($userIds);
+		}
+		foreach($userModels as $val)
 		{
 			foreach($messageModels as $k=>$v)
 			{
