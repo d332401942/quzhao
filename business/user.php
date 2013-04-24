@@ -112,6 +112,11 @@ class UserBusiness extends BaseBusiness
 		$data->change($model);
 	}
 	
+	public function resetPasswd($userid,$newPass)
+	{
+		$data = new UserData();
+		$data->resetPasswd($userid,$newPass);
+	}
 	/**
 	 * 添加一个其他网站登录的用户
 	 * @param unknown $model

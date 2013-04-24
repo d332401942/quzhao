@@ -86,5 +86,18 @@ class UserData extends BaseData
 	{
 		$this->updateModel ( $model );
 	}
+	
+	public function getUserId($email)
+	{
+		$this->where(array('email'=>array('='=>$email)));
+		$result = $this->findOne();
+		return $result;
+	}
+	
+	public function resetPasswd($userid,$newPass)
+	{
+		$sql = 'update user set password = '.md5($newPass).' where id = '.$userid;
+		$this->exec ( $sql );
+	}
 
 }
