@@ -41,7 +41,7 @@ class ConnectModel extends Feng
 
 	private $serverName;
 
-	public function __construct($serverName = 'www.quzhao.com')
+	public function __construct($serverName = 'www.quzhao.com', $fromUrl = null)
 	{
 		$this->serverName = $serverName;
 		$this->appIdQQ = '100384287';
@@ -50,7 +50,7 @@ class ConnectModel extends Feng
 		$this->stepQQ1 = 'http://openapi.qzone.qq.com/oauth/show?';
 		$this->stepQQ1 .= 'which=ConfirmPage&display=pc&response_type=code&scope=all';
 		$this->stepQQ1 .= '&client_id=' . $this->appIdQQ;
-		$this->stepQQ1 .= '&redirect_uri=' . urlencode ( 'http://' . $serverName . '/callbak/qq' );
+		$this->stepQQ1 .= '&redirect_uri=' . urlencode ( $this->redirectUriQQ );
 		$this->stepQQ2 = 'https://graph.qq.com/oauth2.0/token';
 		$this->stepQQ3 = 'https://graph.qq.com/oauth2.0/me';
 		$this->stepQQ4 = 'https://graph.qq.com/user/get_user_info';

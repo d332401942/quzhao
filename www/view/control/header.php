@@ -13,6 +13,11 @@ class HeaderControlView extends BaseView
         $this->assign('css', $css);
 
         $js = empty($parameters['js']) ? array() : explode(',', $parameters['js']);
+        array_unshift($js, 'jquery.mask');
+        array_unshift($js, 'jquery.form');
+        array_unshift($js, 'jquery.cookie');
+        array_unshift($js, 'jquery');
+        $js = array_unique($js);
         $this->assign('js', $js);
 
         $type = empty($parameters['type']) ? null : trim($parameters['type']);
