@@ -15,6 +15,7 @@ class IndexSearchView extends BaseView
 		$keyword = null;
 		$category = null;
 		$sort = null;
+		$sortPrice = 'price1';
 		$showType = null;
 		$attrArr = $this->getAttrArr($parameters);
 		$attrModels = array();
@@ -67,6 +68,10 @@ class IndexSearchView extends BaseView
 		if (!empty($parameters['sort']))
 		{
 			$sort = $parameters['sort'];
+			if ($sort == 'price1')
+			{
+				$sortPrice = 'price2';
+			}
 		}
 		//得到历史记录
 		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
@@ -88,6 +93,7 @@ class IndexSearchView extends BaseView
         $this->assign('keyword', $keyword);
         $this->assign('category', $category);
         $this->assign('sort', $sort);
+        $this->assign('sortPrice', $sortPrice);
         $this->assign('showType', $showType);
 		$this->assign('attrModels',$attrModels);
 		$this->assign('attrArr',$attrArr);
