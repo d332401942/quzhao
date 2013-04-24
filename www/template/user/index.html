@@ -6,7 +6,7 @@
 			<ul>
 				<li class="js-user-menu aa"><a href="javascript:;" onclick="love(this)">喜欢（<{$pageCore->count}>）</a></li>
 				<li class="js-user-menu"><a href="javascript:;" onclick="share(this);">爆料（<{$pageShareCore->count}>）</a></li>
-				<li class="js-user-menu"><a href="#">消息（2）</a></li>
+				<li class="js-user-menu"><a href="javascript:;">消息（2）</a></li>
 			</ul>
 		</div>
 		<div class="line"></div>
@@ -19,7 +19,7 @@
 				<h3><a href="<{$val->href}>" target="_blank" title="<{$val->name}>"><{$val->name|truncate:25}></a></h3>
 				<h4><{$val->price}></h4>
 				<h2>
-					<span><a href="#"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><!--<span><a href="#"><img src="__RESOURCE__/images/see.gif" />3435</a></span>-->
+					<span><a href="javascript:;"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><!--<span><a href="javascript:;"><img src="__RESOURCE__/images/see.gif" />3435</a></span>-->
 				</h2>
 				</div>
 			</li>
@@ -50,11 +50,18 @@
 	</div>
 	<div class="con_right2">
 		<div class="right2_yi">
-			<div class="right2_yi_pic"><a href="#"><img src="<{$CurrentUser->head|parsePicpath}>" alt=""/></a></div>
+			<div class="right2_yi_pic">
+				<a href="javascript:;">
+					<{if (!empty($CurrentUser->head))}>
+						<img src="<{$CurrentUser->head|parsePicpath}>" alt=""/>
+					<{else}>
+						<img src="__RESOURCE__/images/144-145.jpg" alt=""/>
+					<{/if}>
+				</a>
+			</div>
 			<div class="right2_yi_title">
 				<ul>
-					<li><a style="font-size:16px;" href="#">小李子</a></li>
-					<li><a href="#"><img src="__RESOURCE__/images/12-16.jpg" alt=""/></a>&nbsp;<a href="#">北京</a></li>
+					<li><a style="font-size:16px;" href="javascript:;"><{$CurrentUser->nickname}></a></li>
 				</ul>
 			</div>
 		</div>
