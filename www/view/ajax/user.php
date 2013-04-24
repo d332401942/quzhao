@@ -64,6 +64,9 @@ class UserAjaxView extends BaseAjaxView
 		$userModel->password = $password;
 		$business = M('UserBusiness');
 		$business->preSet($userModel);
+		//把用户信息记入cookie
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($userModel), 0, '/');
+		$this->response(true);
 		$this->response(true);
 	}
 	
