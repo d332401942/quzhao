@@ -5,6 +5,7 @@ class IndexTuanView extends BaseView
 	
 	public function index($parameters)
 	{
+		$this->setMeta('团购_趣找购物搜索');
 		foreach ($parameters as $key => $val)
 		{
 			$parameters[$key] = htmlspecialchars($val);
