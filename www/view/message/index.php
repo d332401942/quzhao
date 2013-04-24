@@ -14,24 +14,28 @@ class IndexMessageView extends BaseView
 		}
 		$isLastPage = empty($_GET['isLastPage']) ? false : true;
 		$pageCore->currentPage = $page;
+		$result = array();
 		$result = $business->findAll($pageCore,$pid,$isLastPage);
-		if($this->CurrentUser)
+		if(!empty($result))
 		{
-			foreach($result as $key=>$val)
+			if($this->CurrentUser)
 			{
-				if($val->userid == $this->CurrentUser->id)
+				foreach($result as $key=>$val)
 				{
-					$result[$key]->del = true; 
-				}
-				foreach($val->replys as $k=>$v)
-				{
-					if($v->userid == $this->CurrentUser->id)
+					if($val->userid == $this->CurrentUser->id)
 					{
-						$val->replys[$k]->del = true;
+						$result[$key]->del = true; 
+					}
+					foreach($val->replys as $k=>$v)
+					{
+						if($v->userid == $this->CurrentUser->id)
+						{
+							$val->replys[$k]->del = true;
+						}
 					}
 				}
 			}
-		}
+		}	
 		$this->assign('model',$result);
 		$this->assign('pageCore',$pageCore);
 	}
