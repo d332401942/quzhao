@@ -1,32 +1,35 @@
 <div class="Register3_box" style="">
-	<div class="off"><a href="javascript:;" onclick="$.mask.close();">x</a></div>
-	<h1>hi,<{$CurrentUser->nickname}><strong>接下来只要简单设置就可以了</strong></h1>
-	<div class="Register3_box_l">
-		<a href="javascript:;">
-		<{if (!empty($CurrentUser->head))}>
-			<img src="<{$CurrentUser->head}>">
-		<{else}>
-			<img src="__RESOURCE__/images/user_header.gif">
-		<{/if}>
-		<h2 style="display:none;">修改头像</h2>
-		</a>
-	</div>
-	<div class="Register3_box_r">
+	<form id="js-preset-form" action="post" method="post" onsubmit="return doPreset()">
+		<div class="off"><a href="javascript:;" onclick="$.mask.close();">x</a></div>
+		<h1>hi,<{$CurrentUser->nickname}><strong>接下来只要简单设置就可以了</strong></h1>
+		<div class="Register3_box_l">
+			<a href="javascript:;">
+			<{if (!empty($CurrentUser->head))}>
+				<img src="<{$CurrentUser->head}>">
+			<{else}>
+				<img src="__RESOURCE__/images/user_header.gif">
+			<{/if}>
+			<h2 style="display:none;">修改头像</h2>
+			</a>
+		</div>
+		<div class="Register3_box_r">
 
-		<ul>
-			<li>
-				<input type="text" class="Register3_box_r_in" value="<{$CurrentUser->nickname}>">
-			</li>
-			<li>
-				<input type="text" class="Register3_box_r_in" onmouseout="this.style.borderColor=''" onfocus="if (value =='邮箱'){value =''}" value="邮箱" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='邮箱'}" style="">
-			<h3 style="display:none;">邮箱不能为空</h3>
-			</li>
-			<li>
-				<input type="text" class="Register3_box_r_in" onmouseout="this.style.borderColor=''" onfocus="type='password';if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}" style="">
-			</li>
-			<li class="Register3_box_r_pnt"><a href="#">完成</a></li>
-		</ul>
+			<ul>
+				<li>
+					<input name="nikename" onfocus="checkNikeNamePreset()" type="text" class="Register3_box_r_in" value="<{$CurrentUser->nickname}>">
+					<h3 class="js-preset-email-error"></h3>
+				</li>
+				<li>
+					<input name="email" type="text" class="Register3_box_r_in" onmouseout="this.style.borderColor=''" onfocus="if (value =='登录邮箱'){value =''}" value="登录邮箱" onmouseover="this.style.borderColor=''" tabindex="1" onblur="checkEmailPreset();if (value ==''){value='登录邮箱'}" style="">
+					<h3 class="js-preset-email-error"></h3>
+				</li>
+				<li>
+					<input onblur="checkPasswordPreset()" name="password" type="text" class="Register3_box_r_in" onmouseout="this.style.borderColor=''" onfocus="type='password';if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}" style="">
+					<h3 class="js-preset-email-error"></h3>
+				</li>
+				<li class="Register3_box_r_pnt"><a href="javascript:;" onclick="$('#js-preset-form').submit()">完成</a></li>
+			</ul>
 
-	</div>
-
+		</div>
+	</form>
 </div>

@@ -17,4 +17,13 @@ class CommUtility extends Feng
 	    }
 	    return $sessionId;
 	}
+	
+	public static function randStr(){
+		$string = "0123456789ABCDEFGHIJKLMNOPQRSTUVWSYZabcdefghijklmnopqrstuvwsyz";
+		$salt = '';
+		for($i = 0;$i<12;$i++){
+			$salt .= substr($string,mt_rand(0,strlen($string)-1),1);
+		}
+		return $salt;
+	}
 }

@@ -135,7 +135,7 @@ function listenUserInfo(interval) {
 			preset();
 		}
 		else {
-			//window.location.reload();
+			window.location.reload();
 		}
 	}
 }
@@ -225,7 +225,7 @@ function doReg(obj) {
 		dataType: 'json',
 		success: function(data) {
 			if (data.result) {
-				window.location.href = '__APP__/user/change';
+				//window.location.href = '__APP__/user/change';
 			}
 		}
 	});
@@ -249,6 +249,96 @@ function rePasswordBlur(obj) {
 		$('#js-pass-error').html('两次密码输入的不一致');
 		$(obj).css('border-color','#E872C0');
 	}
+}
+
+function doPreset() {
+	if (!checkNikeNamePreset() | !checkEmailPreset() | !checkPasswordPreset()) {
+		return false;
+	}
+	var formObj = $('#js-preset-form');
+	var email = formObj.find('input[name="email"]').val();
+	var nikename = formObj.find('input[name="nikename"]').val();
+	var password = formObj.find('input[name="password"]').val();
+	$.ajax({
+		url: '__AJAX__/user/preSet?stmp='+ new Date().toString(),
+		data: {email:email,nikename:nikename,password:password},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+	return false;
+}
+
+function checkNikeNamePreset() {
+
+	var formObj = $('#js-preset-form');
+	var nikenameObj = formObj.find('input[name="nikename"]');
+	var errObj = nikenameObj.next();
+	var nikename = nikenameObj.val();
+	if (!nikename) {
+		errObj.html('昵称不能为空');
+		return false;
+	}
+	else if (nikename.length > 8) {
+		errObj.html('昵称不能超过8个字');
+		return false;
+	}
+	errObj.html('');
+	return true;
+}
+
+function checkEmailPreset() {
+	var formObj = $('#js-preset-form');
+	var emailObj = formObj.find('input[name="email"]');
+	var errObj = emailObj.next();
+	var email = emailObj.val();
+	if (!email || email == '登录邮箱') {
+		errObj.html('请填写email');
+		return false;
+	}
+	var url  = '__AJAX__/user/checkuser?stmp'+Math.random();
+	var data = {name:email};
+	var status = false;
+	$.ajax({
+		url:url,
+		data:data,
+		async: false,
+		dataType:'json',
+		success:function(data){
+			if (data.result) {
+				status = true;
+				errObj.html('<font color="green">用户名可用</font>');
+			}
+			else {
+				errObj.html(data.error.message);
+			}
+		}
+	});
+	return status;
+}
+
+function checkPasswordPreset() {
+	var formObj = $('#js-preset-form');
+	var passwordObj = formObj.find('input[name="password"]');
+	var errObj = passwordObj.next();
+	var password = passwordObj.val();
+	if (password == '密码') {
+		password = '';
+	}
+	if (!password || password.length < 6) {
+		errObj.html('密码不能小于6位');
+		return false;
+	}
+	if (password.length > 32) {
+		errObj.html('密码不能大于32位');
+		return false;
+	}
+	errObj.html('');
+	return true;
 }
 
 function checkuser() {

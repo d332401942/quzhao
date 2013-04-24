@@ -25,7 +25,7 @@ class BaseAjaxView extends AjaxCoreLib
 		{
 			throw new AjaxExceptionLib('not login', CodeException::USER_NOT_LOGIN);
 		}
-		else if (empty($this->CurrentUser->email))
+		else if ($mustEmail && empty($this->CurrentUser->email))
 		{
 			throw new AjaxExceptionLib('not have email', CodeException::USER_NO_EAMIL);
 		}

@@ -10,7 +10,7 @@ class UserData extends BaseData
 		$this->add ( $model );
 	}
 
-	public function checkuser($name)
+	public function getUserByEmail($name)
 	{
 		$this->where ( array (
 						'email' => array (
@@ -33,6 +33,7 @@ class UserData extends BaseData
 		$line = array (
 						'city',
 						'email',
+						'head',
 						'id',
 						'inviteid',
 						'ischecked',
@@ -85,6 +86,26 @@ class UserData extends BaseData
 	public function change($model)
 	{
 		$this->updateModel ( $model );
+	}
+	
+	public function getUserId($email)
+	{
+		$this->where(array('email'=>array('='=>$email)));
+		$result = $this->findOne();
+		return $result;
+	}
+	
+	public function preSet($model)
+	{
+		$model->password = md5 ( $model->password );
+		$model->setWorkFields(array('email', 'nikename', 'password'));	
+		$this->updateModel($model);
+	}
+	
+	public function resetPasswd($userid,$newPass)
+	{
+		$sql = 'update user set password = '.md5($newPass).' where id = '.$userid;
+		$this->exec ( $sql );
 	}
 
 }
