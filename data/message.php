@@ -117,12 +117,22 @@ class MessageData extends BaseData
 		$ids = is_array($id) ? $id : array($id);
 		if($userid)
 		{
+			//用户自己删除
 			$sql = 'delete from message where id in ('.implode(',', $ids).') AND userid = '.$userid;
 		}else{
+			//后台管理删除
 			$sql = 'delete from message where id in ('.implode(',', $ids).')';
 		}
-		
 		$this->exec($sql);
+		
+		//删除该评论下所有回复
+		$sql = 'select * from reply where messageid in ('.implode(',', $ids).')';
+		$result = $this->query($sql);
+		if(!empty($result))
+		{
+			$sql2 = 'delete from reply where messageid in ('.implode(',', $ids).')';
+			$this->exec($sql2);
+		}
 	}
 	
 	private function getUserMessage($ids)

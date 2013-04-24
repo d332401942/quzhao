@@ -11,7 +11,7 @@ class RetrieveUserView extends BaseView
 			//}
 			//查询用户信息
 			$business = M('RetrieveBusiness');
-			$userModel = $business->getUserId('67063492@qq.com');
+			$userModel = $business->getUserId('denghongfeng@quzhao.com');
 			if(!$userModel)
 			{
 				//抛出异常
