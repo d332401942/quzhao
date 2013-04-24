@@ -5,7 +5,6 @@ class endDpView extends BaseView
     public function index($parameters)
     {
         $id = !empty($parameters)?intval($parameters['id']):'';
-        $this->setMeta();
         $business = new HomeTjDataBusiness();
        //得到推荐产品
         $tjModels = $business->getTjDpModels(5);
@@ -52,6 +51,7 @@ class endDpView extends BaseView
 		);
 		//新浪微博appKey
 		$sina = new ConnectModel();
+		$this->setMeta($goods->name. '_趣找购物搜索');
 		$this->assign('sinaApp',$sina->appIdWeibo);
 		$this->assign('editorArr', $editorArr);
         $this->assign('tjModels', $tjModels);

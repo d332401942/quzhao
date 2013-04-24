@@ -5,7 +5,7 @@ class IndexNineView extends BaseView
 	
 	public function index($parameters)
 	{
-		$this->setMeta();
+		$this->setMeta('9.9包邮_趣找购物搜索');
 		//得到9.9的数据 
 		$pageCore = new PageCoreLib();
 		$business = new HomeTjDataBusiness();

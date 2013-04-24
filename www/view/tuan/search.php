@@ -5,6 +5,7 @@ class SearchTuanView extends BaseView
 	
 	public function index()
 	{
+		$this->setMeta('团购_趣找购物搜索');
 		$pageCore = new PageCoreLib();
 		$pageCore->pageSize = 24;
 		$pageCore->currentPage = empty($_POST['page']) ? 1 : (int)$_POST['page'];

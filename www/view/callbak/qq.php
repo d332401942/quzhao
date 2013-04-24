@@ -26,8 +26,7 @@ class QqCallbakView extends BaseCallbakView
 			{
 				$this->responseError ( $str );
 			}
-			// header ( 'HTTP/1.1 301 Moved Permanently' );
-			header ( 'Location: ' . $connectModel->redirectUriQQ . '&' . $str );
+			header ( 'Location: ' . $connectModel->redirectUriQQ . '?' . $str );
 			exit ();
 		}
 		

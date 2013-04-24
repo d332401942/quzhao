@@ -5,7 +5,7 @@ class IndexBrandView extends BaseView
 	
 	public function index()
 	{
-		$this->setMeta();
+		$this->setMeta('品牌特卖_趣找购物搜索');
 		$business = new HomeBrandBusiness();
 		$start = 0;
 		$end = 16;
