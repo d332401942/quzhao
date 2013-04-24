@@ -47,11 +47,11 @@ class BaseView extends ViewCoreLib
     {
     	if (!$this->CurrentUser)
     	{
-    		$this->redirect(APP_URL . '/user/login');
+    		$this->redirect(APP_URL . '/');
     	}
     	else if (empty($this->CurrentUser->email))
     	{
-    		$this->redirect(APP_URL . '/user/preset');
+    		$this->redirect(APP_URL . '/');
     	}
     }
     
