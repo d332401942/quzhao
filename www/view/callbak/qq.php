@@ -5,7 +5,13 @@ class QqCallbakView extends BaseCallbakView
 
 	public function index()
 	{
-		$connectModel = new ConnectModel ( $this->ServerName );
+		$fromUrl = null;
+		if (!empty($_GET['fromurl']))
+		{
+			$fromUrl = $_GET['fromurl'];
+		}
+		$fromUrl = urldecode($fromUrl);
+		$connectModel = new ConnectModel ( $this->ServerName, $fromUrl);
 		$access_token = empty ( $_GET ['access_token'] ) ? null : $_GET ['access_token'];
 		$code = empty ( $_GET ['code'] ) ? null : $_GET ['code'];
 		$url = '';
@@ -21,9 +27,10 @@ class QqCallbakView extends BaseCallbakView
 				$this->responseError ( $str );
 			}
 			// header ( 'HTTP/1.1 301 Moved Permanently' );
-			header ( 'Location: ' . $connectModel->redirectUriQQ . '?' . $str );
+			header ( 'Location: ' . $connectModel->redirectUriQQ . '&' . $str );
 			exit ();
 		}
+		
 		if (! $access_token)
 		{
 			$this->responseError ( '' );

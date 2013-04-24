@@ -1,0 +1,86 @@
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>趣找购物搜索</title>
+	<link rel="shortcut icon" href="/favicon.ico"> 
+	<meta content="趣找购物搜索" name="description">
+	<meta content="趣找购物搜索" name="keyword">
+	<meta property="qc:admins" content="376426635761520176375">
+	<meta property="wb:webmaster" content="243a964c87bed3cd">
+	<link type="text/css" rel="stylesheet" href="/./www/resource/css/css.css">
+	<link type="text/css" rel="stylesheet" href="/./www/resource/css/login.css">
+	<script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="/./www/resource/js/jquery.js"></script>
+	<script type="text/javascript" src="/./www/resource/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/./www/resource/js/jquery.form.js"></script>
+	<script type="text/javascript" src="/./www/resource/js/jquery.mask.js"></script>
+</head>
+<div class="box user-reg" style="padding: 0px; opacity: 1; display: block;">
+    <div class="left">
+		<form action="" method="" onsubmit="return doLogin(this)">
+			<div class="left_yi">
+				<span style="font-size:18px;">
+					登录
+				</span>
+				&nbsp;有没有账户?&nbsp;
+				<a style="color:#c74396;" href="javascript:;" onclick="showRegDiv();">
+					注册一个
+				</a>
+			</div>
+			<div class="left_er">
+				<input name="email" class="kuang" type="text" onmouseout="this.style.borderColor=''" onfocus="if (value =='登录邮箱'){value =''}" value="登录邮箱" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='登录邮箱'}" style="">
+			</div>
+			<div class="left_san" id="js-error">
+				
+			</div>
+			<div class="left_er">
+				<input name="password" class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''} type='password'" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}" type="text" style="">
+			</div>
+			<div class="left_si">
+				<div class="left_si_left">
+					<input name="verify" class="kuang3" onmouseout="this.style.borderColor=''" onfocus="if (value =='验证码'){value =''}" value="验证码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='验证码'}" type="text" style="">
+				</div>
+				<div class="left_si_right">
+					<a href="javascript:;">
+						<img width="87px" height="30px" src="/verify" onclick="javascript:this.src='/verify?stmp='+new Date().toString();">
+					</a>
+				</div>
+			</div>
+			<div class="left_wu">
+				<div class="left_wu_left">
+					<a href="javascript:;">
+						<input type="image" name="btn_submit" src="/./www/resource/images/61-33.jpg" alt="">
+					</a>
+				</div>
+				<div class="left_wu_right">
+					<a href="javascript:;">
+						忘记密码
+					</a>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div class="right">
+        <div class="right_yi">
+            <a href="javascript:;" onclick="$.mask.close()">
+                <img src="/./www/resource/images/7-8.png" alt="">
+            </a>
+        </div>
+        <div class="right_er">
+            使用关联账户登录
+        </div>
+        <div class="right_san">
+            <a href="<{$connectModel->stepTaobao1}>">
+                <img src="/./www/resource/images/181-33-taobao.jpg" alt="">
+            </a>
+        </div>
+        <div class="right_san">
+            <a href="<{$connectModel->stepWeibo1}>" onclick="loginWeibo()">
+                <img src="/./www/resource/images/181-33-xinlang.jpg" alt="">
+            </a>
+        </div>
+        <div class="right_san">
+            <a href="<{$connectModel->stepQQ1}>" onclick="loginQQ()" id="qqLoginBtn">
+                <img src="/./www/resource/images/181-33-qq.jpg" alt="">
+            </a>
+        </div>
+    </div>
+</div>
