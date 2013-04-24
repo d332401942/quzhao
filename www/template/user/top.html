@@ -135,7 +135,7 @@ function listenUserInfo(interval) {
 			preset();
 		}
 		else {
-			//window.location.reload();
+			window.location.reload();
 		}
 	}
 }
@@ -225,7 +225,7 @@ function doReg(obj) {
 		dataType: 'json',
 		success: function(data) {
 			if (data.result) {
-				window.location.href = '__APP__/user/change';
+				//window.location.href = '__APP__/user/change';
 			}
 		}
 	});
@@ -260,7 +260,15 @@ function doPreset() {
 	var nikename = formObj.find('input[name="nikename"]').val();
 	var password = formObj.find('input[name="password"]').val();
 	$.ajax({
-		
+		url: '__AJAX__/user/preSet?stmp='+ new Date().toString(),
+		data: {email:email,nikename:nikename,password:password},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
 	});
 	return false;
 }

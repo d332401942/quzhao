@@ -100,7 +100,9 @@ class UserAjaxView extends BaseAjaxView
 		catch(BusinessExceptionLib $e)
 		{
 			$this->responseError($e->getMessage(), $e->getCode());
-		}	
+		}
+		//把用户信息记入cookie
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($model), 0, '/');
 		$this->response(true);
 	}
 	

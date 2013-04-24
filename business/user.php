@@ -9,24 +9,25 @@ class UserBusiness extends BaseBusiness
 	 */
 	public function register($model)
 	{
-		if (empty ( $model->email ))
-		{
-			$this->throwException ( '用户名不能为空', CodeException::USER_EMAIL_EMPTY );
-		}
-		$emailRegular = CommUtility::EMAIL_PATTERN;
-		if (! preg_match ( $emailRegular, $model->email ))
-		{
-			$this->throwException ( '邮箱格式不正确', CodeException::USER_EAMIL_FORMAT );
-		}
-		$data = new UserData ();
 		$result = $this->checkuser ( $model->email );
 		
 		if (empty ( $model->password ))
 		{
 			$this->throwException ( '密码不能为空', CodeException::USER_PASS_EMPTY );
 		}
-		
+		$data = new UserData ();
 		$data->addUser ( $model );
+	}
+
+	public function preSet($model)
+	{
+		$result = $this->checkuser ( $model->email );
+		if (empty ( $model->password ))
+		{
+			$this->throwException ( '密码不能为空', CodeException::USER_PASS_EMPTY );
+		}
+		$data = new UserData ();
+		$data->preSet ( $model );
 	}
 
 	public function getUserInfoByOther($openId, $userInfo, $type)
@@ -121,15 +122,16 @@ class UserBusiness extends BaseBusiness
 		$data = new UserData ();
 		$data->change ( $model );
 	}
-	
-	public function resetPasswd($userid,$newPass)
+
+	public function resetPasswd($userid, $newPass)
 	{
-		$data = new UserData();
-		$data->resetPasswd($userid,$newPass);
+		$data = new UserData ();
+		$data->resetPasswd ( $userid, $newPass );
 	}
+
 	/**
 	 * 添加一个其他网站登录的用户
-	 * 
+	 *
 	 * @param unknown $model        	
 	 */
 	private function addOtherModel($model)

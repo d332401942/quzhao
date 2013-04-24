@@ -33,6 +33,7 @@ class UserData extends BaseData
 		$line = array (
 						'city',
 						'email',
+						'head',
 						'id',
 						'inviteid',
 						'ischecked',
@@ -92,6 +93,13 @@ class UserData extends BaseData
 		$this->where(array('email'=>array('='=>$email)));
 		$result = $this->findOne();
 		return $result;
+	}
+	
+	public function preSet($model)
+	{
+		$model->password = md5 ( $model->password );
+		$model->setWorkFields(array('email', 'nikename', 'password'));	
+		$this->updateModel($model);
 	}
 	
 	public function resetPasswd($userid,$newPass)
