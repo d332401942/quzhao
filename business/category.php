@@ -40,4 +40,5 @@ class CategoryBusiness extends BaseBusiness
 		$result = $data->getAttrDbs($attrModel->attrid);
 		return $result;
 	}
+	
 }
