@@ -63,7 +63,8 @@ class ProductData extends BaseData
 	 public function loveNum($id)
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		echo '喜欢成功';exit;
+		echo '喜欢成功';
+		exit;
 		$sql = 'update product set lovenumber = lovenumber+1 where id = '.$id;
 		$data->exec($sql);
 	}

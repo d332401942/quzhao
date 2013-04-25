@@ -170,6 +170,7 @@ class CategoryData extends BaseData
 		$result = $this->getOneById($categoryId);
 		return  $result ;
 	}
+	
 	private function setAttrCache($attrId)
 	{
 		$models = self::$attrdbModels[$attrId];

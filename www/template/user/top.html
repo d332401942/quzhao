@@ -3,7 +3,7 @@
 		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
 		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if (!empty($CurrentUser->email))}>
-			<li style="margin-left:750px;_margin-left:425px;"><a href="javascript:;"><{$CurrentUser->nickname}></a></li>
+			<li style="margin-left:805px;_margin-left:425px;"><a onmouseover="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user">
 					<{if ($CurrentUser->head)}>
@@ -14,14 +14,14 @@
 				</a>
 			</li>
 		<{else}> 
-			<li style="margin-left:790px;_margin-left:430px;">
+			<li style="margin-left:850px;_margin-left:430px;">
 				<a href="javascript:;" onclick="showLeftLogin()">登录</a>
 			</li>
 			<li style=""><a href="javascript:;" onclick="showLeftLogin()"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
 		<{/if}>
-		<li style="margin-left:15px;"><a href="javascript:;">帮助</a></li>
-		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+		<li style="margin-left:15px;display:none;"><a href="javascript:;">帮助</a></li>
+		<li style="display:none;"><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if (!empty($CurrentUser->email))}>
 		<li style="margin-left:15px;"><a href="javascript:;" onclick="loginOut();">退出</a></li>
 		<{/if}>
@@ -60,7 +60,7 @@
 		<li><a href="javascript:;">折扣活动</a></li>
 	</ul>
 	
-	<ul class="xiaoxi" style="display:none;">
+	<ul class="xiaoxi" id="js-header-replay" style="display:none;">
 		<li class="chang">照片<a href="javascript:;">理业主的照片理业主</a>有了新回复</li>
 		<li class="duan"><a href="javascript:;">不再提醒</a></li>
 		<li class="chang">折扣活动</li>
@@ -473,4 +473,14 @@ function pwStrength(pwd, type) {
 		}
 	}
 } 
+
+//获取用户消息
+$.ajax({
+	url: '__AJAX__/user/getReply?stmp=' + new Date().toString(),
+	dataType: 'json',
+	success: function(data) {
+		
+	}
+});
+
 </script>
