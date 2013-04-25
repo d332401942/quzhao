@@ -128,4 +128,23 @@ class UserAjaxView extends BaseAjaxView
 		return true;
 	}
 	
+	public function changePassword()
+	{
+		$newPassword = null;
+		$userId = null;
+		$this->mustLogin();
+		if (!empty($_POST['password']))
+		{
+			$newPassword = $_POST['password'];
+		}
+		$business = new UserBusiness();
+		$business->changePassword($newPassword, $this->CurrentUser->id);
+		$this->response(true);
+	}
+	
+	public function uploadHead()
+	{
+		
+	}
+	
 }
