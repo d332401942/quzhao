@@ -1,5 +1,12 @@
 <ifrem>
-		123123
-		
-		<span onclick="parent.$.mask.close()">关闭</span>
+	<form id="js-portrait-form" enctype="multipart/form-data" action="" method="POST" style="width:400px;">
+		<a href="javascript:;" onclick="window.close()">关闭</a>
+		<input name="head" type="file" />
+		<button href="javascript:;" onclick="doSubmit()">上传</button>
+	</form>
 <ifrem>
+<script>
+	function doSubmit() {
+		document.getElementById('js-portrait-form').submit();
+	}
+</script>
