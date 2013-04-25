@@ -120,7 +120,7 @@
 			<td><a href="__APP__/content__LIMIT__cid/<{$model->cid}>" style="font-size:16px;"><{$model->jtClassName}></a></td>
 			<td title="<{$model->info}>"><{$model->info|truncate:'10'}></td>
 			<td><{$model->ltime|date_format:'Y-m-d'}></td>
-			<td>操作人</td>
+			<td><{if ($model->userid)}><{$model->userid}><{else}>操作人<{/if}></td>
 			<td><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
 			<td><{if ($model->istj)}>是<{else}>否<{/if}>/<{if ($model->ishot)}>是<{else}>否<{/if}></td>
 			<td>
