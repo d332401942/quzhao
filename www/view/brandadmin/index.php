@@ -12,11 +12,14 @@ class IndexBrandadminView extends BaseView
 		}
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
-		$rows = array();
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
-			$rows = $oneBusiness ->getOneId($id);
+			$brandModel = $oneBusiness ->getOneId($id);
+		}
+		else
+		{
+			$brandModel = new BrandDataModel();
 		}
 		
 		if($_POST)
@@ -76,11 +79,7 @@ class IndexBrandadminView extends BaseView
 		$cateBusiness = M('Brand_cateBusiness');
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
-		foreach($rows as $v)
-		{
-			$this->assign('model', $v);
-		}
-		
+		$this->assign('model', $brandModel);
 	}
 	
 

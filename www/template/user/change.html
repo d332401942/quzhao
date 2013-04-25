@@ -8,7 +8,7 @@
 			<div class="con_left_er_zuo">基本设置</div>
 			<div class="con_left_er_you">
 				<div class="you_name"><input class="yy" value="<{if (!empty($CurrentUser->nickname))}><{$CurrentUser->nickname}><{else}>用户名<{/if}>" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" /></div>
-				<h3 class="id-nickname-error" style="color: #C74396;font-size: 12px;font-weight: lighter;"></h3>
+				<h3 id="id-nickname-error" style="color: #C74396;font-size: 12px;font-weight: lighter;"></h3>
 				<input type="hidden" name="cityid" id="cityname" value="10100" />
 				<div class="dingwei"><a href="javascript:" onclick="showCity()"><img src="__RESOURCE__/images/12-16.jpg"/></a>&nbsp;<span id="js-city-name"><{$cityName}></span></div>
 			</div>
@@ -118,6 +118,7 @@ function checkForm(obj) {
 		$('#id-nickname-error').html('请输入用户名');
 		return false;
 	}
+	
 }
 
 function changePassword(obj) {

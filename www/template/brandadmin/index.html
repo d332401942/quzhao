@@ -96,7 +96,7 @@ function checkform() {
 }
 var checkedCateIds = {};
 <{foreach ($model->colums as $k => $m)}>
-	checkedCateIds['<{$k}>'] = '<{$m->columnname}>';
+	checkedCateIds['<{$k}>'] = '<{$m->name}>';
 <{/foreach}>
 
 function checkcate(value) {
