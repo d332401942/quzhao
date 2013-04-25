@@ -113,7 +113,7 @@ class CategoryData extends BaseData
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$sql = 'select categoryid,attrid,name,level,pid1,pid2,sort,isvalid';
-		$sql .= ' from category where isvalid = 1 order by sort desc';
+		$sql .= ' from category where isvalid = 1 order by categoryid desc,sort desc';
 		$statement = $this->run($sql);
 		$result = array();
 		while ($categoryDataModel = $statement->fetchObject('CategoryDataModel'))
@@ -150,7 +150,7 @@ class CategoryData extends BaseData
 		if(!empty($attrId))
 		{
 			$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by attrdbid desc ,sort desc";
+			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by attrdbid asc ,sort desc";
 			$statement = $this->run($sql);
 			while ($attrdbDataModel = $statement->fetchObject('AttrdbDataModel'))
 			{
@@ -167,7 +167,7 @@ class CategoryData extends BaseData
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$result = array();
-		$this->setOrder(array('categoryid'=>'desc'));
+		$this->setOrder(array('categoryid'=>'asc'));
 		$result = $this->getOneById($categoryId);
 		return  $result ;
 	}
