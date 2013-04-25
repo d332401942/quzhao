@@ -64,7 +64,7 @@ class IndexBrandadminView extends BaseView
 						$columnBrand_columnModel->cateid = $val;
 						//if(!empty($_POST['colums']) && !empty($_POST['brandid']) && (int)$_POST['brandid'])
 						//{
-							/*foreach($rows[$parameters['id']] as $v)
+							/*foreach($_POST['colums'][$parameters['id']] as $v)
 							{	
 								$columnBrand_columnModel->cateid = $v->id;
 							}

@@ -3,6 +3,10 @@ class ChangeUserView extends BaseView
 {
 	public function index()
 	{
+		if($_POST)
+		{
+			$this->change();
+		}
 		$this->setMeta();
 		$this->mustLogin();
 		//得到城市信息
@@ -31,14 +35,15 @@ class ChangeUserView extends BaseView
 		{
 			$city = 10100;
 		}
+		if ($this->CurrentUser->city)
+		{
+			$city = $this->CurrentUser->city;
+		}
 		//得到城市名称
         $cityName = $this->getCityName($city);
 		//默认字母
 		$headLetter = 'L';
-		if($_POST)
-		{
-			$this->change();
-		}
+		
 		$this->assign('headLetter',$headLetter);
 		$this->assign('cityName', $cityName);
 		$this->assign('hotCityModels',$hotCityModels);

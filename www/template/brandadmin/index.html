@@ -6,7 +6,6 @@
 			<th colspan="6" align="right"><a href="__APP__/brandadmin/lists" target="_blank">管理</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/loginout">安全退出</a></th>
 		</tr>
 		<input type="hidden" name="brandid" value="<{$model->id}>" />
-		<input type="hidden" name="colums" value="<{$model->colums}>" />
 			<tr>
 				<td>名称：</td>
 				<td><input value="<{if (isset($model->name))}><{$model->name}><{/if}>" type="text" name="name" id="name" /></td>
@@ -42,7 +41,9 @@
 			</tr>
 			<tr style="display:none;" id="js-hidden-column">
 				<td>栏目：</td>
-				<td id="js-column"></td>
+				<td id="js-column">
+					
+				</td>
 			</tr>
 			<tr>
 				<td>图片logo：</td>
@@ -93,6 +94,11 @@ function checkform() {
 		return false;
 	}
 }
+var checkedCateIds = {};
+<{foreach ($model->colums as $k => $m)}>
+	checkedCateIds['<{$k}>'] = '<{$m->columnname}>';
+<{/foreach}>
+
 function checkcate(value) {
 	if(value != '') {
 		$.post('__AJAX__/child_cate/getcateid',{cateId:value},function(data){
@@ -102,7 +108,11 @@ function checkcate(value) {
 				var arr = arr_data.result;
 				for (var i in arr) {
 					var obj = arr[i];
-					rs += "<input type='checkbox' name='cateid[]' value="+obj.id+" />"+obj.name ;
+					var checked = '';
+					if (checkedCateIds[obj.id]) {
+						var checked = 'checked';
+					}
+					rs += "<input type='checkbox' "+checked+" name='cateid[]' value="+obj.id+" />"+obj.name ;
 				}
 				$('#js-hidden-column').show();
 				$('#js-column').html(rs);
@@ -110,4 +120,5 @@ function checkcate(value) {
 		})
 	}	
 }
+checkcate(<{$model->cate}>);
 </script>

@@ -3,11 +3,12 @@
 <div class="box dp">
 	<div class="con_left">
 		<div class="con_left_yi">设置</div>
-		<form action="__APP__/user/change" method="post" enctype="multipart/form-data">
+		<form action="__APP__/user/change" method="post" onsubmit="return checkForm(this)" enctype="multipart/form-data">
 		<div class="con_left_er">
 			<div class="con_left_er_zuo">基本设置</div>
 			<div class="con_left_er_you">
-				<div class="you_name"><input class="yy" value="用户名" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" /></div>
+				<div class="you_name"><input class="yy" value="<{if (!empty($CurrentUser->nickname))}><{$CurrentUser->nickname}><{else}>用户名<{/if}>" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" /></div>
+				<h3 class="id-nickname-error" style="color: #C74396;font-size: 12px;font-weight: lighter;"></h3>
 				<input type="hidden" name="cityid" id="cityname" value="10100" />
 				<div class="dingwei"><a href="javascript:" onclick="showCity()"><img src="__RESOURCE__/images/12-16.jpg"/></a>&nbsp;<span id="js-city-name"><{$cityName}></span></div>
 			</div>
@@ -21,7 +22,15 @@
 		</div>
 		<div class="con_left_si">
 			<div class="con_left_si_zuo">照片</div>
-			<div class="con_left_si_you"><a href="javascript:;"><img src="__RESOURCE__/images/144-145.jpg" alt=""/></a></div>
+			<div class="con_left_si_you">
+				<a href="javascript:;">
+					<{if ($CurrentUser->head)}>
+						<img width="144" height="145" src="<{$CurrentUser->head}>" alt="">
+					<{else}>
+						<img width="144" height="145" src="__RESOURCE__/images/tx.gif" alt="">
+					<{/if}>
+				</a>
+			</div>
 			<div class="hei">
 				<div class="photo"><a href="javascript:;" onclick="showUploadDiv()"><img src="__RESOURCE__/images/56-42.png" alt=""/></a></div>
 				<div class="photo_zi"><a href="javascript:;" onclick="showUploadDiv()">换一张照片</a></div>
@@ -101,6 +110,15 @@
 </div>
 
 <script>
+
+function checkForm(obj) {
+	var nicknameObj = $(obj).find('input[name="nickname"]');
+	var nickname = nicknameObj.val();
+	if (!nickname || nickname == '用户名') {
+		$('#id-nickname-error').html('请输入用户名');
+		return false;
+	}
+}
 
 function changePassword(obj) {
 	var passwordObj = $(obj).find('input[name="password"]');
