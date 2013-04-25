@@ -129,7 +129,11 @@
 				<a href="javascript:;" class="<{if ($sort=='sales')}>open4<{/if}>" onclick="setSort('sales')">销量</a>
 				<a href="javascript:;" class="<{if ($sort=='createtime')}>open4<{/if}>" onclick="setSort('createtime')">最新</a>
 				<a href="javascript:;" class="<{if ($sort=='price1' or $sort=='price2')}>open4<{/if}>" onclick="setSort('<{$sortPrice}>')" >
-					价格<{if ($sort=='price2')}><img src="__RESOURCE__/images/bjg.gif"><{else}><img src="__RESOURCE__/images/djg.gif" /><{/if}>
+					价格
+					<{if ($sort=='price2')}>
+					↓
+					<{else}>
+					↑<{/if}>
 				</a>
 				</div>
 				<div class="list_r_menu_l2">
