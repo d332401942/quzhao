@@ -6,7 +6,7 @@
 			<ul>
 				<li class="js-user-menu aa"><a href="javascript:;" onclick="love(this)">喜欢（<{$pageCore->count}>）</a></li>
 				<li class="js-user-menu"><a href="javascript:;" onclick="share(this);">爆料（<{$pageShareCore->count}>）</a></li>
-				<li class="js-user-menu"><a href="javascript:;">消息（2）</a></li>
+				
 			</ul>
 		</div>
 		<div class="line"></div>
@@ -51,17 +51,17 @@
 	<div class="con_right2">
 		<div class="right2_yi">
 			<div class="right2_yi_pic">
-				<a href="javascript:;">
+				<a href="__APP__/user/change">
 					<{if (!empty($CurrentUser->head))}>
 						<img src="<{$CurrentUser->head|parsePicpath}>" alt=""/>
 					<{else}>
-						<img src="__RESOURCE__/images/144-145.jpg" alt=""/>
+						<img src="__RESOURCE__/images/tx.gif" width="144" height="155" alt=""/>
 					<{/if}>
 				</a>
 			</div>
 			<div class="right2_yi_title">
 				<ul>
-					<li><a style="font-size:16px;" href="javascript:;"><{$CurrentUser->nickname}></a></li>
+					<li><a style="font-size:16px;" href="__APP__/user/change"><{$CurrentUser->nickname}></a></li>
 				</ul>
 			</div>
 		</div>

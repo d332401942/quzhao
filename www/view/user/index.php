@@ -23,7 +23,7 @@ class IndexUserView extends BaseView
 		$pageCore->pageSize = 12;
 		$pageCore->currentPage = ! empty ( $parameters ['page'] ) ? ( int ) $parameters ['page'] : 1;
 		$business = M ( 'ShareBusiness' );
-		$rows = $business->getShareTotal ( $pageCore, $this->CurrentUser->id );
+		$rows = $business->getShare ( $pageCore, $this->CurrentUser->id );
 		$this->assign ( 'pageShareCore', $pageCore );
 		$this->assign ( 'shareModel', $rows );
 	}

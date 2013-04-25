@@ -13,8 +13,11 @@
 			</div>
 		</div>
 		<div class="con_left_san">
-			<div class="san_left" onclick="showChangePasswordDiv()">修改密码</div>
-			<div class="san_right"><a href="javascript:;"><img src="__RESOURCE__/images/85-23.jpg" alt=""/></a></div>
+			<div class="san_left">修改密码</div>
+			<div class="san_right">
+				<a href="javascript:;" onclick="showChangePasswordDiv()">
+				<img src="__RESOURCE__/images/85-23.jpg" alt="" /></a>
+			</div>
 		</div>
 		<div class="con_left_si">
 			<div class="con_left_si_zuo">照片</div>
@@ -73,9 +76,79 @@
 	<div class="radius_bottom"></div>
 </div>  
 <!-- 城市 end -->
-<script>
-function showChangePasswordDiv() {
 
+<div class="Register3_box" style="display:none;padding: 45px 45px 60px; top:0px;;" id="js-change-password-div">
+	<div class="off"><a href="javascript:;" onclick="$.mask.close(function(){$('.js-change-error').html('')})">x</a></div>
+	<h1>重置密码</h1>
+	<div class="Register3_box_l">
+		<a href="javascript:;"><h2>&nbsp;</h2></a>
+	</div>
+	<form onsubmit="return changePassword(this)" class="js-change-password-form">
+	<div class="Register3_box_r">
+		<ul>
+			<li>
+				<input name="password" type="text" class="Register3_box_r_in" onmouseout="this.style.borderColor=''" onfocus="type='password';if (value =='输入新密码'){value =''}" value="输入新密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='输入新密码';type='text'}" style="">
+				<h3 style="" class="js-change-error"></h3>
+			</li>
+			<li>
+				<input name="repassword" type="text" class="Register3_box_r_in" onmouseout="this.style.borderColor=''" onfocus="type='password';if (value =='再输一次新密码'){value =''}" value="再输一次新密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='再输一次新密码';type='text';}" style="">
+				<h3 style="" class="js-change-error"></h3>
+			</li>
+			<li class="Register3_box_r_pnt"><a href="javascript:;" onclick="$('#jquery-extend-mask-inner').find('.js-change-password-form').submit()">完成</a></li>
+		</ul>
+	</div>
+	</form>
+</div>
+
+<script>
+
+function changePassword(obj) {
+	var passwordObj = $(obj).find('input[name="password"]');
+	var passwordErrObj = passwordObj.next();
+	var password = passwordObj.val();
+	if (password == '输入新密码') {
+		password = '';
+	}
+	if (!password || password.length < 6) {
+		console.log(password.length);
+		passwordErrObj.html('密码不能少于6位');
+		return false;
+	}
+	if (password.length > 32) {
+		passwordErrObj.html('密码不能大于32位');
+		return false;
+	}
+	var repasswordObj = $(obj).find('input[name="repassword"]');
+	var repasswordErrObj = repasswordObj.next();
+	var repassword = repasswordObj.val();
+	if (!repassword || repassword == '再输一次新密码') {
+		repassword = '';
+	}
+	if (!repassword || repassword != password) {
+		repasswordErrObj.html('两次输入的密码不一致');
+		return false;
+	}
+	$('.js-change-error').html('');
+	$.ajax({
+		url: '__AJAX__/user/changePassword?stmp=' + new Date().toString(),
+		data: {password:password},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				alert('密码更改成功');
+				window.location.reload();
+			}
+			else {
+				alert(data.result.message);
+			}
+		}
+	});
+	return false;
+}
+
+function showChangePasswordDiv() {
+	$.mask.show($('#js-change-password-div'));
 }
 
 function showCity() {
