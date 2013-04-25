@@ -31,7 +31,7 @@ class ShareData extends BaseData
 		$this->exec($sql);
 	}
 	
-	public function getShareTotal($pageCore,$userid)
+	public function getShare($pageCore,$userid)
 	{
 		$this->setPage($pageCore);
 		$this->setOrder(array('id'=>'desc'));

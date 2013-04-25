@@ -88,6 +88,7 @@ class UserAjaxView extends BaseAjaxView
 		$model->otheraccount= UserDataModel::REG_DEFAULT;
 		$model->othersite	= 0;
 		$model->status		= 1;
+		$model->nickname = '匿名用户';
 		foreach ($model as $key => $val)
 		{
 			if (empty($val))
