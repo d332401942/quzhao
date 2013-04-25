@@ -18,10 +18,19 @@ class BrandDataModel extends BaseDataModel
 	public $url;
 	
 	public $createtime;
+	
+	public $cateName;
+	
+	public $username;
+	
+	public $colums = array();
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->setTableName('brand');
+		$this->setIgoneFields('colums');
+		$this->setIgoneFields('cateName');
+		$this->setIgoneFields('username');
 	}
 }
