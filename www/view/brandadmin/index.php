@@ -80,6 +80,7 @@ class IndexBrandadminView extends BaseView
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
 		$this->assign('model', $brandModel);
+		
 	}
 	
 
