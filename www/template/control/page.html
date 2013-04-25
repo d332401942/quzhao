@@ -1,6 +1,6 @@
 <{if ($start < $end)}>
 <div class="pag" <{if (isset($width))}>style="width:715px;"<{/if}> >
-		
+		<{if ($start > 1)}><a href="#nogo" onclick="<{$goPage}>(1)">首页</a><{/if}>
 		<a href="#nogo" onclick="<{$goPage}>(<{$currentPage - 1}>)">上一页</a>
 		<{for (;$start <= $end; $start++)}>
      		<{if ($start == $currentPage)}>
