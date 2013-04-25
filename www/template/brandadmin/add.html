@@ -1,0 +1,117 @@
+
+<div class="list-div">
+	<div class="content-select">
+		<tr>
+		<th colspan="6" align="right"><a href="__APP__/brandadmin/">添加品牌</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/add">添加超值单品</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/loginout">安全退出</a></th>
+	</tr>
+	</div>
+</div>
+
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data">
+	<input name="oldpic" value="<{$dataModel->pic}>" type="hidden" />
+	<input name="site" value="<{$dataModel->site}>" type="hidden" />
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>ID：</td>
+				<td><input value="<{$dataModel->id}>" type="text" disabled /></td>
+			</tr>
+			<tr>
+				<td>类别：</td>
+				<td>
+					<select name="cid">
+						<{foreach ($allClassModels as $model)}>
+							<{if ($model->id != 1)}>
+							<option <{if ($dataModel->cid == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name}></option>
+							<{/if}>
+							<{foreach ($model->children as $m)}>
+								<option <{if ($dataModel->cid == $m->id)}>selected<{/if}> value="<{$m->id}>">----<{$m->name}></option>
+							<{/foreach}>
+						<{/foreach}>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>商品名：</td>
+				<td><input name="name" value="<{$dataModel->name}>" type="text" class="addinput" /></td>
+			</tr>
+			<tr>
+				<td>标题：</td>
+				<td><input name="title" value="<{$dataModel->title}>" type="text" class="addinput" /></td>
+			</tr>
+			<tr>
+				<td>图片：</td>
+				<td>
+					<input name="pic" value="" type="file" />
+				</td>
+			</tr>
+			<tr>
+				<td>商品链接：</td>
+				<td><input name="href" value="<{$dataModel->href}>" type="text" class="addinput" /></td>
+			</tr>
+			<tr>
+				<td>原价格:</td>
+				<td><input name="sprice" value="<{$dataModel->sprice}>" type="text" /></td>
+			</tr>
+			<tr>
+				<td>目前价格:</td>
+				<td><input name="price" value="<{$dataModel->price}>" type="text" /></td>
+			</tr>
+			<tr>
+				<td>邮费:</td>
+				<td><input name="eprice" value="<{$dataModel->eprice}>" type="text" /></td>
+			</tr>
+			<tr>
+				<td>是否推荐:</td>
+				<td>
+					<label>否<input name="istj" <{if (!$dataModel->istj)}>checked<{/if}> value="0" type="radio" /></label>
+					<label>是<input name="istj" <{if ($dataModel->istj == 1)}>checked<{/if}> value="1" type="radio" /></label>
+				</td>
+			</tr>
+			<tr>
+				<td>是否显示为热门:</td>
+				<td>
+					<label>否<input name="ishot" <{if (!$dataModel->ishot)}>checked<{/if}> value="0" type="radio" /></label>
+					<label>是<input name="ishot" <{if ($dataModel->ishot == 1)}>checked<{/if}> value="1" type="radio" /></label>
+					（超值单品有效）
+				</td>
+			</tr>
+			<tr>
+				<td>商品介绍：</td>
+				<td>
+					<textarea class="addinput" name="info"><{$dataModel->info}></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>商品适合性别：</td>
+				<td>
+					<label>男<input name="fitsex" <{if ($dataModel->fitsex == 1)}>checked<{/if}> value="1" type="radio" /></label>
+					<label>女<input name="fitsex" <{if ($dataModel->fitsex == 2)}>checked<{/if}> value="2" type="radio" /></label>
+					<label>中性<input name="fitsex" <{if ($dataModel->fitsex == 3)}>checked<{/if}> value="3" type="radio" /></label>
+				</td>
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td>
+					<textarea name="remark" class="addinput"><{$dataModel->remark}></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>有效时间：</td>
+				<td>
+					<{$dateFrom}>&nbsp;--&nbsp;&nbsp;<{$dateTo}>
+				</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td><input name="sort" type="text" value="<{$dataModel->sort}>" /></td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="class="add-div add-div-img">
+		<img src="<{$dataModel->pic|parsePicpath}>" />
+	</div>
+</form>

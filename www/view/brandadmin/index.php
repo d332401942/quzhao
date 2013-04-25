@@ -12,11 +12,14 @@ class IndexBrandadminView extends BaseView
 		}
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
-		$rows = array();
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
-			$rows = $oneBusiness ->getOneId($id);
+			$brandModel = $oneBusiness ->getOneId($id);
+		}
+		else
+		{
+			$brandModel = new BrandDataModel();
 		}
 		
 		if($_POST)
@@ -58,23 +61,25 @@ class IndexBrandadminView extends BaseView
 				$columnBusiness = M('Brand_columnBusiness');
 				$columnBrand_columnModel = M('Brand_columnDataModel');
 				$columnBrand_columnModel->brandid = $model->id;
+				if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
+				{
+					$columnBusiness->del($_POST['brandid']);	
+					
+				}	
 				foreach($_POST['cateid'] as $val)
 				{
 					$columnBrand_columnModel->cateid = $val;
-					if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
-					{
-						$columnBusiness->update($columnBrand_columnModel);	
-					}else{
-						$columnBusiness->add($columnBrand_columnModel);
-					}
+					$columnBusiness->add($columnBrand_columnModel);
 				}
+				
+				
 			}
 			$this->redirect(APP_URL . '/brandadmin/lists');
 		}
 		$cateBusiness = M('Brand_cateBusiness');
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
-		$this->assign('model', $rows);
+		$this->assign('model', $brandModel);
 	}
 	
 
