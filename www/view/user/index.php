@@ -7,12 +7,17 @@ class IndexUserView extends BaseView
 	{
 		$this->setMeta ();
 		$this->mustLogin ();
+		
 		$pageCore = new PageCoreLib ();
 		$pageCore->pageSize = 12;
 		$pageCore->currentPage = ! empty ( $parameters ['page'] ) ? ( int ) $parameters ['page'] : 1;
 		$business = M ( 'HomeTjDataBusiness' );
 		$result = $business->getUserLove ( $pageCore, $this->CurrentUser->id );
 		$this->shareNumber ($parameters);
+		//得到推荐的单品
+		$business = new HomeTjDataBusiness();
+		$tjModels = $business->getTjDpModels(3);
+		$this->assign('tjModels', $tjModels);
 		$this->assign ( 'pageCore', $pageCore );
 		$this->assign ( 'model', $result );
 	}
