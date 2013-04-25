@@ -58,23 +58,16 @@ class IndexBrandadminView extends BaseView
 				$columnBusiness = M('Brand_columnBusiness');
 				$columnBrand_columnModel = M('Brand_columnDataModel');
 				$columnBrand_columnModel->brandid = $model->id;
+				if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
+				{
+					$columnBusiness->del($_POST['brandid']);	
 					
-					foreach($_POST['cateid'] as $val)
-					{
-						$columnBrand_columnModel->cateid = $val;
-						//if(!empty($_POST['colums']) && !empty($_POST['brandid']) && (int)$_POST['brandid'])
-						//{
-							/*foreach($_POST['colums'][$parameters['id']] as $v)
-							{	
-								$columnBrand_columnModel->cateid = $v->id;
-							}
-						
-							$columnBusiness->update($columnBrand_columnModel);	
-						}else{*/
-							$columnBusiness->add($columnBrand_columnModel);
-						//}	
-						
-					}
+				}	
+				foreach($_POST['cateid'] as $val)
+				{
+					$columnBrand_columnModel->cateid = $val;
+					$columnBusiness->add($columnBrand_columnModel);
+				}
 				
 				
 			}
