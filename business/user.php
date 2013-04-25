@@ -133,6 +133,12 @@ class UserBusiness extends BaseBusiness
 		$data = new UserData ();
 		$data->resetPasswd ( $userid, $newPass );
 	}
+	
+	public function editHead($userModel)
+	{
+		$data = new UserData();
+		$data->editHead($userModel);
+	}
 
 	/**
 	 * 添加一个其他网站登录的用户

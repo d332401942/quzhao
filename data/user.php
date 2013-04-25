@@ -117,5 +117,11 @@ class UserData extends BaseData
 		$sql = 'update user set password = "' . md5 ( $newPass ) . '" where id = ' . ( int ) $userid;
 		$this->exec ( $sql );
 	}
+	
+	public function editHead($userModel)
+	{
+		$userModel->setWorkFields('head');
+		$this->updateModel($userModel);
+	}
 
 }

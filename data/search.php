@@ -105,7 +105,24 @@ class SearchData extends BaseData
 				case 2:
 					if (count($array) == 2)
 					{
-						$sphinx->setFilterFloatRange($key, $array[0], $array[1]);
+						$start = floatval($array[0]);
+						$end = floatval($array[1]);
+						if (!$start && $end)
+						{
+							$start = 0.0;
+						}
+						if ($start && !$end)
+						{
+							$end = floatval(999999999);
+						}
+						if ($start > $end)
+						{
+							$sphinx->setFilterFloatRange($key, $end, $start);
+						}
+						else
+						{
+							$sphinx->setFilterFloatRange($key, $start, $end);
+						}
 					}
 					break;
 			}

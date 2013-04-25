@@ -15,6 +15,19 @@ class IndexSearchView extends BaseView
 		$keyword = null;
 		$category = null;
 		$sort = null;
+		$priceStart = null;
+		$priceEnd = null;
+		if (!empty($parameters['attr_price']))
+		{
+			$arr = substr($parameters['attr_price'], 2);
+			$arr = explode('-', $arr);
+			$priceEnd = $arr[1];
+			$priceStart = $arr[0];
+			if ($priceEnd)
+			{
+				$priceStart = (int)$arr[0];
+			}
+		}
 		$sortPrice = 'price1';
 		$showType = null;
 		$attrArr = $this->getAttrArr($parameters);
@@ -97,6 +110,8 @@ class IndexSearchView extends BaseView
         $this->assign('showType', $showType);
 		$this->assign('attrModels',$attrModels);
 		$this->assign('attrArr',$attrArr);
+		$this->assign('priceEnd', $priceEnd);
+		$this->assign('priceStart', $priceStart);
 		$this->assign('searchBrowseHistoryModels', $searchBrowseHistoryModels);
 		$this->assign('recommendModels', $recommendModels);
 	}

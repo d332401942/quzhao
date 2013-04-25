@@ -10,7 +10,12 @@
 				<div class="you_name"><input class="yy" value="<{if (!empty($CurrentUser->nickname))}><{$CurrentUser->nickname}><{else}>用户名<{/if}>" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" /></div>
 				<h3 id="id-nickname-error" style="color: #C74396;font-size: 12px;font-weight: lighter;"></h3>
 				<input type="hidden" name="cityid" id="cityname" value="10100" />
-				<div class="dingwei"><a href="javascript:" onclick="showCity()"><img src="__RESOURCE__/images/12-16.jpg"/></a>&nbsp;<span id="js-city-name"><{$cityName}></span></div>
+				<div class="dingwei">
+				<a href="javascript:" onclick="showCity()">
+					<img src="__RESOURCE__/images/12-16.jpg"/>
+				</a>&nbsp;
+					<span id="js-city-name" onclick="showCity()"><{$cityName}></span>
+				</div>
 			</div>
 		</div>
 		<div class="con_left_san">
@@ -25,7 +30,7 @@
 			<div class="con_left_si_you">
 				<a href="javascript:;">
 					<{if ($CurrentUser->head)}>
-						<img width="144" height="145" src="<{$CurrentUser->head}>" alt="">
+						<img width="144" height="145" src="<{$CurrentUser->head|parsePicpath}>" alt="">
 					<{else}>
 						<img width="144" height="145" src="__RESOURCE__/images/tx.gif" alt="">
 					<{/if}>
@@ -193,6 +198,8 @@ function goCity(id,name) {
 }
 
 function showUploadDiv() {
+	open("__APP__/portrait","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes")
+	return;
 	$.ajax({
 		url: '__APP__/portrait?stmp=' + new Date().toString(),
 		success: function(html) {

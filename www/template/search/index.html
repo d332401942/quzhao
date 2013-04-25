@@ -134,9 +134,9 @@
 				</div>
 				<div class="list_r_menu_l2">
 					价格 
-					<input name="" type="text" class="list_r_menu_l2_in">- 
-					<input name="" type="text" class="list_r_menu_l2_in">
-					<a href="#" class="list_r_menu_l2_pnt" style="display: ;">确定</a>
+					<input name="" id="js-price-start" value="<{$priceStart}>" type="text" class="list_r_menu_l2_in">- 
+					<input name="" id="js-price-end" value="<{if ($priceEnd)}><{$priceEnd}><{/if}>" type="text" class="list_r_menu_l2_in">
+					<a href="javascript:;" class="list_r_menu_l2_pnt" onclick="searchByPrice()">确定</a>
 				</div>
 				<div class="list_r_menu_l list_r_menu_r">
 
@@ -371,6 +371,20 @@ function setSort(str) {
 	formObj.find('input[name="page"]').val('');
 	formObj.find('input[name="sort"]').val(str);
 	formTogo();
+}
+
+function searchByPrice() {
+	var priceStart = $('#js-price-start').val();
+	var priceEnd = $('#js-price-end').val();
+	if (priceStart) {
+		priceStart = parseInt(priceStart);
+	}
+	if (priceEnd) {
+		priceEnd = parseInt(priceEnd);
+	}
+	if ((priceStart && priceEnd && priceEnd >= priceStart) || (priceStart && !priceEnd) || (!priceStart && priceEnd)) {
+		searchByAttr('price','2',priceStart +'-'+ priceEnd);
+	}
 }
 
 function searchByCategory(id) {
