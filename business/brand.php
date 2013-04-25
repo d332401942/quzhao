@@ -13,10 +13,10 @@ class BrandBusiness extends BaseBusiness
 		$data->updateModel($model);
 	}
 	
-	public function getAll()
+	public function getAll($pageCore)
 	{
 		$data = M('BrandData');
-		return $data->getAll();
+		return $data->getAll($pageCore);
 	}
 	
 	/*
@@ -31,7 +31,7 @@ class BrandBusiness extends BaseBusiness
 	public function getOneId($id)
 	{
 		$data = new BrandData();
-		return $data->getOneById($id);
+		return $data->getOne($id);
 	}
 }
 

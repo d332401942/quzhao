@@ -6,6 +6,7 @@
 			<th colspan="6" align="right"><a href="__APP__/brandadmin/lists" target="_blank">管理</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/loginout">安全退出</a></th>
 		</tr>
 		<input type="hidden" name="brandid" value="<{$model->id}>" />
+		<input type="hidden" name="colums" value="<{$model->colums}>" />
 			<tr>
 				<td>名称：</td>
 				<td><input value="<{if (isset($model->name))}><{$model->name}><{/if}>" type="text" name="name" id="name" /></td>

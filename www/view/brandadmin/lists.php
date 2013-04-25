@@ -10,9 +10,19 @@ class ListsBrandadminView extends BaseView
 		{
 			$this->redirect(APP_URL . '/brandadmin/login');
 		}
+		$pageCore = new PageCoreLib ();
+		$pageCore->pageSize = 10;
+		$page = 1;
+		if (! empty ( $_GET ['page'] ) && ( int ) $_GET ['page'])
+		{
+			$page = ( int ) $_GET ['page'];
+		}
+		$pageCore->currentPage = $page;
+		
 		$business = M('BrandBusiness');
-		$result = $business->getAll();
+		$result = $business->getAll($pageCore);
 		$this->assign('model' ,$result);
+		$this->assign ( 'pageCore', $pageCore );
 		
 	}
 	

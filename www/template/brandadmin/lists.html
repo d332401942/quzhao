@@ -37,9 +37,10 @@
 		<td colspan="10" style="text-align:left;"><button onclick="del()">删除</button></td>
 	</tr>
 </table>
+<{uc class="PageControlView" pageCore=$pageCore}>
 <script>
 function goPage(page) {
-	window.location.href = '__APP__/content?page='+page;
+	window.location.href = '__APP__/brandadmin/lists?page='+page;
 }
 function del(id) {
 	if (!confirm('确定要删除吗？')) {
