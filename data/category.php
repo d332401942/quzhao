@@ -150,7 +150,7 @@ class CategoryData extends BaseData
 		if(!empty($attrId))
 		{
 			$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by sort desc";
+			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = ".$attrId." order by attrdbid desc ,sort desc";
 			$statement = $this->run($sql);
 			while ($attrdbDataModel = $statement->fetchObject('AttrdbDataModel'))
 			{
@@ -167,6 +167,7 @@ class CategoryData extends BaseData
 	{
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$result = array();
+		$this->setOrder(array('categoryid'=>'desc'));
 		$result = $this->getOneById($categoryId);
 		return  $result ;
 	}
