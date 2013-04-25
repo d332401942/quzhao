@@ -192,5 +192,6 @@ class SearchData extends BaseData
 	{
 		$sphinx->setFilter('isdelete', array(0));
 		$sphinx->setFilter('siteid', array(111), true);
+		$sphinx->setFilter('siteid', array(112), true);
 	}
 }
