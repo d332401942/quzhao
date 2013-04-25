@@ -856,3 +856,30 @@ filter:Alpha(opacity=95);}
 .list_cont  .list_fu2 ul .list_fu_logo h4{ font-size:12px; padding-bottom:5px;}
 .list_r_menu_r{*padding-right:3px;}
 .list_r_menu_r li { *width:42px; }
+
+
+/*  list_big  */	
+
+.list_big { }
+.list_big ul { height:auto;}
+.list_big ul li{ width:190px; height:300px; }
+.list_big ul li .list_cont_tu{ width:190px; height:190px;}
+.list_big  .list_jg{ width:160px; overflow:hidden;}
+.list_r  .tian_lei_r{ width:630px; padding-bottom:6px;_padding-bottom:0px;} 
+.tian_lei_r a{ margin-bottom:3px;} 
+.cont_title{ width:803px;}
+.list_r_more{ width:50px; text-align:right; }
+.list_r_minimo{ height:21px; line-height:21px; margin-bottom:10px;}
+.list_r_minimo a{  height:21px;}
+.list_r_menu_l a img{ margin-left:3px; margin-bottom:-2px; position:relative;_padding-top:7px;_padding-left:3px;_margin-right:-3px;}
+.list_r_menu_l2{ float:left; width:238px; margin-left:-50px; position:relative;}
+.list_r_menu_l2_in{ width:50px; background-color:#fff; border:1px solid #ddd; height:18px; line-height:18px; padding:3px; margin-left:5px; margin-right:5px;}
+.list_r_menu_l2_in:focus{border:1px solid #ff9fdc;}
+.list_r_menu_l2_pnt{ line-height:24px; margin-right:10px; width:50px; position:absolute; right:0px; top:0px;_top:1px; text-align:center;
+	height:24px;
+	text-align:center;	
+	display:inline-block; background-image:url(images/list_big_bg.gif);
+	border:1px solid #ddd;
+	background-color:#eee;
+}
+.list_r_menu_l2_pnt:hover{ text-decoration:none; color:#333;}

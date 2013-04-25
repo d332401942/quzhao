@@ -9,7 +9,7 @@ class IndexSearchView extends BaseView
 		$nineModels = array();
 		$dpModels = array();
 		$pageCore = new PageCoreLib();
-		$pageCore->pageSize = 18;
+		$pageCore->pageSize = 20;
         $pageCore->currentPage = !empty($parameters['page']) ? (int)$parameters['page'] : 1;
 		$pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
 		$keyword = null;
