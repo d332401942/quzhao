@@ -128,7 +128,7 @@ class UserAjaxView extends BaseAjaxView
 		return true;
 	}
 	
-	public function changePassword()
+	public function resetPasswd()
 	{
 		$newPassword = null;
 		$userId = null;
@@ -138,7 +138,7 @@ class UserAjaxView extends BaseAjaxView
 			$newPassword = $_POST['password'];
 		}
 		$business = new UserBusiness();
-		$business->changePassword($newPassword, $this->CurrentUser->id);
+		$business->resetPasswd($this->CurrentUser->id, $newPassword);
 		$this->response(true);
 	}
 	

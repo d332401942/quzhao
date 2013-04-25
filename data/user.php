@@ -73,13 +73,15 @@ class UserData extends BaseData
 		$sql = 'update user set nickname = "' . $nickname . '",head = "' . $head . '" where id = ' . $userId;
 		$this->exec ( $sql );
 	}
-	
+
 	public function getUserByIds($ids)
 	{
-		$query = array();
-		$query['id'] = array('in' => $ids);
-		$this->where($query);
-		$result = $this->findAll();
+		$query = array ();
+		$query ['id'] = array (
+						'in' => $ids 
+		);
+		$this->where ( $query );
+		$result = $this->findAll ();
 		return $result;
 	}
 
@@ -87,24 +89,32 @@ class UserData extends BaseData
 	{
 		$this->updateModel ( $model );
 	}
-	
+
 	public function getUserId($email)
 	{
-		$this->where(array('email'=>array('='=>$email)));
-		$result = $this->findOne();
+		$this->where ( array (
+						'email' => array (
+										'=' => $email 
+						) 
+		) );
+		$result = $this->findOne ();
 		return $result;
 	}
-	
+
 	public function preSet($model)
 	{
 		$model->password = md5 ( $model->password );
-		$model->setWorkFields(array('email', 'nickname', 'password'));	
-		$this->updateModel($model);
+		$model->setWorkFields ( array (
+						'email',
+						'nickname',
+						'password' 
+		) );
+		$this->updateModel ( $model );
 	}
-	
-	public function resetPasswd($userid,$newPass)
+
+	public function resetPasswd($userid, $newPass)
 	{
-		$sql = 'update user set password = '.md5($newPass).' where id = '.$userid;
+		$sql = 'update user set password = "' . md5 ( $newPass ) . '" where id = ' . ( int ) $userid;
 		$this->exec ( $sql );
 	}
 

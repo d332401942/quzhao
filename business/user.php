@@ -122,9 +122,14 @@ class UserBusiness extends BaseBusiness
 		$data = new UserData ();
 		$data->change ( $model );
 	}
+	
 
 	public function resetPasswd($userid, $newPass)
 	{
+		if (empty($newPass))
+		{
+			$this->throwException('密码不能为空', CodeException::USER_PASS_EMPTY);
+		}
 		$data = new UserData ();
 		$data->resetPasswd ( $userid, $newPass );
 	}

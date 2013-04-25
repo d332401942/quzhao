@@ -1,4 +1,4 @@
-<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_DB css="css,city" js="jquery,jquery.form"}>
+<{uc class="HeaderControlView" meta=$meta css="css,city" js="jquery,jquery.form"}>
 <!--content-->
 <div class="box dp">
 	<div class="con_left">
@@ -130,7 +130,7 @@ function changePassword(obj) {
 	}
 	$('.js-change-error').html('');
 	$.ajax({
-		url: '__AJAX__/user/changePassword?stmp=' + new Date().toString(),
+		url: '__AJAX__/user/resetPasswd?stmp=' + new Date().toString(),
 		data: {password:password},
 		type: 'post',
 		dataType: 'json',
