@@ -3,7 +3,7 @@
 		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
 		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if (!empty($CurrentUser->email))}>
-			<li style="margin-left:750px;_margin-left:425px;"><a onmouseover="$(this).float($('#js-header-replay'))" href="javascript:;">消息（0）</a></li>
+			<li style="margin-left:805px;_margin-left:425px;"><a onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user">
 					<{if ($CurrentUser->head)}>
@@ -14,14 +14,14 @@
 				</a>
 			</li>
 		<{else}> 
-			<li style="margin-left:790px;_margin-left:430px;">
+			<li style="margin-left:850px;_margin-left:430px;">
 				<a href="javascript:;" onclick="showLeftLogin()">登录</a>
 			</li>
 			<li style=""><a href="javascript:;" onclick="showLeftLogin()"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
 		<{/if}>
-		<li style="margin-left:15px;"><a href="javascript:;">帮助</a></li>
-		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
+		<li style="margin-left:15px;display:none;"><a href="javascript:;">帮助</a></li>
+		<li style="display:none;"><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if (!empty($CurrentUser->email))}>
 		<li style="margin-left:15px;"><a href="javascript:;" onclick="loginOut();">退出</a></li>
 		<{/if}>
