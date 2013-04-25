@@ -19,14 +19,14 @@
 				<td>
 					<select name="cid">
 						<{foreach ($allClassModels as $model)}>
+							<{if ($model->id != 1)}>
 							<option <{if ($dataModel->cid == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name}></option>
+							<{/if}>
 							<{foreach ($model->children as $m)}>
 								<option <{if ($dataModel->cid == $m->id)}>selected<{/if}> value="<{$m->id}>">----<{$m->name}></option>
 							<{/foreach}>
 						<{/foreach}>
 					</select>
-					
-					<a href="__APP__/tjclass">类别管理</a>
 				</td>
 			</tr>
 			<tr>

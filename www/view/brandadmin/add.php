@@ -109,14 +109,8 @@ class AddBrandadminView extends BaseView
 		{
 			$this->setPic($model);
 		}
-		if ($model->id)
-		{
-			$business->updateModel($model);
-		}
-		else
-		{	
-			$business->add($model);
-		}
+		$business->add($model);
+		$this->redirect(APP_URL . '/brandadmin/add');
 	}
 	
 	private function setPic($model)
