@@ -49,13 +49,15 @@ class ChangeUserView extends BaseView
 	private function change()
 	{
 		$business = M('UserBusiness');
-		$model = new UserDataModel();
+		$model = $this->CurrentUser;
 		$model->id 			= $this->CurrentUser->id;
 		$model->head 		= '';
 		$model->nickname 	= trim($_POST['nickname']);
 		$model->city 		= intval($_POST['cityid']);
 		$model->setWorkFields(array('head', 'nickname', 'city'));
 		$business->changeData($model);
+		//把用户信息记入cookie
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($model), 0, '/');
 	}
 	private function getCityName($code)
 	{

@@ -3,7 +3,7 @@
 		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
 		<li style=""><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
 		<{if (!empty($CurrentUser->email))}>
-			<li style="margin-left:750px;_margin-left:425px;"><a href="javascript:;">消息（0）</a></li>
+			<li style="margin-left:750px;_margin-left:425px;"><a href="javascript:;"><{$CurrentUser->nickname}></a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user">
 					<{if ($CurrentUser->head)}>

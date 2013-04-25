@@ -88,6 +88,7 @@ class UserAjaxView extends BaseAjaxView
 		$model->otheraccount= UserDataModel::REG_DEFAULT;
 		$model->othersite	= 0;
 		$model->status		= 1;
+		$model->nickname = '匿名用户';
 		foreach ($model as $key => $val)
 		{
 			if (empty($val))
@@ -125,6 +126,25 @@ class UserAjaxView extends BaseAjaxView
 			$this->responseError('验证码错误');
 		}
 		return true;
+	}
+	
+	public function resetPasswd()
+	{
+		$newPassword = null;
+		$userId = null;
+		$this->mustLogin();
+		if (!empty($_POST['password']))
+		{
+			$newPassword = $_POST['password'];
+		}
+		$business = new UserBusiness();
+		$business->resetPasswd($this->CurrentUser->id, $newPassword);
+		$this->response(true);
+	}
+	
+	public function uploadHead()
+	{
+		
 	}
 	
 }

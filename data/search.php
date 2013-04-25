@@ -178,8 +178,11 @@ class SearchData extends BaseData
 			case 'createtime':
 				$sortStr = 'createtime desc';
 				break;
-			case 'price':
+			case 'price1':
 				$sortStr = 'price asc';
+				break;
+			case 'price2':
+				$sortStr = 'price desc';
 				break;
 		}
 		$sphinx->setSortMode(SPH_SORT_EXTENDED, $sortStr);
