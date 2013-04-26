@@ -4,10 +4,7 @@ class CateaddCategoryView extends BaseView
 {
 	public function index()
 	{
-		if(empty($_COOKIE['brand_id']) && empty($_COOKIE['brandModel']))
-		{
-			$this->redirect(APP_URL . '/brandadmin/login');
-		}
+		
 		if (!empty($_POST))
 		{
 			$business = M('Brand_cateBusiness');
