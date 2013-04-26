@@ -114,7 +114,7 @@ class HomeTjDataBusiness extends BaseBusiness
      * @param array $cid 分类ID
      * @param array $state 状态
      */
-    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
+    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false, $userid = false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
     {
         $data = new HomeTjDataData();
         $data->setOrder($sort);
@@ -165,6 +165,10 @@ class HomeTjDataBusiness extends BaseBusiness
 		{
 			$query['tempType'] = 1;
 		}
+		if($userid)
+		{
+			$query['userid'] = $userid;
+		}
         if ($query)
         {
             $data->where($query);
@@ -173,6 +177,22 @@ class HomeTjDataBusiness extends BaseBusiness
         return $data->findAll();
     }
 
+	public function getAllTotal($tempType = false, $userid = false)
+	{
+		$data = new HomeTjDataData();
+		$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid;
+		$total = $data->query($sql);
+		
+		return $total[0]['num'];
+	}
+	
+	public function tgCount($tempType = false, $userid = false)
+	{
+		$data = new HomeTjDataData();
+		$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state = 1 AND userid = '. $userid;
+		$total = $data->query($sql);
+		return $total[0]['num'];
+	}
     /**
      * 改变商品状态
      * @param array $ids 商品ID

@@ -12,6 +12,12 @@ class AddBrandadminView extends BaseView
 		}
 		$model = null;
 		$business = new HomeTjDataBusiness();
+		if (!empty($_GET['id']) && (int)$_GET['id'])
+		{
+			$id = (int)$_GET['id'];
+			$model = $business->getOneById($id);
+			
+		}
 		if (!$model)
 		{
 			$model = new HomeTjDataDataModel();
@@ -21,6 +27,7 @@ class AddBrandadminView extends BaseView
 		
 		if (!empty($_POST))
 		{
+			
 			$this->add();
 		}
 		
@@ -45,6 +52,7 @@ class AddBrandadminView extends BaseView
 	{
 		$business = new HomeTjDataBusiness();
 		$model = $this->model;
+		
 		$file = new FileUploadUtilLib('pic');
 		$uploadInfo = $file->upload();
 		$picName = null;
@@ -110,8 +118,15 @@ class AddBrandadminView extends BaseView
 		{
 			$this->setPic($model);
 		}
-		$business->add($model);
-		$this->redirect(APP_URL . '/brandadmin/add');
+		
+		if ($model->id)
+		{
+			$business->updateModel($model);
+		}else{
+			$business->add($model);
+		}
+	
+		$this->redirect(APP_URL . '/brandadmin/dplists');
 	}
 	
 	private function setPic($model)

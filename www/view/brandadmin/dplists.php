@@ -1,5 +1,6 @@
-<?php
-class IndexTempView extends BaseView
+<?php 
+
+class DplistsBrandadminView extends BaseView
 {
 	public function index($parameters)
 	{
@@ -95,40 +96,15 @@ class IndexTempView extends BaseView
         }
 
 		
-		$userid = null;
-		$count = null;
-		$tgCount = null;
-		
-		$tempType = 1;
-        if (isset($_GET['userid']) && $_GET['userid'] !== '')
-        {
-            $userid = (int)$_GET['userid'];
-			//得到总数
-			$count = $business->getAllTotal($tempType,$userid);
-			//得到已经通过审核总数
-			$tgCount = $business->tgCount($tempType,$userid);
-        }
-		
-		
-		$id = null;
-		if (!empty($_GET['id']))
-		{
-			$id = $_GET['id'];
-			$this->assign('id', $id);
-		}
 		$pageCore->currentPage = $page;
-		if ($id)
+		$tempType = 1;
+		$userid = null;
+		if(!empty($_COOKIE['brand_id']))
 		{
-			$model = $business->getOneById($id,$tempType);
-			if ($model)
-			{
-				$models = array($model);
-			}
-		}
-		else
-		{
-			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType);
-		}
+			$userid = $_COOKIE['brand_id'];
+		}	
+		
+		$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userid);
 		$models = $models ?  $models : array();
 		foreach ($models as $model)
 		{
@@ -152,23 +128,14 @@ class IndexTempView extends BaseView
 				$model->SiteName = $siteModels[$model->site]->name;
 			}
 		}
-		
-		$this->assign('id', $id);
-		$this->assign('page',$page);
-		$this->assign('state',implode(',',$state));
-		$this->assign('cid',$cidStr);
-		$this->assign('fid',$fid);
-		$this->assign('site',$site);
-		$this->assign('istj',$istj);
-		$this->assign('ishot',$ishot);
+		//得到总数
+		$count = $business->getAllTotal($tempType,$userid);
+		//得到已经通过审核总数
+		$tgCount = $business->tgCount($tempType,$userid);
 		$this->assign('models',$models);
-		$this->assign('classModels',$classModels);
-		$this->assign('sourceModels',$sourceModels);
-		$this->assign('siteModels',$siteModels);
-		$this->assign('title', '内容管理');
-		$this->assign('pageCore', $pageCore);
 		$this->assign('count',$count);
 		$this->assign('tgCount',$tgCount);
+		$this->assign('pageCore', $pageCore);
 	}
+
 }
-?>
