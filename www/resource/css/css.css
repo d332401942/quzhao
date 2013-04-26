@@ -878,7 +878,7 @@ filter:Alpha(opacity=95);}
 .list_r_menu_l2_pnt{ line-height:24px; margin-right:10px; width:50px; position:absolute; right:0px; top:0px;_top:1px; text-align:center;
 	height:24px;
 	text-align:center;	
-	display:inline-block; background-image:url(images/list_big_bg.gif);
+	display:inline-block; background-image:url(../images/list_big_bg.gif);
 	border:1px solid #ddd;
 	background-color:#eee;
 }

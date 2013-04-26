@@ -105,7 +105,24 @@ class SearchData extends BaseData
 				case 2:
 					if (count($array) == 2)
 					{
-						$sphinx->setFilterFloatRange($key, $array[0], $array[1]);
+						$start = floatval($array[0]);
+						$end = floatval($array[1]);
+						if (!$start && $end)
+						{
+							$start = 0.0;
+						}
+						if ($start && !$end)
+						{
+							$end = floatval(999999999);
+						}
+						if ($start > $end)
+						{
+							$sphinx->setFilterFloatRange($key, $end, $start);
+						}
+						else
+						{
+							$sphinx->setFilterFloatRange($key, $start, $end);
+						}
 					}
 					break;
 			}
@@ -168,21 +185,21 @@ class SearchData extends BaseData
 
 	private function setSortMode($sphinx, $sort)
 	{
-		$sortStr = '@weight desc';
+		$sortStr = '@weight desc, weight desc';
 		$sort = strtolower($sort);
 		switch ($sort)
 		{
 			case 'sales':
-				$sortStr = 'sales desc';
+				$sortStr .= ',sales desc';
 				break;
 			case 'createtime':
-				$sortStr = 'createtime desc';
+				$sortStr .= ',createtime desc';
 				break;
 			case 'price1':
-				$sortStr = 'price asc';
+				$sortStr .= ',price asc';
 				break;
 			case 'price2':
-				$sortStr = 'price desc';
+				$sortStr .= ',price desc';
 				break;
 		}
 		$sphinx->setSortMode(SPH_SORT_EXTENDED, $sortStr);
@@ -192,5 +209,6 @@ class SearchData extends BaseData
 	{
 		$sphinx->setFilter('isdelete', array(0));
 		$sphinx->setFilter('siteid', array(111), true);
+		$sphinx->setFilter('siteid', array(112), true);
 	}
 }
