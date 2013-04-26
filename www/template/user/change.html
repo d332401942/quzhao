@@ -51,7 +51,22 @@
 		</form>
 		<div class="clear"></div>
 	</div>
-	<div class="con_right"></div>
+	<div class="con_right">
+		<div class="pp_rr2" style="width:192px;">
+			<h2>热门推荐</h2>
+			<ul>
+				<{foreach ($tjModels as $model1)}>
+				<li>
+					<a onclick="hitsLog(1,<{$model1->id}>);return dpLog(<{$model1->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model1->id}>" target="_blank">
+					<div><img src="<{if (!preg_match('/^http:\/\//',$model1->pic))}>/<{/if}><{$model1->pic}>" /></div>
+					<!-- <div class="xl"><span>月销量：6438件</span></div> -->
+					<h2><{$model1->name}></h2>
+					<h3>￥<{$model1->price}></h3></a>
+				</li>
+				<{/foreach}>
+			</ul>
+			</div>
+	</div>
 </div>
 <{uc class="FooterControlView"}>
 <!-- 城市 start -->

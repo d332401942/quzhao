@@ -43,7 +43,10 @@ class ChangeUserView extends BaseView
         $cityName = $this->getCityName($city);
 		//默认字母
 		$headLetter = 'L';
-		
+		//得到推荐的单品
+		$business = new HomeTjDataBusiness();
+		$tjModels = $business->getTjDpModels(2);
+		$this->assign('tjModels', $tjModels);
 		$this->assign('headLetter',$headLetter);
 		$this->assign('cityName', $cityName);
 		$this->assign('hotCityModels',$hotCityModels);

@@ -55,7 +55,7 @@
 					<{if (!empty($CurrentUser->head))}>
 						<img src="<{$CurrentUser->head|parsePicpath}>" alt=""/>
 					<{else}>
-						<img src="__RESOURCE__/images/tx.gif" width="144" height="155" alt=""/>
+						<img src="__RESOURCE__/images/user_header.gif" width="115" height="115" alt="" />
 					<{/if}>
 				</a>
 			</div>
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 		<div class="right2_er">
-			<div class=" pp_rr2">
+			<div class="pp_rr2" style="width:192px;">
 			<h2>热门推荐</h2>
 			<ul>
 				<{foreach ($tjModels as $model1)}>
