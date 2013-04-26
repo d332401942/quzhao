@@ -1,11 +1,19 @@
 <div class="box user-reg" style="display:none;padding:0px;">
 	<form action="__AJAX__/user/add" method="post" id="js-regForm" onsubmit="return doReg(this);">
 		<div class="left">
-			<div class="left_yi"><span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;<a style="color:#c74396;" href="javascript:;" onclick="showLoginDiv();">立即登录</a></div>
+			<div class="left_yi">
+				<span style="font-size:18px;">注册</span>&nbsp;已有账户?&nbsp;
+				<a style="color:#c74396;" href="javascript:;" onclick="showLoginDiv();">立即登录</a>
+			</div>
 			<div class="left_er">
 				<input onblur="checkuser()" id="js-user-email" onfocus="if (value =='登录邮箱'){value =''}" class="kuang" name="email" value="登录邮箱" tabindex="1" type="text" style="">
 			</div>
 			<div class="left_san" id="js-email-error">填写您的登录邮箱</div>
+			
+			<div style="margin-top:20px;" class="left_er">
+				<input class="kuang2"  onmouseout="this.style.borderColor=''" onfocus="checkRePassword(this)" value="确认密码" onmouseover="this.style.borderColor=''" tabindex="1"  onblur="rePasswordBlur(this)" type="text" style="">
+			</div>
+			
 			<div class="left_er">
 				<input onblur="pwStrength(this.value,'onblur')" id="js-password"  class="kuang2" name="password"  tabindex="1" value="密码" onfocus="if (value =='密码'){value =''};type='password'"  type="" style="">
 			</div>
@@ -15,9 +23,6 @@
 				<div class="right2_yi_you"><a href="javascript:;"><img src="__RESOURCE__/images/qiang.jpg" alt=""></a></div>
 			</div>
 			<div class="left_san" id="js-pass-error"></div>
-			<div style="margin-top:20px;" class="left_er">
-				<input class="kuang2"  onmouseout="this.style.borderColor=''" onfocus="checkRePassword(this)" value="确认密码" onmouseover="this.style.borderColor=''" tabindex="1"  onblur="rePasswordBlur(this)" type="text" style="">
-			</div>
 			<div class="left_wu2">
 				<div class="left_wu_left"><a href="javascript:;"><input type="image"  name="btn_submit" src="__RESOURCE__/images/61-33-.jpg" /></a></div>
 				<div class="left_wu_right2"><input name="agreement" class="agreement" type="checkbox" value="ok" checked="">同意<a href="javascript:;">用户协议</a></div>

@@ -51,7 +51,7 @@
 	<div class="con_right2">
 		<div class="right2_yi">
 			<div class="right2_yi_pic">
-				<a href="__APP__/user/change">
+				<a href="javascript:;">
 					<{if (!empty($CurrentUser->head))}>
 						<img src="<{$CurrentUser->head|parsePicpath}>" alt=""/>
 					<{else}>
@@ -61,7 +61,8 @@
 			</div>
 			<div class="right2_yi_title">
 				<ul>
-					<li><a style="font-size:16px;" href="__APP__/user/change"><{$CurrentUser->nickname}></a></li>
+					<li><a style="font-size:16px;" href="javascript:;"><{$CurrentUser->nickname}></a></li>
+					<li><a href="javascript:;" href="__APP__/user/change" title="设置"><img src="__RESOURCE__/images/sz.gif" /></a></li>
 				</ul>
 			</div>
 		</div>

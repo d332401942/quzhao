@@ -27,7 +27,7 @@
 		</div>
 		<div class="con_left_si">
 			<div class="con_left_si_zuo">照片</div>
-			<div class="con_left_si_you">
+			<div class="con_left_si_you" onmouseover="$(this).next().show();">
 				<a href="javascript:;">
 					<{if ($CurrentUser->head)}>
 						<img width="144" height="145" src="<{$CurrentUser->head|parsePicpath}>" alt="">
@@ -36,10 +36,14 @@
 					<{/if}>
 				</a>
 			</div>
-			<div class="hei">
-				<div class="photo"><a href="javascript:;" onclick="showUploadDiv()"><img src="__RESOURCE__/images/56-42.png" alt=""/></a></div>
-				<div class="photo_zi"><a href="javascript:;" onclick="showUploadDiv()">换一张照片</a></div>
+			<div class="hei" onmouseout="$(this).hide();">
+				<a href="javascript:;" onclick="showUploadDiv()">
+					<div class="photo">
+					<img src="__RESOURCE__/images/56-42.png" alt=""/></div>
+					<div class="photo_zi">换一张照片</div>
+				</a>
 			</div>
+			
 		</div>
 
 		
