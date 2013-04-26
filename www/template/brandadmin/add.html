@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td>商品名：</td>
-				<td><input name="name" value="<{$dataModel->name}>" type="text" class="addinput" /></td>
+				<td><input name="name" value="<{$dataModel->name}>" type="text" class="addinput" />&nbsp;&nbsp;<span style="color:red;">*</span></td>
 			</tr>
 			<tr>
 				<td>标题：</td>
@@ -38,24 +38,24 @@
 			<tr>
 				<td>图片：</td>
 				<td>
-					<input name="pic" value="" type="file" />
+					<input name="pic" value="" type="file" />&nbsp;&nbsp;<span style="color:red;">*</span>
 				</td>
 			</tr>
 			<tr>
 				<td>商品链接：</td>
-				<td><input name="href" value="<{$dataModel->href}>" type="text" class="addinput" /></td>
+				<td><input name="href" value="<{$dataModel->href}>" type="text" class="addinput" />&nbsp;&nbsp;<span style="color:red;">*</span></td>
 			</tr>
 			<tr>
 				<td>原价格:</td>
-				<td><input name="sprice" value="<{$dataModel->sprice}>" type="text" /></td>
+				<td><input name="sprice" value="<{$dataModel->sprice}>" type="text" />&nbsp;&nbsp;<span style="color:red;">*</span></td>
 			</tr>
 			<tr>
 				<td>目前价格:</td>
-				<td><input name="price" value="<{$dataModel->price}>" type="text" /></td>
+				<td><input name="price" value="<{$dataModel->price}>" type="text" />&nbsp;&nbsp;<span style="color:red;">*</span></td>
 			</tr>
 			<tr>
 				<td>邮费:</td>
-				<td><input name="eprice" value="<{$dataModel->eprice}>" type="text" /></td>
+				<td><input name="eprice" value="<{$dataModel->eprice}>" type="text" />&nbsp;&nbsp;<span style="color:red;">*</span></td>
 			</tr>
 			<tr>
 				<td>是否推荐:</td>
@@ -75,7 +75,7 @@
 			<tr>
 				<td>商品介绍：</td>
 				<td>
-					<textarea class="addinput" name="info"><{$dataModel->info}></textarea>
+					<textarea class="addinput" name="info"><{$dataModel->info}></textarea>&nbsp;&nbsp;<span style="color:red;">*</span>
 				</td>
 			</tr>
 			<tr>
@@ -83,7 +83,7 @@
 				<td>
 					<label>男<input name="fitsex" <{if ($dataModel->fitsex == 1)}>checked<{/if}> value="1" type="radio" /></label>
 					<label>女<input name="fitsex" <{if ($dataModel->fitsex == 2)}>checked<{/if}> value="2" type="radio" /></label>
-					<label>中性<input name="fitsex" <{if ($dataModel->fitsex == 3)}>checked<{/if}> value="3" type="radio" /></label>
+					<label>中性<input name="fitsex" <{if ($dataModel->fitsex == 3)}>checked<{/if}> value="3" type="radio" /></label>&nbsp;&nbsp;<span style="color:red;">*</span>
 				</td>
 			</tr>
 			<tr>
