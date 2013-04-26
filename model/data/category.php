@@ -25,6 +25,8 @@ class CategoryDataModel extends ModelCoreLib
 
 	public $path;
 	
+	public $num;
+	
 	public $children;
 	
 	public function __construct()
@@ -33,5 +35,6 @@ class CategoryDataModel extends ModelCoreLib
 		$this->setPrimaryKey('categoryid');
 		$this->setIgoneFields('children');
 		$this->setIgoneFields('path');
+		$this->setIgoneFields('num');
 	}
 }

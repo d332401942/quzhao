@@ -1,7 +1,7 @@
 <{uc class="HeaderControlView" meta=$meta css="css" keyword=$keyword}>
 <div class="box ">
     <div class="list_top">
-        在1617个商家中，找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
+        找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
     </div>
     <div class="list_l">
         <div class="list_nav">
@@ -17,7 +17,12 @@
                     </h2>
 					<{foreach ($model->children as $m)}>
                     <li>
-                        <a href="javascript:;" onclick="searchByCategory(<{$m->categoryid}>)"><{$m->name}></a>
+                        <a href="javascript:;" onclick="searchByCategory(<{$m->categoryid}>)">
+							<{$m->name}>
+							<{if ($m->num)}>
+							(<{$m->num}>)
+							<{/if}>
+						</a>
                     </li>
                     <{/foreach}>
                 </ul>
@@ -84,6 +89,33 @@
     <div class="list_r">
 		<{if (!empty($attrModels))}>
         <div class="tian_lei">
+			<{if (!empty($searchBrandModels))}>
+				<ul>
+					<li class="tian_lei_l ">
+						品牌：
+					</li>
+					<li class="tian_lei_r">
+						<a href="javascript:;" onclick="clearAttr('brandid')">全部</a>
+						<{foreach ($searchBrandModels as $k => $v)}>
+							<{if ($k < 4)}>
+							<a href="javascript:;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}>" onclick="searchByAttr('brandid',0,'<{$v->brandid}>')"><{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}></a>
+							<{else}>
+							<a href="javascript:;" style="display:none;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}> js-extend-more-brandid" onclick="searchByAttr('brandid',0,'<{$v->brandid}>')">
+								<{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}>
+							</a>
+							<{/if}>
+						<{/foreach}>
+					</li>
+					<li class="list_r_more">
+						<{if (!empty($k) && $k >= 4)}>
+						<a href="javascript:;" onclick="attrShow('brandid')">
+							更多
+							<img src="__RESOURCE__/images/bn.gif" />
+						</a>
+						<{/if}>
+					</li>
+				</ul>
+			<{/if}>
             <{foreach ($attrModels as $key=>$val)}>
 			<{if ($key > 2)}>
 				<ul class="js-attrdb-more" style="display:none;">
@@ -97,15 +129,15 @@
                     <a href="javascript:;" onclick="clearAttr('<{$val->attr}>')">全部</a>
 					<{foreach ($val->extend as $k => $v)}>
 						<{if ($k < 4)}>
-						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}></a>
+						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')"><{$v[0]}><{if (!empty($v[2]))}>(<{$v[2]}>)<{/if}></a>
 						<{else}>
-						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}> js-extend-more-<{$val->attrdbid}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" style="display:none;"><{$v[0]}></a>
+						<a href="javascript:;" class="<{if (!empty($attrArr[$val->attr]) && $val->stype .'_'. $v[1] == $attrArr[$val->attr])}>open4<{/if}> js-extend-more-<{$val->attr}>" onclick="searchByAttr('<{$val->attr}>','<{$val->stype}>','<{$v[1]}>')" style="display:none;"><{$v[0]}><{if (!empty($v[2]))}>(<{$v[2]}>)<{/if}></a>
 						<{/if}>
                     <{/foreach}>
                 </li>
                 <li class="list_r_more">
-					<{if ($k >= 4)}>
-                    <a href="javascript:;" onclick="attrShow(<{$val->attrdbid}>)">
+					<{if (!empty($k) && $k >= 4)}>
+                    <a href="javascript:;" onclick="attrShow('<{$val->attr}>')">
                         更多
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>

@@ -11,6 +11,24 @@ class SearchBusiness extends BaseBusiness
 		$result = $data->searchProduct($pageCore, $keyword , $categoryIds,$attrArr, $sort);		
 		return $result;	
 	}
+	
+	/**
+	 * 搜索关键字都有的分类和数木
+	 * @param string $keyword
+	 * @param id $category 类别ID
+	 * @param array $attrArr 商品属性
+	 * @return unknown
+	 */
+	public function searchBrandIdToCount($keyword , $category, $attrArr)
+	{
+		$data = new SearchData();
+		$brandIdToCount = $data->searchBrandIdToCount($keyword , $category, $attrArr);
+		if (!$brandIdToCount)
+		{
+			$brandIdToCount = array();
+		}
+		return $brandIdToCount;
+	}
 
 	public function getRecommendModels($keyword)
 	{

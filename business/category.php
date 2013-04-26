@@ -13,17 +13,17 @@ class CategoryBusiness extends BaseBusiness
 			return $categoryIdToCount;
 		}
 		$categoryIds = array_keys($categoryIdToCount);
-		$categoryModels = $this->getCompleteCategoryByIds($categoryIds);
+		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount);
 		return $categoryModels;
 	}
 
 	/**
 	 * 通过分类ID获取他的上级已经下级的所有数据
 	 */
-	public function getCompleteCategoryByIds($ids)
+	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array())
 	{
 		$data = M('CategoryData');
-		$models = $data->getCompleteCategoryByIds($ids);
+		$models = $data->getCompleteCategoryByIds($ids, $categoryIdToCount);
 		return $models;
 	}
 	
@@ -39,6 +39,27 @@ class CategoryBusiness extends BaseBusiness
 		}
 		$result = $data->getAttrDbs($attrModel->attrid);
 		return $result;
+	}
+	
+	/**
+	 * 根据品牌ID获取品牌
+	 * @param unknown $brandIds
+	 * @return multitype:
+	 */
+	public function getSearchBrandDataModel($brandIds)
+	{
+		$searchBrandModels = array();
+		if (!$brandIds)
+		{
+			return $searchBrandModels;
+		}
+		$data = new CategoryData();
+		$searchBrandModels = $data->getSearchBrandDataModel($brandIds);
+		if (!$searchBrandModels)
+		{
+			$searchBrandModels = array();
+		}
+		return $searchBrandModels;
 	}
 	
 }

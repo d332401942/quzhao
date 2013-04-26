@@ -24,6 +24,47 @@ class SearchData extends BaseData
 		$this->setLight($productModels);
 		return $productModels;
 	}
+	
+	/**
+	 * 搜索关键字都有的分类和数木
+	 * @param string $keyword
+	 * @param id $category 类别ID
+	 * @param array $attrArr 商品属性
+	 * @return unknown
+	 */
+	public function searchBrandIdToCount($keyword , $category, $attrArr)
+	{
+		if (isset($attrArr['brandid'])) 
+		{
+			unset($attrArr['brandid']);
+		}
+		$sphinx = new SphinxDbLib();
+		$sphinx->setMatchMode(SPH_MATCH_EXTENDED2);
+		$this->setPublicFilter($sphinx);
+		$sphinx->SetFilter('brandid', array(0), true);
+		$sphinx->setGroupBy('brandid', SPH_GROUPBY_ATTR, '@count desc');
+		if ($category)
+		{
+			$sphinx->setFilter('categoryid', array($category));
+		}
+		$this->setAttr($sphinx, $attrArr);
+		$result = $sphinx->query($keyword, 'product');
+		$brandIdToCount = array();
+		if (!empty($result['matches']))
+		{
+			foreach ($result['matches'] as $arr)
+			{
+				if (!empty($arr['attrs']['brandid']))
+				{
+					$id = $arr['attrs']['brandid'];
+					$count = $arr['attrs']['@count'];
+					$brandIdToCount[$id] = $count;
+				}
+			}
+		}
+		return $brandIdToCount;
+		
+	}
 
 	public function getRecommendModels($keyword)
 	{
@@ -36,6 +77,7 @@ class SearchData extends BaseData
 		$this->setPublicFilter($sphinx);
 		$sphinx->setLimits(0, 5, 5);
 		$result = $sphinx->query($keyword, 'product');
+		
 		$productIds = $sphinx->getResultIds($result);
 		if (empty($productIds))
 		{
@@ -81,10 +123,21 @@ class SearchData extends BaseData
 		{
 			$sphinx->setFilter('categoryid', $categoryIds);
 		}
+		$this->setAttr($sphinx, $attrArr);
+		$result = $sphinx->query($keyword, 'product');
+		$lightWords = $sphinx->getLightWords($result);
+		$this->lightWords = $sphinx->getLightWords($result);
+		$productIds = $sphinx->getResultIds($result, $pageCore);
+		$sphinx->clear();
+		return $productIds;
+	}
+	
+	private function setAttr($sphinx, $attrArr)
+	{
 		foreach ($attrArr as $key => $val)
 		{
 			$arr = explode('_', $val);
-			if (count($arr) != 2) 
+			if (count($arr) != 2)
 			{
 				continue;
 			}
@@ -127,12 +180,6 @@ class SearchData extends BaseData
 					break;
 			}
 		}
-		$result = $sphinx->query($keyword, 'product');
-		$lightWords = $sphinx->getLightWords($result);
-		$this->lightWords = $sphinx->getLightWords($result);
-		$productIds = $sphinx->getResultIds($result, $pageCore);
-		$sphinx->clear();
-		return $productIds;
 	}
 
 	private function setLight($productModels)
@@ -190,16 +237,16 @@ class SearchData extends BaseData
 		switch ($sort)
 		{
 			case 'sales':
-				$sortStr .= ',sales desc';
+				$sortStr = ',sales desc';
 				break;
 			case 'createtime':
-				$sortStr .= ',createtime desc';
+				$sortStr = ',createtime desc';
 				break;
 			case 'price1':
-				$sortStr .= ',price asc';
+				$sortStr = ',price asc';
 				break;
 			case 'price2':
-				$sortStr .= ',price desc';
+				$sortStr = ',price desc';
 				break;
 		}
 		$sphinx->setSortMode(SPH_SORT_EXTENDED, $sortStr);
@@ -209,6 +256,5 @@ class SearchData extends BaseData
 	{
 		$sphinx->setFilter('isdelete', array(0));
 		$sphinx->setFilter('siteid', array(111), true);
-		$sphinx->setFilter('siteid', array(112), true);
 	}
 }

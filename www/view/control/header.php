@@ -26,7 +26,7 @@ class HeaderControlView extends BaseView
         $keyword = empty($parameters['keyword']) ? null : trim($parameters['keyword']);
         if (empty($keyword))
         {
-            $keyword = '羽绒服';
+            $keyword = '电饭煲';
         }
         $this->assign('keyword', $keyword);
     }
