@@ -49,13 +49,34 @@ class IndexSearchView extends BaseView
 			}
 		}
 		
+		if (!empty($parameters['sort']))
+		{
+			$sort = $parameters['sort'];
+			if ($sort == 'price1')
+			{
+				$sortPrice = 'price2';
+			}
+		}
+		$keyword = urldecode($keyword);
+		$business = M('SearchBusiness');
+		//得到都有的品牌ID
+		$brandIdToCount = $business->searchBrandIdToCount($keyword , $category, $attrArr, $sort);
+		$brandIds = array_keys($brandIdToCount);
+		$searchBrandModels = $categoryBusiness->getSearchBrandDataModel($brandIds);
+		foreach ($searchBrandModels as $model)
+		{
+			if (!empty($brandIdToCount[$model->brandid]))
+			{
+				$model->num = $brandIdToCount[$model->brandid];
+			}
+		}
 		if (!empty($parameters['category']))
 		{
 			$category = (int)($parameters['category']);
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 			if(!empty($attrModels))
 			{
-				foreach($attrModels as $val)
+				foreach($attrModels as $key => $val)
 				{
 					if (empty($val->info))
 					{
@@ -64,7 +85,8 @@ class IndexSearchView extends BaseView
 					$arr = explode('#',$val->info);
 					foreach($arr as $v)
 					{
-						$val->extend[] = explode(':',$v);
+						$arr = explode(':',$v);
+						$val->extend[] = $arr;
 						if (!empty($val->extend[1]))
 						{
 							$val->extend[1] = str_replace(',', '-', $val->extend[1]);
@@ -78,23 +100,15 @@ class IndexSearchView extends BaseView
 			}
 		}
 		
-		if (!empty($parameters['sort']))
-		{
-			$sort = $parameters['sort'];
-			if ($sort == 'price1')
-			{
-				$sortPrice = 'price2';
-			}
-		}
+		
 		//得到历史记录
 		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
-        $keyword = urldecode($keyword);
-		$business = M('SearchBusiness');
+        
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
+		
 		//TODO 得到特别推荐
 		$recommendModels = $business->getRecommendModels($keyword);
 		$recommendModels = array_values($recommendModels);
-
 		$categoryModels = $categoryBusiness->search($keyword);
 		$productModels = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);
@@ -112,6 +126,7 @@ class IndexSearchView extends BaseView
 		$this->assign('attrArr',$attrArr);
 		$this->assign('priceEnd', $priceEnd);
 		$this->assign('priceStart', $priceStart);
+		$this->assign('searchBrandModels', $searchBrandModels);
 		$this->assign('searchBrowseHistoryModels', $searchBrowseHistoryModels);
 		$this->assign('recommendModels', $recommendModels);
 	}
