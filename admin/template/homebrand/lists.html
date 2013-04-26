@@ -1,0 +1,87 @@
+<{include '__TEMPLATE__/header.html'}>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform();">
+	<input name="oldpic" value="<{$model->pic}>" type="hidden" />
+	<input name="id" value="<{$model->id}>" type="hidden" />
+	<div class="add-div">
+		<table style="width:100%;margin:auto;" border="0">
+	<tr>
+		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
+		<th style="width:30px;">ID</th>
+		<th style="width:100px;">添加人</th>
+		<th style="width:150px;">分类</th>
+		<th style="width:200px;">名称</th>
+		<th>入库时间</th>
+		<th style="width:85px;">操作</th>
+	</tr>
+		<{if ($model)}>
+		<{foreach ($model as $val)}>
+		<tr>
+			<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
+			<td align="center"><{$val->id}></td>
+			<td align="center"><{$val->username}></td>
+			<td align="center"><{$val->cateName}></td>
+			<td align="center"><{$val->name}></td>
+			<td align="center"><{$val->createtime|date_format:'Y-m-d H:i:s'}></td>
+			<td align="center">
+				<a href="__APP__/homebrand/brand__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
+				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
+			</td>
+		</tr>
+		<{/foreach}>
+		<{else}>
+		<tr>
+			<td colspan="6" align="center">暂无品牌数据</td>
+		</tr>
+		<{/if}>
+	<tr>
+		<td><input type="checkbox" onclick="checkAll(this)" class="js-checkall-input" /></td>
+		<td colspan="10" style="text-align:left;"><button onclick="del()">删除</button></td>
+	</tr>
+</table>
+	</div>
+<{include '__TEMPLATE__/footer.html'}>
+<{uc class="PageControlView" pageCore=$pageCore}>
+<script>
+function goPage(page) {
+	window.location.href = '__APP__/brandadmin/lists?page='+page;
+}
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
+	if (!ids) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	
+	$.ajax({
+		url: '__AJAX__/brand/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:ids},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+function checkAll(obj) {
+	var checkInputObj = $('.js-checkall-input');
+	if ($(obj).attr('checked')) {
+		checkInputObj.attr('checked',true);
+	} 
+	else {
+		checkInputObj.attr('checked',false);
+	}
+}
+</script>

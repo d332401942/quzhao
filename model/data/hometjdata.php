@@ -200,6 +200,11 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $userid;
 	
+	/**
+	 * 1是兼职添加的东西，临时字段
+	 */
+	public $tempType = 0;
+	
 	public function __construct()
 	{
 		parent::__construct();

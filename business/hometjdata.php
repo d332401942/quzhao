@@ -46,9 +46,10 @@ class HomeTjDataBusiness extends BaseBusiness
 		$result = $data->getLoveModel();
 		return $result;
 	}
-    public function getOneById($id)
+    public function getOneById($id,$tempType=false)
     {
         $data = new HomeTjDataData();
+		
         return $data->getOneById($id);
     }
 
@@ -113,7 +114,7 @@ class HomeTjDataBusiness extends BaseBusiness
      * @param array $cid 分类ID
      * @param array $state 状态
      */
-    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
+    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
     {
         $data = new HomeTjDataData();
         $data->setOrder($sort);
@@ -157,6 +158,13 @@ class HomeTjDataBusiness extends BaseBusiness
                 $query['ishot'] = array('!=' => 1);
             }
         }
+		
+		$query['tempType'] = array('!=' => 1);
+		
+		if($tempType)
+		{
+			$query['tempType'] = 1;
+		}
         if ($query)
         {
             $data->where($query);

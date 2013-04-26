@@ -94,6 +94,7 @@ class AddBrandadminView extends BaseView
 		}
 		$model->ltime = time();
 		$model->userid = $_COOKIE['brand_id'];
+		$model->tempType = 1; 
 		if (!$model->id)
 		{
 			$model->state = HomeTjDataDataModel::STATE_DOWN;

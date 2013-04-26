@@ -39,13 +39,21 @@ class LeftIndexView extends BaseView
                 ),
             ),
             '品牌特卖' => array(
-                array(
+                /*array(
                     'name' => '品牌列表',
                     'url' => 'homebrand',
-                ),
-                array(
+                ),*/
+               /* array(
                     'name' => '添加品牌',
                     'url' => 'homebrand/add'
+                ),*/
+				array(
+                    'name' => '品牌列表',
+                    'url' => 'homebrand/lists',
+                ),
+				array(
+                    'name' => '添加品牌',
+                    'url' => 'homebrand/brand'
                 ),
                 array(
                     'name' => '品牌推荐',
@@ -121,6 +129,12 @@ class LeftIndexView extends BaseView
 				array(
 					'name' => '评论查看',
 					'url' => 'message/show',
+				)
+			),
+			'兼职管理' => array(
+				array(
+					'name' => '超值单品',
+					'url' => 'temp/index',
 				)
 			),
 			'分类管理' => array(

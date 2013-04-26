@@ -1,0 +1,125 @@
+<{include '__TEMPLATE__/header.html'}>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform();">
+	<input name="oldpic" value="<{$model->pic}>" type="hidden" />
+	<input name="id" value="<{$model->id}>" type="hidden" />
+	<div class="add-div">
+		<table>
+			
+		<input type="hidden" name="brandid" value="<{$model->id}>" />
+			<tr>
+				<td>名称：</td>
+				<td><input value="<{if (isset($model->name))}><{$model->name}><{/if}>" type="text" name="name" id="name" /></td>
+			</tr>
+			<tr>
+				<td>名称首写大写字母：</td>
+				<td><input value="<{if (isset($model->letter))}><{$model->letter}><{/if}>" type="text" name="letter" id="letter" /></td>
+			</tr>
+			<tr>
+				<td>来源URL：</td>
+				<td><input value="<{if (isset($model->url))}><{$model->url}><{/if}>" type="text" name="url" id="url" /></td>
+			</tr>
+			<tr>
+				<td>活动开始时间：</td>
+				<td><input <{if (isset($model->startTime))}>value="<{$model->startTime}>"<{/if}> type="text" name="startTime" id="startTime" /></td>
+			</tr>
+			<tr>
+				<td>活动结束时间：</td>
+				<td><input value="<{if (isset($model->endTime))}><{$model->endTime}><{/if}>" type="text" name="endTime" id="endTime" /></td>
+			</tr>
+			<tr>
+				<td>品类：</td>
+				<td>
+					<select name="cate" id="cate" onchange="checkcate(this.value)">
+						<option value="">请选择分类</option>
+						<{if ($cateModel)}>
+						<{foreach ($cateModel as $val)}>
+							<option value="<{$val->id}>" <{if (isset($model->endTime))}> <{if ($val->id == $model->cate)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
+						<{/foreach}>
+						<{/if}>
+					</select>
+				</td>
+			</tr>
+			<tr style="display:none;" id="js-hidden-column">
+				<td>栏目：</td>
+				<td id="js-column">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>图片logo：</td>
+				<td><input value="" type="file" name="image" /></td>
+			</tr>
+			<tr>
+				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+	<{if (!empty($model->image))}>
+	<div class="class="add-div add-div-img">
+		<img src="<{$model->image|parsePicpath}>" width="300" height="300" />
+	</div>
+	<{/if}>
+</form>
+
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+function checkform() {
+	var	name = $('#name').val();
+	var	letter = $('#letter').val();
+	var	url = $('#url').val();
+	var	startTime = $('#startTime').val();
+	var	endTime = $('#endTime').val();
+	var	cate = $('#cate').val();
+	if(name == '') {
+		alert('请填写名称');
+		return false;
+	}
+	if(letter == '') {
+		alert('首写字母不能为空');
+		return false;
+	}
+	if(url == '') {
+		alert('来源URL不能为空');
+		return false;
+	}
+	if(startTime == '') {
+		alert('开始时间不能为空');
+		return false;
+	}
+	if(endTime == '') {
+		alert('结束时间不能为空');
+		return false;
+	}
+	if(cate == '') {
+		alert('请选择分类');
+		return false;
+	}
+}
+var checkedCateIds = {};
+<{foreach ($model->colums as $k => $m)}>
+	checkedCateIds['<{$k}>'] = '<{$m->name}>';
+<{/foreach}>
+
+function checkcate(value) {
+	if(value != '') {
+		$.post('__AJAX__/child_cate/getcateid',{cateId:value},function(data){
+			var arr_data = $.parseJSON(data);
+			var rs = '';
+			if(arr_data.result) {
+				var arr = arr_data.result;
+				for (var i in arr) {
+					var obj = arr[i];
+					var checked = '';
+					if (checkedCateIds[obj.id]) {
+						var checked = 'checked';
+					}
+					rs += "<input type='checkbox' "+checked+" name='cateid[]' value="+obj.id+" />"+obj.name ;
+				}
+				$('#js-hidden-column').show();
+				$('#js-column').html(rs);
+			}
+		})
+	}	
+}
+checkcate(<{$model->cate}>);
+</script>
