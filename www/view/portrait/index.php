@@ -11,7 +11,6 @@ class IndexPortraitView extends BaseView
         {
         	$this->upload();
         }
-        P($_POST);
         if (!$this->tmpImage)
         {
         	$this->tmpImage = $this->CurrentUser->head;

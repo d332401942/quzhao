@@ -144,7 +144,50 @@ class UserAjaxView extends BaseAjaxView
 	
 	public function uploadHead()
 	{
-		
+		$h = $_POST['h'];
+		$w = $_POST['w'];
+		$x = $_POST['x'];
+		$y = $_POST['y'];
+		$iw = $_POST['iw'];
+		$ih = $_POST['ih'];
+		$imagePath = $_POST['head'];
+		if (!preg_match('/^http/', $imagePath))
+		{
+			$imagePath = './' . $imagePath;
+		}
+		$imaegContent = file_get_contents($imagePath);
+		$im = @imagecreatefromstring($imaegContent);
+		if (!$im) 
+		{
+			$this->responseError('图片错误');
+		}
+		$imageArr = getimagesize($imagePath);
+		$imw = $imageArr[0];
+		$imh = $imageArr[1];
+		$rw = $imw / $iw * $w;
+		$rh = $imh / $ih * $h;
+
+		$newIm = imagecreatetruecolor(80, 80);
+		imagecopyresized($newIm, $im, 0, 0, $x, $y,80,80, $rw,$rh);
+		$filePath = './public/uploads';
+		$folder = $filePath .'/'.date('Y-m-d');
+    	if (!file_exists($folder))
+    	{
+    		mkdir($folder);
+    	}
+		$fileName = $folder .'/'. microtime(true) . rand(10000,9999) .'.jpeg';
+		if (imagejpeg($newIm, $fileName)) 
+		{
+			@unlink($imagePath);
+		}
+		//修改用户头像并且存放cookie
+		$business = M('UserBusiness');
+		$model = $this->CurrentUser;
+		$model->head = $fileName;
+		$business->editHead($model);
+		//把用户信息记入cookie
+		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($model), 0, '/');
+		$this->response(true);
 	}
 	
 }
