@@ -1,0 +1,53 @@
+<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<div class="list-div">
+	<div class="content-select">
+	</div>
+</div>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>分类名称：</td>
+				<td><input name="name" value="" type="text" class="addinput" id="name" /></td>
+			</tr>
+			
+			<tr>
+				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<ul>
+<{foreach ($cateModel as $model)}>
+	<li>
+		<{$model->name}>&nbsp;&nbsp;||&nbsp;&nbsp;<a href="#nogo" onclick="del(<{$model->id}>)">删除</a>
+	</li>
+<{/foreach}>
+</ul>
+<script>
+function checkform() {
+	var	name = $('#name').val();
+	if(name == '') {
+		alert('分类名称不能为空');
+		return false;
+	}
+}
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	if (!id) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/cateadd/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:id},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+</script>

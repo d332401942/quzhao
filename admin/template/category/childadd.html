@@ -1,0 +1,71 @@
+<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<div class="list-div">
+	<div class="content-select">
+	</div>
+</div>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+	<div class="add-div">
+		<table>
+			<tr>
+				<td>品类：</td>
+				<td>
+					<select name="cate" id="cate" onchange="checkcate(this.value)">
+						<option value="">请选择分类</option>
+						<{if ($cateModel)}>
+						<{foreach ($cateModel as $val)}>
+							<option value="<{$val->id}>" <{if (isset($model->endTime))}> <{if ($val->id == $model->cate)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
+						<{/foreach}>
+						<{/if}>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>栏目名称：</td>
+				<td><input name="name" value="" type="text" class="addinput" id="name2" /></td>
+			</tr>
+			
+			<tr>
+				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<ul>
+所属分类：&nbsp;栏目名称：
+<{foreach ($childModel as $model)}>
+	<li style="margin:5px;">
+		<{$model->cate}>&nbsp;&nbsp;||&nbsp;&nbsp;<{$model->name}>&nbsp;&nbsp;||&nbsp;&nbsp;<a href="#nogo" onclick="del(<{$model->id}>)">删除</a>
+	</li>
+<{/foreach}>
+</ul>
+<script>
+function checkform() {
+	var	name = $('#name2').val();
+	var	cate = $('#cate').val();
+	if(name == '') {
+		alert('栏目名称不能为空');
+		return false;
+	}
+	if(cate == '') {
+		alert('请选择分类');
+		return false;
+	}
+}
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	if (!id) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/childcate/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:id},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+</script>

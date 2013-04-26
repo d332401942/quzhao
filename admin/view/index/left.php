@@ -123,6 +123,18 @@ class LeftIndexView extends BaseView
 					'url' => 'message/show',
 				)
 			),
+			'分类管理' => array(
+				array(
+					'name' => '分类添加',
+					'url' => 'category/cateadd',
+				),
+			),
+			'栏目管理' => array(
+				array(
+					'name' => '栏目添加',
+					'url' => 'category/childadd',
+				),
+			)
         );
         $this->assign('menu', $menu);
     }
