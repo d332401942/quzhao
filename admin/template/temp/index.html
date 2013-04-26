@@ -113,7 +113,7 @@
 					<option <{if ($model->state == 0)}>selected<{/if}> value="0">待审核</option>
 				</select>
 			</td>
-			<td title="<{$model->name}>"><{$model->name|truncate:'100'}></td>
+			<td title="<{$model->name}>"><a href="<{$model->href}>" target="_blank"><{$model->name|truncate:'100'}></a></td>
 			<td><{$model->SoureName}></td>
 			<td><{$model->SiteName}></td>
 			<td><{$model->price}></td>
