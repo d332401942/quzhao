@@ -58,8 +58,8 @@ class AddContentView extends BaseView
 		$timeStart = $model->time_start ? $model->time_start : time();
 		$timeEnd = $model->time_end ? $model->time_end : time();
 		
-		$dateFrom = FormCommon::date('time_start',date('Y-m-d H:m:s',$timeStart),true);
-		$dateTo = FormCommon::date('time_end',date('Y-m-d H:m:s',$timeEnd),true);
+		$dateFrom = FormCommon::date('time_start',date('Y-m-d H:i:s',$timeStart),true);
+		$dateTo = FormCommon::date('time_end',date('Y-m-d H:i:s',$timeEnd),true);
 		
 		//得到所有分类
 		$homeTjClassBusiness = new HomeTjClassBusiness();
