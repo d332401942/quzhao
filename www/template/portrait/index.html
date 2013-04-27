@@ -1,507 +1,146 @@
-<ifrem>
-	<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta content="ie=7" http-equiv="x-ua-compatible">
-		<link href="http://www.quanzhi.cn/static/css@v1@base,css@v1@user.css" rel="stylesheet">
-		<title>上传照片</title>
-		<style>
-			html, body{ background:none;}
-		</style>
-		<script src="http://my.quanzhi.com/js/jquery.pack.js"></script>
-		<script type="text/javascript" src="http://my.quanzhi.com/js/ui.core.packed.js"></script> 
-		<script type="text/javascript" src="http://my.quanzhi.com/js/ui.draggable.packed.js"></script>
-	</head>
-	<body style="background-color:transparent">
 
-	<!--<img src='images/thumb/man.gif' id='Photo'>-->
-
-	 <div class="popup user_editpho" id="upp">
-	<input type="hidden" name="lan" id="lan" value="cn">
-	<div class="popup-bt"><span><a href="javascript:;" onclick="javascript:parent.$.mask.close();"><i class="icon icon-round-del"></i></a></span>编辑照片</div>
-	<div class="popup-con clear">
-	 <div id="" class="user_editphole"><!--左-->
-			<p class="user_a5 user_mrb8">你可以拖动照片以裁剪满意的头像</p>
-			<div class="uploadtooltip"></div>
-			<div style="width: 300px; height: 200px;" id="Canvas" class="uploaddiv">
-				<div style="width: 120px; height: 120px; top: 41px; left: 89px;" id="ImageDragContainer">
-										<img class="ui-draggable" style="width: 118px; height: 118px; left: 1px; top: 1px; position: relative;" src="http://img3.quanzhi.cn/images/v1/photoboy.gif" id="ImageDrag">
-								</div>
-				<div style="top: -120px;" id="IconContainer"> 
-										<img class="ui-draggable" style="width: 118px; height: 118px; left: 91px; top: 41px; position: relative;" src="http://img3.quanzhi.cn/images/v1/photoboy.gif" id="ImageIcon">
-								</div>
-			</div>
-			<div class="uploaddiv">
-			  <table width="300" align="center">
-				<tbody><tr>
-				  <td width="25" id="Min"><img alt="缩小" src="http://img3.quanzhi.cn/images/v1/thumb/_c.gif" onmouseover="this.src='http://img3.quanzhi.cn/images/v1/thumb/_c.gif';" onmouseout="this.src='http://img5.quanzhi.cn/images/v1/thumb/_h.gif';" id="moresmall" class="smallbig"> </td>
-				  <td width="250"><div id="bar">
-					  <div style="left: 120px;" class="child ui-draggable"></div>
-					</div></td>
-				  <td width="25" id="Max"><img alt="放大" src="http://img3.quanzhi.cn/images/v1/thumb/h.gif" onmouseover="this.src='http://img3.quanzhi.cn/images/v1/thumb/c.gif';" onmouseout="this.src='http://img3.quanzhi.cn/images/v1/thumb/h.gif';" id="morebig" class="smallbig"> </td>
-				</tr>
-			  </tbody></table>
-			</div>
-		  </div>
-	<!--左-->
-
-	<div class="user_editphori"><!--右-->
-	 <div class="upload">
-	<form action="" method="post" enctype="multipart/form-data">
-	<span style="color:red;" id="js-uploadphoto-error"></span><br>
-	<input type="file" name="file" id="file" style="width:215px">
-	<span class="btn btn-clean-c"><button name="button" id="button" type="submit">上传</button></span>
-	<input type="hidden" name="upload" id="upload" value="upload">
-	</form>
-	 </div>
-	 <div class="wcupload user_mrtb10">
-		<div id="js-resume-uploadfile" action="" method="POST">
-			<span class="btn btn-clean-a"><button name="btn_Image" onclick="ckeckThumb()" type="button">完成裁切保存头像</button></span>
-			<div style="display:none">
-			  <input type="hidden" name="fileName" id="bigImage" value="">
-			  <input type="hidden" name="photoId" id="" value="">
-			  left:
-			  <input type="text" name="left" id="left" value="">
-			  <br>
-			  top:
-			  <input type="text" name="top" id="top" value="">
-			  <br>
-			  img_x:
-			  <input type="text" name="img_x" id="img_x" value="">
-			  <br>
-			  img_y:
-			  <input type="text" name="img_y" id="img_y" value="">
-			  <br>
-			  img_w:
-			  <input type="text" name="img_w" id="img_w" value="">
-			  <br>
-			  img_h:
-			  <input type="text" name="img_h" id="img_h" value="">
-			  <br>
-			  dst_x:
-			  <input type="text" name="dst_x" id="dst_x" value="">
-			  <br>
-			  dst_y:
-			  <input type="text" name="dst_y" id="dst_y" value="">
-			  <br>
-			  dst_w:
-			  <input type="text" name="dst_w" id="dst_w" value="">
-			  <br>
-			  dst_h:
-			  <input type="text" name="dst_h" id="dst_h" value="">
-			  <br>
-			  倍数:
-			  <input type="text" name="f" id="f" value="">
-			  <br>
-			  宽度:
-			  <input type="text" name="width" id="width" value="">
-			  <br>
-			  高度:
-			  <input type="text" name="height" id="height" value="">
-			  <br>
-			</div>
-		</div>
-	</div>
-	</div><!--右-->
-	<div style="clear:both;"></div>
-	</div><div style="clear:both;"></div></div>
-
-	
-	</body>
-</html>
-<script type="text/javascript">
-var CANVAS_WIDTH = 300; //画布的宽
-var CANVAS_HEIGHT = 200; //画布的高
-var ICON_WIDTH = 120;  //截取框的宽
-var ICON_HEIGHT = 120;  //截取框的高
-var LEFT_EDGE = (CANVAS_WIDTH - ICON_WIDTH) / 2; 
-var TOP_EDGE = (CANVAS_HEIGHT - ICON_HEIGHT) / 2; 
-
-var scaleFactor;
-var factor;
-var minFactor;
-var oldWidth;
-var oldHeight;
-var realWidth;
-var realHeight;
-var iconElement;
-var imagedrag;
-
-$(document).ready(function() {
-  //引用图片对象
-  iconElement = $("#ImageIcon");
-  imagedrag = $("#ImageDrag");
-  //载入图片到缓存，用于获取原始尺寸
-  var image = new Image();   
-    image.onload = function(){
-      realWidth = this.width;
-      realHeight = this.height;
-      test();
-    };
-    image.src = iconElement.attr("src");
-    //清除缓存图片
-    image = null;
-
-function test(){
-
-  var upicok = '0';
-	var upicwidth = '0';
-	var upicheight = '0';
-	if(upicok!=1)
-	{
-		run(0,0);
-	}
-	else
-	{
-		run(upicwidth,upicheight);
-	}
-
-
-  function setImg(left,scaleFactor){
-    //图片实际尺寸
-    var currentWidth = Math.round(scaleFactor * realWidth);
-    var currentHeight = Math.round(scaleFactor * realHeight);
-
-    //图片相对CANVAS的初始位置
-    var originLeft = parseInt(iconElement.css("left"));
-    var originTop = parseInt(iconElement.css("top"));
-
-    originLeft -= Math.round((currentWidth - oldWidth) / 2);
-    originTop -= Math.round((currentHeight - oldHeight) / 2);
-    dragleft = originLeft - LEFT_EDGE;
-    dragtop = originTop - TOP_EDGE;
-
-    //图片当前尺寸和位置
-    $(".child").css("left", left + "px");
-    iconElement.css({ width: currentWidth + "px", height: currentHeight + "px", left: originLeft + "px", top: originTop + "px" });
-    imagedrag.css({ width: currentWidth + "px", height: currentHeight + "px", left: dragleft + "px", top: dragtop + "px" });
-
-    valuewrite(originLeft,originTop,currentWidth,currentHeight);
-    valuewrite(dragleft,dragtop,currentWidth,currentHeight);
-    oldWidth = currentWidth;
-    oldHeight = currentHeight;
-  };
-  //拖拽对象事件方法与注册
-  $(".child").draggable({
-    cursor: "move",
-    containment: $("#bar"),
-    drag: function(e, ui) {
-      var left = parseInt($(this).css("left"));
-      //前面讲过了y=factor（x），此处是知道x求y的值，即知道滑动条的位置，获取缩放率
-      scaleFactor = Math.pow(factor, (left / 120 - 1));
-      if (scaleFactor < minFactor) {
-          scaleFactor = minFactor;
-      }
-      if (scaleFactor > factor) {
-          scaleFactor = factor;
-      }
-      setImg(left,scaleFactor);
-    }
-  });
-  //放大缩小对象事件方法与注册
-  var SilderSetValue = function(i) {
-      var left = parseInt($(".child").css("left"));
-      left += i;
-
-      if (left < 0) {
-          left = 0;
-      }
-      if (left > 235) {
-          left = 235;
-      }
-
-      scaleFactor = Math.pow(factor, (left / 120 - 1));
-      if (scaleFactor < minFactor) {
-          scaleFactor = minFactor;
-      }
-      if (scaleFactor > factor) {
-          scaleFactor = factor;
-      }
-      setImg(left,scaleFactor);
-  }
-  //点击加减号
-  $("#moresmall").click(function() {
-      SilderSetValue(-20);
-  });
-  $("#morebig").click(function() {
-      SilderSetValue(20);
-  });
-
-};
-});
-function run(i_width,i_height){
-	$("#Canvas").css({width:CANVAS_WIDTH+ "px",height:CANVAS_HEIGHT+ "px"});
-	$("#ImageDragContainer").css({width:ICON_WIDTH+ "px",height:ICON_HEIGHT+ "px",top:TOP_EDGE+1+ "px",left:LEFT_EDGE-1+ "px"});
-	$("#IconContainer").css({top:"-"+ICON_HEIGHT+"px"});
-   //  var iconElement = $("#ImageIcon");
-   //  var imagedrag = $("#ImageDrag");
-   //  var image = new Image();
-   //  image.src = iconElement.attr("src");
-  	// if(image.width==0 && image.height==0){
-  	// 	var realWidth = i_width;
-  	// 	var realHeight = i_height;
-  	// }else{
-  	// 	 var realWidth = image.width;
-  	// 	var realHeight = image.height; 
-  	// }
-   //  image=null;
-    
-	minFactor = Math.min(ICON_WIDTH / realWidth,ICON_HEIGHT/realHeight);
-    if (ICON_WIDTH > realWidth && ICON_HEIGHT > realHeight) {
-        minFactor = 1;
-    }
-    factor = minFactor > 0.25 ? 8.0 : 4.0 / Math.sqrt(minFactor);
-
-	scaleFactor = 1;
-    if (realWidth > CANVAS_WIDTH && realHeight > CANVAS_HEIGHT) {
-        if (realWidth / CANVAS_WIDTH > realHeight / CANVAS_HEIGHT) {
-            scaleFactor = CANVAS_HEIGHT / realHeight;
-        }
-        else {
-            scaleFactor = CANVAS_WIDTH / realWidth;
-        }
-    }
-   $(".child").css("left", 120 * (Math.log(scaleFactor * factor) / Math.log(factor)) + "px");
-
-
-
-    var currentWidth = Math.round(scaleFactor * realWidth);
-    var currentHeight = Math.round(scaleFactor * realHeight);
-	var originLeft = Math.round((CANVAS_WIDTH - currentWidth) / 2) ;
-    var originTop = Math.round((CANVAS_HEIGHT - currentHeight) / 2);
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta name="Author" content="SeekEver">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <script src="__RESOURCE__/js/jquery.js" type="text/javascript"></script>
   
-    //计算截取框中的图片的位置
-    var dragleft = originLeft - LEFT_EDGE;
-    var dragtop = originTop - TOP_EDGE;
+  <script src="/./www/resource/js/jquery.form.js" type="text/javascript"></script>
 
+  
+  <script src="__RESOURCE__/js/jquery.jcrop.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="__RESOURCE__/css/jquery.jcrop.css" type="text/css" />
+<script type="text/javascript">
 
-    //设置图片当前尺寸和位置
+    jQuery(function($){
+
+      // Create variables (in this scope) to hold the API and image size
+      var jcrop_api, boundx, boundy;
+      
+      $('#target').Jcrop({
+		minSize: [48,48],
+		setSelect: [0,0,190,190],
+        onChange: updatePreview,
+        onSelect: updatePreview,
+		onSelect: updateCoords,
+        aspectRatio: 1
+      },
+	function(){
+        // Use the API to get the real image size
+        var bounds = this.getBounds();
+        boundx = bounds[0];
+        boundy = bounds[1];
+        // Store the API in the jcrop_api variable
+        jcrop_api = this;
+    });
+	function updateCoords(c)
+	{
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	};
 	
-
-    iconElement.css({ width: currentWidth + "px", height: currentHeight + "px", left: originLeft + "px", top: originTop + "px" });
-    imagedrag.css({ width: currentWidth + "px", height: currentHeight + "px", left: dragleft + "px", top: dragtop + "px" });
 	
-	oldWidth = currentWidth;
-    oldHeight = currentHeight;
-	valuewrite(dragleft,dragtop,oldWidth,oldHeight);
+	function updatePreview(c){
+		if (parseInt(c.w) > 0)
+		{
+			var rx = 48 / c.w;		//小头像预览Div的大小
+			var ry = 48 / c.h;
 
-	
-  $("#ImageDrag").draggable(
-    {
-        cursor: 'move',
-        drag: function(e, ui) {
-            var self = $(this).data("draggable");
-            var drop_img = $("#ImageIcon");
-            var top = drop_img.css("top").replace(/px/, ""); //取出截取框到顶部的距离
-           var left = drop_img.css("left").replace(/px/, ""); //取出截取框到左边的距离
-            drop_img.css({ left: (parseInt(self.position.left) + LEFT_EDGE) + "px", top: (parseInt(self.position.top) + TOP_EDGE) + "px" }); //同时移动
-           
-			valuewrite(parseInt(self.position.left),parseInt(self.position.top),oldWidth,oldHeight);
-			
-
-        }
-    }
-    );
-    //设置图片可拖拽，并且拖拽一张图片时，同时移动另外一张图片
-    $("#ImageIcon").draggable(
-    {
-        cursor: 'move',
-        drag: function(e, ui) {
-            var self = $(this).data("draggable");
-            var drop_img = $("#ImageDrag");
-            var top = drop_img.css("top").replace(/px/, ""); //取出截取框到顶部的距离
-            var left = drop_img.css("left").replace(/px/, ""); //取出截取框到左边的距离
-            drop_img.css({ left: (parseInt(self.position.left) - LEFT_EDGE) + "px", top: (parseInt(self.position.top) - TOP_EDGE) + "px" }); //同时移动
-			valuewrite(parseInt(self.position.left) - LEFT_EDGE,parseInt(self.position.top) - TOP_EDGE,oldWidth,oldHeight);
-        }
-
-    }
-    );
-}
-
-
-function valuewrite(left,top,currentWidth,currentHeight)
-{
-		var img_x=left>0 && left<ICON_WIDTH?0:0-left;
-		var dst_x=left<=0 || left>=ICON_WIDTH?0:left;
-		var img_y=top>0 && top<ICON_HEIGHT?0:0-top;
-		var dst_y=top<=0 || top>=ICON_HEIGHT?0:top;
-		var img_w='';
-		var dst_w='';
-		if(ICON_WIDTH>currentWidth){
-			if(left>0 && left<ICON_WIDTH-currentWidth){
-				img_w=currentWidth;
-				dst_w=currentWidth;
-			}else if(left>ICON_WIDTH || left<-currentWidth){
-				img_w=0;
-				dst_w=ICON_WIDTH;
-			}else if(left>0 && left<ICON_WIDTH){
-				img_w=ICON_WIDTH-left;
-				
-				dst_w=ICON_WIDTH-left;
-			}else{
-				img_w=currentWidth+left;
-				
-				dst_w=currentWidth+left;
-			}
-		}else{
-			if(left<=0 && left>=0-(currentWidth-ICON_WIDTH)){
-				img_w=ICON_WIDTH;
-				dst_w=ICON_WIDTH;
-			}else if(left>ICON_WIDTH || left<0-currentWidth){
-				img_w=0;
-				dst_w=ICON_WIDTH;
-			}else if(left>0 && left<ICON_WIDTH){
-				img_w=ICON_WIDTH-left;
-				
-				dst_w=ICON_WIDTH-left;
-			}else{
-				img_w=currentWidth+left;
-				
-				dst_w=currentWidth+left;
-			}
+			$('#preview').css({
+				width: Math.round(rx * boundx) + 'px',
+				height: Math.round(ry * boundy) + 'px',
+				marginLeft: '-' + Math.round(rx * c.x) + 'px',
+				marginTop: '-' + Math.round(ry * c.y) + 'px'
+			});
 		}
-
-		var img_h='';
-		var dst_h='';
-		if(ICON_HEIGHT>currentHeight){
-			if(top>0 && top<ICON_HEIGHT-currentHeight){
-				img_h=currentHeight;
-				dst_h=currentHeight;
-			}else if(top>ICON_WIDTH || top<0-currentHeight){
-				img_h=0;
-				dst_h=ICON_HEIGHT;
-			}else if(top>0 && top<ICON_HEIGHT){
-				img_h=ICON_HEIGHT-top;
-				
-				dst_h=ICON_HEIGHT-top;
-			}else{
-				img_h=currentHeight+top;
-				
-				dst_h=currentHeight+top;
-			}
-		}else{
-			if(top<=0 && top>=0-(currentHeight-ICON_HEIGHT)){
-				img_h=ICON_HEIGHT;
-				dst_h=ICON_HEIGHT;
-			}else if(top>ICON_WIDTH || top<0-currentHeight){
-				img_h=0;
-				dst_h=ICON_HEIGHT;
-			}else if(top>0 && top<ICON_HEIGHT){
-				img_h=ICON_HEIGHT-top;
-				
-				dst_h=ICON_HEIGHT-top;
-			}else{
-				img_h=currentHeight+top;
-				
-				dst_h=currentHeight+top;
-			}
+		{
+			var rx = 199 / c.w;		//大头像预览Div的大小
+			var ry = 199 / c.h;
+			$('#preview2').css({
+				width: Math.round(rx * boundx) + 'px',
+				height: Math.round(ry * boundy) + 'px',
+				marginLeft: '-' + Math.round(rx * c.x) + 'px',
+				marginTop: '-' + Math.round(ry * c.y) + 'px'
+			});
 		}
-		$("#left").val(left);
-		$("#top").val(top);
-		$("#f").val(scaleFactor);
-		$("#width").val(currentWidth);
-		$("#height").val(currentHeight);
-		$("#img_x").val(img_x/scaleFactor);
-		$("#img_y").val(img_y/scaleFactor);
-		$("#img_w").val(img_w/scaleFactor);
-		$("#img_h").val(img_h/scaleFactor);
-		$("#dst_x").val(dst_x);
-		$("#dst_y").val(dst_y);
-		$("#dst_w").val(dst_w);
-		$("#dst_h").val(dst_h);
-
-}
-function ckeckThumb()
-{
-	var form = $('#js-resume-uploadfile');
-	var data = {};
-	form.find('input').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		data[name] = value;		
-	});
-	if (!data['photoId'] && !data['fileName']) {
-		parent.$.alert('请上传文件！');
+	};
+    });
+	function popclose() {
+		window.parent.$.mask.close();
+	}
+</script>
+</head>
+<body>
+	<div>
+		<button onclick="popclose()">关闭</button>
+		<form method="post" action="" enctype="multipart/form-data">
+			<input type="file" name="file">
+			<input type="submit" value="上传">
+		</form>
+		<div style="float:left;">
+			<{if (!empty($tmpImage))}>
+				<img id="target" src="<{$tmpImage|parsePicpath}>" alt=""/>
+			<{else}>
+				<img id="target" src="__RESOURCE__/images/user_header.gif" alt="" />
+			<{/if}>
+		</div>
+		<div style="width:48px;height:48px;margin:10px;overflow:hidden; float:left;">
+			<{if (!empty($tmpImage))}>
+				<img style="float:left;" id="preview" src="<{$tmpImage|parsePicpath}>" alt=""/>
+			<{else}>
+				<img style="float:left;" id="preview" src="__RESOURCE__/images/user_header.gif"  alt="" />
+			<{/if}>
+		</div>
+		<div style="width:190px;height:195px;margin:10px;overflow:hidden; float:left;">
+			<{if (!empty($tmpImage))}>
+				<img style="float:left;" id="preview2" src="<{$tmpImage|parsePicpath}>" alt=""/>
+			<{else}>
+				<img style="float:left;" id="preview2" src="__RESOURCE__/images/user_header.gif"  alt="" />
+			<{/if}>
+		</div>
+		<form action="" method="post" onsubmit="return checkCoords(this)">
+			<input type="hidden" id="x" name="x" />
+			<input type="hidden" id="y" name="y" />
+			<input type="hidden" id="w" name="w" />
+			<input type="hidden" id="h" name="h" />
+			<input type="hidden" id="js-head-value" name="head" value="<{if (!empty($tmpImage))}><{$tmpImage|parsePicpath}><{else}>__RESOURCE__/images/user_header.gif<{/if}>" />
+			<input type="submit" value="裁剪" />
+		</form>
+	</div>
+</body>
+</html>
+<script>
+function checkCoords(obj) {
+	
+	if (!$('#js-head-value').val()) {
+		alert('请先上传一张照片');
 		return false;
 	}
-    //判断剪切里面是否有图片
-    //var realWidth = image.width;
-    //var realHeight = image.height;
-    var imgError = false;
-    var img_x = parseFloat(data.img_x);
-    var img_w = parseFloat(data.img_w);
-    var img_y = parseFloat(data.img_y);
-    var img_h = parseFloat(data.img_h);
-    if ((img_x >= realWidth && img_w >= realWidth) || (img_x >= realWidth || img_w == 0)) {
-        imgError = true;
-    }
-    else if ((img_y >= realHeight && img_h >= realHeight) || (img_y >= realHeight || img_h == 0) ) {
-        imgError = true;
-    }
-    else if (img_x <= 0 && img_w <= 0) {
-        imgError = true;
-    }
-    else if (img_y <= 0 && img_h <= 0) {
-        imgError = true;
-    }
-    if(realWidth < 120 && realHeight < 120)
-    {
-    	data.dst_x = 0;
-    	data.dst_y = 0;
-    	data.img_x = 0;
-    	data.img_w = realWidth;
-    	data.img_y = 0;
-    	data.img_h = realHeight;
-    }
-    if (imgError) {
-        var errorObj = $('#js-uploadphoto-error');
-        var msg = '请确定要裁切的照片在编辑范围内！';
-        if ('0' == 1) {
-            msg = 'Make sure the photo is in the edit box!';
-        }
-        errorObj.html(msg).show();
-        return false;
-    }
-	$.ajax({
-		url:'/ajax/resume/uploadPhoto',
-		type:'post',
-		data:data,
-		dataType:'json',
-		success:function(data){
-			if (data.result) {			
-				parent.photoId = data.result;
-				var src = '/resume/showphoto?photoId='+data.result+'&fileName=';
-        parent.successUploadphoto(src);
-        parent.$.mask.close();
+	if (!parseInt($('#w').val())) {
+		alert('请选择裁剪区域，然后按提交.');
+		return false;
+	}
+	var iw = $('#target').width();
+	var ih = $('#target').height();
+	$(obj).ajaxSubmit({
+		url: '__AJAX__/user/uploadHead?stmp='+ new Date().toString(),
+		type: 'post',
+		dataType: 'json',
+		data: {iw:iw,ih:ih},
+		success: function(data) {
+			if (data.result) {
+				window.parent.location.href = window.parent.location.href + '?r=' + Math.random();
 			}
 			else {
-				parent.$.alert('上传失败！')
+				alert(data.result.message);
 			}
 		}
 	});
-}
-function SavePhoto(obj)
-{
-	parent.$("#imgphoto").attr("src",obj);
-	parent.$("#spphoto2").css("display","none");
-	parent.$("#spphoto1").css("display","block");
-	CloseShowPhoto();
-}
-function CloseShowPhoto()
-{
-	parent.photoclose("",1);
-}
-
-function getResumeId()
-{
-	var rid = parent.$("#ResumeId").val();
-	if(rid != "" && typeof(rid) != 'undefined')
-	{
-		var url = $("#form1").attr("ACTION");
-		$("#form1").attr("ACTION",url+"&rid="+rid);
-	}
-}
-getResumeId();
+	return false;
+};
 </script>
-<ifrem>

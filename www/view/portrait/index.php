@@ -3,15 +3,33 @@
 class IndexPortraitView extends BaseView
 {
     
+	public $tmpImage = null;
+	
     public function index()
     {
         if ($_FILES)
         {
         	$this->upload();
         }
+        if (!$this->tmpImage)
+        {
+        	$this->tmpImage = $this->CurrentUser->head;
+        }
+        $this->assign('tmpImage', $this->tmpImage);
     }
     
-    private function upload()
+    public function upload()
+    {
+    	$file = new FileUploadUtilLib('file');
+    	$uploadInfo = $file->upload();
+    	if ($uploadInfo)
+    	{
+    		$fileName = $uploadInfo[0];
+    		$this->tmpImage = $fileName;
+    	}
+    }
+    
+    private function upload1()
     {
     	$file = new FileUploadUtilLib('head');
     	$uploadInfo = $file->upload();

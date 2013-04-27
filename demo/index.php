@@ -108,12 +108,8 @@ if ($_GET['act'] == 'cut'){
 		<input type="submit" value="上传">
 	</form>
 	<div style="float:left;"><img id="target" src="0000.jpg"  ></div>
-	<div style="width:25px;height:28px;margin:10px;overflow:hidden; float:left;">
-	   <img  style="float:left;" id="preview" src="0000.jpg" >
-	</div>
-	<div style="width:190px;height:195px;margin:10px;overflow:hidden; float:left;">
-	   <img  style="float:left;" id="preview2" src="0000.jpg" >
-    </div>
+	<div style="width:48px;height:48px;margin:10px;overflow:hidden; float:left;"><img  style="float:left;" id="preview" src="0000.jpg" ></div>
+	<div style="width:190px;height:195px;margin:10px;overflow:hidden; float:left;"><img  style="float:left;" id="preview2" src="0000.jpg" ></div>
 	<form action="index.php?act=cut" method="post" onsubmit="return checkCoords();">
 		<input type="hidden" id="x" name="x" />
 		<input type="hidden" id="y" name="y" />

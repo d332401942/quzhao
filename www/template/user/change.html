@@ -217,13 +217,10 @@ function goCity(id,name) {
 }
 
 function showUploadDiv() {
-	open("__APP__/portrait","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes")
-	return;
-	$.ajax({
-		url: '__APP__/portrait?stmp=' + new Date().toString(),
-		success: function(html) {
-			$.mask.show(html);
-		}
-	});
+	//open("__APP__/portrait","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes")
+	//return;
+
+	$.mask.show('<iframe width="900" height="500" name="upload" src="__APP__/portrait"></iframe >');
+
 }
 </script>
