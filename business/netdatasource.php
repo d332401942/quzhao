@@ -31,6 +31,23 @@ class NetDataSourceBusiness extends BaseBusiness
 		$result = $data->findAll();
 		return $result;
 	}
+	
+	public function getFromSiteName($href)
+	{
+		$array = array(
+			'/jd.com/' => '京东商城',	
+			'/360buy.com/' => '京东商城',	
+			'/taobao.com/' => '淘宝',	
+		);
+		foreach ($array as $pattern => $name)
+		{
+			if (preg_match($pattern, $href))
+			{
+				return $name;
+			}
+		}
+		return '趣找网';
+	}
     
     public function getOneById($id)
     {

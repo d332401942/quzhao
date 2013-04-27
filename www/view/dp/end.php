@@ -15,7 +15,8 @@ class endDpView extends BaseView
 		{
 			//得到产品商家
 			$comefrom = new NetDataSourceBusiness();
-			$model = $comefrom->getOneById($goods->fid);
+			$fromSiteName = $comefrom->getFromSiteName($goods->href);
+			//$model = $comefrom->getOneById($goods->fid);
 		}
        //得到大家都喜欢
 	   $loveModel = $business->getLoveModel();
@@ -56,7 +57,7 @@ class endDpView extends BaseView
 		$this->assign('editorArr', $editorArr);
         $this->assign('tjModels', $tjModels);
         $this->assign('goods', $goods);
-        $this->assign('model', $model);
+        $this->assign('fromSiteName', $fromSiteName);
 		$this->assign('id', $id);
 		$this->assign('loveModel', $loveModel);
     }
