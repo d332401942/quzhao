@@ -58,7 +58,7 @@
 <div class="listed">
 <ul>
 <li class="listed_l">来源商家</li>
-<li><{$fromSiteName}></li>
+<li><{if ($goods->fromName)}><{$goods->fromName}><{else}><{$fromSiteName}><{/if}></li>
 </ul>
 
 <!--<ul>
