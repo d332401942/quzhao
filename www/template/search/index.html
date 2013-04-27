@@ -1,4 +1,4 @@
-<{uc class="HeaderControlView" meta=$meta css="css" keyword=$keyword}>
+<{uc class="HeaderControlView" meta=$meta css="css" keyword=$keyword js="jquery,jquery.cookie"}>
 <div class="box ">
     <div class="list_top">
         找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
@@ -86,6 +86,7 @@
                 </li>
 				<{/foreach}> 
             </ul>
+			<{if ($searchBrowseHistoryModels)}><div style="float:right;margin-bottom: 5px;"><a onclick="clearSearch()" style="color:#777777;" href="javascript:;">清空</a></div><{/if}>
         </div>
     </div>
     <div class="list_r">
@@ -525,6 +526,10 @@ function lovenum(pid) {
 			}
 		}
 	});
+}
+function clearSearch() {
+	$.removeCookie('searchBrowseLog');
+	window.location.reload();
 }
 </script>
 
