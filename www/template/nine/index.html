@@ -51,9 +51,9 @@ var data = [];
 							data.push({obj:$('#js-over-time-<{$model->id}>'),time:overTime});
 						</script>
 						</h3>
-						<a  style="margin-left:200px;" href="javascript:;" title="喜欢" onclick="lovenum(<{$model->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$model->lovenumber}></a>
 					<{/if}>
 				</div>
+				<!--<a  style="margin-left:200px;" href="javascript:;" title="喜欢" onclick="lovenum(<{$model->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$model->lovenumber}></a>-->
 				<div style="float:rigjht; "class="fx_box" onmouseover="showShare(<{$model->id}>,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>http://www.quzhao.com/<{/if}><{$model->pic}>')">
 					<a href="#"><img src="__RESOURCE__/images/shr.gif" />分享</a>
 				</div>
