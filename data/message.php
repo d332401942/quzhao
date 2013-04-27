@@ -103,7 +103,6 @@ class MessageData extends BaseData
 				}
 			}
 		}
-		//P($messageModels);
 		return $messageModels;
 	}
 	
