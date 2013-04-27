@@ -625,7 +625,7 @@ filter:Alpha(opacity=95);}
 .ress_more_li h2 span img{ margin-right:5px; float:left;}
 	
 /*-----------------------user----------------------------*/
-.top_bar{ position:fixed;  _position:absolute; z-index:9999;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop)); left:0; top:0;_padding-right:20px;_padding-left:20px;  width:100%; height:34px;background:rgba(255, 255, 255, 0.95) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/background:#fff;box-shadow: 1px 1px 1px #e5e5e5;}
+.top_bar{ position:fixed;  _position:absolute; z-index:9999;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop)); left:0; top:0;_padding-right:20px;_padding-left:20px;  width:100%; height:34px;background:rgba(252, 252, 252, 0.95) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/background:#fcfcfc;box-shadow: 1px 1px 1px #e5e5e5;}
 .top_bar_con{ width:1000px; height:34px; line-height:34px; margin:0 auto; position:relative;z-index:999; }
 .top_bar_con ul{  overflow:hidden;}
 .top_bar_con ul li{ float:left;  }
@@ -712,7 +712,7 @@ filter:Alpha(opacity=95);}
 
 .line{ width:110%; height:1px; margin-left:-22px; border-bottom:1px #e5e5e5 solid; clear:both; overflow:hidden; }
 
-.con_right2{ float:right; width:252px;  height:385px;  }
+.con_right2{ float:right; width:252px;   }
 
 .right2_yi{ width:252px; background:white; height:114px; box-shadow: 1px 1px 3px #ccc; *border:1px gray solid; border:1px #e5e5e5 solid\9; }
 .right2_yi_pic{ float:left; width:114px; height:114px; overflow:hidden; }
@@ -870,7 +870,7 @@ filter:Alpha(opacity=95);}
 .list_big  .list_jg{ width:160px; overflow:hidden;}
 .list_r  .tian_lei_r{ width:630px; padding-bottom:6px;_padding-bottom:0px;} 
 .tian_lei_r a{ margin-bottom:3px;} 
-.cont_title{ width:803px;}
+
 .list_r_more{ width:50px; text-align:right; }
 .list_r_minimo{ height:21px; line-height:21px; margin-bottom:10px;}
 .list_r_minimo a{  height:21px;}
