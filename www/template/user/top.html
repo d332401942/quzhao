@@ -1,6 +1,6 @@
 <div class="top_bar_con">
 	<ul>
-		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
+		<li style="margin-left:8px;"><a href="javascript:;" onclick="showShareDiv()">我要推荐</a></li>
 		<li style=""><a href="javascript:;"><!--<img src="__RESOURCE__/images/6-4.png" alt="">--></a></li>
 		<{if (!empty($CurrentUser->email))}>
 			<li style="margin-left:805px;_margin-left:425px;"><a href="__APP__/user" onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
