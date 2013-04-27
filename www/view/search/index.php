@@ -14,6 +14,10 @@ class IndexSearchView extends BaseView
 		$pageCore->currentPage = $pageCore->currentPage ? $pageCore->currentPage : 1;
 		$keyword = null;
 		$category = null;
+		if (isset($parameters['category']))
+		{
+			$category = (int)($parameters['category']);
+		}
 		$sort = null;
 		$priceStart = null;
 		$priceEnd = null;
@@ -70,9 +74,8 @@ class IndexSearchView extends BaseView
 				$model->num = $brandIdToCount[$model->brandid];
 			}
 		}
-		if (!empty($parameters['category']))
+		if ($category)
 		{
-			$category = (int)($parameters['category']);
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
 			if(!empty($attrModels))
 			{

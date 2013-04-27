@@ -232,7 +232,7 @@ class SearchData extends BaseData
 
 	private function setSortMode($sphinx, $sort)
 	{
-		$sortStr = '@weight desc, weight desc';
+		$sortStr = 'weight desc, @weight desc';
 		$sort = strtolower($sort);
 		switch ($sort)
 		{
