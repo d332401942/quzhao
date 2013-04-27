@@ -177,11 +177,13 @@ class HomeTjDataBusiness extends BaseBusiness
         return $data->findAll();
     }
 
-	public function getAllTotal($tempType = false, $userid = false ,$strTime = false,$endTiem =false)
+	public function getAllTotal($tempType = false, $userid = false ,$strTime = false,$endTiem =false,$yueStr = false,$yueEnd =false)
 	{
 		$data = new HomeTjDataData();
-		if($strTime && $endTiem)
+		if($yueStr && $yueEnd)
 		{
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid.' AND ltime > '.$yueStr.' && ltime < '.$yueEnd;
+		}else if($strTime && $endTiem){
 			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid.' AND ltime > '.$strTime.' && ltime < '.$endTiem;
 		}else{
 			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid;

@@ -110,14 +110,25 @@ class IndexTempView extends BaseView
 			$endTiem = strtotime($endTiem);
 			$time = $_GET['timeCount'];
 		}
+		$yueStr = null;
+		$yueEnd = null;
+		$yue = null;
+        if (isset($_GET['yue']) && $_GET['yue'] !== '')
+        {
+			$yue = $_GET['yue'];
+			$yueStr = '2013-'.$_GET['yue'].'-01 00:00:00';
+			$yueEnd = '2013-'.$_GET['yue'].'-30 23:59:59';
+			$yueStr = strtotime($yueStr);
+			$yueEnd = strtotime($yueEnd);
+        }
 		
         if (isset($_GET['userid']) && $_GET['userid'] !== '')
         {
             $userid = (int)$_GET['userid'];
 			//得到总数
-			$count = $business->getAllTotal($tempType,$userid,$strTime,$endTiem);
+			$count = $business->getAllTotal($tempType,$userid,$strTime,$endTiem,$yueStr,$yueEnd);
 			//得到已经通过审核总数
-			$tgCount = $business->tgCount($tempType,$userid,$strTime,$endTiem);
+			$tgCount = $business->tgCount($tempType,$userid,$strTime,$endTiem,$yueStr,$yueEnd);
 			
         }
 		
@@ -183,6 +194,7 @@ class IndexTempView extends BaseView
 		$this->assign('tgCount',$tgCount);
 		$this->assign('userid',$userid);
 		$this->assign('date',$time );
+		$this->assign('yue',$yue );
 	}
 }
 ?>

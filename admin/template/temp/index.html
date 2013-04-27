@@ -1,7 +1,7 @@
 <{include '__TEMPLATE__/header.html'}>
 
 <{if ($count)}>
-	<div style="color:red;margin:10px;">ID：<{$userid}>&nbsp;&nbsp;<{$date}>总共发布：<{$count}>&nbsp;&nbsp;已经通过：<{$tgCount}></div>
+	<div style="color:red;margin:10px;">ID：<{$userid}>&nbsp;&nbsp;<{$date}><{if ($yue)}><{$yue}>月<{/if}>总共发布：<{$count}>&nbsp;&nbsp;已经通过：<{$tgCount}></div>
 <{/if}>
 <div class="list-div">
 <div class="content-select">
@@ -44,14 +44,34 @@
 					<label>待审核<input <{if (in_array(0,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
 				</td>
 				<td>
-					按日期查看
+					按月查看
+				</td>
+				<td>
+					<select name="yue">
+						<option value="">月份</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</td>
+				<td>
+					按天查看
 				</td>
 				<td>
 					<script language="javascript" type="text/javascript" src="__RESOURCE__/js/My97DatePicker/WdatePicker.js"></script>
 					<input class="Wdate" name="timeCount" type="text" onClick="WdatePicker()">
 				</td>
 				<td>
-					输入id查看发布总数
+					输入id查看总数
 				</td>
 				<td>
 					<input name="userid" value="" />
