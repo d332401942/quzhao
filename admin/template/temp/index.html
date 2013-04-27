@@ -1,6 +1,8 @@
 <{include '__TEMPLATE__/header.html'}>
 
-<{if ($count)}><div style="color:red;margin:10px;">总共发布：<{$count}>已经通过：<{$tgCount}></div><{/if}>
+<{if ($count)}>
+	<div style="color:red;margin:10px;">ID：<{$userid}>&nbsp;&nbsp;<{$date}>总共发布：<{$count}>&nbsp;&nbsp;已经通过：<{$tgCount}></div>
+<{/if}>
 <div class="list-div">
 <div class="content-select">
 	<div>
@@ -23,24 +25,7 @@
 						<{/foreach}>
 					</select>
 				</td>
-				<td>商品网站</td>
-				<td>
-					<select name="fid">
-						<option value="">全部</option>
-						<{foreach ($sourceModels as $model)}>
-							<option <{if ($fid == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name}></option>
-						<{/foreach}>
-					</select>
-				</td>
-				<td>抓取网站</td>
-				<td>
-					<select name="site">
-						<option value="">全部</option>
-						<{foreach ($siteModels as $model)}>
-							<option <{if ($site == $model->id)}>selected<{/if}> value="<{$model->id}>"><{$model->name}></option>
-						<{/foreach}>
-					</select>
-				</td>
+				
 				<td>
 					商品ID
 				</td>
@@ -59,24 +44,11 @@
 					<label>待审核<input <{if (in_array(0,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
 				</td>
 				<td>
-					是否推荐
+					查看当月总数
 				</td>
 				<td>
-					<select name="istj">
-						<option value="">全部</option>
-						<option value="1" <{if ($istj == 1)}>selected<{/if}>>是</option>
-						<option value="0" <{if ($istj === 0)}>selected<{/if}>>否</option>
-					</select>
-				</td>
-				<td>
-					是否热门
-				</td>
-				<td>
-					<select name="ishot">
-						<option value="">全部</option>
-						<option value="1" <{if ($ishot == 1)}>selected<{/if}>>是</option>
-						<option value="0" <{if ($ishot === 0)}>selected<{/if}>>否</option>
-					</select>
+					<script language="javascript" type="text/javascript" src="__RESOURCE__/js/My97DatePicker/WdatePicker.js"></script>
+					<input class="Wdate" name="timeCount" type="text" onClick="WdatePicker()">
 				</td>
 				<td>
 					输入id查看发布总数
