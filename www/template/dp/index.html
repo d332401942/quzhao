@@ -40,18 +40,8 @@
 						<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank"><img src="<{$model->pic|parsePicpath}>" /></a>
 					</li>
 					<li class="dp_box2_l_r"> 
-						<h2 id="js-info-<{$model->id}>"><{$model->info|truncate:'400':'...'}></h2>
-						<script>
-							var html = $('#js-info-<{$model->id}>').html();
-							var num = html.length;
-							var ll = 5;
-							var start = 0;
-							var middle = num - ll;
-							var preHtml = html.substr(0, middle);
-							var lastHtml =  '<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="__APP__/dp/end__LIMIT__id/<{$model->id}>" target="_blank">' + html.substr(middle, num) + ' > </a>';
-							var newHtml = preHtml + lastHtml;
-							$('#js-info-<{$model->id}>').html(newHtml);
-						</script>
+						<h2 id="js-info-<{$model->id}>"><{$model->info|truncate:'300':''}>&nbsp;<a href="<{$model->href}>" target="_blank">详细</a></h2>
+						
 						<h3> 
 							<span><img src="__RESOURCE__/images/tm.gif" /><{$model->ctime|diffNow}>前更新</span>
 							
