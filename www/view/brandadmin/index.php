@@ -6,7 +6,7 @@ class IndexBrandadminView extends BaseView
 	public function index($parameters)
 	{
 		
-		if(empty($_COOKIE['brand_id']) && empty($_COOKIE['brandModel']))
+		if(empty($_COOKIE['brand_id']) && empty($_COOKIE['brandModel']) && empty($_COOKIE['brand_name']))
 		{
 			$this->redirect(APP_URL . '/brandadmin/login');
 		}

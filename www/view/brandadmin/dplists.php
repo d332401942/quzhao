@@ -4,6 +4,10 @@ class DplistsBrandadminView extends BaseView
 {
 	public function index($parameters)
 	{
+		if(empty($_COOKIE['brand_id']) && empty($_COOKIE['brandModel']) && empty($_COOKIE['brand_name']))
+		{
+			$this->redirect(APP_URL . '/brandadmin/login');
+		}
 		$business = new HomeTjDataBusiness();
 		$classBusiness = new HomeTjClassBusiness();
 		$classModels = $classBusiness->findAll(array(HomeTjClassDataModel::IS_USE_TYPE_YES));
