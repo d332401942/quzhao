@@ -306,10 +306,16 @@ class HomeTjDataBusiness extends BaseBusiness
         return $model;
     }
 
-    public function delById($id)
+    public function delById($id,$userid = false)
     {
         $data = new HomeTjDataData();
-        $data->delById($id);
+		if($userid)
+		{
+			$sql = 'delete from home_tj_data where id = '.$id . ' AND userid = '.$_COOKIE['brand_id'];
+		}else{
+			$sql = 'delete from home_tj_data where id = '.$id;
+		}
+		$data->exec($sql);
     }
 
     /* private function setPic($model,$netDataModel)

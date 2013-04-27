@@ -38,8 +38,8 @@
 			<td align="center"><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
 			<td align="center"><{if ($model->state == 1)}>已通过<{else}>未通过<{/if}></td>
 			<td align="center">
-				<a href="__APP__/brandadmin/add?id=<{$model->id}>"><button>编辑</button></a>
-				<{if ($model->state == 0)}><a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a><{/if}>
+				<{if ($model->state == 0)}><a href="__APP__/brandadmin/add?id=<{$model->id}>"><button>编辑</button></a>
+				<a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a><{/if}>
 			</td>
 		</tr>
 	<{/foreach}>
@@ -57,7 +57,7 @@ function del(id,pic) {
 	}
 	$.ajax({
 		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
-		data: {id:id,pic:pic},
+		data: {id:id,pic:pic,userid:1},
 		type: 'post',
 		dataType: 'json',
 		success: function(data) {
