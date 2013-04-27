@@ -1,4 +1,4 @@
-<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_NINE css="css" js="jquery"}>
+<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_NINE css="css" js="jquery,jquery.cookie"}>
 
 <div class="box">
 	<img src="__RESOURCE__/images/nine_banner.jpg" />
@@ -51,9 +51,10 @@ var data = [];
 							data.push({obj:$('#js-over-time-<{$model->id}>'),time:overTime});
 						</script>
 						</h3>
+						<a  style="margin-left:200px;" href="javascript:;" title="喜欢" onclick="lovenum(<{$model->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$model->lovenumber}></a>
 					<{/if}>
 				</div>
-				<div class="fx_box" onmouseover="showShare(<{$model->id}>,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>http://www.quzhao.com/<{/if}><{$model->pic}>')">
+				<div style="float:rigjht; "class="fx_box" onmouseover="showShare(<{$model->id}>,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>http://www.quzhao.com/<{/if}><{$model->pic}>')">
 					<a href="#"><img src="__RESOURCE__/images/shr.gif" />分享</a>
 				</div>
 				<div class="fx_box_nin" id="js-hover-share-<{$model->id}>" style="display:none;" >
@@ -183,5 +184,33 @@ function hideDiv(obj) {
 			hideDiv(obj);
 		}, 1500);
 	}
+}
+function lovenum(pid) {
+	if (!CurrentUserInfo) {
+		showLoginDiv();
+	}
+	var data = {pid:pid}
+	var	url = '__AJAX__/love/index?stmp=' + new Date().toString();
+	$.ajax({
+		data:data,
+		dataType:'json',
+		type:'post',
+		url:url,
+		success:function(data){
+			if(data.result) {
+				window.location.reload();
+			}
+			else if(data.error.code == 50001) {
+				showLoginDiv();
+				return false;
+			}
+			else if(data.error.code == 50002) {
+				window.location.href="__APP__/user/preset";
+			}
+			else {
+				alert('该产品已经喜欢过');
+			}
+		}
+	});
 }
 </script>
