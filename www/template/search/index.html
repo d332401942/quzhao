@@ -44,7 +44,7 @@
 				<{/if}>
             </div>
         </div>
-        <div class="list_l_mo">
+        <div class="pp_rr2">
             <h2>
                 特别推荐
             </h2>
@@ -56,8 +56,10 @@
                         <div>
                             <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
                         </div>
-                        <{$model->title}>
+                         <h2 title="<{$model->title}>"><{$model->title}></h2>
+                        <h3>￥<{$model->price}></h3>
                     </a>
+					 
                 </li>
 				<{/foreach}>
             </ul>
@@ -78,7 +80,7 @@
                                 月销量：6438件
                             </span>
                         </div> -->
-                        <h2><{$model->title}></h2>
+                        <h2 title="<{$model->title}>"><{$model->title}></h2>
                         <h3>￥<{$model->price}></h3>
                     </a>
                 </li>
