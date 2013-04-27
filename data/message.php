@@ -91,17 +91,18 @@ class MessageData extends BaseData
 				if($v->userid == $val->id)
 				{
 					$messageModels[$k]->nickname = $val->nickname;
+					$messageModels[$k]->head = $val->head;
 				}
 				foreach($v->replys as $kk=>$vv)
 				{
 					if($vv->userid == $val->id)
 					{
 						$v->replys[$kk]->nickname = $val->nickname;
+						$v->replys[$kk]->head = $val->head;
 					}
 				}
 			}
 		}
-		//P($messageModels);
 		return $messageModels;
 	}
 	

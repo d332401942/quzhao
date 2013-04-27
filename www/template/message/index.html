@@ -3,7 +3,12 @@
 <{foreach ($model as $val)}>
 <div class="comt_box">
 	<div class="comt_l">
-		<img src="__RESOURCE__/images/tx.gif" />
+		<{if ($val->head)}>
+			<img src="<{$val->head|parsePicpath}>" width="40" height="40" />
+		<{else}>
+			<img src="__RESOURCE__/images/tx.gif" width="40" height="40" />
+		<{/if}>
+		
 	</div>
 	<div class="comt_r">
 		<div class="comt_r_top">

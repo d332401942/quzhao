@@ -59,7 +59,7 @@ class ChangeUserView extends BaseView
 		$business = M('UserBusiness');
 		$model = $this->CurrentUser;
 		$model->id 			= $this->CurrentUser->id;
-		$model->head 		= '';
+		//$model->head 		= '';
 		$model->nickname 	= trim($_POST['nickname']);
 		$model->city 		= intval($_POST['cityid']);
 		$model->setWorkFields(array('head', 'nickname', 'city'));
