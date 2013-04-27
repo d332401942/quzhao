@@ -1,3 +1,4 @@
+<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
 <div class="list-div">
 	<div class="content-select">
 		<tr>
@@ -38,6 +39,7 @@
 			<td align="center"><{if ($model->state == 1)}>已通过<{else}>未通过<{/if}></td>
 			<td align="center">
 				<a href="__APP__/brandadmin/add?id=<{$model->id}>"><button>编辑</button></a>
+				<a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a>
 			</td>
 		</tr>
 	<{/foreach}>
@@ -48,5 +50,21 @@
 <script>
 function goPage(page) {
 	window.location.href = '__APP__/brandadmin/dplists?page='+page;
+}
+function del(id,pic) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
+		data: {id:id,pic:pic},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
 }
 </script>
