@@ -211,6 +211,8 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $fromName;
 	
+	public $username;
+	
 	public function __construct()
 	{
 		parent::__construct();
