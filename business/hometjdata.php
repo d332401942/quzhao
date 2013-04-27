@@ -247,6 +247,10 @@ class HomeTjDataBusiness extends BaseBusiness
         {
             $this->throwException('商品名称必必须填写');
         }
+		if (empty($model->fromName))
+        {
+            $this->throwException('商品来源名称必必须填写');
+        }
         if (empty($model->cid))
         {
             $this->throwException('商品类容必须填写');

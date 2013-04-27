@@ -205,6 +205,12 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $tempType = 0;
 	
+	
+	/**
+	 * 网站来源名称
+	 */
+	public $fromName;
+	
 	public function __construct()
 	{
 		parent::__construct();
