@@ -44,7 +44,7 @@ var data = [];
 							开始时间：<font><{$model->time_start|date_format:'Y年m月d日'}></font>
 						</h3>
 					<{else}>
-						<h3 id="js-over-time-<{$model->id}>">
+						<h3 id="js-over-time-<{$model->id}>" time="<{$model->time_end - time()}>">
 						所剩时间<span class="js-over-day"></span>天
 						<script>
 							var overTime = <{$model->time_end - time()}>;
@@ -128,7 +128,7 @@ function countdown(obj,time) {
 	H = padNum(H);
 	M = padNum(M);
 	S = padNum(S);
-	timeStr = H + M + S;
+	var timeStr = H + M + S;
 	showTime(obj,timeStr,D)
 	setTimeout(function(){
 		countdown(obj,time - 1);
