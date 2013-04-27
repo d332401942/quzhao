@@ -139,6 +139,7 @@ class AddContentView extends BaseView
 		{
 			$this->setPic($model);
 		}
+		
 		if ($model->id)
 		{
 			$business->updateModel($model);

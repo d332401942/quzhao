@@ -177,19 +177,30 @@ class HomeTjDataBusiness extends BaseBusiness
         return $data->findAll();
     }
 
-	public function getAllTotal($tempType = false, $userid = false)
+	public function getAllTotal($tempType = false, $userid = false ,$strTime = false,$endTiem =false,$yueStr = false,$yueEnd =false)
 	{
 		$data = new HomeTjDataData();
-		$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid;
+		if($yueStr && $yueEnd)
+		{
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid.' AND ltime > '.$yueStr.' && ltime < '.$yueEnd;
+		}else if($strTime && $endTiem){
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid.' AND ltime > '.$strTime.' && ltime < '.$endTiem;
+		}else{
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND userid = '. $userid;
+		}
 		$total = $data->query($sql);
-		
 		return $total[0]['num'];
 	}
 	
-	public function tgCount($tempType = false, $userid = false)
+	public function tgCount($tempType = false, $userid = false,$strTime = false,$endTiem =false)
 	{
 		$data = new HomeTjDataData();
-		$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state = 1 AND userid = '. $userid;
+		if($strTime && $endTiem)
+		{
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state = 1 AND userid = '. $userid.' AND ctime > '.$strTime.' && ctime < '.$endTiem;
+		}else{
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state = 1 AND userid = '. $userid;
+		}
 		$total = $data->query($sql);
 		return $total[0]['num'];
 	}
@@ -246,6 +257,10 @@ class HomeTjDataBusiness extends BaseBusiness
         if (empty($model->name))
         {
             $this->throwException('商品名称必必须填写');
+        }
+		if (empty($model->fromName))
+        {
+            $this->throwException('商品来源名称必必须填写');
         }
         if (empty($model->cid))
         {

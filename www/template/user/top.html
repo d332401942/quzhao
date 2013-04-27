@@ -1,6 +1,6 @@
 <div class="top_bar_con">
 	<ul>
-		<li style="margin-left:8px;"><a href="javascript:;" onmouseover="$(this).float($('#js-header-share'))">我要分享</a></li>
+		<li style="margin-left:8px;"><a href="javascript:;" onclick="showShareDiv()">我要推荐</a></li>
 		<li style=""><a href="javascript:;"><!--<img src="__RESOURCE__/images/6-4.png" alt="">--></a></li>
 		<{if (!empty($CurrentUser->email))}>
 			<li style="margin-left:805px;_margin-left:425px;"><a href="__APP__/user" onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
@@ -56,8 +56,8 @@
 <{/if}>
 <div class="dingwei2">
 	<ul class="youhui" id="js-header-share" style="display:none;">
-		<li><a href="javascript:;" onclick="showShareDiv()">优惠商品</a></li>
-		<li><a href="javascript:;">折扣活动</a></li>
+		<li><a href="javascript:;" onclick="showShareDiv()">我要推荐</a></li>
+		<!--<li><a href="javascript:;">折扣活动</a></li>-->
 	</ul>
 	
 	<ul class="xiaoxi" id="js-header-replay" style="display:none;">
