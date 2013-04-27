@@ -163,12 +163,11 @@ var hoverCode = null;
 <li class="tian_lei_r">
 	<a href="#nogo" class="js-search-sort <{if (!$sortStr)}>open4<{/if}>" onclick="setOrder(this,'')">默认</a>
 	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'bought')}>open4<{/if}>" onclick="setOrder(this,'bought')">人气</a>
+	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'id')}>open4<{/if}>" onclick="setOrder(this,'rebate')">折扣</a>
 	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'cur_price')}>open4<{/if}>" onclick="setOrder(this,'cur_price')">最低价格</a>
 	<a href="#nogo" class="js-search-sort <{if ($sortStr == 'id')}>open4<{/if}>" onclick="setOrder(this,'id')">最新发布</a>
 </li>
 </ul>
-
-
 </div>
 <div id="js-content">
 <{if ($models)}>
