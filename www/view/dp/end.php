@@ -11,6 +11,7 @@ class endDpView extends BaseView
         //得到产品详细
         $goods = $business->getOneById($id);
 		$model = null;
+		$goods = array_pop($goods);
 		if($goods)
 		{
 			//得到产品商家
