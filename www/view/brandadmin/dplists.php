@@ -4,7 +4,7 @@ class DplistsBrandadminView extends BaseView
 {
 	public function index($parameters)
 	{
-		if(empty($_COOKIE['brand_id']) && empty($_COOKIE['brandModel']) && empty($_COOKIE['brand_name']))
+		if(!isset($_COOKIE['brand_id']) || !isset($_COOKIE['brandModel']) || !isset($_COOKIE['brand_name']))
 		{
 			$this->redirect(APP_URL . '/brandadmin/login');
 		}
