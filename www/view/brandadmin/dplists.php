@@ -103,12 +103,12 @@ class DplistsBrandadminView extends BaseView
 		$pageCore->currentPage = $page;
 		$tempType = 1;
 		$userid = null;
+		$del = 1;
 		if(!empty($_COOKIE['brand_id']))
 		{
 			$userid = $_COOKIE['brand_id'];
 		}	
-		
-		$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userid);
+		$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userid,$del);
 		$models = $models ?  $models : array();
 		foreach ($models as $model)
 		{

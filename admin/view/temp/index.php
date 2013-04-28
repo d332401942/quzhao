@@ -93,8 +93,6 @@ class IndexTempView extends BaseView
         {
             $ishot = (int)$_GET['ishot'];
         }
-
-		
 		$userid = null;
 		$count = null;
 		$tgCount = null;
