@@ -93,8 +93,6 @@ class IndexTempView extends BaseView
         {
             $ishot = (int)$_GET['ishot'];
         }
-
-		
 		$userid = null;
 		$count = null;
 		$tgCount = null;
@@ -131,18 +129,18 @@ class IndexTempView extends BaseView
 			$tgCount = $business->tgCount($tempType,$userid,$strTime,$endTiem,$yueStr,$yueEnd);
 			
         }
-		
-		
 		$id = null;
+		$del = 1;
 		if (!empty($_GET['id']))
 		{
 			$id = $_GET['id'];
 			$this->assign('id', $id);
 		}
+		$userids = false;
 		$pageCore->currentPage = $page;
 		if ($id)
 		{
-			$model = $business->getOneById($id,$tempType);
+			$model = $business->getOneById($id,$tempType,$del);
 			if ($model)
 			{
 				$models = array($model);
@@ -150,7 +148,7 @@ class IndexTempView extends BaseView
 		}
 		else
 		{
-			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType);
+			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userids,$del);
 		}
 		$models = $models ?  $models : array();
 		foreach ($models as $model)

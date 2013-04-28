@@ -7,6 +7,8 @@ class HitsDataModel extends BaseDataModel
      * 9.9或超值单品数据
      */
     const TYPE_HOME_DATA = 1; 
+	
+	
     
     /**
      * 品牌特卖数据

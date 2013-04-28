@@ -11,7 +11,7 @@ class HitsBusiness extends BaseBusiness
         $data->add($model);
     }
 
-	public function getHits($pageCore, $type, $time = 86400, $dataId = null)
+	public function getHits($pageCore, $type, $time = 86400, $dataId = null,$cid)
 	{
 		$data = M('HitsData');
 		$function = null;
@@ -19,7 +19,7 @@ class HitsBusiness extends BaseBusiness
 		{
 			$function = 'getNineHits';
 		}
-		$models = $data->$function($pageCore, $time, $dataId);
+		$models = $data->$function($pageCore, $time, $dataId,$cid);
 		return $models;
 	}
 }

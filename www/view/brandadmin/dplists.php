@@ -4,7 +4,7 @@ class DplistsBrandadminView extends BaseView
 {
 	public function index($parameters)
 	{
-		if(empty($_COOKIE['brand_id']) && empty($_COOKIE['brandModel']) && empty($_COOKIE['brand_name']))
+		if(!isset($_COOKIE['brand_id']) || !isset($_COOKIE['brandModel']) || !isset($_COOKIE['brand_name']))
 		{
 			$this->redirect(APP_URL . '/brandadmin/login');
 		}
@@ -103,12 +103,12 @@ class DplistsBrandadminView extends BaseView
 		$pageCore->currentPage = $page;
 		$tempType = 1;
 		$userid = null;
+		$del = 1;
 		if(!empty($_COOKIE['brand_id']))
 		{
 			$userid = $_COOKIE['brand_id'];
 		}	
-		
-		$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userid);
+		$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userid,$del);
 		$models = $models ?  $models : array();
 		foreach ($models as $model)
 		{

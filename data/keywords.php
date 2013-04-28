@@ -12,7 +12,7 @@ class KeywordsData extends BaseData
 		}
 		else
 		{
-			$sql = 'SELECT count(*) as num FROM keywords group by keywords';
+			$sql = 'SELECT COUNT(DISTINCT keywords) as num  FROM keywords';
 		}
 		
 		$row = $this->query ( $sql );

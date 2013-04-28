@@ -112,15 +112,14 @@ class LeftIndexView extends BaseView
 				),
 				array(
 					'name' => '超值单品',
-					'url' => 'friendlink/add',
+					'url' => 'hits/nine__cid/2',
 				),
-			),
-			'关键词统计' => array(
 				array(
 					'name' => '关键词统计',
 					'url' => 'keywords/index',
 				)
 			),
+			
 			'会员分享' => array(
 				array(
 					'name' => '优惠商品',

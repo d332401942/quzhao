@@ -345,7 +345,7 @@ function del(id,pic) {
 	}
 	$.ajax({
 		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
-		data: {id:id,pic:pic},
+		data: {id:id,pic:pic,del:1},
 		type: 'post',
 		dataType: 'json',
 		success: function(data) {

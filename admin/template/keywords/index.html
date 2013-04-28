@@ -1,6 +1,7 @@
 <{include '__TEMPLATE__/header.html'}>
 
-<form style="clear:both;" action="" method="post">
+<form style="clear:both;" action="" method="post" id="js-go-form" >
+<input type="hidden" name="page" value="<{$page}>" />
 	<table>
 		<tr>
 			<td>期限：</td>
@@ -30,7 +31,16 @@
 	<{/foreach}>
 </table>
 </div>
+<{uc class="PageControlView" pageCore=$pageCore}>
 <{include '__TEMPLATE__/footer.html'}>
 <script>
 function selectAll(obj) {}
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
 </script>
