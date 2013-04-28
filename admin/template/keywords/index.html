@@ -1,0 +1,36 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<form style="clear:both;" action="" method="post">
+	<table>
+		<tr>
+			<td>期限：</td>
+			<td>
+				<select name="time">
+					<option <{if ($time == 1)}>selected<{/if>}> value="1">一天内</option>
+					<option <{if ($time == 7)}>selected<{/if>}> value="7">一周内</option>
+					<option <{if ($time == 30)}>selected<{/if}> value="30">一月内</option>
+					<option <{if (!$time)}>selected<{/if}> value="">全部</option>
+				</select>
+			</td>
+			<td><button type="submit">查询</button></td>
+		</tr>
+	</table>
+</form>
+<div class="list-div">
+<table style="width:100%">
+	<tr>
+		<th>关键词</th>
+		<th>搜索次数</th>
+	</tr>
+	<{foreach ($models as $model)}>
+		<tr>
+			<td><{$model->keywords}></td>
+			<td><{$model->num}></td>
+		</tr>
+	<{/foreach}>
+</table>
+</div>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+function selectAll(obj) {}
+</script>

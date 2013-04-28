@@ -62,6 +62,27 @@ class SearchData extends BaseData
 				}
 			}
 		}
+		/*
+		*如果查询结果为真进行次数统计
+		*	
+		*/
+		if(!empty($brandIdToCount))
+		{	/*$sql = 'select * from keywords where keywords = "'.$keyword.'"';
+			$res = $this->query($sql,'KeywordsDataModel');*/
+			//if($res)
+			//{
+				//$sql = 'update keywords set number = number+1,createtime = '.time().' where keywords = "'.$keyword.'"';
+				//$this->exec($sql);
+			//}else{
+				$keywordsModel = M('KeywordsDataModel');
+				$keywordsModel->keywords = $keyword;
+				$keywordsModel->createtime = time();
+				$keywordsModel->number = 1;
+				$keywordsModel->ip = ip2long($_SERVER['REMOTE_ADDR']);
+				$sql = "insert into keywords (id,keywords,createtime,number,ip) values (null,'$keywordsModel->keywords','$keywordsModel->createtime','$keywordsModel->number','$keywordsModel->ip ')";
+				$this->exec($sql);
+			//}
+		}
 		return $brandIdToCount;
 		
 	}

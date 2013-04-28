@@ -115,6 +115,12 @@ class LeftIndexView extends BaseView
 					'url' => 'friendlink/add',
 				),
 			),
+			'关键词统计' => array(
+				array(
+					'name' => '关键词统计',
+					'url' => 'keywords/index',
+				)
+			),
 			'会员分享' => array(
 				array(
 					'name' => '优惠商品',
@@ -131,6 +137,7 @@ class LeftIndexView extends BaseView
 					'url' => 'message/show',
 				)
 			),
+			
 			'兼职管理' => array(
 				array(
 					'name' => '超值单品',
