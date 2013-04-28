@@ -163,9 +163,14 @@ class UserAjaxView extends BaseAjaxView
 			case 'jpg':
 			case 'jpeg':
 				$im = @imagecreatefromjpeg($imagePath);
-			
+				break;
+			case 'png':
+				$im = @imagecreatefrompng($imagePath);
+				break;
+			case 'gif':
+				$im = @imagecreatefromgif($imagePath);
+				break;
 		}
-		$im = @imagecreatefromjpeg($imagePath);
 		if (!$im) 
 		{
 			$this->responseError('图片错误');
