@@ -1,6 +1,7 @@
 <{include '__TEMPLATE__/header.html'}>
 
-<form style="clear:both;" action="" method="post">
+<form style="clear:both;" action="" method="post" id="js-go-form" >
+<input type="hidden" name="page" value="<{$page}>" />
 	<table>
 		<tr>
 			<td>期限：</td>
@@ -32,9 +33,6 @@
 </div>
 <{uc class="PageControlView" pageCore=$pageCore}>
 <{include '__TEMPLATE__/footer.html'}>
-<form id="js-go-form" action="" method="get">
-	<input type="hidden" name="page" value="<{$page}>" />
-</form>
 <script>
 function selectAll(obj) {}
 var isGoPage = false;
