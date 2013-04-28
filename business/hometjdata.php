@@ -46,11 +46,26 @@ class HomeTjDataBusiness extends BaseBusiness
 		$result = $data->getLoveModel();
 		return $result;
 	}
-    public function getOneById($id,$tempType=false)
+    public function getOneById($id,$tempType=false,$userid = false,$del=false)
     {
         $data = new HomeTjDataData();
-		
-        return $data->getOneById($id);
+		$where = 'id = '.$id;
+		if($tempType)
+		{
+			$where .= ' AND tempType = 1';
+		}
+		if($userid)
+		{
+			$where .= ' AND userid = '.$userid;
+		}
+		if($del)
+		{
+			$where .= ' AND state != 4';
+		}
+		$sql = 'select * from home_tj_data where '.$where;
+		$res = $data->query($sql,'HomeTjDataDataModel');
+		return $res;
+       // return $data->getOneById($id);
     }
 
     /**

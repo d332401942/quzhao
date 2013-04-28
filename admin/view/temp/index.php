@@ -140,11 +140,8 @@ class IndexTempView extends BaseView
 		$pageCore->currentPage = $page;
 		if ($id)
 		{
-			$model = $business->getOneById($id,$tempType,$del);
-			if ($model)
-			{
-				$models = array($model);
-			}
+			$models = $business->getOneById($id,$tempType,$userids,$del);
+			
 		}
 		else
 		{
