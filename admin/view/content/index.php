@@ -105,11 +105,8 @@ class IndexContentView extends BaseView
 		$pageCore->currentPage = $page;
 		if ($id)
 		{
-			$model = $business->getOneById($id);
-			if ($model)
-			{
-				$models = array($model);
-			}
+			$models = $business->getOneById($id);
+			
 		}
 		else
 		{
