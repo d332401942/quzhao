@@ -167,8 +167,8 @@ class UserAjaxView extends BaseAjaxView
 		$rw = $imw / $iw * $w;
 		$rh = $imh / $ih * $h;
 
-		$newIm = imagecreatetruecolor(80, 80);
-		imagecopyresized($newIm, $im, 0, 0, $x, $y,80,80, $rw,$rh);
+		$newIm = imagecreatetruecolor($w, $h);
+		imagecopyresized($newIm, $im, 0, 0, $x, $y,$w,$h, $rw,$rh);
 		$filePath = './public/uploads';
 		$folder = $filePath .'/'.date('Y-m-d');
     	if (!file_exists($folder))

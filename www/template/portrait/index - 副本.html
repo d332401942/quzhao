@@ -1,12 +1,146 @@
-<ifrem>
-	<form id="js-portrait-form" enctype="multipart/form-data" action="" method="POST" style="width:400px;">
-		<a href="javascript:;" onclick="window.close()">关闭</a>
-		<input name="head" type="file" />
-		<button href="javascript:;" onclick="doSubmit()">上传</button>
-	</form>
-<ifrem>
-<script>
-	function doSubmit() {
-		document.getElementById('js-portrait-form').submit();
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta name="Author" content="SeekEver">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<script src="__RESOURCE__/js/jquery.js" type="text/javascript"></script>
+	<script src="/./www/resource/js/jquery.form.js" type="text/javascript"></script>
+	<script src="__RESOURCE__/js/jquery.jcrop.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="__RESOURCE__/css/jquery.jcrop.css" type="text/css" />
+	<style>
+		html {background: none repeat scroll 0 0 #FFFFFF;}
+	</style>
+<script type="text/javascript">
+
+    jQuery(function($){
+
+      // Create variables (in this scope) to hold the API and image size
+      var jcrop_api, boundx, boundy;
+      
+      $('#target').Jcrop({
+		minSize: [48,48],
+		setSelect: [0,0,190,190],
+        onChange: updatePreview,
+        onSelect: updatePreview,
+		onSelect: updateCoords,
+        aspectRatio: 1
+      },
+	function(){
+        // Use the API to get the real image size
+        var bounds = this.getBounds();
+        boundx = bounds[0];
+        boundy = bounds[1];
+        // Store the API in the jcrop_api variable
+        jcrop_api = this;
+    });
+	function updateCoords(c)
+	{
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	};
+	
+	
+	function updatePreview(c){
+		if (parseInt(c.w) > 0)
+		{
+			var rx = 48 / c.w;		//小头像预览Div的大小
+			var ry = 48 / c.h;
+
+			$('#preview').css({
+				width: Math.round(rx * boundx) + 'px',
+				height: Math.round(ry * boundy) + 'px',
+				marginLeft: '-' + Math.round(rx * c.x) + 'px',
+				marginTop: '-' + Math.round(ry * c.y) + 'px'
+			});
+		}
+		{
+			var rx = 199 / c.w;		//大头像预览Div的大小
+			var ry = 199 / c.h;
+			$('#preview2').css({
+				width: Math.round(rx * boundx) + 'px',
+				height: Math.round(ry * boundy) + 'px',
+				marginLeft: '-' + Math.round(rx * c.x) + 'px',
+				marginTop: '-' + Math.round(ry * c.y) + 'px'
+			});
+		}
+	};
+    });
+	function popclose() {
+		window.parent.$.mask.close();
 	}
+</script>
+</head>
+<body>
+	<div>
+		<button onclick="popclose()">关闭</button>
+		<form method="post" action="" enctype="multipart/form-data">
+			<input type="file" name="file">
+			<input type="submit" value="上传">
+		</form>
+		<div style="float:left;">
+			<{if (!empty($tmpImage))}>
+				<img id="target" src="<{$tmpImage|parsePicpath}>" alt=""/>
+			<{else}>
+				<img id="target" src="__RESOURCE__/images/user_header.gif" alt="" />
+			<{/if}>
+		</div>
+		<div style="width:48px;height:48px;margin:10px;overflow:hidden; float:left;">
+			<{if (!empty($tmpImage))}>
+				<img style="float:left;" id="preview" src="<{$tmpImage|parsePicpath}>" alt=""/>
+			<{else}>
+				<img style="float:left;" id="preview" src="__RESOURCE__/images/user_header.gif"  alt="" />
+			<{/if}>
+		</div>
+		<div style="width:190px;height:195px;margin:10px;overflow:hidden; float:left;">
+			<{if (!empty($tmpImage))}>
+				<img style="float:left;" id="preview2" src="<{$tmpImage|parsePicpath}>" alt=""/>
+			<{else}>
+				<img style="float:left;" id="preview2" src="__RESOURCE__/images/user_header.gif"  alt="" />
+			<{/if}>
+		</div>
+		<form action="" method="post" onsubmit="return checkCoords(this)">
+			<input type="hidden" id="x" name="x" />
+			<input type="hidden" id="y" name="y" />
+			<input type="hidden" id="w" name="w" />
+			<input type="hidden" id="h" name="h" />
+			<input type="hidden" id="js-head-value" name="head" value="<{if (!empty($tmpImage))}><{$tmpImage|parsePicpath}><{else}>__RESOURCE__/images/user_header.gif<{/if}>" />
+			<input type="submit" value="裁剪" />
+		</form>
+	</div>
+</body>
+</html>
+<script>
+function checkCoords(obj) {
+	
+	if (!$('#js-head-value').val()) {
+		alert('请先上传一张照片');
+		return false;
+	}
+	if (!parseInt($('#w').val())) {
+		alert('请选择裁剪区域，然后按提交.');
+		return false;
+	}
+	var iw = $('#target').width();
+	var ih = $('#target').height();
+	$(obj).ajaxSubmit({
+		url: '__AJAX__/user/uploadHead?stmp='+ new Date().toString(),
+		type: 'post',
+		dataType: 'json',
+		data: {iw:iw,ih:ih},
+		success: function(data) {
+			if (data.result) {
+				window.parent.location.href = window.parent.location.href + '?r=' + Math.random();
+			}
+			else {
+				alert(data.result.message);
+			}
+		}
+	});
+	return false;
+};
 </script>
