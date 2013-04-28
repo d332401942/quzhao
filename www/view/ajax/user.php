@@ -155,8 +155,17 @@ class UserAjaxView extends BaseAjaxView
 		{
 			$imagePath = './' . $imagePath;
 		}
-		$imaegContent = file_get_contents($imagePath);
-		$im = @imagecreatefromstring($imaegContent);
+		$extName = pathinfo($imagePath, PATHINFO_EXTENSION);
+		$extName = strtolower($extName);
+		$im = null;
+		switch ($extName)
+		{
+			case 'jpg':
+			case 'jpeg':
+				$im = @imagecreatefromjpeg($imagePath);
+			
+		}
+		$im = @imagecreatefromjpeg($imagePath);
 		if (!$im) 
 		{
 			$this->responseError('图片错误');
