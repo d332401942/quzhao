@@ -20,9 +20,10 @@ class ContentAjaxView extends BaseAjaxView
     {
         $id = $_POST['id'];
         $pic = $_POST['pic'];
+		$del = isset($_POST['del'])?(int)$_POST['del']:false;
         $business = new HomeTjDataBusiness();
-        $business->delById($id);
-        @unlink($pic);
+		$business->delById($id,$del);
+		@unlink($pic);
         $this->response(true);
     }
     

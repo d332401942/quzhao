@@ -30,7 +30,19 @@
 	<{/foreach}>
 </table>
 </div>
+<{uc class="PageControlView" pageCore=$pageCore}>
 <{include '__TEMPLATE__/footer.html'}>
+<form id="js-go-form" action="" method="get">
+	<input type="hidden" name="page" value="<{$page}>" />
+</form>
 <script>
 function selectAll(obj) {}
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
 </script>

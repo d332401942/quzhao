@@ -14,6 +14,13 @@ class IndexKeywordsView extends BaseView
 
 		$business = M('KeywordsBusiness');
 		$pageCore = new PageCoreLib();
+		$pageCore->pageSize = 10;
+		$page = 1;
+		if (!empty($_GET['page']) && (int)$_GET['page'])
+		{
+			$page = (int)$_GET['page'];
+		}
+		$pageCore->currentPage = $page;
 		$models = $business->getCount($pageCore, ($time * 24 * 3600));
 		$this->assign('models', $models);
 		$this->assign('pageCore', $pageCore);

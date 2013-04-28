@@ -7,9 +7,9 @@ class KeywordsData extends BaseData
 		$now = time();
 		if($time)
 		{
-			$sql = 'SELECT count(*) as num FROM keywords where createtime >= '.($now - $time);
+			$sql = 'SELECT COUNT(DISTINCT keywords) as num FROM keywords where createtime >= '.($now - $time);
 		}else{
-			$sql = 'SELECT count(*) as num FROM keywords';
+			$sql = 'SELECT COUNT(DISTINCT keywords) as num  FROM keywords';
 		}
 		
 		$row = $this->query ( $sql );

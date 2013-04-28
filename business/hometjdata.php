@@ -114,7 +114,7 @@ class HomeTjDataBusiness extends BaseBusiness
      * @param array $cid 分类ID
      * @param array $state 状态
      */
-    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false, $userid = false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
+    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false,$del=false, $userid = false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
     {
         $data = new HomeTjDataData();
         $data->setOrder($sort);
@@ -124,6 +124,10 @@ class HomeTjDataBusiness extends BaseBusiness
         {
             $query['cid'] = array('in' => $cid);
         }
+		if($del)
+		{
+			$query['state'] = array('!=' => 4);
+		}
         if (!empty($state))
         {
             $query['state'] = array('in' => $state);
@@ -197,9 +201,9 @@ class HomeTjDataBusiness extends BaseBusiness
 		$data = new HomeTjDataData();
 		if($strTime && $endTiem)
 		{
-			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state = 1 AND userid = '. $userid.' AND ctime > '.$strTime.' && ctime < '.$endTiem;
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state in(1,4)  AND userid = '. $userid.' AND ctime > '.$strTime.' && ctime < '.$endTiem;
 		}else{
-			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state = 1 AND userid = '. $userid;
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state in(1,4) AND userid = '. $userid;
 		}
 		$total = $data->query($sql);
 		return $total[0]['num'];
@@ -306,10 +310,13 @@ class HomeTjDataBusiness extends BaseBusiness
         return $model;
     }
 
-    public function delById($id,$userid = false)
+    public function delById($id,$del=false,$userid = false)
     {
         $data = new HomeTjDataData();
-		if($userid)
+		if($del)
+		{
+			$sql = 'update home_tj_data set state = 4 where id = '.$id;
+		}else if($userid)
 		{
 			$sql = 'delete from home_tj_data where id = '.$id . ' AND userid = '.$_COOKIE['brand_id'];
 		}else{
