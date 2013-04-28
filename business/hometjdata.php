@@ -114,7 +114,7 @@ class HomeTjDataBusiness extends BaseBusiness
      * @param array $cid 分类ID
      * @param array $state 状态
      */
-    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false,$del=false, $userid = false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
+    public function findAll($pageCore, $cid = array(), $state = array(), $fid = null, $site = null, $istj = null, $ishot = null, $tempType = false,$userid = false,$del=false, $sort = array('sort' => 'desc', 'ctime' => 'desc'))
     {
         $data = new HomeTjDataData();
         $data->setOrder($sort);

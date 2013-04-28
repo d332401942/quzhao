@@ -138,6 +138,7 @@ class IndexTempView extends BaseView
 			$id = $_GET['id'];
 			$this->assign('id', $id);
 		}
+		$userids = false;
 		$pageCore->currentPage = $page;
 		if ($id)
 		{
@@ -149,7 +150,7 @@ class IndexTempView extends BaseView
 		}
 		else
 		{
-			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$del);
+			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType,$userids,$del);
 		}
 		$models = $models ?  $models : array();
 		foreach ($models as $model)
