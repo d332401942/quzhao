@@ -13,6 +13,10 @@ class AddContentView extends BaseView
 		{
 			$id = (int)$_GET['id'];
 			$model = $business->getOneById($id);
+			if($model)
+			{
+				$model = array_pop($model);
+			}
 			
 		}
 		else if (!empty($_GET['netdataid']) && (int)$_GET['netdataid'])
