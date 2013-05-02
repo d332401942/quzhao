@@ -18,6 +18,63 @@ class UserBusiness extends BaseBusiness
 		$data = new UserData ();
 		$data->addUser ( $model );
 	}
+	
+	/**
+	 * 后台修改前台用户权限
+	 * @param unknown $userId
+	 * @param unknown $power
+	 */
+	public function updateRegUserPower($userId, $power)
+	{
+		if (!$userId)
+		{
+			$this->responseError('没有用户ID');
+		}
+		if (!$power)
+		{
+			$this->responseError('没有权限值');
+		}
+		$data = new UserData ();
+		$data->updateRegUserPower($userId, $power);
+	}
+	
+	/**
+	 * 设置登录用户信息到缓存
+	 * @param unknown $sessionId
+	 * @param unknown $userId
+	 */
+	public function setViewUserToCache($sessionId, $userId)
+	{
+		$data = new UserData();
+		$data->setViewUserToCache($sessionId, $userId);
+	}
+	
+	/**
+	 * 删除用户登录信息
+	 * @param unknown $sessionId
+	 */
+	public function delViewUserToCache($sessionId)
+	{
+		$data = new UserData();
+		$data->delViewUserToCache($sessionId);
+	}
+	
+	/**
+	 * 更加sessionId获取当前用户信息
+	 */
+	public function getCacheUserDataModel($sessionId)
+	{
+		$data = new UserData();
+		return $data->getCacheUserDataModel($sessionId);
+	}
+	
+	public function findAll($pageCore)
+	{
+		$data = new UserData();
+		$data->setPage($pageCore);
+		$result = $data->findAll();
+		return $result;
+	}
 
 	public function preSet($model)
 	{

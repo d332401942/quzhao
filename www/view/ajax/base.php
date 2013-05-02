@@ -27,7 +27,7 @@ class BaseAjaxView extends AjaxCoreLib
 		}
 		else if ($mustEmail && empty($this->CurrentUser->email))
 		{
-			throw new AjaxExceptionLib('not have email', CodeException::USER_NO_EAMIL);
+			//throw new AjaxExceptionLib('not have email', CodeException::USER_NO_EAMIL);
 		}
 	}
 	
@@ -37,9 +37,8 @@ class BaseAjaxView extends AjaxCoreLib
 		{
 			return null;
 		}
-		$userArr = json_decode($_COOKIE[self::USER_INFO_COOKIE_KEY], true);
-		$userModel = new UserDataModel();
-		$userModel->loadArray($userArr);
-		$this->CurrentUser = $userModel;
+		$business = new UserBusiness();
+		$sessionId = CommUtility::getUserSessionId();
+		$this->CurrentUser = $business->getCacheUserDataModel($sessionId);
 	}
 }

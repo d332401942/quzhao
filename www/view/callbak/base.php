@@ -5,7 +5,9 @@ class BaseCallbakView extends BaseView
 	
 	protected function gotoSet($userModel)
 	{
-		setcookie ( BaseView::USER_INFO_COOKIE_KEY, json_encode ( $userModel ), 0, '/' );
+		//把用户信息记入cookie
+		$userUtility = new UserUtility();
+		$userUtility->setViewUser($userModel);
 		if (!empty($_GET['fromurl']))
 		{
 			$formUrl = urldecode($_GET['fromurl']);

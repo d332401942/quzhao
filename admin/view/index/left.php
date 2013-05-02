@@ -39,14 +39,6 @@ class LeftIndexView extends BaseView
                 ),
             ),
             '品牌特卖' => array(
-                /*array(
-                    'name' => '品牌列表',
-                    'url' => 'homebrand',
-                ),*/
-               /* array(
-                    'name' => '添加品牌',
-                    'url' => 'homebrand/add'
-                ),*/
 				array(
                     'name' => '品牌列表',
                     'url' => 'homebrand/lists',
@@ -120,7 +112,11 @@ class LeftIndexView extends BaseView
 				)
 			),
 			
-			'会员分享' => array(
+			'会员管理' => array(
+				array(
+					'name' => '会员列表',
+					'url' => 'user/list',		
+				),
 				array(
 					'name' => '优惠商品',
 					'url' => 'user/share',

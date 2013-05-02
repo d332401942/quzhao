@@ -2,7 +2,7 @@
 	<ul>
 		<li style="margin-left:8px;"><a href="javascript:;" onclick="showShareDiv()">我要推荐</a></li>
 		<li style=""><a href="javascript:;"><!--<img src="__RESOURCE__/images/6-4.png" alt="">--></a></li>
-		<{if (!empty($CurrentUser->email))}>
+		<{if (!empty($CurrentUser->id))}>
 			<li style="margin-left:805px;_margin-left:425px;"><a href="__APP__/user" onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user">
@@ -22,7 +22,7 @@
 		<{/if}>
 		<li style="margin-left:15px;display:none;"><a href="javascript:;">帮助</a></li>
 		<li style="display:none;"><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-		<{if (!empty($CurrentUser->email))}>
+		<{if (!empty($CurrentUser->id))}>
 		<li style="margin-left:15px;"><a href="javascript:;" onclick="loginOut();">退出</a></li>
 		<{/if}>
 	</ul>	
@@ -131,15 +131,11 @@ function listenUserInfo(interval) {
 	}
 	if (typeof(userInfo) == 'object') {
 		clearInterval(interval);
-		if (!userInfo.email || userInfo.email == "0") {
-			preset();
-		}
-		else {
-			window.location.reload();
-		}
+		window.location.reload();
 	}
 }
 
+/*
 function preset() {
 	$.ajax({
 		url: '__APP__/user/preset?stmp=' + new Date().toString(),
@@ -150,6 +146,7 @@ function preset() {
 		}
 	});
 }
+*/
 
 function showLoginDiv() {
 	$.removeCookie('UserInfo');

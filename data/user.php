@@ -22,6 +22,18 @@ class UserData extends BaseData
 	}
 
 	/**
+	 * 后台修改前台用户权限
+	 * 
+	 * @param unknown $userId        	
+	 * @param unknown $power        	
+	 */
+	public function updateRegUserPower($userId, $power)
+	{
+		$sql = 'update user set power = ' . $power . ' where id = ' . $userId;
+		$this->exec ( $sql );
+	}
+
+	/**
 	 * 通过用户名和密码获取用户信息
 	 */
 	public function getUserInfo($email, $password)
@@ -48,6 +60,61 @@ class UserData extends BaseData
 		$this->where ( $query );
 		$userModel = $this->findOne ();
 		return $userModel;
+	}
+
+	/**
+	 * 设置登录用户信息到缓存
+	 * 
+	 * @param unknown $sessionId        	
+	 * @param unknown $userId        	
+	 */
+	public function setViewUserToCache($sessionId, $userId)
+	{
+		$memcache = new MemcacheDbLib ();
+		$key = self::getUserLonginKey ( $sessionId );
+		$userModel = $this->getOneById ( $userId );
+		$modelStr = $userModel ? json_encode ( $userModel ) : null;
+		$memcache->set ( $key, $modelStr, 0, 24 * 3600);
+	}
+	
+	/**
+	 * 删除用户登录信息
+	 * @param unknown $sessionId
+	 */
+	public function delViewUserToCache($sessionId)
+	{
+		$memcache = new MemcacheDbLib ();
+		$key = self::getUserLonginKey ( $sessionId );
+		$memcache->delete($key);
+	}
+	
+	/**
+	 * 更加sessionId获取当前用户信息
+	 */
+	public function getCacheUserDataModel($sessionId)
+	{
+		$key = self::getUserLonginKey ( $sessionId );
+		$memcache = new MemcacheDbLib ();
+		$string = $memcache->get($key);
+		if (!$string)
+		{
+			return false;
+		}
+		$arr = json_decode($string, true);
+		$userModel = new UserDataModel();
+		foreach ($userModel as $key => $val)
+		{
+			if (isset($arr[$key]))
+			{
+				$userModel->$key = $arr[$key];
+			}
+		}
+		return $userModel;
+	}
+
+	public static function getUserLonginKey($sessionId)
+	{
+		return $sessionId . 'login';
 	}
 
 	/**
@@ -117,11 +184,11 @@ class UserData extends BaseData
 		$sql = 'update user set password = "' . md5 ( $newPass ) . '" where id = ' . ( int ) $userid;
 		$this->exec ( $sql );
 	}
-	
+
 	public function editHead($userModel)
 	{
-		$userModel->setWorkFields('head');
-		$this->updateModel($userModel);
+		$userModel->setWorkFields ( 'head' );
+		$this->updateModel ( $userModel );
 	}
 
 }

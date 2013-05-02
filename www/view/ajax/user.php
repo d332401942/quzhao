@@ -42,13 +42,15 @@ class UserAjaxView extends BaseAjaxView
 		    $this->responseError('账号已被禁用，请联系管理员');
 		}
 		//把用户信息记入cookie
-		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($userModel), 0, '/');
+		$userUtility = new UserUtility();
+		$userUtility->setViewUser($userModel);
 		$this->response(true);
 	}
 	
 	public function loginOut()
 	{
-		setcookie(BaseView::USER_INFO_COOKIE_KEY, '', -1, '/');
+		$userUtility = new UserUtility();
+		$userUtility->loginOut();
 		$this->response(true);
 	}
 	
@@ -65,8 +67,8 @@ class UserAjaxView extends BaseAjaxView
 		$business = M('UserBusiness');
 		$business->preSet($userModel);
 		//把用户信息记入cookie
-		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($userModel), 0, '/');
-		$this->response(true);
+		$userUtility = new UserUtility();
+		$userUtility->setViewUser($userModel);
 		$this->response(true);
 	}
 	
@@ -88,6 +90,7 @@ class UserAjaxView extends BaseAjaxView
 		$model->otheraccount= UserDataModel::REG_DEFAULT;
 		$model->othersite	= 0;
 		$model->status		= 1;
+		$model->power = UserDataModel::POWER_DEFAULT;
 		$model->nickname = '匿名用户';
 		foreach ($model as $key => $val)
 		{
@@ -106,7 +109,8 @@ class UserAjaxView extends BaseAjaxView
 			$this->responseError($e->getMessage(), $e->getCode());
 		}
 		//把用户信息记入cookie
-		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($model), 0, '/');
+		$userUtility = new UserUtility();
+		$userUtility->setViewUser($model);
 		$this->response(true);
 	}
 	
@@ -200,7 +204,8 @@ class UserAjaxView extends BaseAjaxView
 		$model->head = $fileName;
 		$business->editHead($model);
 		//把用户信息记入cookie
-		setcookie(BaseView::USER_INFO_COOKIE_KEY, json_encode($model), 0, '/');
+		$userUtility = new UserUtility();
+		$userUtility->setViewUser($model);
 		$this->response(true);
 	}
 	

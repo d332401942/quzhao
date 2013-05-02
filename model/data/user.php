@@ -10,6 +10,10 @@ class UserDataModel extends BaseDataModel
 	const OTHER_SITE_WEIBO = 2;
 	
 	const OTHER_SITE_TAOBAO = 3;
+	
+	const POWER_DEFAULT = 1;
+	
+	const POWER_SUPER = 2;
 
 	public $email;
 	
@@ -38,6 +42,12 @@ class UserDataModel extends BaseDataModel
 	public $city;
 	
 	public $status;
+	
+	/**
+	 * 用户权限
+	 * @var int
+	 */
+	public $power;
 	
 	public function __construct()
 	{
