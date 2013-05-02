@@ -11,5 +11,16 @@ class BrandAjaxView extends BaseAjaxView
 		}
 		
 	}
+	
+	public function getAll()
+	{
+		if(!empty($_POST['val']))
+		{
+			$keywords = trim($_POST['val']);
+			$buesiness = M('BrandBusiness');
+			$result = $buesiness->getKeywords($keywords);
+			$this->response($result);
+		}
+	}
 }
 ?>

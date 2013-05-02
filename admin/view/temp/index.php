@@ -46,9 +46,13 @@ class IndexTempView extends BaseView
 		
 		
 		$page = 1;
-		if (!empty($_GET['page']) && (int)$_GET['page'] > 0)
+		if (!empty($_GET['page']) && (int)$_GET['page'] > 0 || !empty($parameters['page']) && (int)$parameters['page'] > 0 )
 		{
 			$page = (int)$_GET['page'];
+		}
+		if (!empty($parameters['page']) && (int)$parameters['page'] > 0 )
+		{
+			$page = (int)$parameters['page'];
 		}
 		$state = array();
 		if (isset($_GET['state']) && $_GET['state'] != null)

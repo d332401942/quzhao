@@ -149,10 +149,10 @@ class LeftIndexView extends BaseView
 					'url' => 'category/cateadd',
 				),
 			),
-			'栏目管理' => array(
+			'商家管理' => array(
 				array(
-					'name' => '栏目添加',
-					'url' => 'category/childadd',
+					'name' => '商家添加',
+					'url' => 'merchants/add',
 				),
 			)
         );

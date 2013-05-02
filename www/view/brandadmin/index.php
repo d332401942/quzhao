@@ -12,14 +12,11 @@ class IndexBrandadminView extends BaseView
 		}
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
+		$brandModel = array();
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
 			$brandModel = $oneBusiness ->getOneId($id);
-		}
-		else
-		{
-			$brandModel = new BrandDataModel();
 		}
 		
 		if($_POST)
@@ -32,8 +29,13 @@ class IndexBrandadminView extends BaseView
 					$model->$key = trim($_POST[$key]);
 				}
 			}
+			if(empty($_POST['name']))
+			{
+				$model->name = $_POST['name2'];
+			}
 			$model->userid = $_COOKIE['brand_id'];
 			$model->createtime = time();
+			//上传图片
 			$file = new FileUploadUtilLib('image');
 			$uploadInfo = $file->upload();
 			$picName = null;
@@ -56,28 +58,18 @@ class IndexBrandadminView extends BaseView
 			}else{
 				$business->add($model);
 			}
-			if(!empty($_POST['cateid']))
-			{
-				$columnBusiness = M('Brand_columnBusiness');
-				$columnBrand_columnModel = M('Brand_columnDataModel');
-				$columnBrand_columnModel->brandid = $model->id;
-				if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
-				{
-					$columnBusiness->del($_POST['brandid']);	
-					
-				}	
-				foreach($_POST['cateid'] as $val)
-				{
-					$columnBrand_columnModel->cateid = $val;
-					$columnBusiness->add($columnBrand_columnModel);
-				}
-				
-				
-			}
+			
 			$this->redirect(APP_URL . '/brandadmin/lists');
 		}
+		//得到所有分类
 		$cateBusiness = M('Brand_cateBusiness');
 		$result = $cateBusiness->getAll();
+		//得到所有商家
+		$business = M('MerchantsBusiness');
+		$merchants = $business->getAll();
+		
+		
+		$this->assign('sjModel', $merchants);
 		$this->assign('cateModel', $result);
 		$this->assign('model', $brandModel);
 		

@@ -33,6 +33,14 @@ class BrandBusiness extends BaseBusiness
 		$data = new BrandData();
 		return $data->getOne($id);
 	}
+	
+	public function getKeywords($keywords)
+	{
+		$data = new BrandData();
+		$sql = "select DISTINCT name from brand where name like '%".$keywords."%'";
+		$result = $data->query($sql,'BrandDataModel');
+		return $result;
+	}
 }
 
 ?>

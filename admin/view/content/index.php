@@ -52,6 +52,10 @@ class IndexContentView extends BaseView
 		{
 			$page = (int)$_GET['page'];
 		}
+		if (!empty($parameters['page']) && (int)$parameters['page'] > 0 )
+		{
+			$page = (int)$parameters['page'];
+		}
 		$state = array();
 		if (isset($_GET['state']) && $_GET['state'] != null)
 		{
