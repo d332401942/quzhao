@@ -10,7 +10,9 @@ class HomeTjDataData extends BaseData
 	 */
 	public function changeState($ids,$state)
 	{
-		$sql = 'update home_tj_data set state='.$state. ',ctime = '.time().' where id in ('.implode(',',$ids).')';
+		$user = json_decode($_COOKIE['UserInfo']);
+		$name = $user->UserName;
+		$sql = 'update home_tj_data set state='.$state.' , ctime = '.time().' , audit = '."'$name'".' where id in ('.implode(',',$ids).')';
 		$this->exec($sql);
 	}
 	

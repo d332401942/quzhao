@@ -211,7 +211,15 @@ class HomeTjDataDataModel extends BaseDataModel
 	 */
 	public $fromName;
 	
+	/**
+	 * 添加人用户名
+	 */
 	public $username;
+	
+	/**
+	 * 审核用户名
+	 */
+	public $audit;
 	
 	public function __construct()
 	{

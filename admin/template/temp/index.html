@@ -96,6 +96,7 @@
 		<th>描述</th>
 		<th>操作时间</th>
 		<th>操作人ID/用户名</th>
+		<th>审核人</th>
 		<th>有效时间</th>
 		<th>推荐/热门</th>
 		<th style="width:120px;">操作</th>
@@ -110,6 +111,7 @@
 					<option <{if ($model->state == 1)}>selected<{/if}> value="1">有货</option>
 					<option <{if ($model->state == 2)}>selected<{/if}> value="2">无货</option>
 					<option <{if ($model->state == 0)}>selected<{/if}> value="0">待审核</option>
+					<option <{if ($model->state == 5)}>selected<{/if}> value="5">不合格</option>
 				</select>
 			</td>
 			<td title="<{$model->name}>"><a href="<{$model->href}>" target="_blank"><{$model->name|truncate:'100'}></a></td>
@@ -120,6 +122,7 @@
 			<td title="<{$model->info}>"><{$model->info|truncate:'10'}></td>
 			<td><{$model->ltime|date_format:'Y-m-d'}></td>
 			<td><{if ($model->userid)}><{$model->userid}>/<{$model->username}><{else}>操作人<{/if}></td>
+			<td><{if ($model->audit)}><{$model->audit}><{else}>审核人<{/if}></td>
 			<td><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
 			<td><{if ($model->istj)}>是<{else}>否<{/if}>/<{if ($model->ishot)}>是<{else}>否<{/if}></td>
 			<td>
@@ -137,6 +140,7 @@
 				<option value="1">有货</option>
 				<option value="2">无货</option>
 				<option value="0">待审核</option>
+				<option value="5">不合格</option>
 			</select>
 			<button onclick="changeAll()">保存</button>
 			<button onclick="clearSort()">清除选中排序</button>
