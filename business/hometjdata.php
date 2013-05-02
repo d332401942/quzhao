@@ -178,8 +178,6 @@ class HomeTjDataBusiness extends BaseBusiness
             }
         }
 		
-		$query['tempType'] = array('!=' => 1);
-		
 		if($tempType)
 		{
 			$query['tempType'] = 1;
