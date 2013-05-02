@@ -1,0 +1,125 @@
+<{include '__TEMPLATE__/header.html'}>
+<div class="list-div">
+<div class="content-select">
+</div>
+<table style="width:100%">
+	<tr>
+		<th style="width:5px;">
+			<input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" />
+		</th>
+		<th style="width:15px;">Email</th>
+		<th style="width:80px;">昵称</th>
+		<th style="width:80px;">注册类型</th>
+		<th style="width:80px;">积分</th>
+		<th style="width:120px;">状态</th>
+		<th>注册时间</th>
+		<th style="width:85px;">操作</th>
+	</tr>
+	<{if ($userModels)}>
+	<{foreach ($userModels as $val)}>
+		<tr>
+			<td>
+				<input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" />
+			</td>
+			<td><{$val->email}></td>
+			<td><{$val->nickname}></td>
+			<td><{$val->email}></td>
+			<td>
+				<{if ($val->regtype == UserDataModel::REG_DEFAULT)}>
+					前台注册
+				<{else if ($val->regtype == UserDataModel::OTHER_SITE_QQ)}>
+					QQ登录
+				<{else if ($val->regtype == UserDataModel::OTHER_SITE_WEIBO)}>
+					微博登录
+				<{else if ($val->regtype == UserDataModel::OTHER_SITE_TAOBAO)}>
+					淘宝登录
+				<{/if}>
+			</td>
+			<td>
+				<{if ($val->status == UserDataModel::IS_YES)}>
+					正常
+				<{else}>
+					下线
+				<{/if}>
+			</td>
+			<td><{$val->createtime|date_format:'Y-m-d'}></td>
+			<td>
+				<select onchange="updatePower(this, <{$val->id}>, <{$val->power}>)">
+					<option value="1" <{if ($val->power == 1)}>selected<{/if}>>普通会员</option>
+					<option value="2" <{if ($val->power == 2)}>selected<{/if}>>特权会员</option>
+				</select>
+				<a href="__APP__/content/add?shareid=<{$val->id}>">编辑</a>&nbsp;
+				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
+			</td>
+		</tr>
+	<{/foreach}>
+	<{else}>
+		<tr>
+			<td colspan="10">...</td>
+		</tr>
+	<{/if}>	
+	<tr>
+		<td><input type="checkbox" onclick="checkAll(this)" class="js-checkall-input" /></td>
+	</tr>
+</table>
+</div>
+<form id="js-go-form" action="" method="get">
+	<input type="hidden" name="page" value="<{$page}>" />
+</form>
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+
+function updatePower(obj, userId, power) {
+	if (!confirm('确定要改变用户的权限？')) {
+		$(obj).find('option').attr('selected', false);
+		$(obj).find('option[value="'+power+'"]').attr('selected', true);
+		return false;
+	}
+	var newPower = $(obj).val();
+	$.ajax({
+		url: '__AJAX__/user/updateRegUserPower?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {userId:userId,power:newPower},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				alert('修改成功');
+			}
+			else {
+				alert(data.error.message);
+			}
+		}
+	});
+	return false;
+}
+
+function del(userId) {
+	if (!confirm('确定要删除这个用户？')) {
+		return false;
+	}
+	$.ajax({
+		url: '__AJAX_/user/delRegUser?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {userId:userId},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				alert('删除成功');
+				window.location.reload();
+			}
+			else {
+				alert('操作失败');
+			}
+		}
+		
+	});
+}
+
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+}
+</script>
