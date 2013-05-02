@@ -63,6 +63,11 @@ class ProductDataModel extends ModelCoreLib
 
 	public $lighttitle;
 	
+	/*
+	*产品喜欢次数
+	*/
+	public $lovenumber =0;
+	
 	public function __construct()
 	{
 		parent::__construct();
