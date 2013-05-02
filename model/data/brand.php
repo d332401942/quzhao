@@ -5,10 +5,6 @@ class BrandDataModel extends BaseDataModel
 	
     public $letter;
 	
-	public $startTime;
-	
-	public $endTime;
-	
 	public $cate;
 	
 	public $image;
@@ -22,6 +18,10 @@ class BrandDataModel extends BaseDataModel
 	public $cateName;
 	
 	public $username;
+	
+	public $rebate;
+	
+	public $merchantsId;
 	
 	public $colums = array();
 

@@ -42,11 +42,12 @@
 					<label>有货<input <{if (in_array(1,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="1" type="checkbox" /></label>&nbsp;
 					<label>无货<input <{if (in_array(2,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="2" type="checkbox" /></label>&nbsp;
 					<label>待审核<input <{if (in_array(0,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
+					<label>不合格<input <{if (in_array(5,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="5" type="checkbox" /></label>&nbsp;
 				</td>
 				<td>
 					按月查看
 				</td>
-				<td>
+				<td width="50">
 					<select name="yue">
 						<option value="">月份</option>
 						<option value="01">01</option>
@@ -74,7 +75,7 @@
 					输入id查看总数
 				</td>
 				<td>
-					<input name="userid" value="" />
+					<input name="userid" value="" size="7" />
 				</td>
 				<td><button type="submit">筛选</button>
 			</tr>
