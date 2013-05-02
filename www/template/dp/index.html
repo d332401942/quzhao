@@ -6,10 +6,10 @@
 <div class="mini_nav_box">
 <h1>商品分类</h1>
 <ul>
-
 <{foreach ($modelCate as $val)}>
-<li><a href="__APP__/dp__LIMIT__cid/<{$val->id}>" <{if ($cid == $val->id) }> style="background-color:#FFE8F4;" <{/if}>  class="mini_nav_box_<{$val->classid}>" ><span></span><{$val->name}></a></li>
+<li><a href="__APP__/dp__LIMIT__cid/<{$val->id}>" onclick="whereCid(<{$val->id}>)" <{if ($cid == $val->id) }> style="background-color:#FFE8F4;" <{/if}>  class="mini_nav_box_<{$val->classid}>" ><span></span><{$val->name}></a></li>
 <{/foreach}>  
+
 </ul>
 </div>
 <div><img src="__RESOURCE__/images/l_nav_bt.png" class="png" width="100%"/></div>
@@ -146,12 +146,16 @@
 	</div>
 <{/if}>	
 </div>
+<input type="hidden" name="cid" id="cid" value="" />
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 <script>
-
-var jiathis_config = {};
 function goPage(page) {
-	window.location.href = '__APP__/dp__LIMIT__page/' + page;
+	cid = $('#cid').val();
+	alert(cid);
+	window.location.href = '__APP__/dp__LIMIT__page/' + page+'/cid/'+cid;
+}
+function whereCid(id) {
+	$('#cid').val(id);
 }
 var mouseObj = null;
 function showShare(id,name,pic) {
@@ -214,5 +218,6 @@ function lovenum(pid) {
 		}
 	});
 }
+
 </script>
 <{uc class="FooterControlView"}>
