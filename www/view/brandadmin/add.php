@@ -16,6 +16,7 @@ class AddBrandadminView extends BaseView
 		{
 			$id = (int)$_GET['id'];
 			$model = $business->getOneById($id);
+			$model = array_pop($model);
 			
 		}
 		if (!$model)
