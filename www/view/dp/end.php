@@ -10,6 +10,10 @@ class endDpView extends BaseView
         $tjModels = $business->getTjDpModels(5);
         //得到产品详细
         $goods = $business->getOneById($id);
+		if(empty($goods))
+		{
+			$this->responseError('404');
+		}
 		$model = null;
 		$goods = array_pop($goods);
 		if($goods)
