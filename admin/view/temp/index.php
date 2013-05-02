@@ -53,8 +53,6 @@ class IndexTempView extends BaseView
 		$state = array();
 		if (isset($_GET['state']) && $_GET['state'] != null)
 		{
-			P($_GET['state']);
-			exit;
 			$state = explode(',',$_GET['state']);
 		}
 		$cid = array();
