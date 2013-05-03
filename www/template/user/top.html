@@ -28,13 +28,14 @@
 	</ul>	
 </div>
 <{if (empty($CurrentUser->id))}>
-<form action="" method="post"  onsubmit="return doLogin(this)">
-	<div class="dingwei2" id="js-login-div" style="display:none">
+
+<div class="dingwei2" id="js-login-div" style="display:none">
+	<form action="" method="post"  onsubmit="return doLogin(this)">
 		<div class="login">
 			<div class="login_yi">
 				<input name="email" class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style="">
 			</div>
-			<div style="margin-top:15px; _margin-top:-17px;" class="login_yi">
+			<div style="margin-top:15px; _margin-top:-17px;*margin-top:17px;" class="login_yi">
 				<input name="password" class="name" onmouseout="this.style.borderColor=''" onfocus="type='password';if (value =='密码'){value =''}" value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}" type="text" style="">
 			</div>
 			<div class="login_er">
@@ -51,8 +52,9 @@
 				</ul>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>
+
 <{/if}>
 <div class="dingwei2">
 	<ul class="youhui" id="js-header-share" style="display:none;">
