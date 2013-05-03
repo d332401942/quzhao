@@ -16,11 +16,12 @@ class IndexBrandadminView extends BaseView
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
-			$brandModel = $oneBusiness ->getOneId($id);
+			$brandModel = $oneBusiness->getOneId($id);
 		}
 		
 		if($_POST)
-		{
+		{	
+			//添加品牌数据
 			$model = M('BrandDataModel');
 			foreach($model as $key=>$val)
 			{
@@ -29,51 +30,32 @@ class IndexBrandadminView extends BaseView
 					$model->$key = trim($_POST[$key]);
 				}
 			}
-			if(empty($_POST['name']))
+			$business = M('BrandBusiness');
+			if(isset($_POST['brand_name_id']))
 			{
-				$model->name = $_POST['name2'];
-			}
-			$model->userid = $_COOKIE['brand_id'];
-			$model->createtime = time();
-			//上传图片
-			$file = new FileUploadUtilLib('image');
-			$uploadInfo = $file->upload();
-			$picName = null;
-			if ($uploadInfo)
-			{
-				$fileName = $uploadInfo[0];
-				$model->image = $fileName;
-				if (0 && file_exists($fileName))
+				$res = $business->check((int)$_POST['brand_name_id'],(int)$_POST['merchantsId']);
+				if(!empty($res))
 				{
-					$picName = $file->thumb($fileName,320,320);
-					unlink($fileName);
-					$model->image = $picName;
+					die('该品牌商家已存在');
 				}
 			}
-			$business = M('BrandBusiness');
+			
+			$model->userid = $_COOKIE['brand_id'];
+			$model->createtime = time();
 			if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
 			{
 				$model->id = $_POST['brandid'];
+				$model->setWorkFields(array('userid', 'url', 'createtime', 'rebate', 'merchantsId'));
 				$business->update($model);
 			}else{
 				$business->add($model);
 			}
-			
 			$this->redirect(APP_URL . '/brandadmin/lists');
 		}
-		//得到所有分类
-		$cateBusiness = M('Brand_cateBusiness');
-		$result = $cateBusiness->getAll();
 		//得到所有商家
 		$business = M('MerchantsBusiness');
 		$merchants = $business->getAll();
-		
-		
 		$this->assign('sjModel', $merchants);
-		$this->assign('cateModel', $result);
 		$this->assign('model', $brandModel);
-		
 	}
-	
-
 }

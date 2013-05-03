@@ -106,6 +106,11 @@ class IndexContentView extends BaseView
 			$id = $_GET['id'];
 			$this->assign('id', $id);
 		}
+		$tempType = null;
+		if (!empty($_GET['temp']))
+		{
+			$tempType = $_GET['temp'];
+		}
 		$pageCore->currentPage = $page;
 		if ($id)
 		{
@@ -114,7 +119,7 @@ class IndexContentView extends BaseView
 		}
 		else
 		{
-			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot);
+			$models = $business->findAll($pageCore,$cid,$state,$fid,$site,$istj,$ishot,$tempType);
 		}
 		$models = $models ?  $models : array();
 		foreach ($models as $model)

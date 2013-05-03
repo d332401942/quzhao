@@ -1,125 +1,108 @@
 <{include '__TEMPLATE__/header.html'}>
-<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform();">
-	<input name="oldpic" value="<{$model->pic}>" type="hidden" />
-	<input name="id" value="<{$model->id}>" type="hidden" />
+<form style="clear:both;" action="__APP__/homebrand/brand" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
 	<div class="add-div">
 		<table>
-			
+	
 		<input type="hidden" name="brandid" value="<{$model->id}>" />
 			<tr>
-				<td>名称：</td>
-				<td><input value="<{if (isset($model->name))}><{$model->name}><{/if}>" type="text" name="name" id="name" /></td>
+				<td>输入名称选择品牌：</td>
+				<td><input value="<{if (isset($model->bn_name))}><{$model->bn_name}><{/if}>" type="text" name="name" id="name" onkeyup="search(this.value)" />&nbsp;&nbsp;<span style="color:red" id="js-msg">*</span></td>
 			</tr>
-			<tr>
-				<td>名称首写大写字母：</td>
-				<td><input value="<{if (isset($model->letter))}><{$model->letter}><{/if}>" type="text" name="letter" id="letter" /></td>
+			<tr style="display:none;" id="js-add-name-hidden">
+				<td colspan="2" align="center"><a href="__APP__/homebrand/brand2">去添加品牌</a></td>
+			</tr>
+			<tr style="display:none;" id="js-select-name-hidden">
+				<td>选择品牌名称：</td>
+				<td>
+					<select name="brand_name_id" id="js-select-name">
+					</select>&nbsp;&nbsp;<span style="color:red">*</span>
+				</td>
 			</tr>
 			<tr>
 				<td>来源URL：</td>
-				<td><input value="<{if (isset($model->url))}><{$model->url}><{/if}>" type="text" name="url" id="url" /></td>
+				<td><input value="<{if (isset($model->url))}><{$model->url}><{/if}>" type="text" name="url" id="url" />&nbsp;&nbsp;<span style="color:red">*</span></td>
 			</tr>
 			<tr>
-				<td>活动开始时间：</td>
-				<td><input <{if (isset($model->startTime))}>value="<{$model->startTime}>"<{/if}> type="text" name="startTime" id="startTime" /></td>
+				<td>折扣：</td>
+				<td><input value="<{if (isset($model->rebate))}><{$model->rebate}><{/if}>" type="text" name="rebate" id="rebate" />&nbsp;&nbsp;<span style="color:red">*</span></td>
 			</tr>
+			
 			<tr>
-				<td>活动结束时间：</td>
-				<td><input value="<{if (isset($model->endTime))}><{$model->endTime}><{/if}>" type="text" name="endTime" id="endTime" /></td>
-			</tr>
-			<tr>
-				<td>品类：</td>
+				<td>商家：</td>
 				<td>
-					<select name="cate" id="cate" onchange="checkcate(this.value)">
-						<option value="">请选择分类</option>
-						<{if ($cateModel)}>
-						<{foreach ($cateModel as $val)}>
-							<option value="<{$val->id}>" <{if (isset($model->endTime))}> <{if ($val->id == $model->cate)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
-						<{/foreach}>
-						<{/if}>
-					</select>
+					<select name="merchantsId" id="merchants">
+						<option value="">请选择商家</option>
+						<{foreach ($sjModel as $val)}>	
+							<option value="<{$val->id}>" <{if (isset($model->merchantsId))}> <{if ($model->merchantsId == $val->id)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
+						<{/foreach}>	
+					</select>&nbsp;&nbsp;<span style="color:red">*</span>
 				</td>
 			</tr>
-			<tr style="display:none;" id="js-hidden-column">
-				<td>栏目：</td>
-				<td id="js-column">
-					
-				</td>
-			</tr>
+			
+			<{if (!empty($model->image))}>
 			<tr>
-				<td>图片logo：</td>
-				<td><input value="" type="file" name="image" /></td>
+				<td>图片预览：</td>
+				<td><img src="<{$model->image|parsePicpath}>" width="300" height="300" /></td>
 			</tr>
+			<{/if}>
 			<tr>
 				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
 			</tr>
 		</table>
 	</div>
-	<{if (!empty($model->image))}>
-	<div class="class="add-div add-div-img">
-		<img src="<{$model->image|parsePicpath}>" width="300" height="300" />
-	</div>
-	<{/if}>
 </form>
-
-<{include '__TEMPLATE__/footer.html'}>
 <script>
 function checkform() {
 	var	name = $('#name').val();
-	var	letter = $('#letter').val();
 	var	url = $('#url').val();
-	var	startTime = $('#startTime').val();
-	var	endTime = $('#endTime').val();
-	var	cate = $('#cate').val();
+	var	rebate = $('#rebate').val();
+	var	merchants = $('#merchants').val();
+	
 	if(name == '') {
-		alert('请填写名称');
-		return false;
-	}
-	if(letter == '') {
-		alert('首写字母不能为空');
+		alert('请选择品牌名称');
 		return false;
 	}
 	if(url == '') {
 		alert('来源URL不能为空');
 		return false;
 	}
-	if(startTime == '') {
-		alert('开始时间不能为空');
+	if(rebate == '') {
+		alert('折扣不能为空');
 		return false;
 	}
-	if(endTime == '') {
-		alert('结束时间不能为空');
-		return false;
-	}
-	if(cate == '') {
-		alert('请选择分类');
+	if(merchants == '') {
+		alert('请选择商家');
 		return false;
 	}
 }
-var checkedCateIds = {};
-<{foreach ($model->colums as $k => $m)}>
-	checkedCateIds['<{$k}>'] = '<{$m->name}>';
-<{/foreach}>
-
-function checkcate(value) {
-	if(value != '') {
-		$.post('__AJAX__/child_cate/getcateid',{cateId:value},function(data){
-			var arr_data = $.parseJSON(data);
-			var rs = '';
-			if(arr_data.result) {
-				var arr = arr_data.result;
-				for (var i in arr) {
-					var obj = arr[i];
-					var checked = '';
-					if (checkedCateIds[obj.id]) {
-						var checked = 'checked';
+function search(value) {
+	if(value != ''){
+		$.ajax({
+			url: '__AJAX__/brand/getAll?stmp=' + new Date().toString(),
+			type: 'post',
+			data: {val:value},
+			success: function(data) {
+				var arr_data = $.parseJSON(data);
+				var rs = '';
+				if(arr_data.result != '') {
+					var arr = arr_data.result;
+					for (var i in arr) {
+						var obj = arr[i];
+						rs += "<option value="+obj.id+">"+obj.name+"</option>";
 					}
-					rs += "<input type='checkbox' "+checked+" name='cateid[]' value="+obj.id+" />"+obj.name ;
-				}
-				$('#js-hidden-column').show();
-				$('#js-column').html(rs);
+					$('#js-select-name-hidden').show();
+					$('#js-msg').hide();
+					$('#js-add-name-hidden').hide();
+					$('#js-select-name').html(rs);
+				}else{
+					$('#js-select-name-hidden').hide();
+					$('#js-add-name-hidden').show();
+					$('#js-msg').show();
+				} 
 			}
-		})
+		});
 	}	
 }
-checkcate(<{$model->cate}>);
 </script>
+
+<{include '__TEMPLATE__/footer.html'}>

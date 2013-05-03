@@ -15,7 +15,7 @@ class ListsHomeBrandView extends BaseView
 		$pageCore->currentPage = $page;
 		
 		$business = M('BrandBusiness');
-		$result = $business->getAll($pageCore);
+		$result = $business->getAll3($pageCore);
 		$this->assign('model' ,$result);
 		$this->assign ( 'pageCore', $pageCore );
 		$this->assign ( 'title', '品牌列表');

@@ -1,0 +1,65 @@
+<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<form style="clear:both;" action="__APP__/brandadmin/brand" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+	<div class="add-div">
+		<table>
+		<tr>
+			<th colspan="6" align="right"><a href="__APP__/brandadmin/">添加品牌</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/lists">品牌管理</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/add">添加超值单品</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/dplists">超值单品管理</a>&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/loginout">安全退出</a></th>
+		</tr>
+			<tr>
+				<td>品牌名称：</td>
+				<td><input value="<{if (isset($model->name))}><{$model->name}><{/if}>" type="text" name="name" id="name" onkeyup="search(this.value)" />&nbsp;&nbsp;<span style="color:red" id="js-msg">*</span></td>
+			</tr>
+			<tr>
+				<td>品牌logo：</td>
+				<td><input value="" type="file" name="image" />&nbsp;&nbsp;<span style="color:red">*</span></td>
+			</tr>
+			<tr>
+				<td>品牌名称首大写字母：</td>
+				<td><input value="<{if (isset($model->letter))}><{$model->letter}><{/if}>" type="text" name="letter" id="letter" />&nbsp;&nbsp;<span style="color:red">*</span></td>
+			</tr>
+			
+			<tr>
+				<td>品类：</td>
+				<td>
+					<select name="cateid" id="cate">
+						<option value="">请选择分类</option>
+						<{if ($cateModel)}>
+						<{foreach ($cateModel as $val)}>
+							<option value="<{$val->id}>" <{if (isset($model->cate))}> <{if ($val->id == $model->cate)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
+						<{/foreach}>
+						<{/if}>
+					</select>&nbsp;&nbsp;<span style="color:red">*</span>
+				</td>
+			</tr>
+			<{if (!empty($model->image))}>
+			<tr>
+				<td>图片预览：</td>
+				<td><img src="<{$model->image|parsePicpath}>" width="300" height="300" /></td>
+			</tr>
+			<{/if}>
+			<tr>
+				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<script>
+function checkform() {
+	var	name = $('#name').val();
+	var	letter = $('#letter').val();
+	var	cate = $('#cate').val();
+	if(name == '') {
+		alert('请填写名称');
+		return false;
+	}
+	if(letter == '') {
+		alert('首写字母不能为空');
+		return false;
+	}
+	if(cate == '') {
+		alert('请选择分类');
+		return false;
+	}
+}
+
+</script>

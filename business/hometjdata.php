@@ -178,9 +178,11 @@ class HomeTjDataBusiness extends BaseBusiness
             }
         }
 		
-		if($tempType)
+		if($tempType == 1)
 		{
 			$query['tempType'] = 1;
+		}else if ($tempType == 0){
+			$query['tempType'] = 0;
 		}
 		if($userid)
 		{

@@ -3,26 +3,49 @@
 class IndexBrandView extends BaseView
 {
 	
-	public function index()
+	public function index($parems)
 	{
 		$this->setMeta('品牌特卖_趣找购物搜索');
-		$business = new HomeBrandBusiness();
-		$start = 0;
-		$end = 16;
-		$more = 16;
-		$models = $business->getIndexBrandData($start, $end);
-		$models = $models ? $models : array();
-		
-		//得到热门品牌
-		$hotHomeBrandModels = $business->getHotHomeBrandModels();
-		//得到品牌特卖处的广告
-		$homeBrandAdBusiness = new HomeBrandAdBusiness();
-		$adModels = $homeBrandAdBusiness->getHomeBrandAdModels(array(HomeBrandAdDataModel::STYPE_POSITION_BRAND_RIGHT_TOP));
-		$this->assign('models', $models);
-		$this->assign('adModels', $adModels);
-		$this->assign('hotHomeBrandModels', $hotHomeBrandModels);
-		$this->assign('start', $start);
-		$this->assign('end', $end);
-		$this->assign('more', $more);
+		//得到所有品牌
+		$pageCore = new PageCoreLib ();
+		$pageCore->pageSize = 20;
+		$page = 1;
+		if (! empty ( $parems['page'] ) && ( int ) $parems['page'])
+		{
+			$page = ( int ) $parems['page'];
+		}
+		$cid = null;
+		if (! empty ( $parems['cid'] ) && ( int ) $parems['cid'])
+		{
+			$cid = ( int ) $parems['cid'];
+		}
+		$letter = null;
+		if (! empty ( $parems['letter'] ))
+		{
+			$letter = trim($parems['letter']);
+		}
+		$mid = null;
+		if (! empty ( $parems['mid'] ))
+		{
+			$mid = trim($parems['mid']);
+		}
+		$pageCore->currentPage = $page;
+		//得到所有数据
+		$business = M('BrandBusiness');
+		$result = $business->getAll2($pageCore,$cid,$letter,$mid);
+		//得到所有分类
+		$cateBusiness = M('Brand_cateBusiness');
+		$cate = $cateBusiness->getAll();
+		//得到所有商家
+		$business = M('MerchantsBusiness');
+		$merchants = $business->getAll();
+		$this->assign('mid', $mid);
+		$this->assign('cid', $cid);
+		$this->assign('page', $page);
+		$this->assign('letter', $letter);
+		$this->assign('sjModel', $merchants);
+		$this->assign('cateModel', $cate);
+		$this->assign('brandModel' ,$result);
+		$this->assign ( 'pageCore', $pageCore );
 	}
 }

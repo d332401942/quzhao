@@ -7,19 +7,18 @@
 		</tr>
 		<input type="hidden" name="brandid" value="<{$model->id}>" />
 			<tr>
-				<td>品牌名称：</td>
-				<td><input value="<{if (isset($model->name))}><{$model->name}><{/if}>" type="text" name="name2" id="name" onkeyup="search(this.value)" />&nbsp;&nbsp;<span style="color:red" id="js-msg">*</span></td>
+				<td>输入名称选择品牌：</td>
+				<td><input value="<{if (isset($model->bn_name))}><{$model->bn_name}><{/if}>" type="text" name="name" id="name" onkeyup="search(this.value)" />&nbsp;&nbsp;<span style="color:red" id="js-msg">*</span></td>
+			</tr>
+			<tr style="display:none;" id="js-add-name-hidden">
+				<td colspan="2" align="center"><a href="__APP__/brandadmin/brand">去添加品牌</a></td>
 			</tr>
 			<tr style="display:none;" id="js-select-name-hidden">
 				<td>选择品牌名称：</td>
 				<td>
-					<select name="name" id="js-select-name">
+					<select name="brand_name_id" id="js-select-name">
 					</select>&nbsp;&nbsp;<span style="color:red">*</span>
 				</td>
-			</tr>
-			<tr>
-				<td>品牌名称首大写字母：</td>
-				<td><input value="<{if (isset($model->letter))}><{$model->letter}><{/if}>" type="text" name="letter" id="letter" />&nbsp;&nbsp;<span style="color:red">*</span></td>
 			</tr>
 			<tr>
 				<td>来源URL：</td>
@@ -28,20 +27,6 @@
 			<tr>
 				<td>折扣：</td>
 				<td><input value="<{if (isset($model->rebate))}><{$model->rebate}><{/if}>" type="text" name="rebate" id="rebate" />&nbsp;&nbsp;<span style="color:red">*</span></td>
-			</tr>
-			
-			<tr>
-				<td>品类：</td>
-				<td>
-					<select name="cate" id="cate">
-						<option value="">请选择分类</option>
-						<{if ($cateModel)}>
-						<{foreach ($cateModel as $val)}>
-							<option value="<{$val->id}>" <{if (isset($model->cate))}> <{if ($val->id == $model->cate)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
-						<{/foreach}>
-						<{/if}>
-					</select>&nbsp;&nbsp;<span style="color:red">*</span>
-				</td>
 			</tr>
 			
 			<tr>
@@ -55,10 +40,7 @@
 					</select>&nbsp;&nbsp;<span style="color:red">*</span>
 				</td>
 			</tr>
-			<tr>
-				<td>图片logo：</td>
-				<td><input value="" type="file" name="image" />&nbsp;&nbsp;<span style="color:red">*</span></td>
-			</tr>
+			
 			<{if (!empty($model->image))}>
 			<tr>
 				<td>图片预览：</td>
@@ -74,17 +56,12 @@
 <script>
 function checkform() {
 	var	name = $('#name').val();
-	var	letter = $('#letter').val();
 	var	url = $('#url').val();
 	var	rebate = $('#rebate').val();
 	var	merchants = $('#merchants').val();
-	var	cate = $('#cate').val();
+	
 	if(name == '') {
-		alert('请填写名称');
-		return false;
-	}
-	if(letter == '') {
-		alert('首写字母不能为空');
+		alert('请选择品牌名称');
 		return false;
 	}
 	if(url == '') {
@@ -93,11 +70,6 @@ function checkform() {
 	}
 	if(rebate == '') {
 		alert('折扣不能为空');
-		return false;
-	}
-	
-	if(cate == '') {
-		alert('请选择分类');
 		return false;
 	}
 	if(merchants == '') {
@@ -118,13 +90,15 @@ function search(value) {
 					var arr = arr_data.result;
 					for (var i in arr) {
 						var obj = arr[i];
-						rs += "<option value="+obj.name+">"+obj.name+"</option>";
+						rs += "<option value="+obj.id+">"+obj.name+"</option>";
 					}
 					$('#js-select-name-hidden').show();
 					$('#js-msg').hide();
+					$('#js-add-name-hidden').hide();
 					$('#js-select-name').html(rs);
 				}else{
 					$('#js-select-name-hidden').hide();
+					$('#js-add-name-hidden').show();
 					$('#js-msg').show();
 				} 
 			}

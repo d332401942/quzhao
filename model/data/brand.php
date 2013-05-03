@@ -1,36 +1,29 @@
 <?php 
 class BrandDataModel extends BaseDataModel
 {
-    public $name;
+    public $brand_name_id;
 	
-    public $letter;
-	
-	public $cate;
-	
-	public $image;
-	
-	public $userid;
+	public $userid = 0;
 	
 	public $url;
 	
 	public $createtime;
 	
-	public $cateName;
-	
 	public $username;
 	
 	public $rebate;
 	
-	public $merchantsId;
+	public $audit;
 	
-	public $colums = array();
+	public $state = 0;
+	
+	public $merchantsId;
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->setTableName('brand');
 		$this->setIgoneFields('colums');
-		$this->setIgoneFields('cateName');
 		$this->setIgoneFields('username');
 	}
 }

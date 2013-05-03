@@ -7,8 +7,10 @@
 	<tr>
 		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
 		<th style="width:30px;">ID</th>
+		<th style="width:50px;">状态</th>
 		<th style="width:100px;">添加人</th>
-		<th style="width:150px;">分类</th>
+		<th style="width:100px;">审核人</th>
+		<th style="width:150px;">商家</th>
 		<th style="width:200px;">名称</th>
 		<th>入库时间</th>
 		<th style="width:85px;">操作</th>
@@ -18,9 +20,18 @@
 		<tr>
 			<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
 			<td align="center"><{$val->id}></td>
-			<td align="center"><{$val->username}></td>
-			<td align="center"><{$val->cateName}></td>
-			<td align="center"><{$val->name}></td>
+			<td>
+				<select onchange="changeState(this,<{$val->id}>)">
+					<option <{if ($val->state == 1)}>selected<{/if}> value="1" > 有货</option>
+					<option <{if ($val->state == 2)}>selected<{/if}> value="2" > 无货</option>
+					<option <{if ($val->state == 0)}>selected<{/if}> value="0" > 待审核</option>
+					<option <{if ($val->state == 3)}>selected<{/if}> value="3" > 不合格</option>
+				</select>
+			</td>
+			<td align="center"><{if ($val->username)}><{$val->username}><{else}>添加人<{/if}></td>
+			<td align="center"><{$val->audit}></td>
+			<td align="center"><{$val->m_name}></td>
+			<td align="center"><{$val->bn_name}></td>
 			<td align="center"><{$val->createtime|date_format:'Y-m-d H:i:s'}></td>
 			<td align="center">
 				<a href="__APP__/homebrand/brand__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
@@ -43,7 +54,7 @@
 <{uc class="PageControlView" pageCore=$pageCore}>
 <script>
 function goPage(page) {
-	window.location.href = '__APP__/brandadmin/lists?page='+page;
+	window.location.href = '__APP__/homebrand/lists?page='+page;
 }
 function del(id) {
 	if (!confirm('确定要删除吗？')) {
@@ -84,4 +95,41 @@ function checkAll(obj) {
 		checkInputObj.attr('checked',false);
 	}
 }
+function changeState(obj,id) {
+	var state = $(obj).val();
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	doChangeState(ids,state);
+} 
+function doChangeState(ids,state,isReload) {
+	if (!ids) {
+		alert('请选择类容');
+		return false;
+	}
+	if (!state) {
+		alert('请选择状态');
+		return false;
+	}
+	$.ajax({
+		url: '__AJAX__/brand/changeState',
+		data: {ids:ids,state:state},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data && data.result) {
+				alert('修改成功');
+				window.location.reload()
+			}
+			else {
+				alert('修改失败');
+			}
+		},
+		error: function() {
+			alert('操作失败');
+		}
+	});
+}
+
 </script>

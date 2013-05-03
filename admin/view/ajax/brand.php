@@ -22,5 +22,18 @@ class BrandAjaxView extends BaseAjaxView
 			$this->response($result);
 		}
 	}
+	
+	public function changeState()
+	{
+		$ids = array();
+		if (! empty($_POST ['ids']))
+		{
+			$ids = $_POST ['ids'];
+		}
+		$state = ( int ) $_POST ['state'];
+		$buesiness = M('BrandBusiness');
+		$buesiness->changeState($ids, $state);
+		$this->response(true);
+	}
 }
 ?>

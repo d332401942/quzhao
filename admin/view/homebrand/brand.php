@@ -6,19 +6,22 @@ class BrandHomeBrandView extends BaseView
 	public function index($parameters)
 	{
 		
+		if(!isset($_COOKIE['brand_id']) || !isset($_COOKIE['brandModel']) || !isset($_COOKIE['brand_name']))
+		{
+			$this->redirect(APP_URL . '/brandadmin/login');
+		}
+		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
+		$brandModel = array();
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
-			$brandModel = $oneBusiness ->getOneId($id);
-		}
-		else
-		{
-			$brandModel = new BrandDataModel();
+			$brandModel = $oneBusiness->getOneId2($id);
 		}
 		
 		if($_POST)
-		{
+		{	
+			//添加品牌数据
 			$model = M('BrandDataModel');
 			foreach($model as $key=>$val)
 			{
@@ -27,52 +30,30 @@ class BrandHomeBrandView extends BaseView
 					$model->$key = trim($_POST[$key]);
 				}
 			}
-			$model->userid = $_COOKIE['brand_id'];
-			$model->createtime = time();
-			$file = new FileUploadUtilLib('image');
-			$uploadInfo = $file->upload();
-			$picName = null;
-			if ($uploadInfo)
+			$business = M('BrandBusiness');
+			if(isset($_POST['brand_name_id']))
 			{
-				$fileName = $uploadInfo[0];
-				$model->image = $fileName;
-				if (0 && file_exists($fileName))
+				$res = $business->check((int)$_POST['brand_name_id'],(int)$_POST['merchantsId']);
+				if(!empty($res))
 				{
-					$picName = $file->thumb($fileName,320,320);
-					unlink($fileName);
-					$model->image = $picName;
+					die('该品牌商家已存在');
 				}
 			}
-			$business = M('BrandBusiness');
+			$model->createtime = time();
 			if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
 			{
 				$model->id = $_POST['brandid'];
+				$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId'));
 				$business->update($model);
 			}else{
 				$business->add($model);
 			}
-			if(!empty($_POST['cateid']))
-			{
-				$columnBusiness = M('Brand_columnBusiness');
-				$columnBrand_columnModel = M('Brand_columnDataModel');
-				$columnBrand_columnModel->brandid = $model->id;
-				if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
-				{
-					$columnBusiness->del($_POST['brandid']);	
-					
-				}	
-				foreach($_POST['cateid'] as $val)
-				{
-					$columnBrand_columnModel->cateid = $val;
-					$columnBusiness->add($columnBrand_columnModel);
-				}
-				
-				
-			}
+			$this->redirect(APP_URL . '/homebrand/lists');
 		}
-		$cateBusiness = M('Brand_cateBusiness');
-		$result = $cateBusiness->getAll();
-		$this->assign('cateModel', $result);
+		//得到所有商家
+		$business = M('MerchantsBusiness');
+		$merchants = $business->getAll();
+		$this->assign('sjModel', $merchants);
 		$this->assign('model', $brandModel);
 		$this->assign('title', '添加品牌');
 		
