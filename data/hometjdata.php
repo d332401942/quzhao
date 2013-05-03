@@ -169,4 +169,10 @@ class HomeTjDataData extends BaseData
 		$result = $this->query($sql,'HomeTjDataDataModel');
 		return $result;
 	}
+	
+	public function loveNum($id)
+	{
+		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
+		$this->exec($sql);
+	}
 }
