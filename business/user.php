@@ -160,7 +160,7 @@ class UserBusiness extends BaseBusiness
 		$data = new UserData ();
 		if (empty ( $email ))
 		{
-			$this->throwException ( '用户名不能为空', CodeException::USER_EMAIL_EMPTY );
+			$this->throwException ( '请填写您的登录邮箱', CodeException::USER_EMAIL_EMPTY );
 		}
 		$emailRegular = CommUtility::EMAIL_PATTERN;
 		if (! preg_match ( $emailRegular, $email ))
@@ -170,7 +170,7 @@ class UserBusiness extends BaseBusiness
 		$result = $data->getUserByEmail ( $email );
 		if ($result)
 		{
-			$this->throwException ( '用户名已被占用', CodeException::USER_EMAIL_EXISTS );
+			$this->throwException ( '邮箱已被占用', CodeException::USER_EMAIL_EXISTS );
 		}
 	}
 

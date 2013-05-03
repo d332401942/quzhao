@@ -17,7 +17,7 @@ class UserAjaxView extends BaseAjaxView
 		$password = null;
 		if (empty($_POST['email']))
 		{
-			$this->responseError('请输入登录邮箱');
+			$this->responseError('请填写您的登录邮箱');
 		}
 		if (empty($_POST['password']))
 		{

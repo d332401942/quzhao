@@ -3,7 +3,7 @@
 		<li style="margin-left:8px;"><a href="javascript:;" onclick="showShareDiv()">我要推荐</a></li>
 		<li style=""><a href="javascript:;"><!--<img src="__RESOURCE__/images/6-4.png" alt="">--></a></li>
 		<{if (!empty($CurrentUser->id))}>
-			<li style="margin-left:805px;_margin-left:425px;"><a href="__APP__/user" onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
+			<li style="margin-left:805px;_margin-left:825px;"><a href="__APP__/user" onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
 			<li style=" margin-top:-10px;">
 				<a href="__APP__/user">
 					<{if ($CurrentUser->head)}>
@@ -14,7 +14,7 @@
 				</a>
 			</li>
 		<{else}> 
-			<li style="margin-left:850px;_margin-left:430px;">
+			<li style="margin-left:850px;_margin-left:860px;">
 				<a href="javascript:;" onclick="showLeftLogin()">登录</a>
 			</li>
 			<li style=""><a href="javascript:;" onclick="showLeftLogin()"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
@@ -27,9 +27,9 @@
 		<{/if}>
 	</ul>	
 </div>
-<{if (empty($CurrentUser->email))}>
+<{if (empty($CurrentUser->id))}>
 <form action="" method="post"  onsubmit="return doLogin(this)">
-	<div class="dingwei2" id="js-login-div" style="display:none">
+	<div class="dingwei2" id="js-login-div" style="display:none1">
 		<div class="login">
 			<div class="login_yi">
 				<input name="email" class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style="">
@@ -229,21 +229,17 @@ function doReg(obj) {
 	return false;
 }
 
-function checkRePassword(obj) {
-	obj.type = 'password';
-	if (obj.value =='确认密码') {
-		obj.value = ''
-	}
-}
 
 function rePasswordBlur(obj) {
 	var password = $('#js-password').val();
 	if (obj.value == '') {
 		obj.value='确认密码'
-		obj.type = 'text';
+		$(obj).val('');
+		$(obj).hide();
+		$(obj).prev().show();
 	}
 	else if (obj.value != password) {
-		$('#js-pass-error').html('两次密码输入的不一致');
+		$('#js-pass-error').html('两次密码输入的不一致').show();
 		$(obj).css('border-color','#E872C0');
 	}
 }
@@ -294,7 +290,7 @@ function checkEmailPreset() {
 	var errObj = emailObj.next();
 	var email = emailObj.val();
 	if (!email || email == '登录邮箱') {
-		errObj.html('请填写email');
+		errObj.html('请填写您的登录邮箱');
 		return false;
 	}
 	var url  = '__AJAX__/user/checkuser?stmp'+Math.random();
@@ -342,7 +338,7 @@ function checkuser() {
 	obj = $('#js-user-email');
 	var name = obj.val();
 	if (!name || name == '登录邮箱') {
-		$('#js-email-error').html('请填写email');
+		$('#js-email-error').html('请填写您的登录邮箱').show();
 		obj.css('border-color','#E872C0');
 		if (name =='') {
 			obj.val('登录邮箱');
@@ -359,11 +355,11 @@ function checkuser() {
 		dataType:'json',
 		success:function(data){
 			if (data.result) {
-				$('#js-email-error').html('<font color="green">用户名可用</font>');
+				$('#js-email-error').html('<font color="green">用户名可用</font>').show();
 				$(obj).css('border-color','#cdcdcd');
 			}
 			else {
-				$('#js-email-error').html(data.error.message);
+				$('#js-email-error').html(data.error.message).show();
 				$(obj).css('border-color','#E872C0');
 			}
 		}
@@ -432,20 +428,20 @@ function pwStrength(pwd, type) {
 		$(".right2_yi_zuo").html('<img src="__RESOURCE__/images/ruo1.jpg">');
 		$(".right2_yi_zhong").html('<img src="__RESOURCE__/images/zhong.jpg">');
 		$(".right2_yi_you").html('<img src="__RESOURCE__/images/qiang.jpg">');
-		$('#js-pass-error').html('请填写密码');
-		$('#js-password').val('密码').get(0).type = 'text';
+		$('#js-pass-error').html('请填写密码').show();
+		$('#js-password').hide().prev().show();
 		$('#js-password').css('border-color','#E872C0');
 	}
 	else if (type && type == 'onblur' && pwd.length < 6) {
-		$('#js-pass-error').html('密码不能低于6位');
+		$('#js-pass-error').html('密码不能低于6位').show();
 		$('#password').css('border-color','#E872C0');
 	}
 	else if(pwd.length > 32) {
-		$('#js-pass-error').html('密码不能超过32位');
+		$('#js-pass-error').html('密码不能超过32位').show();
 		$('#password').css('border-color','#E872C0');
 	}
 	else {
-		$('#js-pass-error').html('');	
+		$('#js-pass-error').html('').hide();	
 		$('#js-password').css('border-color','#cdcdcd');
 		S_level = checkStrong(pwd);
 		switch (S_level) {
