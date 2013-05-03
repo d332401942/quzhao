@@ -1,0 +1,136 @@
+<{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_BRAND css="css" js="jquery"}>
+<div class="box">
+	<img src="__RESOURCE__/images/sale_banner.jpg">
+</div>
+<div class="box ">
+<div  id="nav_left_layout">
+<div class="sale_new_mini" >
+<div class="sale_new_mini_box">
+<a href="javascript:;" onclick="goletter(0) class="sale_xz3">全部</a>
+<a href="javascript:;" onclick="goletter('A')">A</a>
+<a href="javascript:;" onclick="goletter('B')">B</a>
+<a href="javascript:;" onclick="goletter('C')">C</a>
+<a href="javascript:;" onclick="goletter('D')">D</a>
+<a href="javascript:;" onclick="goletter('E')">E</a>
+<a href="javascript:;" onclick="goletter('F')">F</a>
+<a href="javascript:;" onclick="goletter('G')">G</a>
+<a href="javascript:;" onclick="goletter('H')">H</a>
+<a href="javascript:;" onclick="goletter('I')">I</a>
+<a href="javascript:;" onclick="goletter('J')">J</a>
+<a href="javascript:;" onclick="goletter('K')">K</a>
+<a href="javascript:;" onclick="goletter('M')">M</a>
+<a href="javascript:;" onclick="goletter('N')">N</a>
+<a href="javascript:;" onclick="goletter('O')">O</a>
+<a href="javascript:;" onclick="goletter('P')">P</a>
+<a href="javascript:;" onclick="goletter('Q')">Q</a>
+<a href="javascript:;" onclick="goletter('R')">R</a>
+<a href="javascript:;" onclick="goletter('S')">S</a>
+<a href="javascript:;" onclick="goletter('T')">T</a>
+<a href="javascript:;" onclick="goletter('U')">U</a>
+<a href="javascript:;" onclick="goletter('V')">V</a>
+<a href="javascript:;" onclick="goletter('W')">W</a>
+<a href="javascript:;" onclick="goletter('X')">X</a>
+<a href="javascript:;" onclick="goletter('Y')">Y</a>
+<a href="javascript:;" onclick="goletter('Z')">Z</a>
+</div>
+</div>
+</div>
+<div class="cont_title">
+  <h1>品牌特卖<font>100%品质保证，100%优惠</font></h1>
+  <h3><a href="#">更多</a></h3>
+</div>
+<div class="sale_new_nav">
+<a href="javascript:;" onclick="goCid(0)"class="sale_xz">最新</a>
+<{foreach ($cateModel as $model)}>
+<a href="javascript:;" onclick="goCid(<{$model->id}>)"><{$model->name}></a>
+<{/foreach}>
+</div>
+<div class="sale_new_nav2">                     
+<a href="javascript:;" onclick="goSj(0)" class="sale_xz2">全部商家</a>
+<{foreach ($sjModel as $model)}>
+<a href="javascript:;" onclick="goSj(<{$model->id}>)"><{$model->name}></a>
+<{/foreach}>
+</div>
+<div  class="sale_new_cont">
+<ul>
+<{if (!empty($brandModel))}>
+<{foreach ($brandModel as $val)}>
+<li>
+<span>
+<{foreach ($val->shangjia as $v)}>
+<a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
+<{/foreach}>
+</span>
+<div class="sale_new_cont_top">
+	<a href="javascript:;"><img src="<{$val->image|parsePicpath}>" /></a>
+</div>
+<div class="sale_new_cont_tt">
+	<h2><a href="javascript:;"><{$val->name}></a></h2>
+	<div class="sale_new_cont_jg">
+		<div class="sale_new_cont_jg_l">
+			<strong><{$val->rebate}></strong>折
+		</div>
+		<div class="sale_new_cont_jg_r"><a href="javascript:;"><{count($val->shangjia)}></a></div>
+	</div>
+</div>
+</li>
+<{/foreach}>
+<{else}>
+暂无品牌数据
+<{/if}>
+</ul>
+</div>
+</div>
+<script src="__RESOURCE__/js/lx2.js"></script>
+<{uc class="PageControlView" pageCore="$pageCore"}>
+<{uc class="FooterControlView"}>
+<form style="display:none;" id="js-form-page">
+	<input type="hidden" name="cid" value="<{$cid}>" />
+	<input type="hidden" name="letter" id="letter" value="<{$letter}>" />
+	<input type="hidden" name="page" value="<{$page}>" />
+	<input type="hidden" name="mid" id="mid" value="<{$mid}>" />
+</form>
+<script>
+function goPage(page) {
+	var formObj = $('#js-form-page');
+	formObj.find('input[name="page"]').val(page);
+	formTogo();
+}
+
+function goCid(cid) {
+	var formObj = $('#js-form-page');
+	formObj.find('input[name="cid"]').val(cid);
+	$('#letter').val('');
+	$('#mid').val('');
+	formTogo();
+}
+function goletter(letter) {
+	var formObj = $('#js-form-page');
+	formObj.find('input[name="letter"]').val(letter);
+	formTogo();
+}
+function goSj(mid) {
+	var formObj = $('#js-form-page');
+	formObj.find('input[name="mid"]').val(mid);
+	formTogo();
+}
+
+function formTogo() {
+	var formObj = $('#js-form-page');
+	var data = formObj.formToArray();
+	var url = '__APP__/brand__LIMIT__';
+	for (var i in data) {
+		var obj = data[i];
+		if (!obj.value) {
+			continue;
+		}
+		var pre = '';
+		if (i !=0) {
+			pre = '/';
+		}
+		url += pre + obj.name + '/' + obj.value;
+	}
+	window.location.href = url;
+}
+
+</script>
