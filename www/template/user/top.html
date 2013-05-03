@@ -207,7 +207,7 @@ function doLogin(obj) {
 			else {
 				var msg = data.error.message;
 				if ($('#js-error').length) {
-					$('#js-error').html(msg);
+					$('#js-error').html(msg).show();
 				}
 				else {
 					alert(msg);

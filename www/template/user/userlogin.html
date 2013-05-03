@@ -15,13 +15,16 @@
 				onfocus="if (value =='登录邮箱'){value =''}" value="登录邮箱" onmouseover="this.style.borderColor=''"
 				tabindex="1" onblur="if (value ==''){value='登录邮箱'}" style="">
 			</div>
-			<div class="left_san" id="js-error">
+			<div class="left_san" id="js-error" style="display:none;">
 				
 			</div>
 			<div class="left_er">
-				<input name="password" class="kuang2" onmouseout="this.style.borderColor=''" onfocus="if (value =='密码'){value =''} type='password'"
-				value="密码" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='密码';type='text'}"
+				<input class="kuang2" onmouseout="this.style.borderColor=''" onfocus="$(this).hide().next().show().focus()"
+				value="密码" onmouseover="this.style.borderColor=''" tabindex="1" 
 				type="text" style="">
+				<input name="password" class="kuang2" onmouseout="this.style.borderColor=''" 
+				value="" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){$(this).hide().prev().show()}"
+				type="password" style="display:none">
 			</div>
 			<div class="left_si">
 				<div class="left_si_left">
