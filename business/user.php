@@ -174,10 +174,10 @@ class UserBusiness extends BaseBusiness
 		}
 	}
 
-	public function changeData($model)
+	public function changeData($model, $isEditEmail = false)
 	{
 		$data = new UserData ();
-		if ($model->email)
+		if ($model->email && $isEditEmail)
 		{
 			$this->checkuser($model->email);
 			$model->setWorkFields(array('email'));

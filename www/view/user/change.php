@@ -57,13 +57,14 @@ class ChangeUserView extends BaseView
 	private function change()
 	{
 		$business = M('UserBusiness');
-		$model = clone $this->CurrentUser;
-		$model->email = null;
+		$model = $this->CurrentUser;
+		$isEditEmail = false;
 		if (!empty($_POST['email']))
 		{
 			$email = trim($_POST['email']);
 			$email = strtolower($email);
 			$model->email = $email;
+			$isEditEmail = true;
 		}
 		$model->id 			= $this->CurrentUser->id;
 		//$model->head 		= '';
@@ -71,7 +72,7 @@ class ChangeUserView extends BaseView
 		$model->nickname = mb_substr($nickname, 0 , 12, 'utf8');
 		$model->city 		= intval($_POST['cityid']);
 		$model->setWorkFields(array('head', 'nickname', 'city'));
-		$business->changeData($model);
+		$business->changeData($model, $isEditEmail);
 		$utility = new UserUtility();
 		$utility->setViewUser($model);
 	}

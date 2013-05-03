@@ -95,8 +95,7 @@
 
 <div class="dp_box2_l_bt">
 
-    <a href="<{$goods->href}>" target="_blank">去购买</a
-></div>
+    <a href="<{$goods->href}>" target="_blank">去购买</a></div>
 
 </li>
 </ul>
@@ -127,8 +126,8 @@
 <{if ($loveModel)}>
 <{foreach ($loveModel as $val)}>
 <div class="ress_more_li">
-<p><a href="<{$val->href}>" target="_blank"><img src="<{$val->pic|parsePicpath}>" /></a></p>
-<h3><a href="<{$val->href}>" target="_blank"><{$val->name}></a></h3>
+<p><a href="__APP__/dp/end__LIMIT__id/<{$val->id}>"><img src="<{$val->pic|parsePicpath}>" /></a></p>
+<h3><a href="__APP__/dp/end__LIMIT__id/<{$val->id}>"><{$val->name}></a></h3>
 <h4>￥<{$val->price}></h4>
 <h2>
 <span><a href="javascript:;" onclick="lovenum(<{$val->id}>)"><img src="__RESOURCE__/images/like.gif" /><{$val->lovenumber}></a></span><!--<span><a href="javascript:;"><img src="__RESOURCE__/images/see.gif" />3435</a></span>-->

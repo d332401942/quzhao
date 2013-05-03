@@ -80,7 +80,8 @@ function loginOut() {
 		dataType: 'json',
 		success: function(data) {
 			if (data.result) {
-				window.location.reload();
+				var url = window.location.href.replace(/\/$/, '');
+				window.location.href = url + '?s=' + Math.random();
 			}
 		}
 	});
