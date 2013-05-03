@@ -8,11 +8,11 @@
 			<div class="con_left_er_zuo">基本设置</div>
 			<div class="con_left_er_you">
 				<div class="you_name">
-					<input class="yy" value="<{if (!empty($CurrentUser->nickname))}><{$CurrentUser->nickname}><{else}>用户名<{/if}>" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" />
+					<input class="yy" value="<{if (!empty($CurrentUser->nickname))}><{$CurrentUser->nickname}><{else}>昵称<{/if}>" type="text" onblur="if (this.value == '' ){this.value = '昵称'}" onfocus="if(this.value=='昵称'){this.value = ''}" name="nickname" />
 				</div>
 				
 				<div style="margin-top:13px;" class="you_name">
-					<input name="email" onblur="emailBlur(this)" onfocus="emailFocus(this)" class="yy" <{if (!empty($CurrentUser->email))}>disabled<{/if}> value="<{if (empty($CurrentUser->email))}>登录邮箱<{else}><{$CurrentUser->email}><{/if}>" type="text">
+					<input <{if (empty($CurrentUser->email))}>name="email"<{/if}> onblur="emailBlur(this)" onfocus="emailFocus(this)" class="yy" <{if (!empty($CurrentUser->email))}>disabled<{/if}> value="<{if (empty($CurrentUser->email))}>登录邮箱<{else}><{$CurrentUser->email}><{/if}>" type="text">
 				</div>
 				<h3 id="id-nickname-error" style="color: #C74396;font-size: 12px;font-weight: lighter;"></h3>
 				<input type="hidden" name="cityid" id="cityname" value="10100" />
@@ -185,12 +185,12 @@ function checkForm(obj) {
 	var nicknameObj = $(obj).find('input[name="nickname"]');
 	var emailObj = $(obj).find('input[name="email"]');
 	var nickname = nicknameObj.val();
-	if (!nickname || nickname == '用户名') {
-		$('#id-nickname-error').html('请输入用户名');
+	if (!nickname || nickname == '昵称') {
+		$('#id-nickname-error').html('请输入用户昵称');
 		return false;
 	}
 	
-	if (!emailObj.attr('disabled') && !checkEmail(emailObj)) {
+	if (emailObj.length && !checkEmail(emailObj)) {
 		return false;
 	}
 	return true;
