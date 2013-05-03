@@ -5,8 +5,6 @@ class KeywordsDataModel extends BaseDataModel
 	public $keywords;
 
 	public $createtime;
-
-	public $number;
 	
 	public $ip;
 	

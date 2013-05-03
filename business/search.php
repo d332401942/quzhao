@@ -37,6 +37,12 @@ class SearchBusiness extends BaseBusiness
 		return $recommendModels;
 	}
 	
+	public function logKeywords($keywords, $ip)
+	{
+		$data = M('SearchData');
+		$data->logKeywords($keywords, $ip);
+	}
+	
 	/**
      * 得到用户浏览搜索的记录
      * @param array $arrIds 浏览的ID

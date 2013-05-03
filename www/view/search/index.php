@@ -63,6 +63,9 @@ class IndexSearchView extends BaseView
 		}
 		$keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
+		//记录搜索日志
+		$ip = $_SERVER ['REMOTE_ADDR'];
+		$business->logKeywords($keyword, $ip);
 		//得到都有的品牌ID
 		$brandIdToCount = $business->searchBrandIdToCount($keyword , $category, $attrArr, $sort);
 		$brandIds = array_keys($brandIdToCount);
