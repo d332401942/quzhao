@@ -53,6 +53,7 @@
 </div>
 <div  class="sale_new_cont">
 <ul>
+<{if (!empty($brandModel))}>
 <{foreach ($brandModel as $val)}>
 <li>
 <span>
@@ -74,7 +75,9 @@
 </div>
 </li>
 <{/foreach}>
-
+<{else}>
+暂无品牌数据
+<{/if}>
 </ul>
 </div>
 </div>
