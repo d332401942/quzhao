@@ -175,7 +175,19 @@
 					价格 
 					<input name="" id="js-price-start" value="<{$priceStart}>" type="text" class="list_r_menu_l2_in">- 
 					<input name="" id="js-price-end" value="<{if ($priceEnd)}><{$priceEnd}><{/if}>" type="text" class="list_r_menu_l2_in">
-					<a href="javascript:;" class="list_r_menu_l2_pnt" onclick="searchByPrice()">确定</a>
+					<a href="javascript:;" id="js-confirm-price" style="display:none;" class="list_r_menu_l2_pnt" onclick="searchByPrice()">确定</a>
+					<script>
+						setInterval(function(){
+							var priceStart = $('#js-price-start').val();
+							var priceEnd = $('#js-price-end').val();
+							if (priceStart || priceEnd) {
+								$('#js-confirm-price').show();
+							}
+							else {
+								$('#js-confirm-price').hide();
+							}
+						},100);
+					</script>
 				</div>
 				<div class="list_r_menu_l list_r_menu_r">
 
