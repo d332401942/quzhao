@@ -29,10 +29,18 @@ class LoveAjaxView extends BaseAjaxView
 			$model->status = 0;
 			if (isset ( $_POST ['loveType'] ) && $_POST ['loveType'] == 1)
 			{
+<<<<<<< HEAD
 				$model->loveType = $_POST ['loveType'];
 				$data = M ( 'ProductData' );
 				$data->loveNum ( ( int ) $_POST ['pid'] );
 				$this->response ( true );
+=======
+				$model->loveType		= $_POST['loveType'];
+				$data = M('ProductData');
+				$data->loveNum((int)$_POST['pid']);
+				
+				$this->response(true);
+>>>>>>> ee3d58fe964f8e7f38e39959e25346d4bfc5a714
 			}
 			else
 			{
