@@ -26,6 +26,15 @@ class HomeTjDataBusiness extends BaseBusiness
 		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
 		$data->exec($sql);
 	}
+	
+	/**
+	 * 前台超级会员调整排序
+	 */
+	public function upSort($id, $userId)
+	{
+		$userData = new UserData();
+		
+	}
 	 
 	 /*
 	*得到会员喜欢商品

@@ -79,11 +79,17 @@
 							</h4>
 							<a href="javascript:" onmouseover="showShare(<{$model->id}>,'<{$model->name}>','<{if (!preg_match('/^http:\/\//',$model->pic))}>http://www.quzhao.com/<{/if}><{$model->pic}>')" ><img src="__RESOURCE__/images/shr.gif" />分享</a>
 							</span>
-							
 						</h3>
 						<div class="dp_box2_l_bt">
 							<a onclick="hitsLog(1,<{$model->id}>);return dpLog(<{$model->id}>);" href="<{$model->href}>" target="_blank">去购买</a>
 						</div>
+						<{if (!empty($CurrentUser->power) && $CurrentUser->power == 2)}>
+							<br />
+							<span>
+								<button onclick="upSort(<{$model->id}>)">提升排序</button>&nbsp;
+								<button onclick="defSort(<{$model->id}>)">恢复默认排序</button>
+							</span>
+						<{/if}>
 					</li>
 				</ul>
 				<{/foreach}>
@@ -152,6 +158,22 @@
 </form>
 <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 <script>
+
+function upSort(id) {
+	$.ajax({
+		url: '__AJAX__/dp/upSort?stmp=' + new Date().toString(),
+		type: 'get',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+			else {
+				alert(data.error.message);
+			}
+		}
+	});
+}
 
 function goPage(page) {
 	var formObj = $('#js-form-page');
