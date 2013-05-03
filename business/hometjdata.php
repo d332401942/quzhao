@@ -23,8 +23,7 @@ class HomeTjDataBusiness extends BaseBusiness
 	 public function loveNum($id)
 	{
 		$data = new HomeTjDataData();
-		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
-		$data->exec($sql);
+		$data->loveNum($id);
 	}
 	 
 	 /*
