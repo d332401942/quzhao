@@ -42,6 +42,24 @@ class HomeTjDataData extends BaseData
         $this->exec($sql);
     }
     
+    /**
+     * 前台超级会员调整排序
+     */
+    public function upSort($id)
+    {
+    	$sql = 'update home_tj_data set sort = sort + 1 where id = ' . $id;
+    	$this->exec($sql);
+    }
+    
+    /**
+     * 前台超级会员调整排序
+     */
+    public function defSort($id)
+    {
+    	$sql = 'update home_tj_data set sort = 0 where id = ' . $id;
+    	$this->exec($sql);
+    }
+    
     public function clearHot($ids)
     {
         if (!$ids)
@@ -88,7 +106,7 @@ class HomeTjDataData extends BaseData
 			$sql = 'select * from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE.' order by ctime desc,sort desc,id desc limit '.$start.','.$end;
 			$countSql = 'select count(*) from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE;
 		}else{
-			$sql = 'select t1.* from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE.' order by t1.ctime desc,t1.sort desc, t1.id desc limit '.$start.','.$end;
+			$sql = 'select t1.* from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE.' order by t1.sort desc,t1.ctime desc, t1.id desc limit '.$start.','.$end;
 			$countSql = 'select count(*) from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE;
 		}
         $count = $this->queryOne($countSql);

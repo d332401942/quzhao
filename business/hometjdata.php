@@ -32,7 +32,28 @@ class HomeTjDataBusiness extends BaseBusiness
 	public function upSort($id, $userId)
 	{
 		$userData = new UserData();
-		
+		$userModel = $userData->getOneById($userId);
+		if ($userModel->power != UserDataModel::POWER_SUPER)
+		{
+			$this->throwException('权限不够', CodeException::USER_NOT_POWER);
+		}
+		$data = new HomeTjDataData();
+		$data->upSort($id);
+	}
+	
+	/**
+	 * 前台超级会员调整排序
+	 */
+	public function defSort($id, $userId)
+	{
+		$userData = new UserData();
+		$userModel = $userData->getOneById($userId);
+		if ($userModel->power != UserDataModel::POWER_SUPER)
+		{
+			$this->throwException('权限不够', CodeException::USER_NOT_POWER);
+		}
+		$data = new HomeTjDataData();
+		$data->defSort($id);
 	}
 	 
 	 /*

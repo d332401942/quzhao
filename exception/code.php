@@ -41,4 +41,10 @@ class CodeException extends Feng
 	 * 没有设置用户email
 	 */
 	const USER_NO_EAMIL = 50002;
+	
+	/**
+	 * 权限不够
+	 * @var unknown
+	 */
+	const USER_NOT_POWER = 6000;
 }

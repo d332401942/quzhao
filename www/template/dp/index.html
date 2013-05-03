@@ -163,6 +163,24 @@ function upSort(id) {
 	$.ajax({
 		url: '__AJAX__/dp/upSort?stmp=' + new Date().toString(),
 		type: 'get',
+		data: {id:id},
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+			else {
+				alert(data.error.message);
+			}
+		}
+	});
+}
+
+function defSort(id) {
+	$.ajax({
+		url: '__AJAX__/dp/defSort?stmp=' + new Date().toString(),
+		type: 'get',
+		data: {id:id},
 		dataType: 'json',
 		success: function(data) {
 			if (data.result) {
