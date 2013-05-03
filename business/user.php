@@ -177,6 +177,11 @@ class UserBusiness extends BaseBusiness
 	public function changeData($model)
 	{
 		$data = new UserData ();
+		if ($model->email)
+		{
+			$this->checkuser($model->email);
+			$model->setWorkFields(array('email'));
+		}
 		$data->change ( $model );
 	}
 	

@@ -11,12 +11,15 @@
 					<input class="yy" value="<{if (!empty($CurrentUser->nickname))}><{$CurrentUser->nickname}><{else}>用户名<{/if}>" type="text" onblur="if (this.value == '' ){this.value = '用户名'}" onfocus="if(this.value=='用户名'){this.value = ''}" name="nickname" />
 				</div>
 				
+				<div style="margin-top:13px;" class="you_name">
+					<input name="email" onblur="emailBlur(this)" onfocus="emailFocus(this)" class="yy" <{if (!empty($CurrentUser->email))}>disabled<{/if}> value="<{if (empty($CurrentUser->email))}>登录邮箱<{else}><{$CurrentUser->email}><{/if}>" type="text">
+				</div>
 				<h3 id="id-nickname-error" style="color: #C74396;font-size: 12px;font-weight: lighter;"></h3>
 				<input type="hidden" name="cityid" id="cityname" value="10100" />
 				<div class="dingwei">
-				<a href="javascript:" onclick="showCity()">
-					<img src="__RESOURCE__/images/12-16.jpg"/>
-				</a>&nbsp;
+					<a href="javascript:" onclick="showCity()">
+						<img src="__RESOURCE__/images/12-16.jpg"/>
+					</a>&nbsp;
 					<span id="js-city-name" onclick="showCity()"><{$cityName}></span>
 				</div>
 			</div>
@@ -137,15 +140,60 @@
 </div>
 
 <script>
+function emailBlur(obj) {
+	var email = $(obj).val();
+	if (email == '') {
+		$(obj).val('登录邮箱');
+	}
+	setTimeout(function(){
+		checkEmail(obj);
+	},100);
+}
+
+function checkEmail(obj) {
+	var isCheckEd = false;
+	var email = $(obj).val();
+	if (email == '登录邮箱') {
+		email = '';
+	}
+	$.ajax({
+		url: '__AJAX__/user/checkuser?stmp=' + new Date().toString(),
+		type: 'get',
+		data: {name:email},
+		dataType: 'json',
+		async: false,
+		success: function(data) {
+			if (data.result) {
+				isCheckEd = true;
+			}
+			else {
+				$('#id-nickname-error').html(data.error.message);
+			}
+		}
+	});
+	return isCheckEd;
+}
+
+function emailFocus(obj) {
+	var email = $(obj).val();
+	if (email == '登录邮箱') {
+		$(obj).val('');
+	}
+}
 
 function checkForm(obj) {
 	var nicknameObj = $(obj).find('input[name="nickname"]');
+	var emailObj = $(obj).find('input[name="email"]');
 	var nickname = nicknameObj.val();
 	if (!nickname || nickname == '用户名') {
 		$('#id-nickname-error').html('请输入用户名');
 		return false;
 	}
 	
+	if (!emailObj.attr('disabled') && !checkEmail(emailObj)) {
+		return false;
+	}
+	return true;
 }
 
 function changePassword(obj) {
