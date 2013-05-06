@@ -18,9 +18,20 @@ class ListsBrandadminView extends BaseView
 			$page = ( int ) $_GET ['page'];
 		}
 		$pageCore->currentPage = $page;
-		
+		//得到所有数据
 		$business = M('BrandBusiness');
 		$result = $business->getAll($pageCore);
+		$userid = null;
+		if(!empty($_COOKIE['brand_id']))
+		{
+			$userid = $_COOKIE['brand_id'];
+		}	
+		//得到总数
+		$count = $business->getAllTotal($userid);
+		//得到已经通过审核总数
+		$tgCount = $business->tgCount($userid);
+		$this->assign('count',$count);
+		$this->assign('tgCount',$tgCount);
 		$this->assign('model' ,$result);
 		$this->assign ( 'pageCore', $pageCore );
 		

@@ -6,10 +6,7 @@ class BrandHomeBrandView extends BaseView
 	public function index($parameters)
 	{
 		
-		if(!isset($_COOKIE['brand_id']) || !isset($_COOKIE['brandModel']) || !isset($_COOKIE['brand_name']))
-		{
-			$this->redirect(APP_URL . '/brandadmin/login');
-		}
+		
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
 		$brandModel = array();

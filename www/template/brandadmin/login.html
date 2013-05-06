@@ -1,31 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title>登陆</title>
-	
-</head>
+<html><head>
+<title>客户端后台管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
-<script type="text/javascript" src="__RESOURCE__/js/jquery.form.js"></script>
-<body style="background:#ccc;">
-<div style="width:100%">
-	<form action="__APP__/brandadmin/login" method="post" style="margin:200px auto;width:250px;" onsubmit="return checkform()">
-		<table>
-			<tr>
-				<td>账号：</td>
-				<td><input name="username" class="username" type="text" value="用户名"/></td>
-			</tr>
-			<tr>
-				<td>密码：</td>
-				<td><input name="password" class="password" type="password"  value=""/></td>
-			</tr>
-			<tr>
-				<td>
-				</td>
-				<td><button style="float:right;" type="submit">登陆</button></td>
-			</tr>
-		</table>
-	</form>
-</div>
+<style>
+body,td,a,p,input{ font-size:9pt}
+body { margin:0px;background-color:#d9ddf7}
+.c92 { FONT-SIZE: 9pt; COLOR: #003366; LINE-HEIGHT: 150%}
+A:hover { COLOR: #ff9900}
+A:link { COLOR: #003366}
+.input { BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid}
+</style>
+
+
+
+</head>
+<body>
+<form action="__APP__/brandadmin/login" method="post" onsubmit="return checkform()">
+
+<br><br>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="500">
+  <tbody>
+  <tr>
+    <td style="font-size:30px; font-weight:900;" align="center" height="60">&nbsp;</td>
+  </tr></tbody></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="732">
+  <tbody>
+  <tr>
+    <td colspan="7"><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="718"></td>
+    <td rowspan="6">&nbsp; </td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="1"></td></tr>
+  <tr>
+    <td colspan="3" rowspan="2" valign="bottom"><img alt="" src="__RESOURCE__/images/jianzhi/img/2_10.gif" height="201" width="341"></td>
+    <td colspan="2" valign="bottom"><img alt="" src="__RESOURCE__/images/jianzhi/img/2_11.gif" height="108" width="295"></td>
+    <td colspan="2">&nbsp; </td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="110" width="1"></td></tr>
+  <tr>
+    <td colspan="4" background="__RESOURCE__/images/jianzhi/img/images/1_12.gif">
+      <table border="0" cellpadding="3" cellspacing="0" width="50%">
+        
+        <tbody>
+        <tr>
+          <td class="c92" width="24%">用户名</td>
+          <td width="76%"><input name="username" class="username" type="text" value="用户名"/></td></tr>
+        <tr>
+          <td class="c92" width="24%">密&nbsp;&nbsp;码</td>
+          <td width="76%"><input name="password" class="password" type="password"  value=""/></td></tr>
+        <tr>
+          <td width="24%">        </td>     
+
+
+          <td width="76%">
+            <div align="left">
+		
+		<input type="image" src="__RESOURCE__/images/jianzhi/img/login.gif" name="btn_submit" value="登陆" />
+        </div></td></tr></tbody></table>
+
+		
+		</td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="93" width="1"></td></tr>
+  <tr>
+    <td colspan="2" background="__RESOURCE__/images/jianzhi/img/1_13.gif" height="161" width="254"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+        <tr>
+          <td height="50"></td></tr>
+        <tr>
+          <td align="right"></td></tr>
+        <tr>
+          <td height="20"></td></tr>
+        <tr>
+          <td align="right"></td></tr></tbody></table></td>
+    <td colspan="4" rowspan="2" background="__RESOURCE__/images/jianzhi/img/1_14.gif" height="212" valign="top" width="387"></td>
+    <td rowspan="3"><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="242" width="77"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="161" width="1"></td></tr>
+  <tr>
+    <td colspan="2" rowspan="2"><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="81" width="254"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="51" width="1"></td></tr>
+  <tr>
+    <td colspan="4"><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="30" width="387"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="30" width="1"></td></tr>
+  <tr>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="195"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="59"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="87"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="214"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="81"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="5"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="77"></td>
+    <td><img alt="" src="__RESOURCE__/images/jianzhi/img/spacer.gif" height="1" width="14"></td>
+    <td></td></tr></tbody></table>
+</form>
 </body>
 </html>
 <script>
