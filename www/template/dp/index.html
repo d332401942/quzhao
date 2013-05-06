@@ -270,16 +270,6 @@ function lovenum(obj,pid) {
 				var diff = parseInt(data.result);
 				$(obj).find('span').html(num + data.result);
 			}
-			else if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			else if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
-			else {
-				alert('该产品已经喜欢过');
-			}
 		}
 	});
 }

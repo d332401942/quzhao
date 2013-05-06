@@ -18,7 +18,7 @@
 <h3>
 <span><img src="__RESOURCE__/images/tm.gif" /><{$goods->ctime|diffNow}>前更新</span>
 <span><img src="__RESOURCE__/images/us.gif" /><a href="javascript:;" class="uss"><{$editorArr[$goods->id % (count($editorArr))]}></a>推荐</span>
-<span><a href="javascript:;" title="喜欢" onclick="lovenum(<{$goods->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$goods->lovenumber}></a></span>
+<span><a href="javascript:;" title="喜欢" onclick="lovenum(this,<{$goods->id}>)"><img src="__RESOURCE__/images/love.gif" /><span><{$goods->lovenumber}></span></a></span>
 
 <span id="fx_zi">
 <h4 class="fx_box_nin" style="display:none;width:280px;" id="js-hover-share-<{$goods->id}>">
@@ -213,7 +213,10 @@ function hideDiv(obj) {
 		}, 1500);
 	}
 }
-function lovenum(pid) {
+
+function lovenum(obj,pid) {
+	var num = $(obj).find('span').html();
+	num = num ? parseInt(num) : 0;
 	if (!CurrentUserInfo) {
 		showLoginDiv();
 	}
@@ -226,17 +229,8 @@ function lovenum(pid) {
 		url:url,
 		success:function(data){
 			if(data.result) {
-				window.location.reload();
-			}
-			else if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			else if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
-			else {
-				alert('该产品已经喜欢过');
+				var diff = parseInt(data.result);
+				$(obj).find('span').html(num + data.result);
 			}
 		}
 	});
