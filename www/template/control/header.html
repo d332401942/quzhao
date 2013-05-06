@@ -43,7 +43,7 @@
 		var keyword = $(obj).find('input[name="keyword"]').val();
 		url += '__LIMIT__keyword/' + encodeURI(keyword);
 		var type = '<{$type}>';
-		if (type == '') {
+		if (type == 'search') {
 			window.location.href = url;
 		}
 		else {
