@@ -83,34 +83,40 @@ class BrandBusiness extends BaseBusiness
 	//得到发布次数
 	public function getAllTotal($userid = false,$strTime = false,$endTiem =false,$yueStr = false,$yueEnd =false)
 	{
-		$data = new BrandData();
-		$sql = 'select count(*) as num from brand where userid = '. $userid;
-		if($yueStr && $yueEnd)
+		if($userid)
 		{
-			$sql = 'select count(*) as num from brand where userid = '. $userid.' AND createtime > '.$yueStr.' && createtime < '.$yueEnd;
-		}else if($strTime && $endTiem){
-			$sql = 'select count(*) as num from brand where userid = '. $userid.' AND createtime > '.$strTime.' && createtime < '.$endTiem;
-		}else{
+			$data = new BrandData();
 			$sql = 'select count(*) as num from brand where userid = '. $userid;
-		}
-		$total = $data->query($sql);
-		return $total[0]['num'];
+			if($yueStr && $yueEnd)
+			{
+				$sql = 'select count(*) as num from brand where userid = '. $userid.' AND createtime > '.$yueStr.' && createtime < '.$yueEnd;
+			}else if($strTime && $endTiem){
+				$sql = 'select count(*) as num from brand where userid = '. $userid.' AND createtime > '.$strTime.' && createtime < '.$endTiem;
+			}else{
+				$sql = 'select count(*) as num from brand where userid = '. $userid;
+			}
+			$total = $data->query($sql);
+			return $total[0]['num'];
+		}	
 	}
 	
 	//得到已通过发布次数
 	public function tgCount($userid = false,$strTime = false,$endTiem =false,$yueStr = false,$yueEnd =false)
 	{
-		$data = new BrandData();
-		if($yueStr && $yueEnd)
+		if($userid)
 		{
-			$sql = 'select count(*) as num from brand where  state in(1,6) AND userid = '. $userid.' AND createtime > '.$yueStr.' && createtime < '.$yueEnd;
-		}else if($strTime && $endTiem){
-			$sql = 'select count(*) as num from brand where  state in(1,6) AND  userid = '. $userid.' AND createtime > '.$strTime.' && createtime < '.$endTiem;
-		}else{
-			$sql = 'select count(*) as num from brand where  state in(1,6) AND userid = '. $userid;
-		}
-		$total = $data->query($sql);
-		return $total[0]['num'];
+			$data = new BrandData();
+			if($yueStr && $yueEnd)
+			{
+				$sql = 'select count(*) as num from brand where  state in(1,6) AND userid = '. $userid.' AND createtime > '.$yueStr.' && createtime < '.$yueEnd;
+			}else if($strTime && $endTiem){
+				$sql = 'select count(*) as num from brand where  state in(1,6) AND  userid = '. $userid.' AND createtime > '.$strTime.' && createtime < '.$endTiem;
+			}else{
+				$sql = 'select count(*) as num from brand where  state in(1,6) AND userid = '. $userid;
+			}
+			$total = $data->query($sql);
+			return $total[0]['num'];
+		}	
 	}
 	
 }

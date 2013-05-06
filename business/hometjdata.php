@@ -211,7 +211,7 @@ class HomeTjDataBusiness extends BaseBusiness
 		{
 			$query['tempType'] = 1;
 		}
-		else if ($tempType === 0)
+		else if ($tempType == 2)
 		{
 			$query['tempType'] = 0;
 		}
