@@ -1,36 +1,41 @@
-<div class="top_bar_con">
-	<ul>
-		<li style="margin-left:8px;"><a href="javascript:;" onclick="showShareDiv()">我要推荐</a></li>
-		<li style=""><a href="javascript:;"><!--<img src="__RESOURCE__/images/6-4.png" alt="">--></a></li>
-		<{if (!empty($CurrentUser->id))}>
-			<li style="margin-left:805px;_margin-left:825px;"><a href="__APP__/user" onmouseover1="$(this).float($('#js-header-replay'))" href="javascript:;"><{$CurrentUser->nickname}></a></li>
-			<li style=" margin-top:-10px;">
-				<a href="__APP__/user">
-					<{if ($CurrentUser->head)}>
-						<img width="24" height="24" src="<{$CurrentUser->head|parsePicpath}>" alt="">
-					<{else}>
-						<img width="24" height="24" src="__RESOURCE__/images/tx.gif" alt="">
-					<{/if}>
-				</a>
-			</li>
-		<{else}> 
-			<li style="margin-left:850px;_margin-left:860px;">
-				<a href="javascript:;" onclick="showLeftLogin()">登录</a>
-			</li>
-			<li style=""><a href="javascript:;" onclick="showLeftLogin()"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-			<li style="margin-left:15px;"><a href="javascript:;" onclick="showRegDiv();" id="js-reg">注册</a></li>
-		<{/if}>
-		<li style="margin-left:15px;display:none;"><a href="javascript:;">帮助</a></li>
-		<li style="display:none;"><a href="javascript:;"><img src="__RESOURCE__/images/6-4.png" alt=""></a></li>
-		<{if (!empty($CurrentUser->id))}>
-		<li style="margin-left:15px;"><a href="javascript:;" onclick="loginOut();">退出</a></li>
-		<{/if}>
-	</ul>	
+<{if (!empty($CurrentUser->id))}>
+<div class="user_top">
+	<div class="user_top_l">
+		<a href="javascript:;" onclick="showShareDiv()">我要分享</a>
+		</div>
+		<div class="user_top_r">
+		<a href="javascript:;" onclick="loginOut();">退出</a>
+		<a href="javascript:;" class="user_top_r_u" onmouseover="$(this).float($('#js-user-setup'))"><{$CurrentUser->nickname}> 
+			<{if ($CurrentUser->head)}>
+				<img width="24" height="24" src="<{$CurrentUser->head|parsePicpath}>" alt="">
+			<{else}>
+				<img width="24" height="24" src="__RESOURCE__/images/tx.gif" alt="">
+			<{/if}>
+		</a>	
+	</div>
 </div>
-<{if (empty($CurrentUser->id))}>
-<div class="dingwei2" id="js-login-div" style="display:none">
-	<form action="" method="post"  onsubmit="return doLogin(this)">
+
+<div class="dingwei2" id="js-user-setup" style="display:none">
+	<ul class="youhui user_setup">
+		<li><a href="__APP__/user">个人主页</a></li>
+		<li><a href="__APP__/user/change">设置</a></li>
+		<li><a href="javascript:;" onclick="loginOut();">退出</a></li>
+	</ul>
+	
+</div>
+<{else}>
+<div class="user_top">
+	<div class="user_top_l">
+		<a href="javascript:;" onclick="showShareDiv()">我要分享</a>
+		</div>
+		<div class="user_top_r">
+		<a href="javascript:;"  onclick="showRegDiv();" id="js-reg">注册</a>
+		<a href="javascript:;"  onclick="showLeftLogin()">登录<font>v</font></a>	
+	</div>
+	<div class="dingwei2" id="js-login-div" style="display:none">
+		
 		<div class="login">
+			<form action="" method="post"  onsubmit="return doLogin(this)">
 			<div class="login_yi">
 				<input name="email" class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style="">
 			</div>
@@ -51,9 +56,16 @@
 					<li><a href="javascript:;" onclick="loginQQ();hideLeftLogin();"><img src="__RESOURCE__/images/29-28-qq.jpg" alt=""></a></li>
 				</ul>
 			</div>
+			</form>
 		</div>
-	</form>
+		
+	</div>
 </div>
+<{/if}>
+
+
+<{if (empty($CurrentUser->id))}>
+
 <{/if}>
 <div class="dingwei2">
 	<ul class="youhui" id="js-header-share" style="display:none;">
