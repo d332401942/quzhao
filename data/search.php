@@ -90,8 +90,7 @@ class SearchData extends BaseData
 		$this->setSortMode ( $sphinx, $sort );
 		$this->setPublicFilter ( $sphinx );
 		$sphinx->setLimits ( 0, 5, 5 );
-		$result = $sphinx->query ( '@title ' . $keyword, 'product' );
-		
+		$result = $sphinx->query ( $keyword, 'product' );
 		$productIds = $sphinx->getResultIds ( $result );
 		if (empty ( $productIds ))
 		{
