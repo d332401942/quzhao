@@ -23,6 +23,8 @@ class BrandDataModel extends BaseDataModel
 	public $istj = 0;
 	
 	public $temp = 0;
+	
+	public $maxrebate = 0;
 
 	public function __construct()
 	{

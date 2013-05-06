@@ -25,8 +25,13 @@
 				<td><input value="<{if (isset($model->url))}><{$model->url}><{/if}>" type="text" name="url" id="url" />&nbsp;&nbsp;<span style="color:red">*</span></td>
 			</tr>
 			<tr>
-				<td>折扣：</td>
+				<td>最低折扣：</td>
 				<td><input value="<{if (isset($model->rebate))}><{$model->rebate}><{/if}>" type="text" name="rebate" id="rebate" />&nbsp;&nbsp;<span style="color:red">*</span></td>
+			</tr>
+			
+			<tr>
+				<td>最高折扣：</td>
+				<td><input value="<{if (isset($model->maxrebate))}><{$model->maxrebate}><{/if}>" type="text" name="maxrebate" id="maxrebate" />&nbsp;&nbsp;<span style="color:red">*</span></td>
 			</tr>
 			
 			<tr>
@@ -58,6 +63,7 @@ function checkform() {
 	var	name = $('#name').val();
 	var	url = $('#url').val();
 	var	rebate = $('#rebate').val();
+	var	maxrebate = $('#maxrebate').val();
 	var	merchants = $('#merchants').val();
 	
 	if(name == '') {
@@ -69,7 +75,11 @@ function checkform() {
 		return false;
 	}
 	if(rebate == '') {
-		alert('折扣不能为空');
+		alert('最低折扣不能为空');
+		return false;
+	}
+	if(maxrebate == '') {
+		alert('最低折扣不能为空');
 		return false;
 	}
 	if(merchants == '') {

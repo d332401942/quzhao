@@ -49,7 +49,7 @@ class BrandData extends BaseData
 	{
 		if($num == 1)
 		{
-			$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 AND brand.istj = 1 order by id desc limit 10) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.istj = 1 order by b.id desc';
+			$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate,b.maxrebate as b_maxrebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 AND brand.istj = 1 order by id desc limit 10) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.istj = 1 order by b.id desc';
 		
 		}
 		else{
@@ -76,13 +76,13 @@ class BrandData extends BaseData
 				$row = $this->query ( $sql );
 				$pageCore->count = $row [0] ['num'];
 				$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-				$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate FROM merchants AS m INNER JOIN brand AS b ON b.merchantsId = m.id INNER JOIN brand_name AS bn ON bn.id = b.brand_name_id left join brand_cate as bc on bc.id = bn.cateid WHERE m.id = '.$mid.$where2;
+				$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate,b.maxrebate as b_maxrebate FROM merchants AS m INNER JOIN brand AS b ON b.merchantsId = m.id INNER JOIN brand_name AS bn ON bn.id = b.brand_name_id left join brand_cate as bc on bc.id = bn.cateid WHERE m.id = '.$mid.$where2;
 			}else{
 				$sql = 'SELECT count(*) as num FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 '.$where;
 				$row = $this->query ( $sql );
 				$pageCore->count = $row [0] ['num'];
 				$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-				$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 '.$where.'  LIMIT  '.($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize.' ) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 ';
+				$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate, b.maxrebate as b_maxrebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 '.$where.'  LIMIT  '.($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize.' ) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 ';
 			}	
 		}	
 		$statement = $this->run($sql);
@@ -93,15 +93,8 @@ class BrandData extends BaseData
 			if (empty($brandModels[$bn_id]))
 			{
 				$brandModel = new BrandnameDataModel();
-				$brandModel->maxRebate = 0;
-				$brandModel->minRebate = 0;
-				foreach ($brandModel as $key => $val) 
-				{
-					if (isset($result['bn_' . $key]))
-					{
-						$brandModel->$key = $result['bn_' . $key];
-					}
-				}
+				$brandModel->maxrebate = $result['b_maxrebate'];
+				$brandModel->rebate = $result['b_rebate'];
 				$brandModels[$bn_id] = $brandModel;
 			}
 			if (isset($result['m_id']))
@@ -115,19 +108,12 @@ class BrandData extends BaseData
 					}
 				}
 				$merchantsModel-> b_rebate = $result['b_rebate'];
-				if ($merchantsModel-> b_rebate > $brandModel->maxRebate)
-				{
-					$brandModel->maxRebate = $merchantsModel-> b_rebate;
-				}
-				if ($merchantsModel-> b_rebate < $brandModel->minRebate || !$brandModel->minRebate)
-				{
-					$brandModel->minRebate = $merchantsModel-> b_rebate;
-				}
 				$merchantsModel->b_url = $result['b_url'];
-				$brandModels[$bn_id]->rebate = $brandModel->minRebate.'-'.$brandModel->maxRebate;
+				
 				$brandModels[$bn_id]->shangjia[$merchantsModel->id] = $merchantsModel;
 			}
 		}
+		//P($brandModels);
 		return $brandModels;
 	}
 	
