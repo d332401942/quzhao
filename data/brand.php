@@ -98,7 +98,7 @@ class BrandData extends BaseData
 				$brandModel->rebate = $result['b_rebate'];
 				$brandModel->name = $result['bn_name'];
 				$brandModel->image = $result['bn_image'];
-				//$brandModel->url = $result['b_url'];
+				$brandModel->url = $result['b_url'];
 				$brandModels[$bn_id] = $brandModel;
 			}
 			if (isset($result['m_id']))
