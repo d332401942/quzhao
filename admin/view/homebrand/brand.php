@@ -9,7 +9,7 @@ class BrandHomeBrandView extends BaseView
 		
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
-		$brandModel = array();
+		$brandModel = null;
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
