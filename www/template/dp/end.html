@@ -6,7 +6,9 @@
 <div class="dp_box2_l_b">
 <div class="dp_box2_l end_box">
 <ul>
-<li class="dp_box2_l_title"><h1><a href="<{$goods->href}>" target="_blank"><{$goods->name}></a></h1>
+<li class="dp_box2_l_title">
+	<h1><a href="<{$goods->href}>" target="_blank"><{$goods->name}></a></h1>
+	<h2><a onclick="hitsLog(1,<{$goods->id}>);return dpLog(<{$goods->id}>);" href="<{$goods->href}>" target="_blank"><{$goods->title}></a></h2>
 
 </li>
 <li class="dp_box2_l_l">
