@@ -56,16 +56,18 @@
 <{if (!empty($brandModel))}>
 <{foreach ($brandModel as $val)}>
 <li>
+<{if (count($val->shangjia) >1)}>
 <span>
 <{foreach ($val->shangjia as $v)}>
 <a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
 <{/foreach}>
 </span>
+<{/if}>
 <div class="sale_new_cont_top">
-	<a href="javascript:;"><img src="<{$val->image|parsePicpath}>" /></a>
+	<a href="<{$val->url}>" target="_blank"><img src="<{$val->image|parsePicpath}>" /></a>
 </div>
 <div class="sale_new_cont_tt">
-	<h2><a href="javascript:;"><{$val->name}></a></h2>
+	<h2><a href="<{$val->url}>" target="_blank"><{$val->name}></a></h2>
 	<div class="sale_new_cont_jg">
 		<div class="sale_new_cont_jg_l">
 			<strong><{$val->rebate}>-<{$val->maxrebate}></strong>折
