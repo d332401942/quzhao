@@ -188,9 +188,17 @@ class HomeTjDataData extends BaseData
 		return $result;
 	}
 	
-	public function loveNum($id)
+	public function loveNum($id, $loveType = LoveDataModel::LOVE_TYPE_HOME_TJ_DATA)
 	{
-		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
-		$this->exec($sql);
+		if ($loveType == LoveDataModel::LOVE_TYPE_SEARCH)
+		{
+			$data = new ProductData();
+			$data->loveNum($id);
+		}
+		else
+		{
+			$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
+			$this->exec($sql);
+		}
 	}
 }
