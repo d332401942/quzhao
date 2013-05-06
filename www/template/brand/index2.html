@@ -40,9 +40,9 @@
   <h3><a href="#">更多</a></h3>
 </div>
 <div class="sale_new_nav">
-<a href="javascript:;" onclick="goCid(0)"class="sale_xz">最新</a>
+<a href="javascript:;" onclick="goCid(0)" class="sale_xz">最新</a>
 <{foreach ($cateModel as $model)}>
-<a href="javascript:;" onclick="goCid(<{$model->id}>)"><{$model->name}></a>
+<a href="javascript:;" onclick="goCid(this,<{$model->id}>)"><{$model->name}></a>
 <{/foreach}>
 </div>
 <div class="sale_new_nav2">                     
@@ -56,7 +56,7 @@
 <{if (!empty($brandModel))}>
 <{foreach ($brandModel as $val)}>
 <li>
-<{if (count($val->shangjia) >1)}>
+<{if (!$mid)}>
 <span>
 <{foreach ($val->shangjia as $v)}>
 <a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
@@ -99,8 +99,9 @@ function goPage(page) {
 	formTogo();
 }
 
-function goCid(cid) {
+function goCid(obj,cid) {
 	var formObj = $('#js-form-page');
+	obj.addClass();
 	formObj.find('input[name="cid"]').val(cid);
 	$('#letter').val('');
 	$('#mid').val('');
