@@ -1,5 +1,7 @@
 <script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
-<form style="clear:both;" action="__APP__/homebrand/brand2" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+<input type="hidden" name="oldimage" value="<{$model->image}>">
+<input type="hidden" name="id" value="<{$model->id}>">
 	<div class="add-div">
 		<table>
 			<tr>
@@ -22,7 +24,7 @@
 						<option value="">请选择分类</option>
 						<{if ($cateModel)}>
 						<{foreach ($cateModel as $val)}>
-							<option value="<{$val->id}>" <{if (isset($model->cate))}> <{if ($val->id == $model->cate)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
+							<option value="<{$val->id}>" <{if (isset($model->cateid))}> <{if ($val->id == $model->cateid)}> selected="selected" <{/if}><{/if}> ><{$val->name}></option>
 						<{/foreach}>
 						<{/if}>
 					</select>&nbsp;&nbsp;<span style="color:red">*</span>

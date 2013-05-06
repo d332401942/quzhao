@@ -89,12 +89,16 @@ class BrandData extends BaseData
 		$brandModels = array();
 		while ($result = $statement->fetch(PDO::FETCH_ASSOC))
 		{
+			//P($result);
 			$bn_id = $result['bn_id'];
 			if (empty($brandModels[$bn_id]))
 			{
 				$brandModel = new BrandnameDataModel();
 				$brandModel->maxrebate = $result['b_maxrebate'];
 				$brandModel->rebate = $result['b_rebate'];
+				$brandModel->name = $result['bn_name'];
+				$brandModel->image = $result['bn_image'];
+				//$brandModel->url = $result['b_url'];
 				$brandModels[$bn_id] = $brandModel;
 			}
 			if (isset($result['m_id']))

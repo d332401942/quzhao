@@ -1,74 +1,16 @@
 <{include '__TEMPLATE__/header.html'}>
-<{if ($count)}>
-	<div style="color:red;margin:10px;">ID：<{$userid}>&nbsp;&nbsp;<{$date}><{if ($yue)}><{$yue}>月<{/if}>总共发布：<{$count}>&nbsp;&nbsp;已经通过：<{$tgCount}></div>
-<{/if}>
+
 <div class="list-div">
 	<div class="content-select">
 		<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
 		<input type="hidden" name="page" value="<{$page}>" />
 		<input type="hidden" name="state" value="<{$state}>" />
 		<table>
-			<tr>
 				<td>
-					商品ID
+					品牌名称
 				</td>
 				<td>
-					<input name="id" value="" />
-				</td>
-				<td>
-					添加类型
-				</td>
-				<td>
-					<select name="temp">
-						<option value="">全部</option>
-						<option value="2" <{if ($temp == 2)}>selected="selected"<{/if}>>本站</option>
-						<option value="1" <{if ($temp == 1)}>selected="selected"<{/if}>>兼职</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					推荐：
-				</td>
-				<td>
-					<label>全部<input class="js-search-state" value="" type="checkbox" /></label>&nbsp;
-					<label>有货<input  class="js-search-state" value="1" type="checkbox" /></label>&nbsp;
-					<label>无货<input  class="js-search-state" value="2" type="checkbox" /></label>&nbsp;
-					<label>待审核<input  class="js-search-state" value="4" type="checkbox" /></label>&nbsp;
-					<label>不合格<input  class="js-search-state" value="3" type="checkbox" /></label>&nbsp;
-				</td>
-				<td>
-					按月查看
-				</td>
-				<td width="50">
-					<select name="yue">
-						<option value="">月份</option>
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-					</select>
-				</td>
-				<td>
-					按天查看
-				</td>
-				<td>
-					<script language="javascript" type="text/javascript" src="__RESOURCE__/js/My97DatePicker/WdatePicker.js"></script>
-					<input class="Wdate" name="timeCount" type="text" onClick="WdatePicker()">
-				</td>
-				<td>
-					输入id查看总数
-				</td>
-				<td>
-					<input name="userid" value="" size="7" />
+					<input name="name" value="" />
 				</td>
 				<td><button type="submit">筛选</button>
 			</tr>
@@ -83,37 +25,19 @@
 		<table style="width:100%;margin:auto;" border="0">
 	<tr>
 		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
-		<th style="width:30px;">ID</th>
-		<th style="width:50px;">状态</th>
-		<th style="width:100px;">添加人</th>
-		<th style="width:100px;">审核人</th>
-		<th style="width:150px;">商家</th>
-		<th style="width:200px;">品牌名称</th>
-		<th style="width:120px;">是否推荐</th>
-		<th>入库时间</th>
-		<th style="width:85px;">操作</th>
+		<th style="width:50px;">ID</th>
+		<th style="width:350px;">名称</th>
+		<th style="width:100px;">操作</th>
 	</tr>
 		<{if ($model)}>
 		<{foreach ($model as $val)}>
 		<tr>
 			<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
 			<td align="center"><{$val->id}></td>
-			<td>
-				<select onchange="changeState(this,<{$val->id}>)">
-					<option <{if ($val->state == 1)}>selected<{/if}> value="1" > 有货</option>
-					<option <{if ($val->state == 2)}>selected<{/if}> value="2" > 无货</option>
-					<option <{if ($val->state == 4)}>selected<{/if}> value="4" > 待审核</option>
-					<option <{if ($val->state == 3)}>selected<{/if}> value="3" > 不合格</option>
-				</select>
-			</td>
-			<td align="center"><{if ($val->username)}><{$val->username}><{else}>添加人<{/if}></td>
-			<td align="center"><{$val->audit}></td>
-			<td align="center"><{$val->m_name}></td>
-			<td align="center"><{$val->bn_name}></td>
-			<td align="center"><{if ($val->istj == 1)}>是<{else}>否<{/if}></td>
-			<td align="center"><{$val->createtime|date_format:'Y-m-d H:i:s'}></td>
+			<td align="center"><{$val->name}></td>
+			
 			<td align="center">
-				<a href="__APP__/homebrand/brand__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
+				<a href="__APP__/homebrand/brand2__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
 				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
 			</td>
 		</tr>
@@ -162,7 +86,7 @@ function del(id) {
 	}
 	
 	$.ajax({
-		url: '__AJAX__/brand/del?stmp=' + new Date().toString(),
+		url: '__AJAX__/brandname/del?stmp=' + new Date().toString(),
 		type: 'post',
 		data: {ids:ids},
 		success: function(data) {
