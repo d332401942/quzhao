@@ -43,9 +43,10 @@
 </form>
 <script type="text/javascript">
 
-setInterval(function(){
+var sumval = setInterval(function(){
 	var file = $('#js-portrait-file').val();
 	if (file) {
+		clearInterval(sumval);
 		$('#js-portrait-file-form').submit();
 	}
 },200);
