@@ -33,6 +33,11 @@ class CodeException extends Feng
 	const USER_NO_AGREEMENT	= 10005;
 	
 	/**
+	 * 用户昵称没有填写
+	 */
+	const USER_NO_NICKNAME = 10006;
+	
+	/**
 	 * 没有登录
 	 */
 	const USER_NOT_LOGIN = 50001;

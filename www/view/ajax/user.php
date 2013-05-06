@@ -78,6 +78,12 @@ class UserAjaxView extends BaseAjaxView
 		{
 			$this->responseError('没有接受用户注册协议',CodeException::USER_NO_AGREEMENT);	
 		}
+		if (empty($_POST['nikename']) || $_POST['nikename'] == '昵称')
+		{
+			$this->responseError('请填写昵称', CodeException::USER_NO_NICKNAME);
+		}
+		$nikename = trim($_POST['nikename']);
+		$nikename = mb_substr($nikename, 0, 20, 'utf-8');
 		$business = M('UserBusiness');
 		$model = new UserDataModel();
 		$model->email 		= trim($_POST['email']);
@@ -91,7 +97,7 @@ class UserAjaxView extends BaseAjaxView
 		$model->othersite	= 0;
 		$model->status		= 1;
 		$model->power = UserDataModel::POWER_DEFAULT;
-		$model->nickname = '匿名用户';
+		$model->nickname = $nikename;
 		foreach ($model as $key => $val)
 		{
 			if (empty($val))
