@@ -1,6 +1,6 @@
 <?php 
 
-class IndexIndexView extends BaseView
+class Index2IndexView extends BaseView
 {
 	
 	private $classModels = array();
@@ -36,6 +36,15 @@ class IndexIndexView extends BaseView
         $tuanBusiness = new NetTuanBusiness();
         $tuanModels = $tuanBusiness->getIndexTuanModels();
         $tuanModels = $tuanModels ? $tuanModels : array();
+		
+		
+		//得到所有品牌数据
+		$num = 1;
+		$business = M('BrandBusiness');
+		$result = $business->getAll2('','','','',$num);
+		$this->assign('brandModel' ,$result);
+		
+		
 		$this->assign('dpModels', $dpModels);
 		$this->assign('hotHomeBrandModels', $hotHomeBrandModels);
 		

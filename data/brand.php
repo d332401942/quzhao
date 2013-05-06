@@ -40,11 +40,12 @@ class BrandData extends BaseData
 	//前台页面数据
 	 public function getAll2($pageCore,$cid = false,$letter = false,$mid= false,$num = false)
 	{
-		if($num)
+		if($num == 1)
 		{
 			$sql = 'SELECT bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 AND brand.istj = 1 order by id desc limit 10) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.istj = 1 order by b.id desc';
 		
-		}else{
+		}
+		else{
 			$where = ' AND '.true;
 			$where2 = ' AND '.true;
 			if($cid)

@@ -81,8 +81,8 @@
 				<td>
 					<select name="temp">
 						<option value="">全部</option>
-						<option value="2">本站</option>
-						<option value="1">兼职</option>
+						<option value="2" <{if ($tempType == 2)}>selected="selected"<{/if}>>本站</option>
+						<option value="1"<{if ($tempType == 1)}>selected="selected"<{/if}>>兼职</option>
 					</select>
 				</td>
 				<td><button type="submit">筛选</button>

@@ -114,40 +114,42 @@ var overTiemFloatData = [];
 		</div>
 	</div>
 </div>
-
 <div class="box">
 <div class="cont_title">
 	<h1>品牌特卖<font>100%品质保证，100%优惠</font></h1>
 	<h3><a href="__APP__/brand">更多</a></h3>
 </div>
-<div  class="sale_new_cont">
-<ul>
-<{if (!empty($brandModel))}>
-<{foreach ($brandModel as $val)}>
-<li>
-<span>
-<{foreach ($val->shangjia as $v)}>
-<a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
-<{/foreach}>
-</span>
-<div class="sale_new_cont_top">
-	<a href="javascript:;"><img src="<{$val->image|parsePicpath}>" /></a>
+<div class="pp">
+	<{foreach ($brandDataModels as $model)}>
+	<ul>
+		<a href="<{$model->tjhref}>" onclick="return hitsLog(2,<{$model->id}>)" target="_blank">
+			<li class="pp_l">
+				<h2><img src="<{$model->pic|parsePicpath}>" /></h2>
+				<h2><{$model->title1}></h2>
+				<h1><{$model->title2}></h1>
+				<h2><{$model->time_start|date_format:'m月d日'}>-<{$model->time_end|date_format:'m月d日'}></h2>
+			</li>
+			<li class="pp_r"><img src="<{$model->tjpic|parsePicpath}>" /></li>
+			<li class="pp_fu" id="js-over-time-<{$model->id}>">
+			</li>
+			<script>
+				var overTimeDp = <{$model->time_end - time()}>;
+				overTiemFloatData.push({obj:$('#js-over-time-<{$model->id}>'),time:overTimeDp});
+			</script>
+		</a>
+	</ul>
+	<{/foreach}>
+
 </div>
-<div class="sale_new_cont_tt">
-	<h2><a href="javascript:;"><{$val->name}></a></h2>
-	<div class="sale_new_cont_jg">
-		<div class="sale_new_cont_jg_l">
-			<strong><{$val->rebate}></strong>折
-		</div>
-		<div class="sale_new_cont_jg_r"><a href="javascript:;"><{count($val->shangjia)}></a></div>
-	</div>
-</div>
-</li>
-<{/foreach}>
-<{else}>
-暂无品牌数据
-<{/if}>
-</ul>
+<div class="pp_rr">
+	<h2>热门品牌</h2>
+	<ul>
+		<{foreach ($hotHomeBrandModels as $model)}>
+		<li>
+			<a href="<{$model->href}>" target="_blank"><img src="<{$model->pic|parsePicpath}>" /></a>
+		</li>
+		<{/foreach}>
+	</ul>
 </div>
 </div>
 

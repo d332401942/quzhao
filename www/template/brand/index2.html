@@ -84,7 +84,7 @@
 <script src="__RESOURCE__/js/lx2.js"></script>
 <{uc class="PageControlView" pageCore="$pageCore"}>
 <{uc class="FooterControlView"}>
-<form style="display:none;" id="js-form-page">
+<form style="display:none;" id="js-form-page" method="get">
 	<input type="hidden" name="cid" value="<{$cid}>" />
 	<input type="hidden" name="letter" id="letter" value="<{$letter}>" />
 	<input type="hidden" name="page" value="<{$page}>" />
@@ -118,7 +118,7 @@ function goSj(mid) {
 function formTogo() {
 	var formObj = $('#js-form-page');
 	var data = formObj.formToArray();
-	var url = '__APP__/brand__LIMIT__';
+	var url = '__APP__/brand/index2__LIMIT__';
 	for (var i in data) {
 		var obj = data[i];
 		if (!obj.value) {

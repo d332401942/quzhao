@@ -158,5 +158,6 @@ class IndexContentView extends BaseView
 		$this->assign('siteModels',$siteModels);
 		$this->assign('title', '内容管理');
 		$this->assign('pageCore', $pageCore);
+		$this->assign('tempType', $tempType);
 	}
 }
