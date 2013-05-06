@@ -17,6 +17,11 @@ class ListsHomeBrandView extends BaseView
 		{
 			$state = $_GET['state'];
 		}
+		$temp = null;
+		if (isset($_GET['temp']) && (int)$_GET['temp'])
+		{
+			$temp = $_GET['temp'];
+		}
 		$id = null;
 		if (!empty($_GET['id']))
 		{
@@ -48,7 +53,7 @@ class ListsHomeBrandView extends BaseView
 		$pageCore->currentPage = $page;
 		//得到所有商品
 		$business = M('BrandBusiness');
-		$result = $business->getAll3($pageCore,$state,$id);
+		$result = $business->getAll3($pageCore,$state,$id,$temp);
 		
 		$userid = null;
 		if(!empty($_GET['userid']))
@@ -69,6 +74,7 @@ class ListsHomeBrandView extends BaseView
 		$this->assign('yue',$yue );
 		$this->assign('model' ,$result);
 		$this->assign ( 'pageCore', $pageCore );
+		$this->assign ( 'temp', $temp );
 		$this->assign ( 'title', '品牌列表');
 		
 	}

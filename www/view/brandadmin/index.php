@@ -42,6 +42,7 @@ class IndexBrandadminView extends BaseView
 			
 			$model->userid = $_COOKIE['brand_id'];
 			$model->createtime = time();
+			$model->temp = 1;
 			if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
 			{
 				$model->id = $_POST['brandid'];

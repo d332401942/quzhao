@@ -15,6 +15,16 @@
 				<td>
 					<input name="id" value="" />
 				</td>
+				<td>
+					添加类型
+				</td>
+				<td>
+					<select name="temp">
+						<option value="">全部</option>
+						<option value="2" <{if ($temp == 2)}>selected="selected"<{/if}>>本站</option>
+						<option value="1" <{if ($temp == 1)}>selected="selected"<{/if}>>兼职</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>

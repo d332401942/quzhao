@@ -21,6 +21,8 @@ class BrandDataModel extends BaseDataModel
 	public $merchantsId;
 	
 	public $istj = 0;
+	
+	public $temp = 0;
 
 	public function __construct()
 	{

@@ -47,6 +47,14 @@ class LeftIndexView extends BaseView
                     'name' => '添加品牌',
                     'url' => 'homebrand/brand'
                 ),
+				array(
+					'name' => '商家添加',
+					'url' => 'merchants/add',
+				),
+				array(
+					'name' => '分类添加',
+					'url' => 'category/cateadd',
+				),
                 array(
                     'name' => '品牌推荐',
                     'url' => 'homebrand/data'
@@ -139,18 +147,7 @@ class LeftIndexView extends BaseView
 					'url' => 'temp/index',
 				)
 			),
-			'分类管理' => array(
-				array(
-					'name' => '分类添加',
-					'url' => 'category/cateadd',
-				),
-			),
-			'商家管理' => array(
-				array(
-					'name' => '商家添加',
-					'url' => 'merchants/add',
-				),
-			)
+			
         );
         $this->assign('menu', $menu);
     }

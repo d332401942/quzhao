@@ -16,7 +16,7 @@ class BrandData extends BaseData
 	}
 	
 	//后台管理列表
-	public function getAll3($pageCore,$state = false,$id = false)
+	public function getAll3($pageCore,$state = false,$id = false,$temp = false)
 	{
 		$where = 't1.id > 0';
 		if (!empty($state))
@@ -27,6 +27,13 @@ class BrandData extends BaseData
 		if($id)
 		{
 			$where .= ' AND t1.id = '.$id;
+		}
+		if($temp == 1)
+		{
+			$where .= ' AND t1.temp = 1';
+		}elseif($temp == 2)
+		{
+			$where .= ' AND t1.temp = 0';
 		}
 		$sql = 'SELECT count(*) as num FROM brand AS t1 JOIN brandadmin AS t2 ON t2.id = t1.userid JOIN brand_name as t3 on t3.id = t1.brand_name_id JOIN merchants as t4 on t4.id = t1.merchantsId where '.$where;
 		$row = $this->query ( $sql );

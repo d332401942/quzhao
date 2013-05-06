@@ -32,10 +32,10 @@ class BrandBusiness extends BaseBusiness
 	/*
 	*后台调用所有的
 	*/
-	public function getAll3($pageCore,$state,$id)
+	public function getAll3($pageCore,$state,$id,$temp)
 	{
 		$data = M('BrandData');
-		return $data->getAll3($pageCore,$state,$id);
+		return $data->getAll3($pageCore,$state,$id,$temp);
 	}
 	/*
 	*删除
