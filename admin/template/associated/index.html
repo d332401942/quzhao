@@ -11,12 +11,13 @@
 				<td>
 					<input name="name" value="" />
 				</td>
-				<td><button type="submit">筛选</button>
+				<td><button type="submit">筛选</button></td>
 			</tr>
 		</table>
 	</form>
 	</div>
 </div>
+<{if ($model)}>
 <form style="clear:both;" action="" method="post">
 	<div class="add-div">
 		<table style="width:100%;margin:auto;" border="0">
@@ -24,27 +25,23 @@
 			<th style="width:350px;">名称</th>
 			<th style="width:100px;">操作</th>
 		</tr>
-		<{if ($model)}>
+		
 		<{foreach ($model as $val)}>
 			<tr>
-				<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
 				<td align="center"><{$val->keyname}></td>
 				
 				<td align="center">
-					<a href="__APP__/homebrand/brand2__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
+					<a href="__APP__/associated/add">添加</a>&nbsp;
 					<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
 				</td>
 			</tr>
 		<{/foreach}>
-		<{else}>
-			<tr>
-				<td colspan="2" align="center">暂无品牌数据</td>
-			</tr>
-		<{/if}>
 		</table>
 	</div>
 </form>	
 <{uc class="PageControlView" pageCore=$pageCore}>
+<{/if}>
+
 <{include '__TEMPLATE__/footer.html'}>
 <script>
 var isGoPage = false;
