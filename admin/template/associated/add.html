@@ -1,0 +1,63 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+	<div class="content-select">
+		<table>
+				<td>
+					<a href="__APP__/associated/add__LIMIT__lev/1">一级分类</a>
+				</td>
+				<td>
+					<a href="__APP__/associated/add__LIMIT__lev/2">二级分类</a>
+				</td>
+				<td><a href="__APP__/associated/add__LIMIT__lev/3">三级分类</a><td>
+			</tr>
+		</table>
+	</div>
+</div>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform();">
+	<div class="add-div">
+		<table style="width:100%;margin:auto;" border="0">
+	<tr>
+		<th style="width:5px;"><input onclick="checkAll(this)" name="cateId" class="js-checkall-input" type="checkbox" /></th>
+		<th style="width:50px;">ID</th>
+		<th style="width:350px;">名称</th>
+	</tr>
+		<{if ($model)}>
+		<{foreach ($model as $val)}>
+		<tr>
+			<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->categoryid}>" /></td>
+			<td align="center"><{$val->categoryid}></td>
+			<td align="center"><{$val->name}></td>
+		</tr>
+		<{/foreach}>
+		<{/if}>
+	<tr>
+		<td><input type="checkbox" onclick="checkAll(this)" class="js-checkall-input" /></td>
+	</tr>
+</table>
+	</div>
+	<{uc class="PageControlView" pageCore=$pageCore}>
+<{include '__TEMPLATE__/footer.html'}>
+
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+
+function checkAll(obj) {
+	var checkInputObj = $('.js-checkall-input');
+	if ($(obj).attr('checked')) {
+		checkInputObj.attr('checked',true);
+	} 
+	else {
+		checkInputObj.attr('checked',false);
+	}
+}
+
+
+</script>
