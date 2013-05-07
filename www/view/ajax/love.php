@@ -34,10 +34,27 @@ class LoveAjaxView extends BaseAjaxView
 			$model->home_tj_data_id = $pid;
 			$model->userid = $this->CurrentUser->id;
 			$model->status = 0;
+<<<<<<< HEAD
+			if (isset ( $_POST ['loveType'] ) && $_POST ['loveType'] == 1)
+			{
+				$model->loveType		= $_POST['loveType'];
+				$data = M('ProductData');
+				$data->loveNum((int)$_POST['pid']);
+				$this->response(true);
+			}
+			else
+			{
+				$business->add ( $model );
+				$business = M ( 'HomeTjDataBusiness' );
+				$business->loveNum ( ( int ) $_POST ['pid'] );
+				$this->response ( true );
+			}
+=======
 			$model->loveType = $loveType;
 			$business->add ( $model );
 			$homeTjDataBusiness->loveNum ( $pid , $loveType);
 			$this->response(1);
+>>>>>>> e9410fabd8ad6a42280cd145b663ff2d10c2db1c
 		}
 	}
 

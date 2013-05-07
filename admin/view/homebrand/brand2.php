@@ -6,7 +6,7 @@ class Brand2HomeBrandView extends BaseView
 	public function index($parameters)
 	{
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
-		$model = null;
+		$model = array();
 		if($id)
 		{
 			$Business = M('BrandnameBusiness');
@@ -46,7 +46,7 @@ class Brand2HomeBrandView extends BaseView
 				{
 					$brandNameModel->image = $_POST['oldimage'];
 				}
-				if($brandNameModel->id)
+				if(!empty($brandNameModel->id))
 				{
 					$brandNameBusiness->update($brandNameModel);
 					$this->redirect(APP_URL . '/homebrand/editbrand');

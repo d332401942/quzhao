@@ -1,0 +1,145 @@
+<html><head><title>网站后台--管理导航</title>
+<style type="text/css">
+BODY{
+	background-color:#7BB6E7;
+	MARGIN: 0px;
+	font-size:12px;
+	
+}
+td{ font-size:12px;}
+
+.sec_menu {
+	 BACKGROUND:#D6DFF7; OVERFLOW: hidden;
+}
+
+.menu_title{
+	background-color:#799AE1;
+}
+.menu_title SPAN {
+	margin-left:30px;
+	FONT-WEIGHT: bold; LEFT: 10px; POSITION: relative; TOP: 2px; color:#FFFFFF; cursor:hand;
+}
+.menu_title2{
+	background-color:#799AE1;
+}
+
+.menu_title2 SPAN {
+	margin-left:30px;
+	FONT-WEIGHT: bold; LEFT: 10px; color:#FFFFFF; POSITION: relative; TOP: 2px; cursor:hand;
+}
+a  { font:normal 12px 宋体; color:#000000; text-decoration:none; }
+a:hover  { color:#cc0000;text-decoration:underline; }
+
+.lan12b{
+color:#FFFFFF;
+background-color:#799AE1;
+font-size:12px;
+font-weight:bold;}
+
+body{ CURSOR:url('__RESOURCE__/images/jianzhi/img/mouse.ani ')}
+a:hover{ CURSOR:url('__RESOURCE__/images/jianzhi/img/mouse7.ani')}
+a:link {
+	color: #2E2E2E;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #2E2E2E;
+}
+a:hover {
+	text-decoration: none;
+	color: #FF6600;
+	border-bottom-color: #FF6600;
+}
+
+</style>
+<script language="javascript1.2">
+function showsubmenu(sid)
+{
+whichEl = eval("submenu" + sid);
+if (whichEl.style.display == "none")
+{
+eval("submenu" + sid + ".style.display=\"\";");
+}
+else
+{
+eval("submenu" + sid + ".style.display=\"none\";");
+}
+}
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table align="center" cellpadding="0" cellspacing="0" width="158">
+      <tbody><tr>
+        <td height="42" valign="bottom"><img src="__RESOURCE__/images/jianzhi/img/ho34334_r2.jpg" border="0" height="38" width="158"></td>
+      </tr>
+      <tr>
+        <td align="center" onmouseover="this.className='menu_title2';" onmouseout="this.className='menu_title';" class="menu_title" height="35" width="165">&nbsp;&nbsp;<a href="__APP__/brandadmin/" class="lan12b" target="right">回到首页</a>&nbsp;|&nbsp;<a href="__APP__/brandadmin/loginout" target="_top" class="lan12b">退出</a></td>
+      </tr>
+</tbody></table>
+    <table align="center" cellpadding="0" cellspacing="0" width="158">
+  
+  <tbody><tr>
+    <td style="display:" align="center;">
+<div class="sec_menu" style="width:158;">
+            <table align="center" cellpadding="0" cellspacing="0" width="135" style="text-align:center;">
+			  <tbody><tr> 
+                <td height="20">用户名：</td>
+              </tr>
+			  <tr> 
+                <td height="20"><a href="__APP__/brandadmin/loginout" target="_top">重新登陆 </a>|<a href="index.php?c=change&m=indexHtml" target="right">修改密码</a></td>
+              </tr>
+            </tbody></table>
+	  </div>
+<div style="width:158">
+<table align="center" cellpadding="0" cellspacing="0" width="135">
+<tbody><tr><td height="3"></td></tr>
+</tbody></table>
+	  </div>	</td>
+  </tr>
+</tbody></table>
+    
+	<table align="center" cellpadding="0" cellspacing="0" width="158">
+      <tbody><tr>
+        <td class="menu_title" onmouseover="this.className='menu_title2';" onmouseout="this.className='menu_title';" id="menuTitle1" onclick="showsubmenu(10202)" height="25"><span>品牌管理</span></td>
+      </tr>
+      <tr>
+        <td style="display:;" id="submenu10202"><div class="sec_menu" style="width:158">
+            <table align="center" cellpadding="0" cellspacing="0" width="140">
+            
+              <tbody>
+			  <tr style="display:">
+                <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/" target="right">添加品牌</a></td>
+              </tr>
+			   <tr style="display:">
+                <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/lists" target="right">品牌管理</a></td>
+              </tr>
+            </tbody></table>        </div>
+        </td>
+      </tr>
+    </tbody></table>
+	<table align="center" cellpadding="0" cellspacing="0" width="158">
+      <tbody><tr>
+        <td class="menu_title" onmouseover="this.className='menu_title2';" onmouseout="this.className='menu_title';" id="menuTitle1" onclick="showsubmenu(10202)" height="25"><span>单品管理</span></td>
+      </tr>
+      <tr>
+        <td style="display:;" id="submenu10202"><div class="sec_menu" style="width:158">
+            <table align="center" cellpadding="0" cellspacing="0" width="140">
+            
+              <tbody>
+			  <tr style="display:">
+                <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/add" target="right">添加超值单品</a></td>
+              </tr>
+			   <tr style="display:">
+                <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/brandadmin/dplists" target="right">超值单品管理</a></td>
+              </tr>
+            </tbody></table>        </div>
+        </td>
+      </tr>
+    </tbody></table>
+        </div>
+        </td>
+      </tr>
+    </tbody></table>
+</body></html>
