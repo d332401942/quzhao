@@ -35,9 +35,16 @@ class AddAssociatedView extends BaseView
 			if($result)
 			{
 				$model = new AssociatedDataModel();
-				$model->categoryids = $result->categoryids.','.$cateId;
+				if(!empty($result->categoryids))
+				{
+					$model->categoryids = $result->categoryids.','.$cateId;
+				}else{
+					$model->categoryids = $cateId;
+				}
 				$business->update($model,$name);
+				$this->redirect(APP_URL.'associated/index');
 			}
+			
 		}
 		$this->assign('title', '添加关联分类');
 		$this->assign('model', $cateModel);

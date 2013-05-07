@@ -2,14 +2,14 @@
 
 <div class="list-div">
 	<div class="content-select">
-		<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
+		<form id="js-go-form" action="" method="get">
 		<input type="hidden" name="page" value="<{$page}>" />
 		<table>
 				<td>
 					关键词
 				</td>
 				<td>
-					<input name="name" value="" />
+					<input name="name" value="<{$name}>" />
 				</td>
 				<td><button type="submit">筛选</button></td>
 			</tr>
@@ -18,7 +18,7 @@
 	</div>
 </div>
 <{if ($model)}>
-<form style="clear:both;" action="" method="post">
+
 	<div class="add-div">
 		<table style="width:100%;margin:auto;" border="0">
 		<tr>
@@ -38,7 +38,7 @@
 		<{/foreach}>
 		</table>
 	</div>
-</form>	
+
 <{uc class="PageControlView" pageCore=$pageCore}>
 <{/if}>
 
@@ -71,29 +71,5 @@ function del(name) {
 	});
 }
 
-function search(obj) {
-	var formObj = $(obj);
-	if (!isGoPage) {
-		formObj.find('input[name="page"]').val(1);
-	}
-	var all = false;
-	var stateStr = '';
-	$('.js-search-state:checked').each(function(){
-		var value = $(this).val();
-		if (!value) {
-			all = true;
-		}
-		else if (!stateStr) {
-			stateStr = value;
-		}
-		else {
-			stateStr += ',' + value;
-		}
-	});
-	if (!all) {
-		formObj.find('input[name="state"]').val(stateStr);
-	}
-	return true;
-}
 
 </script>

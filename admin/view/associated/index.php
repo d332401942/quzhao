@@ -20,7 +20,8 @@ class IndexAssociatedView extends BaseView
 		$business = M('AssociatedBusiness');
 		$model = $business->getAll($pageCore,$name);
 		
-		
+		$this->assign ( 'name', $name );
+		$this->assign ( 'page', $page );
 		$this->assign ( 'pageCore', $pageCore );
 		$this->assign ( 'model', $model );
 		$this->assign ( 'title', '关联管理' );
