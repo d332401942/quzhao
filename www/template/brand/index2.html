@@ -47,9 +47,16 @@
 </div>
 <div class="sale_new_nav2">                     
 <a href="javascript:;" onclick="goSj(0)" <{if (!$mid)}>class="sale_xz2"<{/if}> >全部商家</a>
-<{foreach ($sjModel as $model)}>
+<{foreach ($sjModel as $key=>$model)}>
+<{if ($key < 15)}>
 <a href="javascript:;" onclick="goSj(<{$model->id}>)" <{if ($mid == $model->id)}> class="sale_xz2" <{/if}> ><{$model->name}></a>
+<{else}>
+<a href="javascript:;" style="display:none;" class="js-hideen" onclick="goSj(<{$model->id}>)" <{if ($mid == $model->id)}> class="sale_xz2" <{/if}> ><{$model->name}></a>
+<{/if}>
 <{/foreach}>
+<{if ($key > 15)}>
+<a href="javascript:;" style="color:red;float:right;" onclick="ghsj()">更多</a>
+<{/if}>
 </div>
 <div  class="sale_new_cont">
 <ul>
@@ -107,6 +114,9 @@ function goCid(cid) {
 	$('#letter').val('');
 	$('#mid').val('');
 	formTogo();
+}
+function ghsj() {
+	$('.js-hideen').toggle();
 }
 function goletter(letter) {
 	var formObj = $('#js-form-page');
