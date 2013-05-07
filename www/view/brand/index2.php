@@ -21,10 +21,11 @@ class Index2BrandView extends BaseView
 			$cid = ( int ) $parems['cid'];
 		}
 		$letter = null;
-		if (! empty ( $parems['letter'] ) && $parems['letter'] != 0)
+		if (! empty ( $parems['letter'] ) && $parems['letter'] != '0')
 		{
 			$letter = trim($parems['letter']);
 		}
+		
 		$mid = null;
 		if (! empty ( $parems['mid'] ))
 		{
