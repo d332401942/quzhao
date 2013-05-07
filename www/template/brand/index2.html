@@ -55,7 +55,8 @@
 <{/if}>
 <{/foreach}>
 <{if ($key > 15)}>
-<a href="javascript:;" style="color:red;float:right;" onclick="ghsj()">更多</a>
+<a href="javascript:;" style="color:red;float:right;" onclick="ghsj()" id="js-gengduo-hidden">更多</a>
+<a href="javascript:;" style="color:red;float:right;" onclick="ghsj2()" id="js2-gengduo-hidden">收起</a>
 <{/if}>
 </div>
 <div  class="sale_new_cont">
@@ -117,7 +118,14 @@ function goCid(cid) {
 	formTogo();
 }
 function ghsj() {
-	$('.js-hideen').toggle();
+	$('.js-hideen').show();
+	$('#js-gengduo-hidden').hide();
+	$('#js2-gengduo-hidden').show();
+}
+function ghsj2() {
+	$('.js-hideen').hide();
+	$('#js-gengduo-hidden').show();
+	$('#js2-gengduo-hidden').hide();
 }
 function goletter(letter) {
 	var formObj = $('#js-form-page');
