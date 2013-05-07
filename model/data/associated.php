@@ -10,7 +10,7 @@ class AssociatedDataModel extends BaseDataModel
 	
 	public $price;
 
-	public $isgroup;
+	public $isgroup = 0;
 	
 	
 	public function __construct()

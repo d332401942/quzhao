@@ -155,6 +155,10 @@ class LeftIndexView extends BaseView
 				array(
 					'name' => '关联添加',
 					'url' => 'associated/index',
+				),
+				array(
+					'name' => '关键词添加',
+					'url' => 'associated/addkey',
 				)
 			),
 			

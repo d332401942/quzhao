@@ -1,0 +1,77 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+	<div class="content-select">
+		
+	</div>
+</div>
+<form style="clear:both;" action="" method="post">
+	<div class="add-div">
+		<table>
+				<td>
+					关键词
+				</td>
+				<td>
+					<input name="name" value="" />
+				</td>
+				<td><button type="submit">添加</button></td>
+			</tr>
+		</table>
+	</div>
+</form>	
+
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+function del(name) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	if (!name) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	
+	$.ajax({
+		url: '__AJAX__/associated/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:name},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+
+function search(obj) {
+	var formObj = $(obj);
+	if (!isGoPage) {
+		formObj.find('input[name="page"]').val(1);
+	}
+	var all = false;
+	var stateStr = '';
+	$('.js-search-state:checked').each(function(){
+		var value = $(this).val();
+		if (!value) {
+			all = true;
+		}
+		else if (!stateStr) {
+			stateStr = value;
+		}
+		else {
+			stateStr += ',' + value;
+		}
+	});
+	if (!all) {
+		formObj.find('input[name="state"]').val(stateStr);
+	}
+	return true;
+}
+
+</script>
