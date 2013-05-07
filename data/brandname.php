@@ -9,6 +9,7 @@ class BrandnameData extends BaseData
 		{
 			$this->where(array('name'=>array('='=>$name)));
 		}
+		$this->setOrder(array('id'=>'desc'));
 		$this->setPage($pageCore);
 		return $this->findAll();
 	}
