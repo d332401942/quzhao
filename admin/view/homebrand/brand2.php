@@ -42,10 +42,13 @@ class Brand2HomeBrandView extends BaseView
 						$brandNameModel->image = $picName;
 					}
 				}
-				if(!empty($_POST['oldimage']))
+				if($_FILES['image']['name'] == '')
 				{
-					$brandNameModel->image = $_POST['oldimage'];
-				}
+					if(!empty($_POST['oldimage']))
+					{
+						$brandNameModel->image = $_POST['oldimage'];
+					}
+				}	
 				if(!empty($brandNameModel->id))
 				{
 					$brandNameBusiness->update($brandNameModel);
