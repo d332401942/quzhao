@@ -55,14 +55,14 @@
 <{/if}>
 <{/foreach}>
 <{if ($key > 15)}>
-<a href="javascript:;" style="color:red;float:right;" onclick="ghsj()" id="js-gengduo-hidden">更多</a>
-<a href="javascript:;"  style="color:red;float:right;display:none;" onclick="ghsj2()" id="js2-gengduo-hidden">收起</a>
+<a href="javascript:;" style="color:#C74396;float:right;" onclick="ghsj()" id="js-gengduo-hidden">更多</a>
+<a href="javascript:;"  style="color:#C74396;float:right;display:none;" onclick="ghsj2()" id="js2-gengduo-hidden">收起</a>
 <{/if}>
 </div>
 <div  class="sale_new_cont">
 <ul>
 <{if (!empty($brandModel))}>
-<{foreach ($brandModel as $val)}>
+<{foreach ($brandModel as $key=>$val)}>
 <li>
 <{if (!$mid)}>
 <span>
@@ -92,9 +92,11 @@
 </div>
 <{uc class="PageControlView" pageCore="$pageCore"}>
 </div>
-<script src="__RESOURCE__/js/lx2.js"></script>
 
 <{uc class="FooterControlView"}>
+<{if ($key> 5)}>
+<script src="__RESOURCE__/js/lx2.js"></script>
+<{/if}>
 <form style="display:none;" id="js-form-page" method="get">
 	<input type="hidden" name="cid" value="<{$cid}>" />
 	<input type="hidden" name="letter" id="letter" value="<{$letter}>" />
