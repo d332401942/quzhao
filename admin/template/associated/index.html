@@ -31,8 +31,8 @@
 				<td align="center"><{$val->keyname}></td>
 				
 				<td align="center">
-					<a href="__APP__/associated/add">添加</a>&nbsp;
-					<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
+					<a href="__APP__/associated/add__LIMIT__name/<{$val->keyname}>">添加</a>&nbsp;
+					<a onclick="del('<{$val->keyname}>')" href="#nogo">删除</a>
 				</td>
 			</tr>
 		<{/foreach}>
@@ -52,31 +52,19 @@ function goPage(page) {
 	formObj.submit();
 	//window.location.href = '__APP__/content?page='+page;
 }
-function del(id) {
+function del(name) {
 	if (!confirm('确定要删除吗？')) {
 		return;
 	}
-	var ids;
-	if (id) {
-		ids = [id];
-	}
-	else {
-		$('.js-index-id:checked').each(function(){
-			if (!ids) {
-				ids = [];
-			}
-			ids.push($(this).val());
-		});
-	}
-	if (!ids) {
+	if (!name) {
 		alert('请选择要删除的数据');
 		return;
 	}
 	
 	$.ajax({
-		url: '__AJAX__/brandname/del?stmp=' + new Date().toString(),
+		url: '__AJAX__/associated/del?stmp=' + new Date().toString(),
 		type: 'post',
-		data: {ids:ids},
+		data: {ids:name},
 		success: function(data) {
 			window.location.reload();
 		}

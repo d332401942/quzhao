@@ -237,9 +237,13 @@ class CategoryData extends BaseData
 	{
 		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
 		
-		$this->where(array('level'=>$lev));
-		//$this->setPage($pageCore);
-		$this->findAll();
+		$sql = "select count(*) as num from category where level = $lev";
+		$res = $this->query($sql);
+		$pageCore->count = $res [0] ['num'];
+		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
+		$sql = "select * from category where level = $lev limit " . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+		$result = $this->query($sql,'AssociatedDataModel');
+		return $result;
 	}
 
 }

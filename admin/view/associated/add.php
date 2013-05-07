@@ -4,10 +4,12 @@ class AddAssociatedView extends BaseView
 {
     public function index($parameter)
 	{
-		$lev = isset($parameter['lev'])?(int)$parameter['lev']:'';
+		
+		$lev = isset($_GET['lev'])?(int)$_GET['lev']:'';
+		$name = isset($parameter['name'])?trim($parameter['name']):'';
 		$cateModel = null;
 		$pageCore = new PageCoreLib();
-		
+		$page = null;
 		if($lev)
 		{
 			$pageCore = new PageCoreLib();
@@ -22,18 +24,26 @@ class AddAssociatedView extends BaseView
 			$cateBusiness = M('CategoryBusiness');
 			$cateModel = $cateBusiness->getAll($pageCore,$lev);
 		}
-		
 		if($_POST)
 		{
+			
 			$cateId = isset($_POST['cateId'])?$_POST['cateId']:array();
-			$name = trim($_GET['id']);
+			$cateId = implode(',',$cateId);
+			$name = trim($_POST['name']);
 			$business = M('AssociatedBusiness');
-			$model = new AssociatedDataModel();
-			$model->categoryids = 1;
-			//$business->add($model,$name);
+			$result = $business->getKeyname($name);
+			if($result)
+			{
+				$model = new AssociatedDataModel();
+				$model->categoryids = $result->categoryids.','.$cateId;
+				$business->update($model,$name);
+			}
 		}
 		$this->assign('title', '添加关联分类');
 		$this->assign('model', $cateModel);
 		$this->assign ('pageCore', $pageCore);
+		$this->assign ('name', $name);
+		$this->assign ('lev', $lev);
+		$this->assign ('page', $page);
 	}
 }

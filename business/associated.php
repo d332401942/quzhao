@@ -3,10 +3,10 @@
 class AssociatedBusiness extends BaseBusiness
 {
 	
-    public function add($model)
+    public function update($model,$name)
 	{
-		$data = new ReplyData();
-		$data->addReply($model);
+		$data = new AssociatedData();
+		$data->update($model,$name);
 	}
 	
 	/*
@@ -16,5 +16,20 @@ class AssociatedBusiness extends BaseBusiness
 	{
 		$data = new AssociatedData();
 		return $data->getAll($pageCore,$name);
+	}
+	
+	/*
+	*	得到数据原有分类
+	*/
+	public function getKeyname($name)
+	{
+		$data = new AssociatedData();
+		return $data->getKeyname($name);
+	}
+	
+	public function del($name)
+	{
+		$data = new AssociatedData();
+		$data->del($name);
 	}
 }
