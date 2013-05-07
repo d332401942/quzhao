@@ -2,18 +2,15 @@
 
 class AssociatedAjaxView extends BaseAjaxView
 {
-	public function getAll()
+	public function del()
 	{
-		if($_POST)
+		if(!empty($_POST['ids']) && trim($_POST['ids']))
 		{
-			if(!empty($_POST['lev']) && (int)$_POST['lev'])
-			{
-				//得到所有分类
-				$cateBusiness = M('CategoryBusiness');
-				$cateModel = $cateBusiness->getAll($pageCore,(int)$_POST['lev']);
-				$this->response($cateModel);
-			}
+			$buesiness = M('AssociatedBusiness');
+			$buesiness->del($_POST['ids']);
+			$this->response(true);
 		}
+		
 	}
 }
 

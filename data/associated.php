@@ -3,9 +3,11 @@
 class AssociatedData extends BaseData
 {
 
-	public function addReply($model)
+	public function update($model,$name)
 	{
-		$this->add ( $model );
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = "update s_key set categoryids = '".$model->categoryids."' where keyname = '".$name."' ";
+		$this->exec($sql);
 	}
 	
 	public function getAll($pageCore,$name = false)
@@ -19,10 +21,25 @@ class AssociatedData extends BaseData
 			$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
 			
 			$sql = "select * from s_key where keyname like '%$name%' limit " . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
-			echo $sql;
 			$result = $this->query($sql,'AssociatedDataModel');
 			return $result;
 		}
 		return array();		
+	}
+	
+	public function getKeyname($name)
+	{
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = "select * from s_key where keyname = '$name' ";
+		$result = $this->query($sql,'AssociatedDataModel');
+		$result = array_pop($result);
+		return $result;
+	}
+	
+	public function del($name)
+	{
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = "delete from s_key  where keyname = '".$name."' ";
+		$this->exec($sql);
 	}
 }
