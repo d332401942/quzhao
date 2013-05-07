@@ -19,11 +19,12 @@ class HomeTjDataBusiness extends BaseBusiness
 	
 	/**
 	 * 修改产品喜欢次数
+	 * var $isAdd 真加，假减
 	 */
-	 public function loveNum($id)
+	 public function loveNum($id, $loveType = LoveDataModel::LOVE_TYPE_HOME_TJ_DATA, $isAdd = true)
 	{
 		$data = new HomeTjDataData();
-		$data->loveNum($id);
+		$data->loveNum($id, $loveType);
 	}
 	
 	/**

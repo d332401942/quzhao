@@ -1,4 +1,4 @@
-<{uc class="HeaderControlView" meta=$meta css="css" keyword=$keyword js="jquery,jquery.cookie"}>
+<{uc class="HeaderControlView" type="search" meta=$meta css="css" keyword=$keyword js="jquery,jquery.cookie"}>
 <div class="box ">
     <div class="list_top">
         找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
@@ -245,7 +245,7 @@
 								<div class="list_jg_r">
 						
 								</div>
-								<span style="float:right;margin:5px 10px 0 0;"><a style="margin:5px 10px 0 0;" href="javascript:;" title="喜欢" onclick="lovenum(<{$model->productid}>)"><img src="__RESOURCE__/images/love.gif" /><{$model->lovenumber}></a></span>
+								<span style="float:right;margin:5px 10px 0 0;"><a style="margin:5px 10px 0 0;" href="javascript:;" title="喜欢" onclick="lovenum(this,<{$model->productid}>)"><img src="__RESOURCE__/images/love.gif" /><span><{$model->lovenumber}></span></a></span>
 							</div>
 							
 						</div>
@@ -511,7 +511,9 @@ function searchLog(id) {
 	$.cookie(searchLogKey,arr,{expires:30})
 	return true;
 }
-function lovenum(pid) {
+function lovenum(obj,pid) {
+	var num = $(obj).find('span').html();
+	num = num ? parseInt(num) : 0;
 	if (!CurrentUserInfo) {
 		showLoginDiv();
 	}
@@ -524,17 +526,8 @@ function lovenum(pid) {
 		url:url,
 		success:function(data){
 			if(data.result) {
-				window.location.reload();
-			}
-			else if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			else if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
-			else {
-				alert('该产品已经喜欢过');
+				var diff = parseInt(data.result);
+				$(obj).find('span').html(num + data.result);
 			}
 		}
 	});
