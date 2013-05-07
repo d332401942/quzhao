@@ -9,7 +9,7 @@ class Index2BrandView extends BaseView
 		$this->setMeta('品牌特卖_趣找购物搜索');
 		//得到所有品牌
 		$pageCore = new PageCoreLib ();
-		$pageCore->pageSize = 20;
+		$pageCore->pageSize = 3;
 		$page = 1;
 		if (! empty ( $parems['page'] ) && ( int ) $parems['page'])
 		{
