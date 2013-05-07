@@ -893,7 +893,7 @@ filter:Alpha(opacity=95);}
 .sale_new_nav a{ padding-left:15px; padding-right:15px; float:left; display: inline-block; color:#333; font-weight:bold;}
 .sale_new_nav a:hover{ text-decoration:none; background-color:#f8f8f8;}
 .sale_new_nav .sale_xz{ background-color:#d256a4; color:#fff; }	
-.sale_new_nav2{ clear:both; background-color:#eee; padding-left:10px; padding-right:10px; height:35px; line-height:35px; margin-bottom:12px;}
+.sale_new_nav2{ clear:both; background-color:#eee; padding-left:10px; padding-right:10px;  line-height:35px; margin-bottom:12px;}
 .sale_new_nav2 a{ color:#999; padding-left:10px; padding-right:10px; }
 .sale_new_nav2 a:hover{ text-decoration:none;}
 .sale_new_nav2 .sale_xz2{ font-weight:bold; color:#333;}
