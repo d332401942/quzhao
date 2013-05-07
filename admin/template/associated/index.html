@@ -17,6 +17,7 @@
 	</form>
 	</div>
 </div>
+<{if ($model)}>
 <form style="clear:both;" action="" method="post">
 	<div class="add-div">
 		<table style="width:100%;margin:auto;" border="0">
@@ -24,10 +25,9 @@
 			<th style="width:350px;">名称</th>
 			<th style="width:100px;">操作</th>
 		</tr>
-		<{if ($model)}>
+		
 		<{foreach ($model as $val)}>
 			<tr>
-				<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
 				<td align="center"><{$val->keyname}></td>
 				
 				<td align="center">
@@ -36,15 +36,12 @@
 				</td>
 			</tr>
 		<{/foreach}>
-		<{else}>
-			<tr>
-				<td colspan="2" align="center">暂无品牌数据</td>
-			</tr>
-		<{/if}>
 		</table>
 	</div>
 </form>	
 <{uc class="PageControlView" pageCore=$pageCore}>
+<{/if}>
+
 <{include '__TEMPLATE__/footer.html'}>
 <script>
 var isGoPage = false;
