@@ -21,11 +21,11 @@ class KeywordsData extends BaseData
 		
 		if ($time)
 		{
-			$sql = 'SELECT count(*) as num,keywords FROM keywords where createtime >= ' . ($now - $time) . ' group by keywords limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+			$sql = 'SELECT count(*) as num,keywords FROM keywords where createtime >= ' . ($now - $time) . ' group by keywords order by count(*) desc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 		}
 		else
 		{
-			$sql = 'SELECT count(*) as num,keywords FROM keywords group by keywords limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+			$sql = 'SELECT count(*) as num,keywords FROM keywords group by keywords order by count(*) desc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 		}
 		$result = $this->query ( $sql, 'KeywordsDataModel' );
 		return $result;
