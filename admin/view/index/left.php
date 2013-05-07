@@ -151,6 +151,12 @@ class LeftIndexView extends BaseView
 					'url' => 'temp/index',
 				)
 			),
+			'关键词管理' => array(
+				array(
+					'name' => '关联添加',
+					'url' => 'associated/index',
+				)
+			),
 			
         );
         $this->assign('menu', $menu);
