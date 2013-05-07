@@ -232,5 +232,13 @@ class CategoryData extends BaseData
 		}
 		return $models;
 	}
+	
+	public function getAll($pageCore,$lev)
+	{
+		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->setPage($pageCore);
+		$this->where(array('level'=>array('='=>$lev)));
+		return $this->findAll();
+	}
 
 }

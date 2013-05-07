@@ -62,4 +62,10 @@ class CategoryBusiness extends BaseBusiness
 		return $searchBrandModels;
 	}
 	
+	public function getAll($pageCore,$lev)
+	{
+		$data = new CategoryData();
+		return $data->getAll($pageCore,$lev);
+	}
+	
 }
