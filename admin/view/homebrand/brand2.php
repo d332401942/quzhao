@@ -16,7 +16,11 @@ class Brand2HomeBrandView extends BaseView
 		{	
 			//添加品牌名称
 			$brandNameBusiness = M('BrandnameBusiness');
-			$res = $brandNameBusiness->checkname($_POST['name']);
+			$res = '';
+			if(empty($_POST['id']))
+			{
+				$res = $brandNameBusiness->checkname($_POST['name']);
+			}
 			if(empty($res))
 			{
 				$brandNameModel = M('BrandnameDataModel');
@@ -42,7 +46,8 @@ class Brand2HomeBrandView extends BaseView
 						$brandNameModel->image = $picName;
 					}
 				}
-				if($_FILES['image']['name'] == '')
+				
+				if(empty($_FILES['image']['name']))
 				{
 					if(!empty($_POST['oldimage']))
 					{
@@ -56,9 +61,9 @@ class Brand2HomeBrandView extends BaseView
 				}else{
 					$brandNameBusiness->add($brandNameModel);
 				}
-				
+				$this->redirect(APP_URL . '/homebrand/brand');
 			}
-			$this->redirect(APP_URL . '/homebrand/brand');
+			
 		}
 		//得到所有分类
 		$cateBusiness = M('Brand_cateBusiness');
