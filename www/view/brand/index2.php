@@ -36,6 +36,7 @@ class Index2BrandView extends BaseView
 		$num = null;
 		$business = M('BrandBusiness');
 		$result = $business->getAll2($pageCore,$cid,$letter,$mid,$num);
+		$result = array_values($result);
 		//得到所有分类
 		$cateBusiness = M('Brand_cateBusiness');
 		$cate = $cateBusiness->getAll();
