@@ -6,7 +6,7 @@
 	</div>
 </div>
 <form style="clear:both;" action="" method="post">
-<input type="hidden" name="id" value="<{$model->keyname}>">
+<input type="hidden" name="id" value="<{if (isset($model->keyname))}><{$model->keyname}><{/if}>">
 	<div class="add-div">
 		<table>
 				<td>

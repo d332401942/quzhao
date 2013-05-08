@@ -60,7 +60,6 @@ function goLev1(lev) {
 function goId(obj,id,level) {
 	level++;
 	data = {pid:id,level:level};
-	
 	url = '__AJAX__/Associated/getAll?stmp=' + new Date().toString();
 	$.ajax({
 		dataType:'json',
@@ -78,30 +77,6 @@ function goId(obj,id,level) {
 				}
 				str += '</ul>';
 				$(obj).next().html(str);
-			}
-		}
-	});
-}
-function goId2(id) {
-	data = {pid:id};
-	url = '__AJAX__/Associated/getAll2?stmp=' + new Date().toString();
-	$.ajax({
-		dataType:'json',
-		type:'post',
-		data:data,
-		url:url,
-		success:function(data){
-			if(data.result) {
-				var result = data.result;
-				var str = '';
-				for (var i in result) {
-					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" />&nbsp;&nbsp;&nbsp;&nbsp;'+result[i].categoryid+'&nbsp;&nbsp;&nbsp;&nbsp;<a href="#nogo">'+result[i].name+'</a></li>';
-				}
-				
-				console.log($('#js-cate-hidden2-'+id));
-				alert(1);
-				$('#js-cate-hidden2-'+id).html(str);
-				$('#js-cate-hidden2-'+id).show();
 			}
 		}
 	});
