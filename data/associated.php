@@ -10,6 +10,16 @@ class AssociatedData extends BaseData
 		$this->exec($sql);
 	}
 	
+	/*
+	*	修改关键名称
+	*/
+	public function updateName($model,$name)
+	{
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = "update s_key set keyname = '".$model->keyname."' where keyname = '".$name."' ";
+		$this->exec($sql);
+	}
+	
 	public function getAll($pageCore,$name = false)
 	{
 		if($name)

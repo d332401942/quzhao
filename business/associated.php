@@ -38,4 +38,22 @@ class AssociatedBusiness extends BaseBusiness
 		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$data->add($model);
 	}
+	/*
+	*	修改查询信息
+	*/
+	public function getName($name)
+	{
+		$data = new AssociatedData();
+		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = "select * from s_key where keyname = '$name'";
+		return $data->query($sql,'AssociatedDataModel');
+	}
+	/*
+	*	修改关键名称
+	*/
+	public function updateName($model,$name)
+	{
+		$data = new AssociatedData();
+		$data->updateName($model,$name);
+	}
 }

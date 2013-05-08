@@ -6,13 +6,14 @@
 	</div>
 </div>
 <form style="clear:both;" action="" method="post">
+<input type="hidden" name="id" value="<{$model->keyname}>">
 	<div class="add-div">
 		<table>
 				<td>
 					关键词
 				</td>
 				<td>
-					<input name="name" value="" />
+					<input name="name" value="<{if (isset($model->keyname))}><{$model->keyname}><{/if}>" />
 				</td>
 				<td><button type="submit">添加</button></td>
 			</tr>
