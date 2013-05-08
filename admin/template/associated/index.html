@@ -24,6 +24,7 @@
 		<tr>
 			<th style="width:350px;">名称</th>
 			<th style="width:400px;">操作</th>
+			<th style="width:400px;">状态</th>
 		</tr>
 		
 		<{foreach ($model as $val)}>
@@ -35,6 +36,7 @@
 					<a href="__APP__/associated/addkey__LIMIT__name/<{$val->keyname}>">编辑</a>&nbsp;
 					<a onclick="del('<{$val->keyname}>')" href="#nogo">删除</a>
 				</td>
+				<td align="center"><{if (empty($val->categoryids))}><span style="color:red">未关联</span><{else}>已关联<{/if}></td>
 			</tr>
 		<{/foreach}>
 		</table>
