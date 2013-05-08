@@ -60,10 +60,12 @@ class AssociatedBusiness extends BaseBusiness
 	/*
 	*	得到子分类
 	*/
-	public function getCate($pid)
+	public function getCate($pid, $level)
 	{
 		$data = new CategoryData();
-		return $data->getCate($pid);
+		return $data->getCate($pid, $level);
 	}
+
+
 	
 }

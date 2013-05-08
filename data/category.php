@@ -246,10 +246,12 @@ class CategoryData extends BaseData
 		return $result;
 	}
 
-	public function getCate($pid)
+	public function getCate($pid, $level)
 	{
+
+		$pidStr = 'pid' . ($level - 1);
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = "select * from category  where level = 2 and pid1 = $pid ";
+		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr .' = ' . $pid;
 		return $this->query($sql,'CategoryDataModel');
 	}
 }

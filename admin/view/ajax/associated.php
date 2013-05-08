@@ -17,9 +17,10 @@ class AssociatedAjaxView extends BaseAjaxView
 		if(!empty($_POST['pid']) && (int)$_POST['pid'])
 		{
 			$buesiness = M('AssociatedBusiness');
-			$result = $buesiness->getCate($_POST['pid']);
+			$result = $buesiness->getCate($_POST['pid'],(int)$_POST['level']);
 			$this->response($result);
 		}
 	}
+
 }
 
