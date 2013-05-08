@@ -6,10 +6,6 @@
 				<td>
 					<a href="javascript:;" onclick="goLev1(1)">一级分类</a>
 				</td>
-				<td>
-					<a href="javascript:;" onclick="goLev1(2)">二级分类</a>
-				</td>
-				<td><a href="javascript:;" onclick="goLev1(3)">三级分类</a><td>
 			</tr>
 		</table>
 	</div>
@@ -18,18 +14,15 @@
 	<input type="hidden" name="name" value="<{$name}>" />
 	<div class="add-div">
 		<table style="width:100%;margin:auto;" border="0">
-	<tr>
-		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input"  type="checkbox" /></th>
-		<th style="width:50px;">ID</th>
-		<th style="width:350px;">名称</th>
-	</tr>
+	
 		<{if ($model)}>
 		<{foreach ($model as $val)}>
-		<tr>
-			<td><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" /></td>
-			<td align="center"><{$val->categoryid}></td>
-			<td align="center"><{$val->name}></td>
-		</tr>
+		<ul>
+			<li>
+				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
+				<div></div>
+			</li>
+		</ul>
 		<{/foreach}>
 		<{/if}>
 	<tr>
@@ -63,6 +56,30 @@ function goLev1(lev) {
 	var formObj = $('#js-go-form');
 	formObj.find('input[name="lev"]').val(lev);
 	formObj.submit();
+}
+function goId(obj,id,level) {
+	level++;
+	data = {pid:id,level:level};
+	url = '__AJAX__/Associated/getAll?stmp=' + new Date().toString();
+	$.ajax({
+		dataType:'json',
+		type:'post',
+		data:data,
+		url:url,
+		success:function(data){
+			if(data.result) {
+				var result = data.result;
+				var str = '<ul>';
+				for (var i in result) {
+					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" />';
+					str += '&nbsp;&nbsp;&nbsp;&nbsp;';
+					str += result[i].categoryid+'&nbsp;&nbsp;&nbsp;&nbsp;<a href="#nogo" onclick="goId(this,'+result[i].categoryid+','+level+')">'+result[i].name+'</a><div></div></li>';
+				}
+				str += '</ul>';
+				$(obj).next().html(str);
+			}
+		}
+	});
 }
 function checkAll(obj) {
 	var checkInputObj = $('.js-checkall-input');
