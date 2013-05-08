@@ -101,7 +101,7 @@
 						<a href="javascript:;" onclick="clearAttr('brandid')">全部</a>
 						<{foreach ($searchBrandModels as $k => $v)}>
 							<{if ($k < 4)}>
-							<a href="javascript:;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}>" onclick="searchByAttr('brandid',0,'<{$v->brandid}>')"><{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}></a>
+							<a href="javascript:;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}>"  onclick="searchByAttr('brandid',0,'<{$v->brandid}>')"><{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}></a>
 							<{else}>
 							<a href="javascript:;" style="display:none;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}> js-extend-more-brandid" onclick="searchByAttr('brandid',0,'<{$v->brandid}>')">
 								<{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}>
