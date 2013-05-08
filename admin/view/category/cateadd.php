@@ -15,5 +15,6 @@ class CateaddCategoryView extends BaseView
 		$cateBusiness = M('Brand_cateBusiness');
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
+		$this->assign('title', '分类管理');
 	}
 }

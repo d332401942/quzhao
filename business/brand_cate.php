@@ -4,7 +4,7 @@ class Brand_cateBusiness extends BaseBusiness
 	public function getAll()
 	{
 		$data = M('Brand_cateData');
-		$data->setOrder(array('id'=>'desc'));
+		$data->setOrder(array('id'=>'asc'));
 		return $data->findAll();
 	}
 	
