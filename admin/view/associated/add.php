@@ -13,7 +13,7 @@ class AddAssociatedView extends BaseView
 		if($lev)
 		{
 			$pageCore = new PageCoreLib();
-			$pageCore->pageSize = 10;
+			$pageCore->pageSize = 100;
 			$page = 1;
 			if (! empty ( $_GET ['page'] ) && ( int ) $_GET ['page'])
 			{

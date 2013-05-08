@@ -17,8 +17,8 @@
 	
 		<{if ($model)}>
 		<{foreach ($model as $val)}>
-		<ul>
-			<li>
+		<ul style="margin:0;padding:0;margin-left:50px;">
+			<li style="margin:0;padding:0;">
 				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
 				<div></div>
 			</li>
@@ -36,7 +36,7 @@
 	</div>
 	
 </form>	
-<{uc class="PageControlView" pageCore=$pageCore}>
+
 <{include '__TEMPLATE__/footer.html'}>
 <form id="js-go-form" action="" method="get">
 	<input type="hidden" name="page" value="<{$page}>" />
