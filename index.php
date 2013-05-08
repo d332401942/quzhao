@@ -18,6 +18,15 @@ try
 {
     $mainClass->run($regulation);
 }
+catch (ViewExceptionLib $e)
+{
+	header("HTTP/1.0 404 Not Found");
+	$mainClass->notFound($notFoundFileName);
+	if (Config::FIRE_DEBUG)
+	{
+		echo $e->getMessage();
+	}
+}
 catch (OtherExceptionLib $e)
 {
 	if ($e->getMessage() == OtherExceptionLib::CLOSE_WINDOW)
@@ -28,27 +37,7 @@ catch (OtherExceptionLib $e)
 		exit;
 	}
 }
-catch (Exception $e)
-{
-    header("HTTP/1.0 404 Not Found");
-    $mainClass->notFound($notFoundFileName);
-    if (Config::FIRE_DEBUG)
-    {
-		echo $e->getMessage();
-		echo "<br />\r\n";
-        echo $e;
-    }
-}
 catch (BusinessExceptionLib $e)
-{
-    header("HTTP/1.0 404 Not Found");
-    $mainClass->notFound($notFoundFileName);
-    if (Config::FIRE_DEBUG)
-    {
-        echo $e;
-    }
-}
-catch (ViewExceptionLib $e)
 {
     header("HTTP/1.0 404 Not Found");
     $mainClass->notFound($notFoundFileName);
@@ -72,6 +61,8 @@ catch (Exception $e)
     $mainClass->notFound($notFoundFileName);
     if (Config::FIRE_DEBUG)
     {
+		echo $e->getMessage();
+		echo "<br />\r\n";
         echo $e;
     }
 }

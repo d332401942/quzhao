@@ -156,6 +156,7 @@ class AddContentView extends BaseView
 			$pic = file_get_contents($_POST['oldpic']);
 			file_put_contents('./public/uploads/images/'.$path.'/'.$md5Url.'.jpg',$pic);
 			$model->pic = 'public/uploads/images/'.$path.'/'.$md5Url.'.jpg';
+			
 			$business->add($model);
 		}
 		$netdataid = null;
