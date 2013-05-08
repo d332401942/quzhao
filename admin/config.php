@@ -5,7 +5,7 @@ class Config extends Conf
 	/**
      * mysql主机地址
      */
-    const DB_MYSQL_HOST = '192.168.1.126';
+    const DB_MYSQL_HOST = 'd332401942.gicp.net';
     
     /**
      * mysql 用户名称
@@ -25,7 +25,7 @@ class Config extends Conf
 	/**
 	 * redis 地址
 	 */
-	const REDIS_HOST = '192.168.1.126';
+	const REDIS_HOST = '114.112.163.3';
 
 	/**
 	 * redis 端口

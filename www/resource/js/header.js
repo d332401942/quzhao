@@ -255,7 +255,9 @@ function checkPasswordPreset() {
 	var password = passwordObj.val();
 	if (password == '密码') {
 		password = '';
+		
 	}
+	alert(password);
 	if (!password || password.length < 6) {
 		errObj.html('密码不能小于6位');
 		return false;
