@@ -7,12 +7,12 @@ class HomeTjDataBusiness extends BaseBusiness
     {
         $data = new HomeTjDataData();
         $this->checkMustFill($model);
-		$sql = "select * from home_tj_data where name = '$model->name'";
+		/* $sql = "select * from home_tj_data where name = '$model->name'";
 		$res = $data->query($sql);
 		if (!empty($res))
         {
             $this->throwException('该商品名称已经存在');
-        }
+        } */
         $data->add($model);
     }
 
