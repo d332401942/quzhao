@@ -52,4 +52,11 @@ class AssociatedData extends BaseData
 		$sql = "delete from s_key  where keyname = '".$name."' ";
 		$this->exec($sql);
 	}
+	
+	public function getOneByName($name)
+	{
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$this->where(array('keyname'=>$name));
+		return $this->findOne();
+	}
 }

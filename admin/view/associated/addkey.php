@@ -22,7 +22,15 @@ class AddkeyAssociatedView extends BaseView
 			{
 				$business->updateName($model,trim($_POST['id']));
 			}else{
+				try
+			{
 				$business->add($model);
+			}
+			catch(BusinessExceptionLib $e)
+			{
+				$message = $e->getMessage();
+				$this->responseError($message);
+			}
 			}
 			$this->redirect(APP_URL.'associated/addkey');
 		}

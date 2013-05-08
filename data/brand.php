@@ -161,5 +161,11 @@ class BrandData extends BaseData
 		$sql = 'update brand set state='.$state.' , createtime = '.time().' , audit = '."'$name'".' where id in ('.implode(',',$ids).')';
 		$this->exec($sql);
 	}
+	
+	public function getOneByUrl($url)
+	{
+		$this->where(array('url'=>$url));
+		return $this->findOne();
+	}
 }
 

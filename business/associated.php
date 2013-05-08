@@ -36,6 +36,11 @@ class AssociatedBusiness extends BaseBusiness
 	{
 		$data = new AssociatedData();
 		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$result = $data->getOneByName($model->keyname);
+		if($result)
+		{
+			$this->throwException('关键词已经存在');
+		}
 		$data->add($model);
 	}
 	/*

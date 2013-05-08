@@ -49,7 +49,15 @@ class IndexBrandadminView extends BaseView
 				$model->setWorkFields(array('userid', 'url', 'createtime', 'rebate', 'merchantsId'));
 				$business->update($model);
 			}else{
-				$business->add($model);
+				try
+				{
+					$business->add($model);
+				}
+				catch(BusinessExceptionLib $e)
+				{
+					$message = $e->getMessage();
+					$this->responseError($message);
+				}
 			}
 			$this->redirect(APP_URL . '/brandadmin/lists');
 		}
