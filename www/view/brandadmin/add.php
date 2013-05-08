@@ -130,7 +130,7 @@ class AddBrandadminView extends BaseView
 			{
 				$business->add($model);
 			}
-			catch(BusinessException $e)
+			catch(BusinessExceptionLib $e)
 			{
 				$message = $e->getMessage();
 				$this->responseError($message);

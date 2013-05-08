@@ -58,6 +58,10 @@ function goLev1(lev) {
 	formObj.submit();
 }
 function goId(obj,id,level) {
+	if($(obj).next().html() != '') {
+		$(obj).next().html('');
+		return ;
+	}
 	level++;
 	data = {pid:id,level:level};
 	url = '__AJAX__/Associated/getAll?stmp=' + new Date().toString();
