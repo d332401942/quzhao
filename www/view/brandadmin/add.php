@@ -88,7 +88,6 @@ class AddBrandadminView extends BaseView
 				$model->$key = $_POST[$key];
 			}
 		}
-		
 		if ($model->time_start)
 		{
 			$model->time_start = strtotime($model->time_start);

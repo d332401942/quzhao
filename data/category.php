@@ -242,8 +242,14 @@ class CategoryData extends BaseData
 		$pageCore->count = $res [0] ['num'];
 		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
 		$sql = "select * from category where level = $lev limit " . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
-		$result = $this->query($sql,'AssociatedDataModel');
+		$result = $this->query($sql,'CategoryDataModel');
 		return $result;
 	}
 
+	public function getCate($pid)
+	{
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = "select * from category  where level = 2 and pid1 = $pid ";
+		return $this->query($sql,'CategoryDataModel');
+	}
 }

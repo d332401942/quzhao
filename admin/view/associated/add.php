@@ -5,7 +5,7 @@ class AddAssociatedView extends BaseView
     public function index($parameter)
 	{
 		
-		$lev = isset($_GET['lev'])?(int)$_GET['lev']:'';
+		$lev = isset($_GET['lev'])?(int)$_GET['lev']:1;
 		$name = isset($parameter['name'])?trim($parameter['name']):'';
 		$cateModel = null;
 		$pageCore = new PageCoreLib();
@@ -22,7 +22,7 @@ class AddAssociatedView extends BaseView
 			$pageCore->currentPage = $page;
 			//得到所有分类
 			$cateBusiness = M('CategoryBusiness');
-			$cateModel = $cateBusiness->getAll($pageCore,$lev);
+			$cateModel = $cateBusiness->getAll($pageCore, $lev);
 		}
 		if($_POST)
 		{

@@ -11,7 +11,7 @@ class HomeTjDataBusiness extends BaseBusiness
 		$res = $data->query($sql);
 		if (!empty($res))
         {
-            $this->throwException('该商品名称已经存在');
+            die('该商品名称已经存在');
         }
         $data->add($model);
     }

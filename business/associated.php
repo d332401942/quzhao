@@ -56,4 +56,14 @@ class AssociatedBusiness extends BaseBusiness
 		$data = new AssociatedData();
 		$data->updateName($model,$name);
 	}
+	
+	/*
+	*	得到子分类
+	*/
+	public function getCate($pid)
+	{
+		$data = new CategoryData();
+		return $data->getCate($pid);
+	}
+	
 }

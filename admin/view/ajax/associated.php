@@ -10,7 +10,16 @@ class AssociatedAjaxView extends BaseAjaxView
 			$buesiness->del($_POST['ids']);
 			$this->response(true);
 		}
-		
+	}
+	
+	public function getAll()
+	{
+		if(!empty($_POST['pid']) && (int)$_POST['pid'])
+		{
+			$buesiness = M('AssociatedBusiness');
+			$result = $buesiness->getCate($_POST['pid']);
+			$this->response($result);
+		}
 	}
 }
 

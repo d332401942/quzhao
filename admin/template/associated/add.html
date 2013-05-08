@@ -6,10 +6,6 @@
 				<td>
 					<a href="javascript:;" onclick="goLev1(1)">一级分类</a>
 				</td>
-				<td>
-					<a href="javascript:;" onclick="goLev1(2)">二级分类</a>
-				</td>
-				<td><a href="javascript:;" onclick="goLev1(3)">三级分类</a><td>
 			</tr>
 		</table>
 	</div>
@@ -18,18 +14,15 @@
 	<input type="hidden" name="name" value="<{$name}>" />
 	<div class="add-div">
 		<table style="width:100%;margin:auto;" border="0">
-	<tr>
-		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input"  type="checkbox" /></th>
-		<th style="width:50px;">ID</th>
-		<th style="width:350px;">名称</th>
-	</tr>
+	
 		<{if ($model)}>
 		<{foreach ($model as $val)}>
-		<tr>
-			<td><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" /></td>
-			<td align="center"><{$val->categoryid}></td>
-			<td align="center"><{$val->name}></td>
-		</tr>
+		<ul>
+			<li>
+				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(<{$val->categoryid}>)" href="javascript:;"><{$val->name}></a>
+				<ul id="js-cate-hidden-<{$val->categoryid}>" style="display:none;"></ul>
+			</li>
+		</ul>
 		<{/foreach}>
 		<{/if}>
 	<tr>
@@ -63,6 +56,27 @@ function goLev1(lev) {
 	var formObj = $('#js-go-form');
 	formObj.find('input[name="lev"]').val(lev);
 	formObj.submit();
+}
+function goId(id) {
+	data = {pid:id};
+	url = '__AJAX__/Associated/getAll?stmp=' + new Date().toString();
+	$.ajax({
+		dataType:'json',
+		type:'post',
+		data:data,
+		url:url,
+		success:function(data){
+			if(data.result) {
+				var result = data.result;
+				var str = '';
+				for (var i in result) {
+					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" />&nbsp;&nbsp;&nbsp;&nbsp;'+result[i].categoryid+'&nbsp;&nbsp;&nbsp;&nbsp;<a href="#nogo" onclick="goId('+result[i].categoryid+')">'+result[i].name+'</a></li>';
+				}
+				$('#js-cate-hidden-'+id).html(str);
+				$('#js-cate-hidden-'+id).show();
+			}
+		}
+	});
 }
 function checkAll(obj) {
 	var checkInputObj = $('.js-checkall-input');
