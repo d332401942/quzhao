@@ -54,7 +54,7 @@
                 <li>
                     <a href="<{$model->url}>" target="_blank">
                         <div>
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                            <img src="<{$model->pic|searchPicpath}>" />
                         </div>
                          <h2 title="<{$model->title}>"><{$model->title}></h2>
                         <h3>￥<{$model->price}></h3>
@@ -73,7 +73,7 @@
                 <li>
                     <a href="<{$model->url}>" target="_blank">
                         <div>
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                            <img src="<{$model->pic|searchPicpath}>" />
                         </div>
                         <!-- <div class="xl">
                             <span>
@@ -214,7 +214,7 @@
 					<li>
 						<div class="list_cont_tu">
 							<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
-								<img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+								<img src="<{$model->pic|searchPicpath}>" />
 							</a>
 						</div>
 						<div class="list_cont_box">
@@ -258,7 +258,7 @@
 					<ul>
 						<li class="list_fu_tu">
 							<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
-								<img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+								<img src="<{$model->pic|searchPicpath}>" />
 							</a>
 						</li>
 						<li class="list_fu_name">
@@ -335,7 +335,7 @@
                 <li>
                     <div class="list_cont_tu">
                         <a href="<{$model->url}>" target="_blank" title="<{$model->title}>">
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                            <img src="<{$model->pic|searchPicpath}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
