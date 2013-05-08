@@ -3,12 +3,34 @@
 class KeywordsData extends BaseData
 {
 
-	public function getCount($pageCore, $time)
+	public function getCount($pageCore, $time=false)
 	{
-		$now = time ();
-		if ($time)
+		if ($time && $time == 1)
 		{
-			$sql = 'SELECT count(*) as num FROM keywords where createtime >= ' . ($now - $time) . ' group by keywords';
+			$time = date('Y-m-d');
+			$dayTimeStr = strtotime($time);
+			$dayTimeEnd = $time.' 11:59:59';
+			$dayTimeEnd = strtotime($dayTimeEnd);
+			$sql = 'SELECT count(*) as num FROM keywords where createtime > '.$dayTimeStr.' && createtime < ' .$dayTimeEnd. ' group by keywords';
+		}
+		elseif($time == 7)
+		{
+			
+			$time = date('Y-m-d');
+			$dayTimeStr = strtotime($time);
+			$dayTimeStr = $dayTimeStr-604800;
+			$dayTimeEnd = $time.' 11:59:59';
+			$dayTimeEnd = strtotime($dayTimeEnd);
+			$sql = 'SELECT count(*) as num FROM keywords where createtime > '.$dayTimeStr.' && createtime < ' .$dayTimeEnd. ' group by keywords';
+		}
+		elseif($time == 30)
+		{
+			$time = date('Y-m-d');
+			$dayTimeStr = strtotime($time);
+			$dayTimeStr = $dayTimeStr-2592000;
+			$dayTimeEnd = $time.' 11:59:59';
+			$dayTimeEnd = strtotime($dayTimeEnd);
+			$sql = 'SELECT count(*) as num FROM keywords where createtime > '.$dayTimeStr.' && createtime < ' .$dayTimeEnd. ' group by keywords';
 		}
 		else
 		{
