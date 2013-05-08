@@ -2,7 +2,7 @@
 
 class IndexAssociatedView extends BaseView
 {
-    public function index()
+    public function index($parameters)
 	{
 		$pageCore = new PageCoreLib();
 		$pageCore->pageSize = 10;
@@ -15,6 +15,12 @@ class IndexAssociatedView extends BaseView
 		if (! empty ( $_GET ['name'] ))
 		{
 			$name = trim( $_GET ['name']);
+			setcookie('temp_name',$name,time()+86400,'/');
+		}
+		if (! empty ( $parameters ['name'] ))
+		{
+			$name = trim( $parameters ['name']);
+			setcookie('temp_name','',-1,'/');
 		}
 		$pageCore->currentPage = $page;
 		$business = M('AssociatedBusiness');

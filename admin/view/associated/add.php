@@ -42,7 +42,7 @@ class AddAssociatedView extends BaseView
 					$model->categoryids = $cateId;
 				}
 				$business->update($model,$name);
-				$this->redirect(APP_URL.'associated/index');
+				$this->redirect(APP_URL.'associated/index__name/'.$_COOKIE['temp_name']);
 			}
 			
 		}
