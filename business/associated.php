@@ -59,6 +59,11 @@ class AssociatedBusiness extends BaseBusiness
 	public function updateName($model,$name)
 	{
 		$data = new AssociatedData();
+		$result = $data->getOneByName($model->keyname);
+		/*if($result)
+		{
+			$this->throwException('关键词已经存在');
+		}*/
 		$data->updateName($model,$name);
 	}
 	

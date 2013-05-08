@@ -58,5 +58,7 @@ class AssociatedData extends BaseData
 		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$this->where(array('keyname'=>$name));
 		return $this->findOne();
+		//$sql = "select * from s_key where keyname = '$name'";
+		//return $this->query($sql);
 	}
 }

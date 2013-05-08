@@ -19,6 +19,11 @@ class HomeTjDataBusiness extends BaseBusiness
     {
         $data = new HomeTjDataData();
         $this->checkMustFill($model);
+		$result = $data->findOneByName($model->name);
+		/*if ($result)
+		{
+			$this->throwException('商品名称已经存在');
+		}*/
         $data->updateModel($model);
     }
 	
