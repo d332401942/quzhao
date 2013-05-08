@@ -229,7 +229,7 @@ class HomeTjDataBusiness extends BaseBusiness
         {
             $data->where($query);
         }
-		$data->setOrder(array('ctime'=>'desc','state'=>'asc'));
+		$data->setOrder(array('state'=>'asc','ctime'=>'desc'));
         return $data->findAll();
     }
 
