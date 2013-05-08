@@ -132,11 +132,8 @@ class LeftIndexView extends BaseView
 				array(
 					'name' => '优惠商品',
 					'url' => 'user/share',
-				),
-				array(
-					'name' => '折扣活动',
-					'url' => '',
-				),
+				)
+				
 			),
 			'评论管理' => array(
 				array(
