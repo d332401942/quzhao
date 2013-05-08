@@ -9,9 +9,9 @@ class IndexKeywordsView extends BaseView
 		$time = null;
 		if (isset($_POST['time']) && (int)$_POST['time'])
 		{
-			$time = $_POST['time'];
+			$time = $_POST['time'];	
 		}
-
+	
 		$business = M('KeywordsBusiness');
 		$pageCore = new PageCoreLib();
 		$pageCore->pageSize = 50;
@@ -25,6 +25,7 @@ class IndexKeywordsView extends BaseView
 		$this->assign('models', $models);
 		$this->assign('pageCore', $pageCore);
 		$this->assign('time', $time);
+		$this->assign('page', $page);
 	}
 
 }
