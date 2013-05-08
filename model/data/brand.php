@@ -25,7 +25,11 @@ class BrandDataModel extends BaseDataModel
 	public $temp = 0;
 	
 	public $maxrebate = 0;
-
+	
+	public $str_time;
+	
+	public $end_time;
+	
 	public function __construct()
 	{
 		parent::__construct();

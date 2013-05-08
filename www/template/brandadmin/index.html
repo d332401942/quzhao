@@ -45,7 +45,15 @@
 					</select>&nbsp;&nbsp;<span style="color:red">*</span>
 				</td>
 			</tr>
-			
+			<script language="javascript" type="text/javascript" src="__RESOURCE__/js/My97DatePicker/WdatePicker.js"></script>
+			<tr>
+				<td>开始时间：</td>
+				<td><input value="<{if (isset($model->str_time))}><{$model->str_time|date_format:'Y-m-d'}><{/if}>"  onClick="WdatePicker()" type="text" name="str_time" id="str_time" />&nbsp;&nbsp;<span style="color:red">*</span></td>
+			</tr>
+			<tr>
+				<td>结束时间：</td>
+				<td><input value="<{if (isset($model->end_time))}><{$model->end_time|date_format:'Y-m-d'}><{/if}>" onClick="WdatePicker()" type="text" name="end_time" id="end_time" />&nbsp;&nbsp;<span style="color:red">*</span></td>
+			</tr>
 			<{if (!empty($model->image))}>
 			<tr>
 				<td>图片预览：</td>
@@ -65,6 +73,8 @@ function checkform() {
 	var	rebate = $('#rebate').val();
 	var	maxrebate = $('#maxrebate').val();
 	var	merchants = $('#merchants').val();
+	var	str_time = $('#str_time').val();
+	var	end_time = $('#end_time').val();
 	
 	if(name == '') {
 		alert('请选择品牌名称');
@@ -84,6 +94,14 @@ function checkform() {
 	}
 	if(merchants == '') {
 		alert('请选择商家');
+		return false;
+	}
+	if(str_time == '') {
+		alert('开始时间不能为空');
+		return false;
+	}
+	if(end_time == '') {
+		alert('结束时间不能为空');
 		return false;
 	}
 }
