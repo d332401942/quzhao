@@ -201,4 +201,14 @@ class HomeTjDataData extends BaseData
 			$this->exec($sql);
 		}
 	}
+	
+	/*
+	*	添加产品检查名称是否已经存在
+	*/
+	public function findOneByName($name)
+	{
+		$this->where(array('name'=>$name));
+		$res = $this->findOne();
+		return $res;
+	}
 }

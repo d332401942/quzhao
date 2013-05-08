@@ -123,8 +123,18 @@ class AddBrandadminView extends BaseView
 		if ($model->id)
 		{
 			$business->updateModel($model);
-		}else{
-			$business->add($model);
+		}
+		else
+		{
+			try
+			{
+				$business->add($model);
+			}
+			catch(BusinessException $e)
+			{
+				$message = $e->getMessage();
+				$this->responseError($message);
+			}
 		}
 	
 		$this->redirect(APP_URL . '/brandadmin/dplists');
