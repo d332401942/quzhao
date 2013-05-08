@@ -631,7 +631,7 @@ filter:Alpha(opacity=95);}
 .top_bar_con ul li{ float:left;  }
 .top_bar_con ul li img{ float:left; margin-top:15px; padding-left:8px;}
 
-.dingwei2{ width:1000px; margin:0 auto;  position:relative; }
+.dingwei2{ width:1000px; margin:0 auto;  position:relative; clear:both; }
 .youhui{ float:left; width:166px; background:white;box-shadow: 1px 1px 3px #ccc; *border:1px gray solid; border:1px #e5e5e5 solid\9; position:absolute;    }
 .youhui li{ width:166px; text-align:center; line-height:34px; }
 .youhui li a{ display:block; width:166px; text-align:center; }
