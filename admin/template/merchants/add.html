@@ -1,4 +1,4 @@
-<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<{include '__TEMPLATE__/header.html'}>
 <div class="list-div">
 	<div class="content-select">
 	</div>
@@ -17,7 +17,7 @@
 		</table>
 	</div>
 </form>
-
+<div style="clear:both;"></div>
 <ul>
 <{foreach ($model as $val)}>
 	<li>
@@ -25,6 +25,7 @@
 	</li>
 <{/foreach}>
 </ul>
+<{include '__TEMPLATE__/footer.html'}>
 <script>
 function checkform() {
 	var	name = $('#name').val();

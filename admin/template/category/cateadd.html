@@ -1,14 +1,12 @@
-<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
-<div class="list-div">
-	<div class="content-select">
-	</div>
-</div>
-<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+<{include '__TEMPLATE__/header.html'}>
+
+
+<form  action="" method="post"  onsubmit="return checkform()">
 	<div class="add-div">
-		<table>
+		<table width="">
 			<tr>
 				<td>分类名称：</td>
-				<td><input name="name" value="" type="text" class="addinput" id="name" /></td>
+				<td><input name="name" value="" type="text" style="width:150px;" class="addinput" id="name" /></td>
 			</tr>
 			
 			<tr>
@@ -17,14 +15,16 @@
 		</table>
 	</div>
 </form>
-
-<ul>
+<div style="clear:both;"></div>
+<ul style="float:left;">
 <{foreach ($cateModel as $model)}>
 	<li>
 		<{$model->name}>&nbsp;&nbsp;||&nbsp;&nbsp;<a href="#nogo" onclick="del(<{$model->id}>)">删除</a>
 	</li>
 <{/foreach}>
 </ul>
+
+<{include '__TEMPLATE__/footer.html'}>
 <script>
 function checkform() {
 	var	name = $('#name').val();

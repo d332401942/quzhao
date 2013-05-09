@@ -9,6 +9,7 @@ class BrandnameDataModel extends BaseDataModel
 
 	public $letter;
 	
+	public $zhekou = '';
 	
 	public function __construct()
 	{

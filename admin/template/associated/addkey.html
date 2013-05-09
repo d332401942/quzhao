@@ -3,23 +3,22 @@
 <div class="list-div">
 	<div class="content-select">
 		
+			<form style="clear:both;" action="" method="post">
+			<input type="hidden" name="id" value="<{if (isset($model->keyname))}><{$model->keyname}><{/if}>">
+					<table>
+							<td>
+								关键词
+							</td>
+							<td>
+								<input name="name" value="<{if (isset($model->keyname))}><{$model->keyname}><{/if}>" />
+							</td>
+							<td><button type="submit">提交</button></td>
+						</tr>
+					</table>
+			</form>	
 	</div>
 </div>
-<form style="clear:both;" action="" method="post">
-<input type="hidden" name="id" value="<{if (isset($model->keyname))}><{$model->keyname}><{/if}>">
-	<div class="add-div">
-		<table>
-				<td>
-					关键词
-				</td>
-				<td>
-					<input name="name" value="<{if (isset($model->keyname))}><{$model->keyname}><{/if}>" />
-				</td>
-				<td><button type="submit">提交</button></td>
-			</tr>
-		</table>
-	</div>
-</form>	
+
 
 <{include '__TEMPLATE__/footer.html'}>
 <script>

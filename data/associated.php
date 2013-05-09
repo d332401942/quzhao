@@ -37,6 +37,7 @@ class AssociatedData extends BaseData
 		return array();		
 	}
 	
+<<<<<<< HEAD
 	public function getKeyname($name)
 	{
 		$this->selectSearchSlaveDb();
@@ -45,6 +46,8 @@ class AssociatedData extends BaseData
 		$result = array_pop($result);
 		return $result;
 	}
+=======
+>>>>>>> 06941d8bebe0cc2868acfaa3e8afae6e00cd2312
 	
 	public function del($name)
 	{
@@ -58,7 +61,12 @@ class AssociatedData extends BaseData
 		$this->selectSearchSlaveDb();
 		$this->where(array('keyname'=>$name));
 		return $this->findOne();
-		//$sql = "select * from s_key where keyname = '$name'";
-		//return $this->query($sql);
+	}
+	
+	public function getOneCate($name)
+	{
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$this->where(array('keyname'=>$name));
+		return $this->findOne();
 	}
 }

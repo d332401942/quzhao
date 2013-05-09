@@ -4,7 +4,7 @@
 	<div class="content-select">
 		<table>
 				<td>
-					<a href="javascript:;" onclick="goLev1(1)">一级分类</a>
+					<a href="javascript:;" onclick="goLev1(1)">关联分类</a>
 				</td>
 			</tr>
 		</table>
@@ -13,13 +13,13 @@
 <form style="clear:both;" action="__APP__/associated/add" method="post">
 	<input type="hidden" name="name" value="<{$name}>" />
 	<div class="add-div">
-		<table style="width:100%;margin:auto;" border="0">
+		<table style="width:50%;margin:auto;" border="0">
 	
 		<{if ($model)}>
 		<{foreach ($model as $val)}>
 		<ul style="margin:0;padding:0;margin-left:50px;">
 			<li style="margin:0;padding:0;">
-				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
+				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" <{if (in_array($val->categoryid,$cateIdModel->categoryids))}> checked="checked" <{/if}> />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
 				<div></div>
 			</li>
 		</ul>
@@ -37,6 +37,20 @@
 	
 </form>	
 
+<div class="add-div" style="float:right;margin-right:300px;">
+	<table style="width:50%;margin:auto;" border="0">
+	
+	<{if ($model)}>
+	<{foreach ($cateNameModel as $val)}>
+	<ul style="margin:0;padding:0;margin-left:50px;">
+		<li style="margin:0;padding:0;">
+			<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red"><{$val->name}></span>
+		</li>
+	</ul>
+	<{/foreach}>
+	<{/if}>
+</table>
+</div>
 <{include '__TEMPLATE__/footer.html'}>
 <form id="js-go-form" action="" method="get">
 	<input type="hidden" name="page" value="<{$page}>" />
@@ -57,6 +71,11 @@ function goLev1(lev) {
 	formObj.find('input[name="lev"]').val(lev);
 	formObj.submit();
 }
+
+var categoryids = {};
+<{foreach ($cateIdModel->categoryids as $id)}>
+	categoryids[<{$id}>] = 1;
+<{/foreach}>
 function goId(obj,id,level) {
 	if($(obj).next().html() != '') {
 		$(obj).next().html('');
@@ -75,7 +94,11 @@ function goId(obj,id,level) {
 				var result = data.result;
 				var str = '<ul>';
 				for (var i in result) {
-					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" />';
+					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" ';
+					if (categoryids[result[i].categoryid]) {
+						str += ' checked ';
+					}
+					str +=' />';
 					str += '&nbsp;&nbsp;&nbsp;&nbsp;';
 					str += result[i].categoryid+'&nbsp;&nbsp;&nbsp;&nbsp;<a href="#nogo" onclick="goId(this,'+result[i].categoryid+','+level+')">'+result[i].name+'</a><div></div></li>';
 				}

@@ -68,4 +68,13 @@ class CategoryBusiness extends BaseBusiness
 		return $data->getAll($pageCore,$lev);
 	}
 	
+	/*
+	*	 得到已经关联的分类
+	*/
+	public function getCateName($id)
+	{
+		$data = new CategoryData();
+		return $data->getCateName($id);
+	}
+	
 }
