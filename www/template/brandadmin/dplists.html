@@ -38,8 +38,8 @@
 			<td align="center"><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
 			<td align="center"><{if ($model->state == 1)}>已通过<{else if($model->state == 5)}>不合格<{else}>未通过<{/if}></td>
 			<td align="center">
-				<{if ($model->state == 0 or $model->state == 5) }><a href="__APP__/brandadmin/add?id=<{$model->id}>"><button>编辑</button></a>
-				<a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a><{/if}>
+				<a href="__APP__/brandadmin/add?id=<{$model->id}>"><button>编辑</button></a>
+				<{if ($model->state == 0 or $model->state == 5) }><a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a><{/if}>
 			</td>
 		</tr>
 	<{/foreach}>
