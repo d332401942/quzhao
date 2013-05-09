@@ -142,7 +142,7 @@ class UserBusiness extends BaseBusiness
 	public function getOneById($id)
 	{
 		$data = M ( 'UserData' );
-		return $data->getOneById;
+		return $data->getOneById($id);
 	}
 
 	/**
