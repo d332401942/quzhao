@@ -64,6 +64,7 @@ class AssociatedData extends BaseData
 	{
 		$this->selectSearchSlaveDb();
 		$this->where(array('keyname'=>$name));
-		return $this->findOne();
+		$result = $this->findOne();
+		return $result;
 	}
 }

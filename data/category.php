@@ -257,8 +257,9 @@ class CategoryData extends BaseData
 	
 	public function getCateName($id)
 	{
+		$id = trim($id,',');
 		$this->selectSearchSlaveDb();
-		$sql = 'select * from category where categoryid in('.$id.') order by sort asc';
+		$sql = 'select * from category where categoryid in('.$id.') order by sort asc,level asc';
 		$result =  $this->query($sql,'CategoryDataModel');
 		return $result;
 	}

@@ -62,6 +62,9 @@ class CategoryBusiness extends BaseBusiness
 		return $searchBrandModels;
 	}
 	
+	/*
+	*	 得到所有分类
+	*/
 	public function getAll($pageCore,$lev)
 	{
 		$data = new CategoryData();

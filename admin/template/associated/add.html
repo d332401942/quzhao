@@ -44,7 +44,7 @@
 	<{foreach ($cateNameModel as $val)}>
 	<ul style="margin:0;padding:0;margin-left:50px;">
 		<li style="margin:0;padding:0;">
-			<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red"><{$val->name}></span>
+			<{if ($val->level == 2)}>--<{else if ($val->level == 3)}>---<{/if}>&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red"><{$val->name}></span>
 		</li>
 	</ul>
 	<{/foreach}>

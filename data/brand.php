@@ -53,8 +53,8 @@ class BrandData extends BaseData
 		
 		}
 		else{
-			$where = ' AND '.true;
-			$where2 = ' AND '.true;
+			$where = ' AND brand.id > 0';
+			$where2 = ' AND brand.id > 0';
 			if($cid)
 			{
 				$where = ' AND b.cateid = '.$cid;
