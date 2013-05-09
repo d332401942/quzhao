@@ -71,7 +71,7 @@ class Brand2HomeBrandView extends BaseView
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
 		$this->assign('model', $model);
-		
+		$this->assign('title', '品牌添加');
 	}
 	
 

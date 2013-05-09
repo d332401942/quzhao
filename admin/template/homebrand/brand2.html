@@ -1,4 +1,4 @@
-<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<{include '__TEMPLATE__/header.html'}>
 <form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
 <input type="hidden" name="oldimage" value="<{if (isset($model->image))}><{$model->image}><{/if}>">
 <input type="hidden" name="id" value="<{if (isset($model->id))}><{$model->id}><{/if}>">
@@ -65,3 +65,4 @@ function checkform() {
 }
 
 </script>
+<{include '__TEMPLATE__/footer.html'}>
