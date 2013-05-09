@@ -7,6 +7,7 @@ class AddAssociatedView extends BaseView
 		
 		$lev = isset($_GET['lev'])?(int)$_GET['lev']:1;
 		$name = isset($parameter['name'])?trim($parameter['name']):'';
+		$oldname = isset($parameter['oldname'])?trim($parameter['oldname']):'';
 		$cateModel = null;
 		$pageCore = new PageCoreLib();
 		$page = null;
@@ -47,15 +48,17 @@ class AddAssociatedView extends BaseView
 			$cateId = isset($_POST['cateId'])?$_POST['cateId']:array();
 			$cateId = implode(',',$cateId);
 			$name = trim($_POST['name']);
+			$oldname = trim($_POST['oldname']);
 			$model = new AssociatedDataModel();
 			$model->categoryids = $cateId;
 			$business->update($model,$name);
-			$this->redirect(APP_URL.'associated/index__name/'.$_COOKIE['temp_name']);
+			$this->redirect(APP_URL.'associated/index__name/'.$oldname);
 		}
 		$this->assign('title', '添加关联分类');
 		$this->assign('model', $cateModel);
 		$this->assign ('pageCore', $pageCore);
 		$this->assign ('name', $name);
+		$this->assign ('oldname', $oldname);
 		$this->assign ('lev', $lev);
 		$this->assign ('page', $page);
 		$this->assign ('cateIdModel', $cateIdModel);

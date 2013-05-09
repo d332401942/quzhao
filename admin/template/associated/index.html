@@ -32,7 +32,9 @@
 				<td align="center"><{$val->keyname}></td>
 				
 				<td align="center">
-					<a href="__APP__/associated/add__LIMIT__name/<{$val->keyname}>">添加关联分类</a>&nbsp;
+					<a href="__APP__/associated/add__LIMIT__name/<{$val->keyname}>/oldname/<{$name}>">
+						添加关联分类
+					</a>&nbsp;
 					<a href="__APP__/associated/addkey__LIMIT__name/<{$val->keyname}>">编辑</a>&nbsp;
 					<a onclick="del('<{$val->keyname}>')" href="#nogo">删除</a>
 				</td>
