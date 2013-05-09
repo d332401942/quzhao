@@ -105,7 +105,7 @@
 <form style="display:none;" id="js-form-page" method="get">
 	<input type="hidden" name="cid" value="<{$cid}>" />
 	<input type="hidden" name="letter" id="letter" value="<{$letter}>" />
-	<input type="hidden" name="page" value="<{$page}>" />
+	<input type="hidden" name="page" id="js-page" value="<{$page}>" />
 	<input type="hidden" name="mid" id="mid" value="<{$mid}>" />
 </form>
 <script>
@@ -120,6 +120,7 @@ function goCid(cid) {
 	formObj.find('input[name="cid"]').val(cid);
 	$('#letter').val('');
 	$('#mid').val('');
+	$('#js-page').val(1);
 	formTogo();
 }
 function ghsj() {
@@ -135,11 +136,13 @@ function ghsj2() {
 function goletter(letter) {
 	var formObj = $('#js-form-page');
 	formObj.find('input[name="letter"]').val(letter);
+	$('#js-page').val(1);
 	formTogo();
 }
 function goSj(mid) {
 	var formObj = $('#js-form-page');
 	formObj.find('input[name="mid"]').val(mid);
+	$('#js-page').val(1);
 	formTogo();
 }
 
