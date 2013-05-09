@@ -31,10 +31,10 @@
 			<td align="center"><{$val->bn_name}></td>
 			<td align="center"><{if ($val->state == 0)}>待审核<{else if ($val->state == 3)}>不合格<{else if ($val->state == 1)}>已通过<{else}>未通过<{/if}></td>
 			<td align="center"><{$val->createtime|date_format:'Y-m-d H:i:s'}></td>
-			<{if ($val->state != 1)}><td align="center">
+			<td align="center">
 				<a href="__APP__/brandadmin__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
-				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
-			</td><{/if}>
+				<{if ($val->state != 1)}><a onclick="del(<{$val->id}>)" href="#nogo">删除</a><{/if}>
+			</td>
 		</tr>
 		<{/foreach}>
 		<{else}>

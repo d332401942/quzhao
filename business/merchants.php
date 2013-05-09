@@ -22,6 +22,18 @@ class MerchantsBusiness extends BaseBusiness
 		$data->exec($sql);
 	}
 	
+	public function update($model)
+	{
+		$data = M('MerchantsData');
+		$data->updateModel($model);
+	}
+	
+	public function getOneById($cid)
+	{
+		$data = M('MerchantsData');
+		return $data->getOneById($cid);
+	}
+	
 	
 	
 }
