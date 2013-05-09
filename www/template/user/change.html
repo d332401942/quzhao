@@ -185,13 +185,14 @@ function checkForm(obj) {
 	var nicknameObj = $(obj).find('input[name="nickname"]');
 	var emailObj = $(obj).find('input[name="email"]');
 	var nickname = nicknameObj.val();
-	var str = nickname.split('');
+	
 	
 	if (!nickname || nickname == '昵称') {
 		$('#id-nickname-error').html('用户名不能为空');
 		return false;
 	}
 	var count = 0;
+	var str = nickname.split('');
 	for (i = 0 ; i < str.length ; i ++) {
 		var strTemp = escape(str[i]);
 		if (strTemp.indexOf("%u",0) == -1) {

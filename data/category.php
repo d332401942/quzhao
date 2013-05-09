@@ -115,7 +115,7 @@ class CategoryData extends BaseData
 
 	private function dbFindAll()
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->selectSearchSlaveDb();
 		$sql = 'select categoryid,attrid,name,level,pid1,pid2,sort,isvalid';
 		$sql .= ' from category where isvalid = 1 order by categoryid desc,sort desc';
 		$statement = $this->run ( $sql );
@@ -153,7 +153,7 @@ class CategoryData extends BaseData
 		}
 		if (! empty ( $attrId ))
 		{
-			$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+			$this->selectSearchSlaveDb();
 			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = " . $attrId . " And attr != 'brandid' order by attrdbid asc ,sort desc";
 			$statement = $this->run ( $sql );
 			while ( $attrdbDataModel = $statement->fetchObject ( 'AttrdbDataModel' ) )
@@ -169,7 +169,7 @@ class CategoryData extends BaseData
 
 	public function getAttrId($categoryId)
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->selectSearchSlaveDb();
 		$result = array ();
 		$this->setOrder ( array (
 						'categoryid' => 'asc' 
@@ -186,7 +186,7 @@ class CategoryData extends BaseData
 	 */
 	public function getSearchBrandDataModel($brandIds)
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->selectSearchSlaveDb();
 		$sql = 'select * from brand where brandid in (' . implode ( ',', $brandIds ) . ')';
 		$models = $this->query ( $sql, 'SearchBrandDataModel' );
 		return $models;

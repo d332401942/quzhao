@@ -35,7 +35,6 @@ class AssociatedBusiness extends BaseBusiness
 	public function add($model)
 	{
 		$data = new AssociatedData();
-		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$result = $data->getOneByName($model->keyname);
 		if($result)
 		{
@@ -43,6 +42,7 @@ class AssociatedBusiness extends BaseBusiness
 		}
 		$data->add($model);
 	}
+	
 	/*
 	*	修改查询信息
 	*/

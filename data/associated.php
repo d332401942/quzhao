@@ -39,7 +39,7 @@ class AssociatedData extends BaseData
 	
 	public function getKeyname($name)
 	{
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$this->selectSearchSlaveDb();
 		$sql = "select * from s_key where keyname = '$name' ";
 		$result = $this->query($sql,'AssociatedDataModel');
 		$result = array_pop($result);
@@ -48,14 +48,14 @@ class AssociatedData extends BaseData
 	
 	public function del($name)
 	{
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$this->selectSearchMasterDb();
 		$sql = "delete from s_key  where keyname = '".$name."' ";
 		$this->exec($sql);
 	}
 	
 	public function getOneByName($name)
 	{
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$this->selectSearchSlaveDb();
 		$this->where(array('keyname'=>$name));
 		return $this->findOne();
 		//$sql = "select * from s_key where keyname = '$name'";
