@@ -117,7 +117,7 @@ class BrandData extends BaseData
 				$brandModels[$bn_id]->shangjia[$merchantsModel->id] = $merchantsModel;
 			}
 		}
-		//echo $sql;
+		
 		//P(count($brandModels));
 		//P($brandModels);exit;
 		return $brandModels;
