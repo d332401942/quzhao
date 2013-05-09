@@ -37,7 +37,6 @@ class AssociatedData extends BaseData
 		return array();		
 	}
 	
-<<<<<<< HEAD
 	public function getKeyname($name)
 	{
 		$this->selectSearchSlaveDb();
@@ -46,8 +45,6 @@ class AssociatedData extends BaseData
 		$result = array_pop($result);
 		return $result;
 	}
-=======
->>>>>>> 06941d8bebe0cc2868acfaa3e8afae6e00cd2312
 	
 	public function del($name)
 	{
