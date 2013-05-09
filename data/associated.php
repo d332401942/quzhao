@@ -5,7 +5,7 @@ class AssociatedData extends BaseData
 
 	public function update($model,$name)
 	{
-		$data->selectSearchMasterDb();
+		$this->selectSearchMasterDb();
 		$sql = "update s_key set categoryids = '".$model->categoryids."' where keyname = '".$name."' ";
 		$this->exec($sql);
 	}
@@ -15,7 +15,7 @@ class AssociatedData extends BaseData
 	*/
 	public function updateName($model,$name)
 	{
-		$data->selectSearchMasterDb();
+		$this->selectSearchMasterDb();
 		$sql = "update s_key set keyname = '".$model->keyname."' where keyname = '".$name."' ";
 		$this->exec($sql);
 	}
@@ -24,7 +24,7 @@ class AssociatedData extends BaseData
 	{
 		if($name)
 		{
-			$data->selectSearchSlaveDb();
+			$this->selectSearchSlaveDb();
 			$sql = "select count(*) as num from s_key where keyname like '%$name%'";
 			$res = $this->query($sql);
 			$pageCore->count = $res [0] ['num'];
@@ -62,7 +62,7 @@ class AssociatedData extends BaseData
 	
 	public function getOneCate($name)
 	{
-		$data->selectSearchSlaveDb();
+		$this->selectSearchSlaveDb();
 		$this->where(array('keyname'=>$name));
 		return $this->findOne();
 	}
