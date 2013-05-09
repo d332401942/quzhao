@@ -1,3 +1,4 @@
+
 <script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
 <form style="clear:both;" action="__APP__/brandadmin" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
 	<div class="add-div">
@@ -45,14 +46,10 @@
 					</select>&nbsp;&nbsp;<span style="color:red">*</span>
 				</td>
 			</tr>
-			<script language="javascript" type="text/javascript" src="__RESOURCE__/js/My97DatePicker/WdatePicker.js"></script>
+			<br /><br /><br />
 			<tr>
-				<td>开始时间：</td>
-				<td><input value="<{if (isset($model->str_time))}><{$model->str_time|date_format:'Y-m-d'}><{/if}>"  onClick="WdatePicker()" type="text" name="str_time" id="str_time" />&nbsp;&nbsp;<span style="color:red">*</span></td>
-			</tr>
-			<tr>
-				<td>结束时间：</td>
-				<td><input value="<{if (isset($model->end_time))}><{$model->end_time|date_format:'Y-m-d'}><{/if}>" onClick="WdatePicker()" type="text" name="end_time" id="end_time" />&nbsp;&nbsp;<span style="color:red">*</span></td>
+				<td>有效时间：</td>
+				<td><{$dateFrom}>&nbsp;--&nbsp;&nbsp;<{$dateTo}></td>
 			</tr>
 			<{if (!empty($model->image))}>
 			<tr>
