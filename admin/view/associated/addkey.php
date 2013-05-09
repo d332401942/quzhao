@@ -10,7 +10,6 @@ class AddkeyAssociatedView extends BaseView
 		{	
 			$business = M('AssociatedBusiness');
 			$model = $business->getName($id);
-			$model = array_pop($model);
 		}
 		if($_POST)
 		{

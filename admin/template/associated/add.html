@@ -19,7 +19,7 @@
 		<{foreach ($model as $val)}>
 		<ul style="margin:0;padding:0;margin-left:50px;">
 			<li style="margin:0;padding:0;">
-				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" <{if (in_array($val->categoryid,$cateIdModel->categoryids))}> checked="checked" <{/if}> />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
+				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" <{if (!empty($cateIdModel->categoryids))}><{if (in_array($val->categoryid,$cateIdModel->categoryids))}> checked="checked" <{/if}><{/if}> />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
 				<div></div>
 			</li>
 		</ul>
@@ -73,9 +73,12 @@ function goLev1(lev) {
 }
 
 var categoryids = {};
+<{if (!empty($cateIdModel->categoryids))}>
 <{foreach ($cateIdModel->categoryids as $id)}>
 	categoryids[<{$id}>] = 1;
 <{/foreach}>
+<{/if}>
+
 function goId(obj,id,level) {
 	if($(obj).next().html() != '') {
 		$(obj).next().html('');
@@ -95,9 +98,13 @@ function goId(obj,id,level) {
 				var str = '<ul>';
 				for (var i in result) {
 					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" ';
+					
+					<{if (!empty($cateIdModel->categoryids))}>
 					if (categoryids[result[i].categoryid]) {
 						str += ' checked ';
 					}
+					<{/if}>
+					
 					str +=' />';
 					str += '&nbsp;&nbsp;&nbsp;&nbsp;';
 					str += result[i].categoryid+'&nbsp;&nbsp;&nbsp;&nbsp;<a href="#nogo" onclick="goId(this,'+result[i].categoryid+','+level+')">'+result[i].name+'</a><div></div></li>';

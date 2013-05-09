@@ -42,9 +42,7 @@ class AssociatedBusiness extends BaseBusiness
 	public function getName($name)
 	{
 		$data = new AssociatedData();
-		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = "select * from s_key where keyname = '$name'";
-		return $data->query($sql,'AssociatedDataModel');
+		return $data->getOneCate($name);
 	}
 	/*
 	*	修改关键名称

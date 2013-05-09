@@ -21,7 +21,10 @@ class AddAssociatedView extends BaseView
 			$cateBusiness = M('CategoryBusiness');
 			$cateNameModel = $cateBusiness->getCateName($cateIdModel->categoryids);
 		}
-		$cateIdModel->categoryids = explode(',',$cateIdModel->categoryids);
+		if(!empty($cateIdModel->categoryids))
+		{
+			$cateIdModel->categoryids = explode(',',$cateIdModel->categoryids);
+		}
 		if($lev)
 		{
 			$pageCore = new PageCoreLib();
