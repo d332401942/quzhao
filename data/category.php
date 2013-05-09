@@ -235,32 +235,29 @@ class CategoryData extends BaseData
 	
 	public function getAll($pageCore,$lev)
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
-		
+		$this->selectSearchSlaveDb();
 		/*
 		*分页
 		$sql = "select count(*) as num from category where level = $lev";
 		$res = $this->query($sql);
 		$pageCore->count = $res [0] ['num'];
 		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );*/
-		$sql = "select * from category where level = $lev order by sort asc ";
+		$sql = 'select * from category where level = '.$lev.' order by sort asc ';
 		$result = $this->query($sql,'CategoryDataModel');
 		return $result;
 	}
 
 	public function getCate($pid, $level)
 	{
-
 		$pidStr = 'pid' . ($level - 1);
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$this->selectSearchSlaveDb();
 		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr .' = ' . $pid .' order by sort asc';
 		return $this->query($sql,'CategoryDataModel');
 	}
 	
 	public function getCateName($id)
 	{
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		
+		$this->selectSearchSlaveDb();
 		$sql = 'select * from category where categoryid in('.$id.') order by sort asc';
 		$result =  $this->query($sql,'CategoryDataModel');
 		return $result;
