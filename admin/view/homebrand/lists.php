@@ -54,7 +54,6 @@ class ListsHomeBrandView extends BaseView
 		//得到所有商品
 		$business = M('BrandBusiness');
 		$result = $business->getAll3($pageCore,$state,$id,$temp);
-		
 		$userid = null;
 		if(!empty($_GET['userid']))
 		{
@@ -67,6 +66,8 @@ class ListsHomeBrandView extends BaseView
 		
 		
 		$this->assign('id',$id);
+		$this->assign('page',$page);
+		$this->assign('state',$state);
 		$this->assign('count',$count);
 		$this->assign('tgCount',$tgCount);
 		$this->assign('userid',$userid);
