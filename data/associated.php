@@ -29,7 +29,7 @@ class AssociatedData extends BaseData
 			$res = $this->query($sql);
 			$pageCore->count = $res [0] ['num'];
 			$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-			
+			//TODO 索引
 			$sql = "select * from s_key where keyname like '%$name%' limit " . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 			$result = $this->query($sql,'AssociatedDataModel');
 			return $result;
