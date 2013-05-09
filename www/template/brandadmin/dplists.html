@@ -55,9 +55,21 @@ function del(id,pic) {
 	if (!confirm('确定要删除吗？')) {
 		return;
 	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
 	$.ajax({
 		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
-		data: {id:id,pic:pic,userid:1},
+		data: {id:ids,pic:pic,userid:1},
 		type: 'post',
 		dataType: 'json',
 		success: function(data) {

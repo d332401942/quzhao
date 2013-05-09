@@ -1,14 +1,15 @@
 <{include '__TEMPLATE__/header.html'}>
 
 <div class="list-div">
-	<div class="content-select">
 		<table>
 				<td>
-					<a href="javascript:;" onclick="goLev1(1)">关联分类</a>
+					<a href="javascript:;"><strong>选择关联分类</strong></a>
+				</td>
+				<td>
+					<a href="javascript:;"><strong>已经关联分类</strong></a>
 				</td>
 			</tr>
 		</table>
-	</div>
 </div>
 <form style="clear:both;" action="__APP__/associated/add" method="post">
 	<input type="hidden" name="name" value="<{$name}>" />
@@ -38,7 +39,7 @@
 	
 </form>	
 
-<div class="add-div" style="float:right;margin-right:300px;">
+<div class="add-div" style="float:right;margin-right:260px;">
 	<table style="width:50%;margin:auto;" border="0">
 	
 	<{if ($model)}>

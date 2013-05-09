@@ -18,8 +18,8 @@ class ContentAjaxView extends BaseAjaxView
     
     public function del()
     {
-        $id = $_POST['id'];
-        $pic = $_POST['pic'];
+        $id = isset($_POST['id'])?implode(',',$_POST['id']):array();
+        $pic = isset($_POST['pic'])?$_POST['pic']:array();
 		$del = isset($_POST['del'])?(int)$_POST['del']:false;
         $business = new HomeTjDataBusiness();
 		$business->delById($id,$del);

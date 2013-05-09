@@ -151,6 +151,7 @@
 			<button onclick="clearSort()">清除选中排序</button>
 			<button onclick="clearTj()">清除选中推荐</button>
 			<button onclick="clearHot()">清除选中热门</button>
+			<button onclick="del()">删除</button>
 		</td>
 	</tr>
 </table>
@@ -352,9 +353,25 @@ function del(id,pic) {
 	if (!confirm('确定要删除吗？')) {
 		return;
 	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
+	if (!ids) {
+		alert('请选择要删除的数据');
+		return;
+	}
 	$.ajax({
 		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
-		data: {id:id,pic:pic},
+		data: {id:ids,pic:pic},
 		type: 'post',
 		dataType: 'json',
 		success: function(data) {
