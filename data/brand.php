@@ -114,9 +114,10 @@ class BrandData extends BaseData
 				}
 				$merchantsModel-> b_rebate = $result['b_rebate'];
 				$merchantsModel->b_url = $result['b_url'];
-				
+				//$brandModels[$bn_id]->$brandModel->total = count();
 				$brandModels[$bn_id]->shangjia[$merchantsModel->id] = $merchantsModel;
 			}
+			$brandModels[$bn_id]->total = count($brandModels[$bn_id]->shangjia);
 		}
 		
 		//P(count($brandModels));
