@@ -9,7 +9,6 @@
 	
 	<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
 		<input type="hidden" name="page" value="<{$page}>" />
-		<input type="hidden" name="state" value="<{$state}>" />
 		<table>
 			
 			<tr>
@@ -41,8 +40,8 @@
 					<label>全部<input class="js-search-state" value="" type="checkbox" /></label>&nbsp;
 					<label>有货<input <{if (in_array(1,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="1" type="checkbox" /></label>&nbsp;
 					<label>无货<input <{if (in_array(2,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="2" type="checkbox" /></label>&nbsp;
-					<label>待审核<input <{if (in_array(0,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
-					<label>不合格<input <{if (in_array(5,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="5" type="checkbox" /></label>&nbsp;
+					<label>待审核<input <{if (in_array('0',explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
+					<label>不合格<input <{if (in_array(5,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="5" type="checkbox" /></label>&nbsp;
 				</td>
 				<td>
 					按月查看

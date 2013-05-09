@@ -12,6 +12,7 @@ class MerchantsBusiness extends BaseBusiness
 	public function getAll()
 	{
 		$data = M('MerchantsData');
+		$data->setOrder(array('sort'=>'asc','id'=>'desc'));
 		return $data->findAll();
 	}
 	
