@@ -18,14 +18,7 @@ class AssociatedBusiness extends BaseBusiness
 		return $data->getAll($pageCore,$name);
 	}
 	
-	/*
-	*	得到数据原有分类
-	*/
-	public function getKeyname($name)
-	{
-		$data = new AssociatedData();
-		return $data->getKeyname($name);
-	}
+	
 	
 	public function del($name)
 	{
@@ -74,6 +67,15 @@ class AssociatedBusiness extends BaseBusiness
 	{
 		$data = new CategoryData();
 		return $data->getCate($pid, $level);
+	}
+	
+	/*
+	*	得到关键词已经关联分类ID
+	*/
+	public function getOneCate($name)
+	{
+		$data = new AssociatedData();
+		return $data->getOneCate($name);
 	}
 
 

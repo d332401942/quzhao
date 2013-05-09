@@ -10,6 +10,18 @@ class AddAssociatedView extends BaseView
 		$cateModel = null;
 		$pageCore = new PageCoreLib();
 		$page = null;
+		$business = M('AssociatedBusiness');
+		$cateIdModel = $business->getOneCate($name);
+		$cateNameModel = array();
+		if(!empty($cateIdModel->categoryids))
+		{
+			/*
+			*	得到已经关联的分类
+			*/
+			$cateBusiness = M('CategoryBusiness');
+			$cateNameModel = $cateBusiness->getCateName($cateIdModel->categoryids);
+		}
+		$cateIdModel->categoryids = explode(',',$cateIdModel->categoryids);
 		if($lev)
 		{
 			$pageCore = new PageCoreLib();
@@ -26,25 +38,13 @@ class AddAssociatedView extends BaseView
 		}
 		if($_POST)
 		{
-			
 			$cateId = isset($_POST['cateId'])?$_POST['cateId']:array();
 			$cateId = implode(',',$cateId);
 			$name = trim($_POST['name']);
-			$business = M('AssociatedBusiness');
-			$result = $business->getKeyname($name);
-			if($result)
-			{
-				$model = new AssociatedDataModel();
-				if(!empty($result->categoryids))
-				{
-					$model->categoryids = $result->categoryids.','.$cateId;
-				}else{
-					$model->categoryids = $cateId;
-				}
-				$business->update($model,$name);
-				$this->redirect(APP_URL.'associated/index__name/'.$_COOKIE['temp_name']);
-			}
-			
+			$model = new AssociatedDataModel();
+			$model->categoryids = $cateId;
+			$business->update($model,$name);
+			$this->redirect(APP_URL.'associated/index__name/'.$_COOKIE['temp_name']);
 		}
 		$this->assign('title', '添加关联分类');
 		$this->assign('model', $cateModel);
@@ -52,5 +52,7 @@ class AddAssociatedView extends BaseView
 		$this->assign ('name', $name);
 		$this->assign ('lev', $lev);
 		$this->assign ('page', $page);
+		$this->assign ('cateIdModel', $cateIdModel);
+		$this->assign ('cateNameModel', $cateNameModel);
 	}
 }

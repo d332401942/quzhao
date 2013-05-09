@@ -42,7 +42,15 @@ class BrandHomeBrandView extends BaseView
 			if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
 			{
 				$model->id = $_POST['brandid'];
-				$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate','brand_name_id','str_time','end_time'));
+				if(!empty($_POST['brand_name_id']) && (int)$_POST['brand_name_id'])
+				{
+					$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate','brand_name_id','str_time','end_time'));
+				}
+				else
+				{
+					$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate','str_time','end_time'));
+				}
+				
 				$business->update($model);
 			}else{
 				try

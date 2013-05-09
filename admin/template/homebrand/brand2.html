@@ -16,7 +16,10 @@
 				<td>品牌名称首大写字母：</td>
 				<td><input value="<{if (isset($model->letter))}><{$model->letter}><{/if}>" type="text" name="letter" id="letter" />&nbsp;&nbsp;<span style="color:red">*</span></td>
 			</tr>
-			
+			<tr>
+				<td>折扣：</td>
+				<td><input value="<{if (isset($model->zhekou))}><{$model->zhekou}><{/if}>" type="text" name="zhekou" id="zhekou" />&nbsp;&nbsp;<span style="color:red">*长度7个汉字</span></td>
+			</tr>
 			<tr>
 				<td>品类：</td>
 				<td>
