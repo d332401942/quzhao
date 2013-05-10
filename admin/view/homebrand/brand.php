@@ -9,7 +9,7 @@ class BrandHomeBrandView extends BaseView
 		
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
-		$brandModel = null;
+		$brandModel = array();
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
@@ -37,12 +37,20 @@ class BrandHomeBrandView extends BaseView
 				}
 			}
 			$model->createtime = time();
-			$model->str_time = strtotime($_POST['str_time']);
-			$model->end_time = strtotime($_POST['end_time']);
+			$model->str_time = strtotime($_POST['time_start']);
+			$model->end_time = strtotime($_POST['time_end']);
 			if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
 			{
 				$model->id = $_POST['brandid'];
-				$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate'));
+				if(!empty($_POST['brand_name_id']) && (int)$_POST['brand_name_id'])
+				{
+					$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate','brand_name_id','str_time','end_time'));
+				}
+				else
+				{
+					$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate','str_time','end_time'));
+				}
+				
 				$business->update($model);
 			}else{
 				try
@@ -57,12 +65,19 @@ class BrandHomeBrandView extends BaseView
 			}
 			$this->redirect(APP_URL . '/homebrand/lists');
 		}
+		
+		$timeStart = isset($brandModel->str_time)?$brandModel->str_time : time();
+		$timeEnd   = isset($brandModel->end_time) ? $brandModel->end_time : time();
+		$dateFrom = FormCommon::date('time_start',date('Y-m-d H:i:s',$timeStart),true);
+		$dateTo = FormCommon::date('time_end',date('Y-m-d H:i:s',$timeEnd),true);
 		//得到所有商家
 		$business = M('MerchantsBusiness');
 		$merchants = $business->getAll();
 		$this->assign('sjModel', $merchants);
 		$this->assign('model', $brandModel);
 		$this->assign('title', '添加品牌');
+		$this->assign('dateTo', $dateTo);
+		$this->assign('dateFrom', $dateFrom);
 		
 	}
 	

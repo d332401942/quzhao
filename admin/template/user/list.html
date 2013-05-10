@@ -48,7 +48,7 @@
 					<option value="1" <{if ($val->power == 1)}>selected<{/if}>>普通会员</option>
 					<option value="2" <{if ($val->power == 2)}>selected<{/if}>>特权会员</option>
 				</select>
-				<a href="__APP__/content/add?shareid=<{$val->id}>">编辑</a>&nbsp;
+				<a href="__APP__/user/edit?id=<{$val->id}>">编辑</a>&nbsp;
 				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
 			</td>
 		</tr>

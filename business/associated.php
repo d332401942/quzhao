@@ -18,14 +18,7 @@ class AssociatedBusiness extends BaseBusiness
 		return $data->getAll($pageCore,$name);
 	}
 	
-	/*
-	*	得到数据原有分类
-	*/
-	public function getKeyname($name)
-	{
-		$data = new AssociatedData();
-		return $data->getKeyname($name);
-	}
+	
 	
 	public function del($name)
 	{
@@ -35,7 +28,6 @@ class AssociatedBusiness extends BaseBusiness
 	public function add($model)
 	{
 		$data = new AssociatedData();
-		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
 		$result = $data->getOneByName($model->keyname);
 		if($result)
 		{
@@ -43,15 +35,14 @@ class AssociatedBusiness extends BaseBusiness
 		}
 		$data->add($model);
 	}
+	
 	/*
 	*	修改查询信息
 	*/
 	public function getName($name)
 	{
 		$data = new AssociatedData();
-		$data->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = "select * from s_key where keyname = '$name'";
-		return $data->query($sql,'AssociatedDataModel');
+		return $data->getOneCate($name);
 	}
 	/*
 	*	修改关键名称
@@ -74,6 +65,15 @@ class AssociatedBusiness extends BaseBusiness
 	{
 		$data = new CategoryData();
 		return $data->getCate($pid, $level);
+	}
+	
+	/*
+	*	得到关键词已经关联分类ID
+	*/
+	public function getOneCate($name)
+	{
+		$data = new AssociatedData();
+		return $data->getOneCate($name);
 	}
 
 

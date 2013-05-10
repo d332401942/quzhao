@@ -1,30 +1,35 @@
-<script type="text/javascript" src="__RESOURCE__/js/jquery.js"></script>
+<{include '__TEMPLATE__/header.html'}>
 <div class="list-div">
 	<div class="content-select">
 	</div>
 </div>
 <form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+<input type="hidden" name="id" value="<{if (isset($oneModel->id))}><{$oneModel->id}><{/if}>" />
 	<div class="add-div">
 		<table>
 			<tr>
 				<td>商家名称：</td>
-				<td><input name="name" value="" type="text" class="addinput" id="name" /></td>
+				<td><input name="name" value="<{if (isset($oneModel->name))}><{$oneModel->name}><{/if}>" style="width:150px;" type="text" class="addinput" id="name" /></td>
 			</tr>
-			
+			<tr>
+				<td>排序：</td>
+				<td><input name="sort" value="<{if (isset($oneModel->sort))}><{$oneModel->sort}><{/if}>" type="text" style="width:50px;" class="addinput" id="sort" /></td>
+			</tr>
 			<tr>
 				<td></td><td><button type="submit" name="btn_submit">确定</button></td>
 			</tr>
 		</table>
 	</div>
 </form>
-
+<div style="clear:both;"></div>
 <ul>
 <{foreach ($model as $val)}>
 	<li>
-		<{$val->name}>&nbsp;&nbsp;||&nbsp;&nbsp;<a href="#nogo" onclick="del(<{$val->id}>)">删除</a>
+		<{$val->name}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$val->sort}>&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;<a href="__APP__/merchants/add__LIMIT__cid/<{$val->id}>">编辑</a>&nbsp;&nbsp;||&nbsp;&nbsp;<a href="#nogo" onclick="del(<{$val->id}>)">删除</a>
 	</li>
 <{/foreach}>
 </ul>
+<{include '__TEMPLATE__/footer.html'}>
 <script>
 function checkform() {
 	var	name = $('#name').val();

@@ -115,7 +115,7 @@ class CategoryData extends BaseData
 
 	private function dbFindAll()
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->selectSearchSlaveDb();
 		$sql = 'select categoryid,attrid,name,level,pid1,pid2,sort,isvalid';
 		$sql .= ' from category where isvalid = 1 order by categoryid desc,sort desc';
 		$statement = $this->run ( $sql );
@@ -153,7 +153,7 @@ class CategoryData extends BaseData
 		}
 		if (! empty ( $attrId ))
 		{
-			$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+			$this->selectSearchSlaveDb();
 			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = " . $attrId . " And attr != 'brandid' order by attrdbid asc ,sort desc";
 			$statement = $this->run ( $sql );
 			while ( $attrdbDataModel = $statement->fetchObject ( 'AttrdbDataModel' ) )
@@ -169,7 +169,7 @@ class CategoryData extends BaseData
 
 	public function getAttrId($categoryId)
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->selectSearchSlaveDb();
 		$result = array ();
 		$this->setOrder ( array (
 						'categoryid' => 'asc' 
@@ -186,7 +186,7 @@ class CategoryData extends BaseData
 	 */
 	public function getSearchBrandDataModel($brandIds)
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		$this->selectSearchSlaveDb();
 		$sql = 'select * from brand where brandid in (' . implode ( ',', $brandIds ) . ')';
 		$models = $this->query ( $sql, 'SearchBrandDataModel' );
 		return $models;
@@ -235,25 +235,32 @@ class CategoryData extends BaseData
 	
 	public function getAll($pageCore,$lev)
 	{
-		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
-		
+		$this->selectSearchSlaveDb();
 		/*
 		*分页
 		$sql = "select count(*) as num from category where level = $lev";
 		$res = $this->query($sql);
 		$pageCore->count = $res [0] ['num'];
 		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );*/
-		$sql = "select * from category where level = $lev ";
+		$sql = 'select * from category where level = '.$lev.' order by sort asc ';
 		$result = $this->query($sql,'CategoryDataModel');
 		return $result;
 	}
 
 	public function getCate($pid, $level)
 	{
-
 		$pidStr = 'pid' . ($level - 1);
-		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
-		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr .' = ' . $pid;
+		$this->selectSearchSlaveDb();
+		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr .' = ' . $pid .' order by sort asc';
 		return $this->query($sql,'CategoryDataModel');
+	}
+	
+	public function getCateName($id)
+	{
+		$id = trim($id,',');
+		$this->selectSearchSlaveDb();
+		$sql = 'select * from category where categoryid in('.$id.') order by sort asc,level asc';
+		$result =  $this->query($sql,'CategoryDataModel');
+		return $result;
 	}
 }

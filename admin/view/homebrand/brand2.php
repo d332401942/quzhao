@@ -27,6 +27,7 @@ class Brand2HomeBrandView extends BaseView
 				$brandNameModel->name = trim($_POST['name']);
 				$brandNameModel->cateid = intval($_POST['cateid']);
 				$brandNameModel->letter	= trim($_POST['letter']);
+				$brandNameModel->zhekou	= trim($_POST['zhekou']);
 				if(!empty($_POST['id']))
 				{
 					$brandNameModel->id = $_POST['id'];
@@ -70,7 +71,7 @@ class Brand2HomeBrandView extends BaseView
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
 		$this->assign('model', $model);
-		
+		$this->assign('title', '品牌添加');
 	}
 	
 

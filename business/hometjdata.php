@@ -372,12 +372,12 @@ class HomeTjDataBusiness extends BaseBusiness
         $data = new HomeTjDataData();
 		if($del)
 		{
-			$sql = 'update home_tj_data set state = 4 where id = '.$id;
+			$sql = 'update home_tj_data set state = 4 where id in('.$id.')';
 		}else if($userid)
 		{
-			$sql = 'delete from home_tj_data where id = '.$id . ' AND userid = '.$_COOKIE['brand_id'];
+			$sql = 'delete from home_tj_data where id in ('.$id . ') AND userid = '.$_COOKIE['brand_id'];
 		}else{
-			$sql = 'delete from home_tj_data where id = '.$id;
+			$sql = 'delete from home_tj_data where id in( '.$id.')';
 		}
 		$data->exec($sql);
     }

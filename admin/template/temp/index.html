@@ -41,8 +41,8 @@
 					<label>全部<input class="js-search-state" value="" type="checkbox" /></label>&nbsp;
 					<label>有货<input <{if (in_array(1,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="1" type="checkbox" /></label>&nbsp;
 					<label>无货<input <{if (in_array(2,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="2" type="checkbox" /></label>&nbsp;
-					<label>待审核<input <{if (in_array(0,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
-					<label>不合格<input <{if (in_array(5,explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="5" type="checkbox" /></label>&nbsp;
+					<label>待审核<input <{if (in_array('0',explode(',',$state),true))}>checked<{/if}> class="js-search-state" value="0" type="checkbox" /></label>&nbsp;
+					<label>不合格<input <{if (in_array(5,explode(',',$state)))}>checked<{/if}> class="js-search-state" value="5" type="checkbox" /></label>&nbsp;
 				</td>
 				<td>
 					按月查看
@@ -149,6 +149,7 @@
 			<button onclick="clearSort()">清除选中排序</button>
 			<button onclick="clearTj()">清除选中推荐</button>
 			<button onclick="clearHot()">清除选中热门</button>
+			<button onclick="del()">删除</button>
 		</td>
 	</tr>
 </table>
@@ -350,9 +351,25 @@ function del(id,pic) {
 	if (!confirm('确定要删除吗？')) {
 		return;
 	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
+	if (!ids) {
+		alert('请选择要删除的数据');
+		return;
+	}
 	$.ajax({
 		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
-		data: {id:id,pic:pic,del:1},
+		data: {id:ids,pic:pic,del:1},
 		type: 'post',
 		dataType: 'json',
 		success: function(data) {
@@ -362,5 +379,4 @@ function del(id,pic) {
 		}
 	});
 }
-
 </script>
