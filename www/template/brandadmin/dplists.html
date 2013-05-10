@@ -25,6 +25,7 @@
 		<th>操作时间</th>
 		<th>有效时间</th>
 		<th>状态</th>
+		<th>备注</th>
 		<th style="width:120px;">操作</th>
 	</tr>
 	<{foreach ($models as $model)}>
@@ -37,6 +38,7 @@
 			<td align="center"><{$model->ltime|date_format:'Y-m-d'}></td>
 			<td align="center"><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
 			<td align="center"><{if ($model->state == 1)}>已通过<{else if($model->state == 5)}>不合格<{else}>未通过<{/if}></td>
+			<td align="center"><{if ($model->state != 1)}><{$model->remark}><{/if}></td>
 			<td align="center">
 				<a href="__APP__/brandadmin/add?id=<{$model->id}>"><button>编辑</button></a>
 				<{if ($model->state == 0 or $model->state == 5) }><a href="javascript:;" onclick="del(<{$model->id}>,'<{$model->pic}>')"><button>删除</button></a><{/if}>
