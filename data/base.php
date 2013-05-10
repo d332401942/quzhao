@@ -7,8 +7,8 @@ class BaseData extends HandleMysqlDbLib
 	{
 		$this->selectDb ( 
 					Config::DB_MYSQL_SEARCH_MASTER_HOST,
-				 	Config::DB_MYSQL_USERNAME,
-				 	Config::DB_MYSQL_PASSWORD, 
+				 	Config::DB_MYSQL_MASTER_USERNAME,
+				 	Config::DB_MYSQL_MASTER_PASSWORD, 
 				 	Config::DB_MYSQL_SEARCH_DBNAME,
 				 	Config::DB_MYSQL_SEARCH_MASTER_PORT 
 				);
@@ -18,8 +18,8 @@ class BaseData extends HandleMysqlDbLib
 	{
 		$this->selectDb (
 				Config::DB_MYSQL_SEARCH_SLAVE_HOST,
-				Config::DB_MYSQL_USERNAME,
-				Config::DB_MYSQL_PASSWORD,
+				Config::DB_MYSQL_MASTER_SLAVE_USERNAME,
+				Config::DB_MYSQL_MASTER_SLAVE_PASSWORD,
 				Config::DB_MYSQL_SEARCH_DBNAME,
 				Config::DB_MYSQL_SEARCH_SLAVE_PORT
 		);
