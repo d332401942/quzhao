@@ -24,7 +24,7 @@ class AssociatedData extends BaseData
 	{
 		if($name)
 		{
-			$this->selectSearchSlaveDb();
+			$this->selectSearchMasterDb();
 			$sql = "select count(*) as num from s_key where keyname like '%$name%'";
 			$res = $this->query($sql);
 			$pageCore->count = $res [0] ['num'];
@@ -39,7 +39,7 @@ class AssociatedData extends BaseData
 	
 	public function getKeyname($name)
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchMasterDb();
 		$sql = "select * from s_key where keyname = '$name' ";
 		$result = $this->query($sql,'AssociatedDataModel');
 		$result = array_pop($result);
@@ -50,19 +50,20 @@ class AssociatedData extends BaseData
 	{
 		$this->selectSearchMasterDb();
 		$sql = "delete from s_key  where keyname = '".$name."' ";
+		echo $sql;
 		$this->exec($sql);
 	}
 	
 	public function getOneByName($name)
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchMasterDb();
 		$this->where(array('keyname'=>$name));
 		return $this->findOne();
 	}
 	
 	public function getOneCate($name)
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchMasterDb();
 		$this->where(array('keyname'=>$name));
 		$result = $this->findOne();
 		return $result;
