@@ -1,0 +1,57 @@
+<{include '__TEMPLATE__/header.html'}>
+<div class="list-div">
+<div class="content-select">
+</div>
+<table style="width:100%">
+	<form>
+	<tr>
+		<td>邮箱</td>
+		<td><{$userModel->email}></td>
+	</tr>
+	<tr>
+		<td>创建时间</td>
+		<td><{$userModel->createtime|date_format:"Y-m-d H:i:s"}></td>
+	</tr>
+	<tr>
+		<td>邮箱是否验证</td>
+		<td>
+			<{if ($userModel->ischecked)}>
+				<span style="color: green">已经验证</span>
+			<{else}>
+				<span style="color: #ccc">未经验证</span>
+				<a href="javascript:;"><span style="color: green">点击发送验证邮件</span></a>
+			<{/if}>
+		</td>
+	</tr>
+	<tr>
+		<td>昵称</td>
+		<td><input value="<{$userModel->nickname}>" name="nickname" /></td>
+	</tr>
+	<tr>
+		<td>积分</td>
+		<td><input name="point" value="<{$userModel->point}>" /></td>
+	</tr>
+	<tr>
+		<td>审核状态</td>
+		<td>
+			<select name="status">
+				<option value="1" <{if ($userModel->status == 1)}>selected<{/if}>>通过</option>
+				<option value="0" <{if ($userModel->status == 0)}>selected<{/if}>>未审核</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>头像</td>
+		<td>
+			<{if ($userModel->head)}>
+				<img width="144" height="145" src="<{$userModel->head|parsePicpath}>" alt="">
+			<{else}>
+				<img width="144" height="145" src="__RESOURCE__/images/tx.gif" alt="">
+			<{/if}>
+		</td>
+	</tr>
+</form>
+</table>
+</div>
+
+<{include '__TEMPLATE__/footer.html'}>
