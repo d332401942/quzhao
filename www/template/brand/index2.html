@@ -1,71 +1,86 @@
 <{uc class="HeaderControlView" meta=$meta type=NavmenuModel::MENU_BRAND css="css" js="jquery"}>
-<div class="box">
+<!--<div class="box">
 	<img src="__RESOURCE__/images/sale_banner.jpg">
-</div>
+</div>-->
 <div class="box ">
 <div  id="nav_left_layout">
 <div class="sale_new_mini" >
 <div class="sale_new_mini_box">
-<a href="javascript:;" onclick="goletter(0) class="sale_xz3">全部</a>
-<a href="javascript:;" onclick="goletter('A')">A</a>
-<a href="javascript:;" onclick="goletter('B')">B</a>
-<a href="javascript:;" onclick="goletter('C')">C</a>
-<a href="javascript:;" onclick="goletter('D')">D</a>
-<a href="javascript:;" onclick="goletter('E')">E</a>
-<a href="javascript:;" onclick="goletter('F')">F</a>
-<a href="javascript:;" onclick="goletter('G')">G</a>
-<a href="javascript:;" onclick="goletter('H')">H</a>
-<a href="javascript:;" onclick="goletter('I')">I</a>
-<a href="javascript:;" onclick="goletter('J')">J</a>
-<a href="javascript:;" onclick="goletter('K')">K</a>
-<a href="javascript:;" onclick="goletter('M')">M</a>
-<a href="javascript:;" onclick="goletter('N')">N</a>
-<a href="javascript:;" onclick="goletter('O')">O</a>
-<a href="javascript:;" onclick="goletter('P')">P</a>
-<a href="javascript:;" onclick="goletter('Q')">Q</a>
-<a href="javascript:;" onclick="goletter('R')">R</a>
-<a href="javascript:;" onclick="goletter('S')">S</a>
-<a href="javascript:;" onclick="goletter('T')">T</a>
-<a href="javascript:;" onclick="goletter('U')">U</a>
-<a href="javascript:;" onclick="goletter('V')">V</a>
-<a href="javascript:;" onclick="goletter('W')">W</a>
-<a href="javascript:;" onclick="goletter('X')">X</a>
-<a href="javascript:;" onclick="goletter('Y')">Y</a>
-<a href="javascript:;" onclick="goletter('Z')">Z</a>
+<a href="javascript:;" onclick="goletter(0)" <{if (!$letter)}>class="sale_xz3"<{/if}>>全部</a>
+<a href="javascript:;" onclick="goletter('A')" <{if ($letter == 'A')}>class="sale_xz3"<{/if}> >A</a>
+<a href="javascript:;" onclick="goletter('B')" <{if ($letter == 'B')}>class="sale_xz3"<{/if}> >B</a>
+<a href="javascript:;" onclick="goletter('C')" <{if ($letter == 'C')}>class="sale_xz3"<{/if}> >C</a>
+<a href="javascript:;" onclick="goletter('D')" <{if ($letter == 'D')}>class="sale_xz3"<{/if}> >D</a>
+<a href="javascript:;" onclick="goletter('E')" <{if ($letter == 'E')}>class="sale_xz3"<{/if}> >E</a>
+<a href="javascript:;" onclick="goletter('F')" <{if ($letter == 'F')}>class="sale_xz3"<{/if}> >F</a>
+<a href="javascript:;" onclick="goletter('G')" <{if ($letter == 'G')}>class="sale_xz3"<{/if}> >G</a>
+<a href="javascript:;" onclick="goletter('H')" <{if ($letter == 'H')}>class="sale_xz3"<{/if}> >H</a>
+<a href="javascript:;" onclick="goletter('I')" <{if ($letter == 'I')}>class="sale_xz3"<{/if}> >I</a>
+<a href="javascript:;" onclick="goletter('J')" <{if ($letter == 'J')}>class="sale_xz3"<{/if}> >J</a>
+<a href="javascript:;" onclick="goletter('K')" <{if ($letter == 'K')}>class="sale_xz3"<{/if}> >K</a>
+<a href="javascript:;" onclick="goletter('M')" <{if ($letter == 'M')}>class="sale_xz3"<{/if}> >M</a>
+<a href="javascript:;" onclick="goletter('N')" <{if ($letter == 'N')}>class="sale_xz3"<{/if}> >N</a>
+<a href="javascript:;" onclick="goletter('O')" <{if ($letter == 'O')}>class="sale_xz3"<{/if}> >O</a>
+<a href="javascript:;" onclick="goletter('P')" <{if ($letter == 'P')}>class="sale_xz3"<{/if}> >P</a>
+<a href="javascript:;" onclick="goletter('Q')" <{if ($letter == 'Q')}>class="sale_xz3"<{/if}> >Q</a>
+<a href="javascript:;" onclick="goletter('R')" <{if ($letter == 'R')}>class="sale_xz3"<{/if}> >R</a>
+<a href="javascript:;" onclick="goletter('S')" <{if ($letter == 'S')}>class="sale_xz3"<{/if}> >S</a>
+<a href="javascript:;" onclick="goletter('T')" <{if ($letter == 'T')}>class="sale_xz3"<{/if}> >T</a>
+<a href="javascript:;" onclick="goletter('U')" <{if ($letter == 'U')}>class="sale_xz3"<{/if}> >U</a>
+<a href="javascript:;" onclick="goletter('V')" <{if ($letter == 'V')}>class="sale_xz3"<{/if}> >V</a>
+<a href="javascript:;" onclick="goletter('W')" <{if ($letter == 'W')}>class="sale_xz3"<{/if}> >W</a>
+<a href="javascript:;" onclick="goletter('X')" <{if ($letter == 'X')}>class="sale_xz3"<{/if}> >X</a>
+<a href="javascript:;" onclick="goletter('Y')" <{if ($letter == 'Y')}>class="sale_xz3"<{/if}> >Y</a>
+<a href="javascript:;" onclick="goletter('Z')" <{if ($letter == 'Z')}>class="sale_xz3"<{/if}> >Z</a>
 </div>
 </div>
 </div>
 <div class="cont_title">
   <h1>品牌特卖<font>100%品质保证，100%优惠</font></h1>
-  <h3><a href="#">更多</a></h3>
+  <!--<h3><a href="#">更多</a></h3>-->
 </div>
+<{if ($cateModel)}>
 <div class="sale_new_nav">
-<a href="javascript:;" onclick="goCid(0)"class="sale_xz">最新</a>
+<a href="javascript:;" onclick="goCid(0)"  <{if (!$cid)}> class="sale_xz" <{/if}> >最新</a>
 <{foreach ($cateModel as $model)}>
-<a href="javascript:;" onclick="goCid(<{$model->id}>)"><{$model->name}></a>
+<a onclick="goCid(<{$model->id}>)"  <{if ($cid == $model->id)}> class="sale_xz" <{/if}> href="javascript:;" > <{$model->name}></a>
 <{/foreach}>
 </div>
+<{/if}>
+<{if ($sjModel)}>
 <div class="sale_new_nav2">                     
-<a href="javascript:;" onclick="goSj(0)" class="sale_xz2">全部商家</a>
-<{foreach ($sjModel as $model)}>
-<a href="javascript:;" onclick="goSj(<{$model->id}>)"><{$model->name}></a>
+<a href="javascript:;" onclick="goSj(0)" <{if (!$mid)}>class="sale_xz2"<{/if}> >全部商家</a>
+<{foreach ($sjModel as $key=>$model)}>
+<{if ($key < 15)}>
+<a href="javascript:;" onclick="goSj(<{$model->id}>)" <{if ($mid == $model->id)}> class="sale_xz2" <{/if}> ><{$model->name}></a>
+<{else}>
+<a href="javascript:;" style="display:none;" class="js-hideen" onclick="goSj(<{$model->id}>)" <{if ($mid == $model->id)}> class="sale_xz2" <{/if}> ><{$model->name}></a>
+<{/if}>
 <{/foreach}>
+<{if ($key > 15)}>
+<a href="javascript:;" style="color:#C74396;float:right;" onclick="ghsj()" id="js-gengduo-hidden">更多</a>
+<a href="javascript:;"  style="color:#C74396;float:right;display:none;" onclick="ghsj2()" id="js2-gengduo-hidden">收起</a>
+<{/if}>
 </div>
+<{/if}>
 <div  class="sale_new_cont">
 <ul>
 <{if (!empty($brandModel))}>
-<{foreach ($brandModel as $val)}>
+<{foreach ($brandModel as $key=>$val)}>
+
 <li>
+<{if (!$mid)}>
 <span>
 <{foreach ($val->shangjia as $v)}>
 <a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
 <{/foreach}>
 </span>
+<{/if}>
 <div class="sale_new_cont_top">
-	<a href="javascript:;"><img src="<{$val->image|parsePicpath}>" /></a>
+	<a href="<{$val->url}>" target="_blank"><img src="<{$val->image|parsePicpath}>" /></a>
 </div>
 <div class="sale_new_cont_tt">
-	<h2><a href="javascript:;"><{$val->name}></a></h2>
+	<h2><a href="<{$val->url}>" target="_blank"><{$val->name}></a></h2>
 	<div class="sale_new_cont_jg">
 		<div class="sale_new_cont_jg_l">
 			<strong><{$val->rebate}>-<{$val->maxrebate}></strong>折
@@ -80,10 +95,13 @@
 <{/if}>
 </ul>
 </div>
-</div>
-<script src="__RESOURCE__/js/lx2.js"></script>
 <{uc class="PageControlView" pageCore="$pageCore"}>
+</div>
+
+ <!--<script src="__RESOURCE__/js/lx2.js"></script>-->
+
 <{uc class="FooterControlView"}>
+
 <form style="display:none;" id="js-form-page" method="get">
 	<input type="hidden" name="cid" value="<{$cid}>" />
 	<input type="hidden" name="letter" id="letter" value="<{$letter}>" />
@@ -98,11 +116,23 @@ function goPage(page) {
 }
 
 function goCid(cid) {
+	//console.log(cid);
+	//$('#js-cur-'+cid).addClass("sale_xz");
 	var formObj = $('#js-form-page');
 	formObj.find('input[name="cid"]').val(cid);
 	$('#letter').val('');
 	$('#mid').val('');
 	formTogo();
+}
+function ghsj() {
+	$('.js-hideen').show();
+	$('#js-gengduo-hidden').hide();
+	$('#js2-gengduo-hidden').show();
+}
+function ghsj2() {
+	$('.js-hideen').hide();
+	$('#js-gengduo-hidden').show();
+	$('#js2-gengduo-hidden').hide();
 }
 function goletter(letter) {
 	var formObj = $('#js-form-page');

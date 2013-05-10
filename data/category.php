@@ -232,5 +232,28 @@ class CategoryData extends BaseData
 		}
 		return $models;
 	}
+	
+	public function getAll($pageCore,$lev)
+	{
+		$this->selectDb ( Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT );
+		
+		/*
+		*分页
+		$sql = "select count(*) as num from category where level = $lev";
+		$res = $this->query($sql);
+		$pageCore->count = $res [0] ['num'];
+		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );*/
+		$sql = "select * from category where level = $lev ";
+		$result = $this->query($sql,'CategoryDataModel');
+		return $result;
+	}
 
+	public function getCate($pid, $level)
+	{
+
+		$pidStr = 'pid' . ($level - 1);
+		$this->selectDb(Config::DB_MYSQL_SEARCH_HOST, Config::DB_MYSQL_USERNAME, Config::DB_MYSQL_PASSWORD, Config::DB_MYSQL_SEARCH_DBNAME, Config::DB_MYSQL_SEARCH_PORT);
+		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr .' = ' . $pid;
+		return $this->query($sql,'CategoryDataModel');
+	}
 }

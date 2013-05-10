@@ -1,4 +1,4 @@
-<{uc class="HeaderControlView" meta=$meta css="css" keyword=$keyword js="jquery,jquery.cookie"}>
+<{uc class="HeaderControlView" type="search" meta=$meta css="css" keyword=$keyword js="jquery,jquery.cookie"}>
 <div class="box ">
     <div class="list_top">
         找到“<strong><{$keyword}></strong>”相关商品<{$pageCore->count}>件
@@ -54,7 +54,7 @@
                 <li>
                     <a href="<{$model->url}>" target="_blank">
                         <div>
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                            <img src="<{$model->pic|searchPicpath}>" />
                         </div>
                          <h2 title="<{$model->title}>"><{$model->title}></h2>
                         <h3>￥<{$model->price}></h3>
@@ -73,7 +73,7 @@
                 <li>
                     <a href="<{$model->url}>" target="_blank">
                         <div>
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                            <img src="<{$model->pic|searchPicpath}>" />
                         </div>
                         <!-- <div class="xl">
                             <span>
@@ -101,7 +101,7 @@
 						<a href="javascript:;" onclick="clearAttr('brandid')">全部</a>
 						<{foreach ($searchBrandModels as $k => $v)}>
 							<{if ($k < 4)}>
-							<a href="javascript:;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}>" onclick="searchByAttr('brandid',0,'<{$v->brandid}>')"><{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}></a>
+							<a href="javascript:;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}>"  onclick="searchByAttr('brandid',0,'<{$v->brandid}>')"><{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}></a>
 							<{else}>
 							<a href="javascript:;" style="display:none;" class="<{if (!empty($attrArr['brandid']) && '0_'. $v->brandid == $attrArr['brandid'])}>open4<{/if}> js-extend-more-brandid" onclick="searchByAttr('brandid',0,'<{$v->brandid}>')">
 								<{$v->brandname}><{if (!empty($v->num))}>(<{$v->num}>)<{/if}>
@@ -214,7 +214,7 @@
 					<li>
 						<div class="list_cont_tu">
 							<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
-								<img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+								<img src="<{$model->pic|searchPicpath}>" />
 							</a>
 						</div>
 						<div class="list_cont_box">
@@ -243,9 +243,9 @@
 									件
 								</div>
 								<div class="list_jg_r">
-						
+									<a href="javascript:;" onclick="lovenum(this,<{$model->productid}>)"><img src="__RESOURCE__/images/love.gif" / style="float:left; margin-top:3px;"><span><{$model->lovenumber}></span></a>
 								</div>
-								<span style="float:right;margin:5px 10px 0 0;"><a style="margin:5px 10px 0 0;" href="javascript:;" title="喜欢" onclick="lovenum(<{$model->productid}>)"><img src="__RESOURCE__/images/love.gif" /><{$model->lovenumber}></a></span>
+								
 							</div>
 							
 						</div>
@@ -258,7 +258,7 @@
 					<ul>
 						<li class="list_fu_tu">
 							<a href="<{$model->url}>" target="__blank" title="<{$model->title}>" onclick="return searchLog(<{$model->productid}>);">
-								<img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+								<img src="<{$model->pic|searchPicpath}>" />
 							</a>
 						</li>
 						<li class="list_fu_name">
@@ -335,7 +335,7 @@
                 <li>
                     <div class="list_cont_tu">
                         <a href="<{$model->url}>" target="_blank" title="<{$model->title}>">
-                            <img src="<{$Host->StaticHost}>/<{$model->pic}>" />
+                            <img src="<{$model->pic|searchPicpath}>" />
                         </a>
                     </div>
                     <div class="list_cont_box">
@@ -511,7 +511,9 @@ function searchLog(id) {
 	$.cookie(searchLogKey,arr,{expires:30})
 	return true;
 }
-function lovenum(pid) {
+function lovenum(obj,pid) {
+	var num = $(obj).find('span').html();
+	num = num ? parseInt(num) : 0;
 	if (!CurrentUserInfo) {
 		showLoginDiv();
 	}
@@ -524,17 +526,8 @@ function lovenum(pid) {
 		url:url,
 		success:function(data){
 			if(data.result) {
-				window.location.reload();
-			}
-			else if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			else if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
-			else {
-				alert('该产品已经喜欢过');
+				var diff = parseInt(data.result);
+				$(obj).find('span').html(num + data.result);
 			}
 		}
 	});

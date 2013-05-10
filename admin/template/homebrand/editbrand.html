@@ -1,0 +1,167 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+	<div class="content-select">
+		<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
+		<input type="hidden" name="page" value="<{$page}>" />
+		<input type="hidden" name="state" value="<{$state}>" />
+		<table>
+				<td>
+					品牌名称
+				</td>
+				<td>
+					<input name="name" value="" />
+				</td>
+				<td><button type="submit">筛选</button>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<form style="clear:both;" action="" method="post" enctype="multipart/form-data" onsubmit="return checkform();">
+	<input name="oldpic" value="<{$model->pic}>" type="hidden" />
+	<input name="id" value="<{$model->id}>" type="hidden" />
+	<div class="add-div">
+		<table style="width:100%;margin:auto;" border="0">
+	<tr>
+		<th style="width:5px;"><input onclick="checkAll(this)" class="js-checkall-input" type="checkbox" /></th>
+		<th style="width:50px;">ID</th>
+		<th style="width:350px;">名称</th>
+		<th style="width:100px;">操作</th>
+	</tr>
+		<{if ($model)}>
+		<{foreach ($model as $val)}>
+		<tr>
+			<td><input type="checkbox" class="js-checkall-input js-index-id" value="<{$val->id}>" /></td>
+			<td align="center"><{$val->id}></td>
+			<td align="center"><{$val->name}></td>
+			
+			<td align="center">
+				<a href="__APP__/homebrand/brand2__LIMIT__id/<{$val->id}>">编辑</a>&nbsp;
+				<a onclick="del(<{$val->id}>)" href="#nogo">删除</a>
+			</td>
+		</tr>
+		<{/foreach}>
+		<{else}>
+		<tr>
+			<td colspan="10" align="center">暂无品牌数据</td>
+		</tr>
+		<{/if}>
+	<tr>
+		<td><input type="checkbox" onclick="checkAll(this)" class="js-checkall-input" /></td>
+		<td colspan="10" style="text-align:left;"><button onclick="del()">删除</button></td>
+	</tr>
+</table>
+	</div>
+<{include '__TEMPLATE__/footer.html'}>
+<{uc class="PageControlView" pageCore=$pageCore}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+function del(id) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
+	if (!ids) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	
+	$.ajax({
+		url: '__AJAX__/brandname/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:ids},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+function checkAll(obj) {
+	var checkInputObj = $('.js-checkall-input');
+	if ($(obj).attr('checked')) {
+		checkInputObj.attr('checked',true);
+	} 
+	else {
+		checkInputObj.attr('checked',false);
+	}
+}
+function changeState(obj,id) {
+	var state = $(obj).val();
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	doChangeState(ids,state);
+} 
+function doChangeState(ids,state,isReload) {
+	if (!ids) {
+		alert('请选择类容');
+		return false;
+	}
+	if (!state) {
+		alert('请选择状态');
+		return false;
+	}
+	$.ajax({
+		url: '__AJAX__/brand/changeState',
+		data: {ids:ids,state:state},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data && data.result) {
+				alert('修改成功');
+				window.location.reload()
+			}
+			else {
+				alert('修改失败');
+			}
+		},
+		error: function() {
+			alert('操作失败');
+		}
+	});
+}
+function search(obj) {
+	var formObj = $(obj);
+	if (!isGoPage) {
+		formObj.find('input[name="page"]').val(1);
+	}
+	var all = false;
+	var stateStr = '';
+	$('.js-search-state:checked').each(function(){
+		var value = $(this).val();
+		if (!value) {
+			all = true;
+		}
+		else if (!stateStr) {
+			stateStr = value;
+		}
+		else {
+			stateStr += ',' + value;
+		}
+	});
+	if (!all) {
+		formObj.find('input[name="state"]').val(stateStr);
+	}
+	return true;
+}
+
+</script>

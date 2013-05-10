@@ -46,7 +46,7 @@
 							<span><img src="__RESOURCE__/images/tm.gif" /><{$model->ctime|diffNow}>前更新</span>
 							
 							<span style=""><img src="__RESOURCE__/images/us.gif" /><a href="javascript:;" class="uss"><{$editorArr[$model->id % (count($editorArr))]}></a>推荐</span>
-							<span><a href="javascript:;" title="喜欢" onclick="lovenum(<{$model->id}>)"><img src="__RESOURCE__/images/love.gif" /><{$model->lovenumber}></a></span>
+							<span><a href="javascript:;" title="喜欢" onclick="lovenum(this,<{$model->id}>)"><img src="__RESOURCE__/images/love.gif" /><span><{$model->lovenumber}></span></a></span>
 							
 							
 							<span id="fx_zi">
@@ -252,7 +252,9 @@ function hideDiv(obj) {
 		}, 1500);
 	}
 }
-function lovenum(pid) {
+function lovenum(obj,pid) {
+	var num = $(obj).find('span').html();
+	num = num ? parseInt(num) : 0;
 	if (!CurrentUserInfo) {
 		showLoginDiv();
 	}
@@ -265,17 +267,8 @@ function lovenum(pid) {
 		url:url,
 		success:function(data){
 			if(data.result) {
-				window.location.reload();
-			}
-			else if(data.error.code == 50001) {
-				showLoginDiv();
-				return false;
-			}
-			else if(data.error.code == 50002) {
-				window.location.href="__APP__/user/preset";
-			}
-			else {
-				alert('该产品已经喜欢过');
+				var diff = parseInt(data.result);
+				$(obj).find('span').html(num + data.result);
 			}
 		}
 	});

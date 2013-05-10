@@ -1,0 +1,78 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+	<div class="content-select">
+		<form id="js-go-form" action="" method="get">
+		<input type="hidden" name="page" value="<{$page}>" />
+		<table>
+				<td>
+					关键词
+				</td>
+				<td>
+					<input name="name" value="<{$name}>" />
+				</td>
+				<td><button type="submit">筛选</button></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<{if ($model)}>
+
+	<div class="add-div">
+		<table style="width:100%;margin:auto;" border="0">
+		<tr>
+			<th style="width:350px;">名称</th>
+			<th style="width:400px;">操作</th>
+			<th style="width:400px;">状态</th>
+		</tr>
+		
+		<{foreach ($model as $val)}>
+			<tr>
+				<td align="center"><{$val->keyname}></td>
+				
+				<td align="center">
+					<a href="__APP__/associated/add__LIMIT__name/<{$val->keyname}>">添加关联分类</a>&nbsp;
+					<a href="__APP__/associated/addkey__LIMIT__name/<{$val->keyname}>">编辑</a>&nbsp;
+					<a onclick="del('<{$val->keyname}>')" href="#nogo">删除</a>
+				</td>
+				<td align="center"><{if (empty($val->categoryids))}><span style="color:red">未关联</span><{else}>已关联<{/if}></td>
+			</tr>
+		<{/foreach}>
+		</table>
+	</div>
+
+<{uc class="PageControlView" pageCore=$pageCore}>
+<{/if}>
+
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+function del(name) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	if (!name) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	
+	$.ajax({
+		url: '__AJAX__/associated/del?stmp=' + new Date().toString(),
+		type: 'post',
+		data: {ids:name},
+		success: function(data) {
+			window.location.reload();
+		}
+	});
+}
+
+
+</script>

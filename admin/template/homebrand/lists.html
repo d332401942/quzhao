@@ -102,7 +102,7 @@
 				<select onchange="changeState(this,<{$val->id}>)">
 					<option <{if ($val->state == 1)}>selected<{/if}> value="1" > 有货</option>
 					<option <{if ($val->state == 2)}>selected<{/if}> value="2" > 无货</option>
-					<option <{if ($val->state == 0)}>selected<{/if}> value="4" > 待审核</option>
+					<option <{if ($val->state == 4)}>selected<{/if}> value="4" > 待审核</option>
 					<option <{if ($val->state == 3)}>selected<{/if}> value="3" > 不合格</option>
 				</select>
 			</td>

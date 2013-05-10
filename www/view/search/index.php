@@ -92,14 +92,15 @@ class IndexSearchView extends BaseView
 					foreach($arr as $v)
 					{
 						$arr = explode(':',$v);
-						$val->extend[] = $arr;
-						if (!empty($val->extend[1]))
+						
+						if (!empty($arr[1]))
 						{
-							$val->extend[1] = str_replace(',', '-', $val->extend[1]);
+							$arr[1] = str_replace(',', '-', $arr[1]);
 						}
+						$val->extend[] = $arr;
 					}
 				}
-			}	
+			}
 			if(!empty($attrModels))
 			{	
 				$attrModels = array_values($attrModels);
@@ -111,7 +112,6 @@ class IndexSearchView extends BaseView
 		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
         
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
-		
 		//TODO 得到特别推荐
 		$recommendModels = $business->getRecommendModels($keyword);
 		$recommendModels = array_values($recommendModels);

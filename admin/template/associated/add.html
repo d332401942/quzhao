@@ -1,0 +1,99 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+	<div class="content-select">
+		<table>
+				<td>
+					<a href="javascript:;" onclick="goLev1(1)">一级分类</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<form style="clear:both;" action="__APP__/associated/add" method="post">
+	<input type="hidden" name="name" value="<{$name}>" />
+	<div class="add-div">
+		<table style="width:100%;margin:auto;" border="0">
+	
+		<{if ($model)}>
+		<{foreach ($model as $val)}>
+		<ul style="margin:0;padding:0;margin-left:50px;">
+			<li style="margin:0;padding:0;">
+				<input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="<{$val->categoryid}>" />&nbsp;&nbsp;&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goId(this,<{$val->categoryid}>,1)" href="javascript:;"><{$val->name}></a>
+				<div></div>
+			</li>
+		</ul>
+		<{/foreach}>
+		<{/if}>
+	<tr>
+		<td><input type="checkbox" onclick="checkAll(this)" class="js-checkall-input" /></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><input type="submit" name="btn_submit" value="提交" /></td>
+	</tr>
+	
+</table>
+	</div>
+	
+</form>	
+
+<{include '__TEMPLATE__/footer.html'}>
+<form id="js-go-form" action="" method="get">
+	<input type="hidden" name="page" value="<{$page}>" />
+	<input type="hidden" name="lev" value="<{$lev}>" />
+	<input type="hidden" name="name" value="<{$name}>" />
+</form>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+}
+function goLev1(lev) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="lev"]').val(lev);
+	formObj.submit();
+}
+function goId(obj,id,level) {
+	if($(obj).next().html() != '') {
+		$(obj).next().html('');
+		return ;
+	}
+	level++;
+	data = {pid:id,level:level};
+	url = '__AJAX__/Associated/getAll?stmp=' + new Date().toString();
+	$.ajax({
+		dataType:'json',
+		type:'post',
+		data:data,
+		url:url,
+		success:function(data){
+			if(data.result) {
+				var result = data.result;
+				var str = '<ul>';
+				for (var i in result) {
+					str += '<li><input type="checkbox" class="js-checkall-input js-index-id" name="cateId[]" value="'+result[i].categoryid+'" />';
+					str += '&nbsp;&nbsp;&nbsp;&nbsp;';
+					str += result[i].categoryid+'&nbsp;&nbsp;&nbsp;&nbsp;<a href="#nogo" onclick="goId(this,'+result[i].categoryid+','+level+')">'+result[i].name+'</a><div></div></li>';
+				}
+				str += '</ul>';
+				$(obj).next().html(str);
+			}
+		}
+	});
+}
+function checkAll(obj) {
+	var checkInputObj = $('.js-checkall-input');
+	if ($(obj).attr('checked')) {
+		checkInputObj.attr('checked',true);
+	} 
+	else {
+		checkInputObj.attr('checked',false);
+	}
+}
+
+
+</script>

@@ -39,7 +39,8 @@ class IndexBrandadminView extends BaseView
 					die('该品牌商家已存在');
 				}
 			}
-			
+			$model->str_time = strtotime($_POST['str_time']);
+			$model->end_time = strtotime($_POST['end_time']);
 			$model->userid = $_COOKIE['brand_id'];
 			$model->createtime = time();
 			$model->temp = 1;
@@ -49,7 +50,15 @@ class IndexBrandadminView extends BaseView
 				$model->setWorkFields(array('userid', 'url', 'createtime', 'rebate', 'merchantsId'));
 				$business->update($model);
 			}else{
-				$business->add($model);
+				try
+				{
+					$business->add($model);
+				}
+				catch(BusinessExceptionLib $e)
+				{
+					$message = $e->getMessage();
+					$this->responseError($message);
+				}
 			}
 			$this->redirect(APP_URL . '/brandadmin/lists');
 		}

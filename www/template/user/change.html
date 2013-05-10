@@ -185,11 +185,26 @@ function checkForm(obj) {
 	var nicknameObj = $(obj).find('input[name="nickname"]');
 	var emailObj = $(obj).find('input[name="email"]');
 	var nickname = nicknameObj.val();
+	var str = nickname.split('');
+	
 	if (!nickname || nickname == '昵称') {
-		$('#id-nickname-error').html('请输入用户昵称');
+		$('#id-nickname-error').html('用户名不能为空');
 		return false;
 	}
-	
+	var count = 0;
+	for (i = 0 ; i < str.length ; i ++) {
+		var strTemp = escape(str[i]);
+		if (strTemp.indexOf("%u",0) == -1) {
+			count++;
+		}
+		else {
+			count = count + 2;
+		}
+	}
+	if (count > 14) {
+		$('#id-nickname-error').html('建议使用中文用户名，最长7个汉字或者14个英文字母');
+		return false;
+	}
 	if (emailObj.length && !checkEmail(emailObj)) {
 		return false;
 	}

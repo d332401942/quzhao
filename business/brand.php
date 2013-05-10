@@ -4,6 +4,11 @@ class BrandBusiness extends BaseBusiness
 	public function add($model)
 	{
 		$data = M('BrandData');
+		$result = $data->getOneByUrl($model->url);
+		if($result)
+		{
+			$this->throwException('url连接已经存在');
+		}
 		$data->add($model);
 	}
 	

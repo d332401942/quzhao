@@ -96,6 +96,7 @@
 		<th>类别</th>
 		<th>描述</th>
 		<th>操作时间</th>
+		<th>图片</th>
 		<th>操作人ID/用户名</th>
 		<th>审核人</th>
 		<th>有效时间</th>
@@ -122,6 +123,7 @@
 			<td><a href="__APP__/content__LIMIT__cid/<{$model->cid}>" style="font-size:16px;"><{$model->jtClassName}></a></td>
 			<td title="<{$model->info}>"><{$model->info|truncate:'10'}></td>
 			<td><{$model->ltime|date_format:'Y-m-d'}></td>
+			<td><img src="<{$model->pic|parsePicpath}>" width="130" height="80" /></td>
 			<td><{if ($model->userid)}><{$model->userid}>/<{$model->username}><{else}>操作人<{/if}></td>
 			<td><{if ($model->audit)}><{$model->audit}><{else}>审核人<{/if}></td>
 			<td><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>

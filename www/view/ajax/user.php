@@ -10,6 +10,15 @@ class UserAjaxView extends BaseAjaxView
 		$business->checkuser($email);
 		$this->response(true);
 	}
+	public function checknikename()
+	{
+		
+		$nickname = !empty($_GET['nikename']) ? trim($_GET['nikename']) : null;
+		$business = M('UserBusiness');
+		$business->checknikename($nickname);
+		$this->response(true);
+	}
+	
 	
 	public function login()
 	{
@@ -78,6 +87,12 @@ class UserAjaxView extends BaseAjaxView
 		{
 			$this->responseError('没有接受用户注册协议',CodeException::USER_NO_AGREEMENT);	
 		}
+		if (empty($_POST['nikename']) || $_POST['nikename'] == '昵称')
+		{
+			$this->responseError('请填写昵称', CodeException::USER_NO_NICKNAME);
+		}
+		$nikename = trim($_POST['nikename']);
+		$nikename = mb_substr($nikename, 0, 20, 'utf-8');
 		$business = M('UserBusiness');
 		$model = new UserDataModel();
 		$model->email 		= trim($_POST['email']);
@@ -91,7 +106,7 @@ class UserAjaxView extends BaseAjaxView
 		$model->othersite	= 0;
 		$model->status		= 1;
 		$model->power = UserDataModel::POWER_DEFAULT;
-		$model->nickname = '匿名用户';
+		$model->nickname = $nikename;
 		foreach ($model as $key => $val)
 		{
 			if (empty($val))
@@ -166,15 +181,16 @@ class UserAjaxView extends BaseAjaxView
 		{
 			case 'jpg':
 			case 'jpeg':
-				$im = @imagecreatefromjpeg($imagePath);
+				$im = imagecreatefromjpeg($imagePath);
 				break;
 			case 'png':
-				$im = @imagecreatefrompng($imagePath);
+				$im = imagecreatefrompng($imagePath);
 				break;
 			case 'gif':
-				$im = @imagecreatefromgif($imagePath);
+				$im = imagecreatefromgif($imagePath);
 				break;
 		}
+		//echo $imagePath;exit;
 		if (!$im) 
 		{
 			$this->responseError('图片错误');

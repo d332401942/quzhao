@@ -5,19 +5,32 @@ class Brand2HomeBrandView extends BaseView
 	
 	public function index($parameters)
 	{
-		
-		
+		$id = isset($parameters['id'])?(int)$parameters['id']:'';
+		$model = array();
+		if($id)
+		{
+			$Business = M('BrandnameBusiness');
+			$model = $Business->getId($id);
+		}
 		if($_POST)
 		{	
 			//添加品牌名称
 			$brandNameBusiness = M('BrandnameBusiness');
-			$res = $brandNameBusiness->checkname($_POST['name']);
+			$res = '';
+			if(empty($_POST['id']))
+			{
+				$res = $brandNameBusiness->checkname($_POST['name']);
+			}
 			if(empty($res))
 			{
 				$brandNameModel = M('BrandnameDataModel');
 				$brandNameModel->name = trim($_POST['name']);
 				$brandNameModel->cateid = intval($_POST['cateid']);
 				$brandNameModel->letter	= trim($_POST['letter']);
+				if(!empty($_POST['id']))
+				{
+					$brandNameModel->id = $_POST['id'];
+				}
 				//上传图片
 				$file = new FileUploadUtilLib('image');
 				$uploadInfo = $file->upload();
@@ -33,14 +46,30 @@ class Brand2HomeBrandView extends BaseView
 						$brandNameModel->image = $picName;
 					}
 				}
-				$brandNameBusiness->add($brandNameModel);
+				
+				if(empty($_FILES['image']['name']))
+				{
+					if(!empty($_POST['oldimage']))
+					{
+						$brandNameModel->image = $_POST['oldimage'];
+					}
+				}	
+				if(!empty($brandNameModel->id))
+				{
+					$brandNameBusiness->update($brandNameModel);
+					$this->redirect(APP_URL . '/homebrand/editbrand');
+				}else{
+					$brandNameBusiness->add($brandNameModel);
+				}
+				$this->redirect(APP_URL . '/homebrand/brand');
 			}
-			$this->redirect(APP_URL . '/homebrand/brand');
+			
 		}
 		//得到所有分类
 		$cateBusiness = M('Brand_cateBusiness');
 		$result = $cateBusiness->getAll();
 		$this->assign('cateModel', $result);
+		$this->assign('model', $model);
 		
 	}
 	

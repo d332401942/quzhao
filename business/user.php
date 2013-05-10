@@ -168,11 +168,28 @@ class UserBusiness extends BaseBusiness
 			$this->throwException ( '邮箱格式不正确', CodeException::USER_EAMIL_FORMAT );
 		}
 		$result = $data->getUserByEmail ( $email );
+	
 		if ($result)
 		{
-			$this->throwException ( '邮箱已被占用', CodeException::USER_EMAIL_EXISTS );
+			$this->throwException ( '这个邮箱已经注册了，请直接 <a onclick="showShareDiv()" href="javascript:;" style="color:#000;text-decoration:underline;">登录</a>', CodeException::USER_EMAIL_EXISTS );
 		}
 	}
+	public function checknikename($nickname)
+	{
+		$data = new UserData ();
+		if (empty ($nickname))
+		{
+			$this->throwException ( '请填写您的昵称', CodeException::USER_NICKNAME_EMPTY );
+		}
+		
+		
+		$result = $data->getUserByNikename( $nickname );
+		if ($result)
+		{
+			$this->throwException ( '昵称已被占用,请换一个吧', CodeException::USER_NO_NICKNAME );
+		}
+	}
+	
 
 	public function changeData($model, $isEditEmail = false)
 	{

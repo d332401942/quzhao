@@ -48,6 +48,10 @@ class LeftIndexView extends BaseView
                     'url' => 'homebrand/brand'
                 ),
 				array(
+                    'name' => '品牌管理',
+                    'url' => 'homebrand/editbrand'
+                ),
+				array(
 					'name' => '商家添加',
 					'url' => 'merchants/add',
 				),
@@ -145,6 +149,16 @@ class LeftIndexView extends BaseView
 				array(
 					'name' => '超值单品',
 					'url' => 'temp/index',
+				)
+			),
+			'关键词管理' => array(
+				array(
+					'name' => '关联添加',
+					'url' => 'associated/index',
+				),
+				array(
+					'name' => '关键词添加',
+					'url' => 'associated/addkey',
 				)
 			),
 			

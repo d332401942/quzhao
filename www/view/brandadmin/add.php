@@ -88,7 +88,6 @@ class AddBrandadminView extends BaseView
 				$model->$key = $_POST[$key];
 			}
 		}
-		
 		if ($model->time_start)
 		{
 			$model->time_start = strtotime($model->time_start);
@@ -120,13 +119,22 @@ class AddBrandadminView extends BaseView
 		{
 			$this->setPic($model);
 		}
-		
-		if ($model->id)
+		try
 		{
-			$business->updateModel($model);
-		}else{
-			$business->add($model);
+			if ($model->id)
+			{
+				$business->updateModel($model);
+			}
+			else
+			{
+				$business->add($model);
+			}
 		}
+		catch(BusinessExceptionLib $e)
+		{	
+			$message = $e->getMessage();
+			$this->responseError($message);
+		}			
 	
 		$this->redirect(APP_URL . '/brandadmin/dplists');
 	}

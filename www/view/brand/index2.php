@@ -21,10 +21,11 @@ class Index2BrandView extends BaseView
 			$cid = ( int ) $parems['cid'];
 		}
 		$letter = null;
-		if (! empty ( $parems['letter'] ))
+		if (! empty ( $parems['letter'] ) && $parems['letter'] != '0')
 		{
 			$letter = trim($parems['letter']);
 		}
+		
 		$mid = null;
 		if (! empty ( $parems['mid'] ))
 		{
@@ -35,6 +36,7 @@ class Index2BrandView extends BaseView
 		$num = null;
 		$business = M('BrandBusiness');
 		$result = $business->getAll2($pageCore,$cid,$letter,$mid,$num);
+		$result = array_values($result);
 		//得到所有分类
 		$cateBusiness = M('Brand_cateBusiness');
 		$cate = $cateBusiness->getAll();

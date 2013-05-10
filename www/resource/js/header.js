@@ -203,9 +203,10 @@ function doPreset() {
 function checkNikeNamePreset() {
 
 	var formObj = $('#js-preset-form');
-	var nikenameObj = formObj.find('input[name="nikename"]');
-	var errObj = nikenameObj.next();
+	//var nikenameObj = formObj.find('input[name="nikename"]');
+	//var errObj = nikenameObj.next();
 	var nikename = nikenameObj.val();
+	
 	if (!nikename) {
 		errObj.html('昵称不能为空');
 		return false;
@@ -257,7 +258,7 @@ function checkPasswordPreset() {
 		password = '';
 		
 	}
-	alert(password);
+	
 	if (!password || password.length < 6) {
 		errObj.html('密码不能小于6位');
 		return false;
@@ -270,14 +271,17 @@ function checkPasswordPreset() {
 	return true;
 }
 
-function checkuser() {
-	obj = $('#js-user-email');
+
+
+function checkname() {
+	obj = $('#js-user-name');
 	var name = obj.val();
-	if (!name || name == '登录邮箱') {
-		$('#js-email-error').html('请填写email');
+	alert(name);
+	if (!name || name == '昵称') {
+		$('#js-user-name').html('请填写昵称');
 		obj.css('border-color','#E872C0');
 		if (name =='') {
-			obj.val('登录邮箱');
+			obj.val('昵称');
 		}
 		return false;
 	}
@@ -291,16 +295,18 @@ function checkuser() {
 		dataType:'json',
 		success:function(data){
 			if (data.result) {
-				$('#js-email-error').html('<font color="green">用户名可用</font>');
+				$('#js-user-error').html('<font color="green">昵称可用</font>');
 				$(obj).css('border-color','#cdcdcd');
 			}
 			else {
-				$('#js-email-error').html(data.error.message);
+				$('#js-user-error').html(data.error.message);
 				$(obj).css('border-color','#E872C0');
 			}
 		}
 	});
 }
+
+
 
 function checkverify(value) {
 	if (value ==''){value='验证码'}
@@ -367,6 +373,7 @@ function pwStrength(pwd, type) {
 		$('#js-pass-error').html('请填写密码');
 		$('#js-password').val('密码').get(0).type = 'text';
 		$('#js-password').css('border-color','#E872C0');
+
 	}
 	else if (type && type == 'onblur' && pwd.length < 6) {
 		$('#js-pass-error').html('密码不能低于6位');

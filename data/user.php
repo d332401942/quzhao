@@ -20,6 +20,18 @@ class UserData extends BaseData
 		$result = $this->findAll ();
 		return $result;
 	}
+	
+	public function getUserByNikename($nickname)
+	{
+		$this->where ( array (
+				'nickname' => array (
+						'=' => $nickname
+				)
+		) );
+		$result = $this->findOne();
+		return $result;
+	}
+	
 
 	/**
 	 * 后台修改前台用户权限

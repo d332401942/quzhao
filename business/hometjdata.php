@@ -7,6 +7,11 @@ class HomeTjDataBusiness extends BaseBusiness
     {
         $data = new HomeTjDataData();
         $this->checkMustFill($model);
+		$result = $data->findOneByName($model->name);
+		if ($result)
+		{
+			$this->throwException('商品名称已经存在');
+		}
         $data->add($model);
     }
 
@@ -14,16 +19,22 @@ class HomeTjDataBusiness extends BaseBusiness
     {
         $data = new HomeTjDataData();
         $this->checkMustFill($model);
+		$result = $data->findOneByName($model->name);
+		/*if ($result)
+		{
+			$this->throwException('商品名称已经存在');
+		}*/
         $data->updateModel($model);
     }
 	
 	/**
 	 * 修改产品喜欢次数
+	 * var $isAdd 真加，假减
 	 */
-	 public function loveNum($id)
+	 public function loveNum($id, $loveType = LoveDataModel::LOVE_TYPE_HOME_TJ_DATA, $isAdd = true)
 	{
 		$data = new HomeTjDataData();
-		$data->loveNum($id);
+		$data->loveNum($id, $loveType);
 	}
 	
 	/**
@@ -223,7 +234,7 @@ class HomeTjDataBusiness extends BaseBusiness
         {
             $data->where($query);
         }
-
+		$data->setOrder(array('state'=>'asc','ctime'=>'desc'));
         return $data->findAll();
     }
 

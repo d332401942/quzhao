@@ -34,7 +34,9 @@
 	</div>
 	<div class="dingwei2" id="js-login-div" style="display:none">
 		
-		<div class="login">
+
+		<div class="login" >
+
 			<form action="" method="post"  onsubmit="return doLogin(this)">
 			<div class="login_yi">
 				<input name="email" class="name" onmouseout="this.style.borderColor=''" onfocus="if (value =='用户名'){value =''}" value="用户名" onmouseover="this.style.borderColor=''" tabindex="1" onblur="if (value ==''){value='用户名'}" type="text" style="">
@@ -177,9 +179,9 @@ function showLoginDiv() {
 
 function showRegDiv() {
 	$.removeCookie('UserInfo');
-	var interval = setInterval(function(){
+	/* var interval = setInterval(function(){
 		listenUserInfo(interval);
-	},30);
+	},30); */
 	$.ajax({
 		url: '__APP__/user/userreg?stmp=' + new Date().toString(),
 		success: function(html) {
@@ -232,11 +234,15 @@ function doLogin(obj) {
 
 //注册
 function doReg(obj) {
+	var nikename = $(obj).find('input[name="nikename"]').val();
+	if (!nikename || nikename == '昵称') {
+		$('#js-nikename-error').html('昵称必须填写').show();
+	}
 	$(obj).ajaxSubmit({
 		dataType: 'json',
 		success: function(data) {
 			if (data.result) {
-				//window.location.href = '__APP__/user/change';
+				window.location.href = '__APP__/user/change';
 			}
 		}
 	});
@@ -282,20 +288,54 @@ function doPreset() {
 
 function checkNikeNamePreset() {
 
-	var formObj = $('#js-preset-form');
-	var nikenameObj = formObj.find('input[name="nikename"]');
-	var errObj = nikenameObj.next();
+	nikenameObj = $('#js-user-name');
 	var nikename = nikenameObj.val();
-	if (!nikename) {
-		errObj.html('昵称不能为空');
+	var count = 0;
+	var str = nikename.split('');
+	for (i = 0 ; i < str.length ; i ++) {
+		var strTemp = escape(str[i]);
+		if (strTemp.indexOf("%u",0) == -1) {
+			count++;
+	     }else {
+			 count = count + 2;
+	     	}
+		}
+	if (count > 14) {
+		$('#js-nikename-error').html('昵称不能超过7个汉字或者14个英文字母').show();
+		nikenameObj.css('border-color','#E872C0');
 		return false;
 	}
-	else if (nikename.length > 8) {
-		errObj.html('昵称不能超过8个字');
+	if (!nikename || nikename == '昵称') {
+		$('#js-nikename-error').html('昵称不能为空').show();
+		nikenameObj.css('border-color','#E872C0');
+		if (nikename =='') {
+			nikenameObj.val('昵称');
+		}
+		if (!nikename || nikename == '昵称') {
+			$('#js-nikename-error').html('昵称不能为空').show();
+		}
+		
 		return false;
 	}
-	errObj.html('');
-	return true;
+	var data = {nikename:nikename};
+	var url  = '__AJAX__/user/checknikename?stmp'+Math.random();
+	$.ajax({
+		type:'get',
+		url:url,
+		data:data,
+		dataType:'json',
+		success:function(data){
+			if (data.result) {
+				
+				$('#js-nikename-error').html('<font color="green">昵称可用</font>').show();
+				$(nikenameObj).css('border-color','#cdcdcd');
+			}
+			else {
+				$('#js-nikename-error').html(data.error.message).show();
+				$(nikenameObj).css('border-color','#E872C0');
+			}
+		}
+	});
 }
 
 function checkEmailPreset() {
@@ -328,8 +368,34 @@ function checkEmailPreset() {
 	return status;
 }
 
+function checkPassPreset() {
+	passObj = $('#js-password');
+	var pass = passObj.val();
+	if (!pass || pass == '密码') {
+		$('#js-pass-error').html('密码不能为空').show();
+		passObj.css('border-color','#E872C0');
+		if (pass =='') {
+			passObj.val('密码');
+		}
+		if (!pass || pass == '密码') {
+			$('#js-pass-error').html('密码不能为空').show();
+		}
+		return false;
+	}
+	if (!pass || pass.length < 6) {
+		$('#js-pass-error').html('密码不能小于6位').show();
+		return false;
+	}
+	if (pass.length > 32) {
+		$('#js-pass-error').html('密码不能大于32位').show();
+		return false;
+	}
+	
+	
+}
+
 function checkPasswordPreset() {
-	var formObj = $('#js-preset-form');
+    var formObj = $('#js-preset-form');
 	var passwordObj = formObj.find('input[name="password"]');
 	var errObj = passwordObj.next();
 	var password = passwordObj.val();
@@ -347,6 +413,24 @@ function checkPasswordPreset() {
 	errObj.html('');
 	return true;
 }
+
+function NameShow() {
+	$('#js-nikename-error').html('建议使用中文用户名，最长7个汉字或者14个英文字母  * 用户名不能为空').show();
+	
+}
+
+function PassShow() {
+	$('#js-pass-error').html('6-16位字母、数字、符号组合密码，字母区分大小写').show();
+	
+}
+function EmailShow() {
+	$('#js-email-error').html('建议使用常用邮箱，用来接收优惠提醒，取回密码').show();
+	
+	
+}
+
+
+
 
 function checkuser() {
 	obj = $('#js-user-email');
@@ -438,19 +522,22 @@ function checkStrong(sPW) {
 //pwStrength函数 
 //当用户放开键盘或密码输入框失去焦点时，根据不同的级别显示不同的颜色 
 function pwStrength(pwd, type) {
+	
 	if (pwd == null || pwd == '') {
 		$(".right2_yi_zuo").html('<img src="__RESOURCE__/images/ruo1.jpg">');
 		$(".right2_yi_zhong").html('<img src="__RESOURCE__/images/zhong.jpg">');
 		$(".right2_yi_you").html('<img src="__RESOURCE__/images/qiang.jpg">');
 		$('#js-pass-error').html('请填写密码').show();
-		$('#js-password').hide().prev().show();
-		$('#js-password').css('border-color','#E872C0');
+		$('#js-pass1').css('border-color','#E872C0');
+	  	 $('#js-password').hide().prev().show();
+	
 	}
 	else if (type && type == 'onblur' && pwd.length < 6) {
 		$('#js-pass-error').html('密码不能低于6位').show();
 		$('#password').css('border-color','#E872C0');
 	}
 	else if(pwd.length > 32) {
+	
 		$('#js-pass-error').html('密码不能超过32位').show();
 		$('#password').css('border-color','#E872C0');
 	}

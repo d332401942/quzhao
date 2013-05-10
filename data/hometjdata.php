@@ -103,11 +103,11 @@ class HomeTjDataData extends BaseData
 		$end = $pageCore->pageSize;
 		if($cateId)
 		{
-			$sql = 'select * from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE.' order by ctime desc,sort desc,id desc limit '.$start.','.$end;
-			$countSql = 'select count(*) from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE;
+			$sql = 'select * from home_tj_data where cid = '.$cateId.' and time_end < '.time().' and state = '.HomeTjDataDataModel::STATE_HAVE.' order by ctime desc,sort desc,id desc limit '.$start.','.$end;
+			$countSql = 'select count(*) from home_tj_data where cid = '.$cateId.' and time_end < '.time().' and state = '.HomeTjDataDataModel::STATE_HAVE;
 		}else{
-			$sql = 'select t1.* from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE.' order by t1.sort desc,t1.ctime desc, t1.id desc limit '.$start.','.$end;
-			$countSql = 'select count(*) from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.state = '.HomeTjDataDataModel::STATE_HAVE;
+			$sql = 'select t1.* from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.time_end < '.time().' and  t1.state = '.HomeTjDataDataModel::STATE_HAVE.' order by t1.sort desc,t1.ctime desc, t1.id desc limit '.$start.','.$end;
+			$countSql = 'select count(*) from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and t1.time_end < '.time().' and t1.state = '.HomeTjDataDataModel::STATE_HAVE;
 		}
         $count = $this->queryOne($countSql);
         if (!$count)
@@ -188,9 +188,27 @@ class HomeTjDataData extends BaseData
 		return $result;
 	}
 	
-	public function loveNum($id)
+	public function loveNum($id, $loveType = LoveDataModel::LOVE_TYPE_HOME_TJ_DATA)
 	{
-		$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
-		$this->exec($sql);
+		if ($loveType == LoveDataModel::LOVE_TYPE_SEARCH)
+		{
+			$data = new ProductData();
+			$data->loveNum($id);
+		}
+		else
+		{
+			$sql = 'update home_tj_data set lovenumber = lovenumber+1 where id = '.$id;
+			$this->exec($sql);
+		}
+	}
+	
+	/*
+	*	添加产品检查名称是否已经存在
+	*/
+	public function findOneByName($name)
+	{
+		$this->where(array('name'=>$name));
+		$res = $this->findOne();
+		return $res;
 	}
 }

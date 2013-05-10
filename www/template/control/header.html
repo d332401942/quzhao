@@ -42,7 +42,14 @@
 		}
 		var keyword = $(obj).find('input[name="keyword"]').val();
 		url += '__LIMIT__keyword/' + encodeURI(keyword);
-		window.open(url);
+		var type = '<{$type}>';
+		if (type == 'search') {
+			window.location.href = url;
+		}
+		else {
+			window.open(url);
+		}
+		
 		$(obj).attr('action',url);
 		return false;
 	}

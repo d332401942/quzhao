@@ -9,7 +9,7 @@ class BrandHomeBrandView extends BaseView
 		
 		
 		$id = isset($parameters['id'])?(int)$parameters['id']:'';
-		$brandModel = array();
+		$brandModel = null;
 		if($id)
 		{
 			$oneBusiness = M('BrandBusiness');
@@ -37,13 +37,23 @@ class BrandHomeBrandView extends BaseView
 				}
 			}
 			$model->createtime = time();
+			$model->str_time = strtotime($_POST['str_time']);
+			$model->end_time = strtotime($_POST['end_time']);
 			if(!empty($_POST['brandid']) && (int)$_POST['brandid'])
 			{
 				$model->id = $_POST['brandid'];
-				$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId'));
+				$model->setWorkFields(array('url', 'createtime', 'rebate', 'merchantsId','istj','maxrebate'));
 				$business->update($model);
 			}else{
-				$business->add($model);
+				try
+				{
+					$business->add($model);
+				}
+				catch(BusinessExceptionLib $e)
+				{
+					$message = $e->getMessage();
+					$this->responseError($message);
+				}
 			}
 			$this->redirect(APP_URL . '/homebrand/lists');
 		}
