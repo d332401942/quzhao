@@ -61,15 +61,19 @@ class CategoryData extends BaseData
 
 	public function getChildrenIds($id)
 	{
+		$ids = is_array($id) ? $id : array($id);
 		$models = $this->findAll ();
 		$childrenIds = array ();
 		foreach ( $models as $model )
 		{
 			$pathArr = explode ( '-', $model->path );
 			{
-				if (in_array ( $id, $pathArr ))
+				foreach ($ids as $id)
 				{
-					$childrenIds [] = $model->categoryid;
+					if (in_array ( $id, $pathArr ))
+					{
+						$childrenIds [] = $model->categoryid;
+					}
 				}
 			}
 		}

@@ -63,11 +63,16 @@ class IndexSearchView extends BaseView
 		}
 		$keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
+		$mapKeywords = $category;
+		if ($keyword && !$category)
+		{
+			$mapCategorys = $this->getMapCategorys($keyword);
+		}
 		//记录搜索日志
 		$ip = $_SERVER ['REMOTE_ADDR'];
 		$business->logKeywords($keyword, $ip);
 		//得到都有的品牌ID
-		$brandIdToCount = $business->searchBrandIdToCount($keyword , $category, $attrArr, $sort);
+		$brandIdToCount = $business->searchBrandIdToCount($keyword , $mapCategorys, $attrArr, $sort);
 		$brandIds = array_keys($brandIdToCount);
 		$searchBrandModels = $categoryBusiness->getSearchBrandDataModel($brandIds);
 		foreach ($searchBrandModels as $model)
@@ -111,12 +116,7 @@ class IndexSearchView extends BaseView
 		//得到历史记录
 		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
         //如果没有选择分类则去查询关键字对应到的分类
-        $mapKeywords = array();
-        if ($keyword)
-        {
-        	$mapKeywords = $this->getMapKeywords($keyword);
-        }
-		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
+		$productModels = $business->searchProduct($pageCore, $keyword , $mapCategorys, $attrArr, $sort);
 		//TODO 得到特别推荐
 		$recommendModels = $business->getRecommendModels($keyword);
 		$recommendModels = array_values($recommendModels);
@@ -168,7 +168,7 @@ class IndexSearchView extends BaseView
 		return $models;
 	}
 	
-	private function getMapKeywords($keyword)
+	private function getMapCategorys($keyword)
 	{
 		//查询关键词是否有对应的分类
 		//echo $keyword;

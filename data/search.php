@@ -36,6 +36,7 @@ class SearchData extends BaseData
 	 */
 	public function searchBrandIdToCount($keyword, $category, $attrArr)
 	{
+		$categorys = (is_array($category) && $category) ? $category : array($category);
 		if (isset ( $attrArr ['brandid'] ))
 		{
 			unset ( $attrArr ['brandid'] );
@@ -47,11 +48,9 @@ class SearchData extends BaseData
 						0 
 		), true );
 		$sphinx->setGroupBy ( 'brandid', SPH_GROUPBY_ATTR, '@count desc' );
-		if ($category)
+		if ($categorys)
 		{
-			$sphinx->setFilter ( 'categoryid', array (
-							$category 
-			) );
+			$sphinx->setFilter ( 'categoryid', $categorys);
 		}
 		$this->setAttr ( $sphinx, $attrArr );
 		$result = $sphinx->query ( '@title ' . $keyword, 'product' );
