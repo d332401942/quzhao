@@ -65,11 +65,11 @@ class IndexSearchView extends BaseView
 		$business = M('SearchBusiness');
 		$mapCategorys = $category;
 		
-		if ($keyword && empty($category))
+		/*if ($keyword && empty($category))
 		{
 			$mapCategorys = $this->getMapCategorys($keyword);
 			$mapCategorys = explode(',',$mapCategorys->categoryids);
-		}
+		}*/
 		//记录搜索日志
 		$ip = $_SERVER ['REMOTE_ADDR'];
 		$business->logKeywords($keyword, $ip);
