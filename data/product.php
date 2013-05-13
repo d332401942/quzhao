@@ -13,7 +13,7 @@ class ProductData extends BaseData
 		{
 			$fileds = '*';
 		}
-		$this->selectSearchMasterDb();
+		$this->selectSearchSlaveDb();
 		$sql = 'select ' . $fileds . ' from `product` where productid in (' . implode ( ',', $ids ) . ')';
 		$statement = $this->run ( $sql );
 		$productModels = array ();

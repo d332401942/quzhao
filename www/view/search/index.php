@@ -65,10 +65,9 @@ class IndexSearchView extends BaseView
 		$business = M('SearchBusiness');
 		$mapCategorys = $category;
 		
-		if ($keyword && empty($category) && 0)
+		if ($keyword && empty($category) && 0 )
 		{
 			$mapCategorys = $this->getMapCategorys($keyword);
-			$mapCategorys = explode(',',$mapCategorys->categoryids);
 		}
 		//记录搜索日志
 		$ip = $_SERVER ['REMOTE_ADDR'];
@@ -176,6 +175,6 @@ class IndexSearchView extends BaseView
 	private function getMapCategorys($keyword)
 	{
 		$business = M('AssociatedBusiness');
-		return $business->getOneCate($keyword);
+		return $business->getMapCategorys($keyword);
 	}
 }

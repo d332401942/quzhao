@@ -25,6 +25,7 @@ class AssociatedBusiness extends BaseBusiness
 		$data = new AssociatedData();
 		$data->del($name);
 	}
+	
 	public function add($model)
 	{
 		$data = new AssociatedData();
@@ -68,12 +69,22 @@ class AssociatedBusiness extends BaseBusiness
 	}
 	
 	/*
-	*	得到关键词已经关联分类ID
+	*	得到关键词已经关联分类IDs
 	*/
-	public function getOneCate($name)
+	public function getMapCategorys($name)
 	{
 		$data = new AssociatedData();
-		return $data->getSearchCateId($name);
+		$result =  $data->getSearchCateId($name);
+		$array = array();
+		if ($result)
+		{
+			$arr = explode(',', $result->categoryids);
+			foreach ($arr as $id)
+			{
+				$array[] = (int)$id;
+			}
+		}
+		return $array;
 	}
 
 

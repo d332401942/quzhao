@@ -36,7 +36,14 @@ class SearchData extends BaseData
 	 */
 	public function searchBrandIdToCount($keyword, $category, $attrArr)
 	{
-		$categorys = (is_array($category) && $category) ? $category : array($category);
+		if (!$category)
+		{
+			$categorys = array();
+		}
+		else if (!is_array($category))
+		{
+			$categorys = array($category);
+		}
 		if (isset ( $attrArr ['brandid'] ))
 		{
 			unset ( $attrArr ['brandid'] );
