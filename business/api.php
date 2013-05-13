@@ -8,7 +8,7 @@ class ApiBusiness extends BaseBusiness
 	 */
 	public function resetCache()
 	{
-		$data = new ('CategoryData');
+		$data = new CategoryData();
 		$data->resetCache();
 	}
 	
