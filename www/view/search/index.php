@@ -63,7 +63,7 @@ class IndexSearchView extends BaseView
 		}
 		$keyword = urldecode($keyword);
 		$business = M('SearchBusiness');
-		$mapKeywords = $category;
+		$mapCategorys = $category;
 		if ($keyword && !$category)
 		{
 			$mapCategorys = $this->getMapCategorys($keyword);
