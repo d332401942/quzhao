@@ -151,7 +151,17 @@ class CategoryData extends BaseData
 		}
 		return $result;
 	}
-
+	/**
+	 *	重新设置分类缓存
+	 */
+	public function resetCache()
+	{
+		$models = $this->dbFindAll();
+		$memcache = M ( 'MemcacheDbLib' );
+		$memcache->delete(self::CACHE_KEY);
+		$json = json_encode ( $models );
+		$memcache->set ( self::CACHE_KEY, $json, time()+86400);
+	}
 	public function getAttrDbs($attrId)
 	{
 		if (! empty ( self::$attrdbModels [$attrId] ))
