@@ -24,7 +24,17 @@ class HeaderControlView extends BaseView
         $this->assign('type', $type);
 
         $keyword = empty($parameters['keyword']) ? null : trim($parameters['keyword']);
-        $defkeyword = '电风扇';
+        //得到热门的关键词
+        $business = M('AssociatedBusiness');
+        $keywordArr = array(
+        				'手机',
+        				'电风扇',
+        				'USB风扇',
+        				'凉席',
+        				'凉鞋',
+        				
+        );
+        $defkeyword = $keywordArr[mt_rand(0, count($keywordArr) - 1)];
         if (empty($keyword))
         {
             $keyword = $defkeyword;
