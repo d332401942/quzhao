@@ -54,13 +54,6 @@ class AssociatedData extends BaseData
 		$this->exec($sql);
 	}
 	
-	public function getOneByName($name)
-	{
-		$this->selectSearchMasterDb();
-		$this->where(array('keyname'=>$name));
-		return $this->findOne();
-	}
-	
 	public function getOneCate($name)
 	{
 		$this->selectSearchMasterDb();

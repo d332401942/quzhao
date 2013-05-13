@@ -67,6 +67,7 @@ class IndexSearchView extends BaseView
 		if ($keyword && !$category)
 		{
 			$mapCategorys = $this->getMapCategorys($keyword);
+			$mapCategorys = explode(',',$mapCategorys->categoryids);
 		}
 		//记录搜索日志
 		$ip = $_SERVER ['REMOTE_ADDR'];
@@ -168,9 +169,12 @@ class IndexSearchView extends BaseView
 		return $models;
 	}
 	
+	/**
+	 *	查询关键词是否有对应的分类
+	 */
 	private function getMapCategorys($keyword)
 	{
-		//查询关键词是否有对应的分类
-		//echo $keyword;
+		$business = M('AssociatedBusiness');
+		return $business->getOneCate($keyword);
 	}
 }
