@@ -17,10 +17,6 @@ class ProductData extends BaseData
 		$sql = 'select ' . $fileds . ' from `product` where productid in (' . implode ( ',', $ids ) . ')';
 		$statement = $this->run ( $sql );
 		$productModels = array ();
-		foreach ( $ids as $id )
-		{
-			$productModels [$id] = null;
-		}
 		while ( $productModel = $statement->fetchObject ( 'ProductDataModel' ) )
 		{
 			$productModels [$productModel->productid] = $productModel;

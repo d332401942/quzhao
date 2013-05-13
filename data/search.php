@@ -204,7 +204,7 @@ class SearchData extends BaseData
 						'before_match' => '<strong>',
 						'after_match' => '</strong>' 
 		);
-		foreach ( $productModels as $model )
+		foreach ( $productModels as $k => $model )
 		{
 			$docs = array ();
 			foreach ( $needLightFileds as $val )

@@ -138,6 +138,7 @@ class UserData extends BaseData
 		$query ['regtype'] = $type;
 		$query ['openid'] = $openId;
 		$this->where ( $query );
+		$sql = 'select * from user as t1 inner join userconnect t2 on t2.userid = t1.id';
 		return $this->findOne ();
 	}
 
