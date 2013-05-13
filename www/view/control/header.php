@@ -27,7 +27,7 @@ class HeaderControlView extends BaseView
         $defkeyword = '电风扇';
         if (empty($keyword))
         {
-            $keyword = '电饭煲';
+            $keyword = $defkeyword;
         }
         $this->assign('defKeyword', $defkeyword);
         $this->assign('keyword', $keyword);
