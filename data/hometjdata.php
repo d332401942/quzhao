@@ -217,7 +217,7 @@ class HomeTjDataData extends BaseData
 	 */
 	public function getDayNumber($cate = false)
 	{
-		$where = ' AND id > 0';
+		$where = ' AND 1 = 1';
 		if($cate == 1)
 		{
 			$where .= ' AND tempType = 1';
@@ -231,6 +231,8 @@ class HomeTjDataData extends BaseData
 		$dayTimeEnd = strtotime($dayTimeEnd);
 		$sql = 'select count(*) as num from home_tj_data where ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
 		$num = $this->query($sql);
+		echo $sql;
+		P($num);
 		return $num[0]['num'];
 	}
 	/*
@@ -238,7 +240,7 @@ class HomeTjDataData extends BaseData
 	 */
 	public function getDayNumberTrue($cate = false)
 	{
-		$where = ' AND id > 0';
+		$where = ' AND 1 = 1';
 		if($cate == 1)
 		{
 			$where .= ' AND tempType = 1';
@@ -260,7 +262,7 @@ class HomeTjDataData extends BaseData
 	 */
 	public function getDayNumberFalse($cate = false)
 	{
-		$where = ' AND id > 0';
+		$where = ' AND 1 = 1';
 		if($cate == 1)
 		{
 			$where .= ' AND tempType = 1';

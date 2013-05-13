@@ -9,6 +9,7 @@ class CountContentView extends BaseView
 		{
 			$cate = $_GET['cate'];
 		}
+		
 		/*
 		 *得到今天总数据
 		 */
