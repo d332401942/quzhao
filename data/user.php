@@ -3,6 +3,11 @@
 class UserData extends BaseData
 {
 
+	public function addUserConnect($model)
+	{
+		$this->add($model);
+	}
+	
 	public function addUser($model)
 	{
 		$model->password = md5 ( $model->password );
@@ -134,12 +139,9 @@ class UserData extends BaseData
 	 */
 	public function getUserInfoByOther($openId, $type)
 	{
-		$query = array ();
-		$query ['regtype'] = $type;
-		$query ['openid'] = $openId;
-		$this->where ( $query );
-		$sql = 'select * from user as t1 inner join userconnect t2 on t2.userid = t1.id';
-		return $this->findOne ();
+		$sql = 'select t1.* from user as t1 inner join userconnect t2 on t2.userid = t1.id where t2.openid = "'.$this->escape($openId).'" and t2.sitetype = ' . (int)$type;
+		$result  = $this->queryOne($sql, 'UserDataModel');
+		return $result;
 	}
 
 	/**

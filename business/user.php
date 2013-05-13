@@ -129,7 +129,7 @@ class UserBusiness extends BaseBusiness
 					$model->$key = 0;
 				}
 			}
-			$this->addOtherModel ( $model );
+			$this->addOtherModel ( $model,$type );
 		}
 		// 修改用户昵称
 		else if (empty ( $model->email ))
@@ -224,10 +224,15 @@ class UserBusiness extends BaseBusiness
 	 *
 	 * @param unknown $model        	
 	 */
-	private function addOtherModel($model)
+	private function addOtherModel($model, $siteType)
 	{
 		$data = M ( 'UserData' );
 		$data->add ( $model );
+		$userConnectModel = new UserConnectDataModel();
+		$userConnectModel->userid = $model->id;
+		$userConnectModel->openid = $model->openid;
+		$userConnectModel->sitetype = $siteType;
+		$data->addUserConnect($userConnectModel);
 	}
 
 }
