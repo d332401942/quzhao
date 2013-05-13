@@ -18,6 +18,7 @@ class WeiboCallbakView extends BaseCallbakView
 		$code = $_GET ['code'];
 		$weiboInfo = $this->getWeiboInfo ( $code );
 		$business = new UserBusiness ();
+		$this->CurrentUser->id;
 		$userModel = $business->getUserInfoByOther ( $weiboInfo['id'], $weiboInfo, UserDataModel::OTHER_SITE_WEIBO );
 		$this->gotoSet($userModel);
 	}

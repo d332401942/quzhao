@@ -112,9 +112,9 @@ class IndexSearchView extends BaseView
 		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
         //如果没有选择分类则去查询关键字对应到的分类
         $mapKeywords = array();
-        if (!$keyword)
+        if ($keyword)
         {
-        	$mapKeywords = $this->getMapKeywords($mapKeywords);
+        	$mapKeywords = $this->getMapKeywords($keyword);
         }
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
 		//TODO 得到特别推荐
@@ -166,5 +166,11 @@ class IndexSearchView extends BaseView
 		$models = $business->searchBrowseHistoryModels($arrIds);
 		$models = $models ? $models : array();
 		return $models;
+	}
+	
+	private function getMapKeywords($keyword)
+	{
+		//查询关键词是否有对应的分类
+		//echo $keyword;
 	}
 }
