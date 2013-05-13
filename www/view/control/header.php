@@ -24,10 +24,12 @@ class HeaderControlView extends BaseView
         $this->assign('type', $type);
 
         $keyword = empty($parameters['keyword']) ? null : trim($parameters['keyword']);
+        $defkeyword = '电风扇';
         if (empty($keyword))
         {
             $keyword = '电饭煲';
         }
+        $this->assign('defKeyword', $defkeyword);
         $this->assign('keyword', $keyword);
     }
 }
