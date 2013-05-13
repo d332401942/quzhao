@@ -34,12 +34,6 @@ class UserDataModel extends BaseDataModel
 	public $regtype;
 	
 	/**
-	 * 第三方登录提供的ID
-	 * @var string
-	 */
-	public $openid;
-
-	/**
 	 * 注册时间
 	 * @var int
 	 */
