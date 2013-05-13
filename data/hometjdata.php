@@ -229,7 +229,7 @@ class HomeTjDataData extends BaseData
 		$dayTimeStr = strtotime($time);
 		$dayTimeEnd = $time.' 23:59:59';
 		$dayTimeEnd = strtotime($dayTimeEnd);
-		$sql = 'select count(*) as num from home_tj_data where ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
+		$sql = 'select count(*) as num from home_tj_data where ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
 		$num = $this->query($sql);
 		echo $sql;
 		P($num);
@@ -252,7 +252,7 @@ class HomeTjDataData extends BaseData
 		$dayTimeStr = strtotime($time);
 		$dayTimeEnd = $time.' 23:59:59';
 		$dayTimeEnd = strtotime($dayTimeEnd);
-		$sql = 'select count(*) as num from home_tj_data where state =1 and ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
+		$sql = 'select count(*) as num from home_tj_data where state =1 and ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
 		$num = $this->query($sql);
 		return $num[0]['num'];
 	}
@@ -274,7 +274,7 @@ class HomeTjDataData extends BaseData
 		$dayTimeStr = strtotime($time);
 		$dayTimeEnd = $time.' 23:59:59';
 		$dayTimeEnd = strtotime($dayTimeEnd);
-		$sql = 'select count(*) as num from home_tj_data where state != 1 and ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
+		$sql = 'select count(*) as num from home_tj_data where state != 1 and ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
 		$num = $this->query($sql);
 		return $num[0]['num'];
 	}
