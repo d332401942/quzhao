@@ -68,6 +68,12 @@ class AssociatedBusiness extends BaseBusiness
 		return $data->getCate($pid, $level);
 	}
 	
+	public function getOneCate($name)
+	{
+		$data = new AssociatedData();
+		$result =  $data->getOneCate($name);
+		return $result;
+	}
 	/*
 	*	得到关键词已经关联分类IDs
 	*/
