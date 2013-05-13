@@ -37,7 +37,7 @@
 </table>
 	</div>
 	
-</form>	
+
 
 <div class="add-div" style="float:right;margin-right:260px;">
 	<table style="width:50%;margin:auto;" border="0">
@@ -46,13 +46,14 @@
 	<{foreach ($cateNameModel as $val)}>
 	<ul style="margin:0;padding:0;margin-left:50px;">
 		<li style="margin:0;padding:0;">
-			<{if ($val->level == 2)}>--<{else if ($val->level == 3)}>---<{/if}>&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red"><{$val->name}></span>
+			<input type="checkbox" class="js-checkall-input js-index-id" checked="checked" name="cateId[]" value="<{$val->categoryid}>" />&nbsp;&nbsp;<{if ($val->level == 2)}>--<{else if ($val->level == 3)}>---<{/if}>&nbsp;&nbsp;<{$val->categoryid}>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red"><{$val->name}></span>
 		</li>
 	</ul>
 	<{/foreach}>
 	<{/if}>
 </table>
 </div>
+</form>	
 <{include '__TEMPLATE__/footer.html'}>
 <form id="js-go-form" action="" method="get">
 	<input type="hidden" name="page" value="<{$page}>" />

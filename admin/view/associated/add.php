@@ -22,7 +22,6 @@ class AddAssociatedView extends BaseView
 			$cateBusiness = M('CategoryBusiness');
 			$cateNameModel = $cateBusiness->getCateName($cateIdModel->categoryids);
 		}
-		
 		if(!empty($cateIdModel->categoryids))
 		{
 			$cateIdModel->categoryids = explode(',',$cateIdModel->categoryids);
@@ -46,6 +45,7 @@ class AddAssociatedView extends BaseView
 		{
 			
 			$cateId = isset($_POST['cateId'])?$_POST['cateId']:array();
+			$cateId = array_unique($cateId);
 			$cateId = implode(',',$cateId);
 			$name = trim($_POST['name']);
 			$oldname = trim($_POST['oldname']);
