@@ -134,6 +134,7 @@ class UserBusiness extends BaseBusiness
 		// 修改用户昵称
 		else if (empty ( $model->email ))
 		{
+			P($model);exit;
 			$data->updateNickNameAndHead ( $model->id, $nickname, $head );
 		}
 		return $model;
