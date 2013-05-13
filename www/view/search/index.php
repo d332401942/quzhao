@@ -110,7 +110,12 @@ class IndexSearchView extends BaseView
 		
 		//得到历史记录
 		$searchBrowseHistoryModels = $this->searchBrowseHistoryModels();
-        
+        //如果没有选择分类则去查询关键字对应到的分类
+        $mapKeywords = array();
+        if (!$keyword)
+        {
+        	$mapKeywords = $this->getMapKeywords($mapKeywords);
+        }
 		$productModels = $business->searchProduct($pageCore, $keyword , $category, $attrArr, $sort);
 		//TODO 得到特别推荐
 		$recommendModels = $business->getRecommendModels($keyword);

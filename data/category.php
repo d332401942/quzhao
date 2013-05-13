@@ -19,26 +19,40 @@ class CategoryData extends BaseData
 		{
 			if (isset ( $allCategoryModels [$id] ))
 			{
-				$lastModel = $allCategoryModels [$id];
+				$model = $allCategoryModels [$id];
 				if (!empty($categoryIdToCount[$id]))
 				{
-					$lastModel->num = $categoryIdToCount[$id];
+					$model->num = $categoryIdToCount[$id];
 				}
-				$pid2 = $lastModel->pid2;
-				$pid1 = $lastModel->pid1;
-				$middleModel = $allCategoryModels [$pid2];
-				$preModel = $allCategoryModels [$pid1];
+				$pid2 = $model->pid2;
+				$pid1 = $model->pid1;
+				if ($model->level == 3)
+				{
+					$lastModel = $model;
+				}
+				else if ($model->level == 2)
+				{
+					$pid2 = $model->categoryid;
+				}
+				else if ($model->level == 1)
+				{
+					$pid1 = $model->categoryid;
+				}
+				$middleModel = null;
+				$preModel = null;
+				$middleModel = !empty($allCategoryModels [$pid2]) ? $allCategoryModels [$pid2] : null;
+				$preModel = !empty($allCategoryModels [$pid1]) ? $allCategoryModels [$pid1] : nul;
 				if (empty ( $models [$pid1] ))
 				{
 					$models [$pid1] = $preModel;
 				}
-				if (empty ( $preModel->children [$pid2] ))
+				if (empty ( $preModel->children [$pid2] ) && $middleModel)
 				{
 					$preModel->children [$pid2] = $middleModel;
 				}
-				if (empty ( $middleModel->children [$id] ))
+				if (empty ( $middleModel->children [$id] ) && $model)
 				{
-					$middleModel->children [$id] = $lastModel;
+					$middleModel->children [$id] = $model;
 				}
 			}
 		}
