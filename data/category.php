@@ -110,7 +110,7 @@ class CategoryData extends BaseData
 		$models = self::$idToCategoryModels;
 		$memcache = M ( 'MemcacheDbLib' );
 		$json = json_encode ( $models );
-		$memcache->set ( self::CACHE_KEY, $json );
+		$memcache->set ( self::CACHE_KEY, $json, time()+86400);
 	}
 
 	private function dbFindAll()
