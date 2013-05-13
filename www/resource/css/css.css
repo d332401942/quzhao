@@ -296,7 +296,7 @@ filter:Alpha(opacity=75); background:#fff;/*实现IE背景透明*/-webkit-transi
 .pp_rr2 ul li{ text-align:center; overflow:hidden; margin-bottom:15px; clear:both;}
 .pp_rr2 ul li a{ display:inline-block; cursor:hand;}
 .pp_rr2 ul li a:hover{ text-decoration:none;}
-.pp_rr2 ul li a img{ max-width:190px;_width:190px; }
+.pp_rr2 ul li a img{ max-width:190px;_width:190px;width:190px\0; }
 .xl{ width:100%; height:20px; margin-top:-20px; display:inline-block;line-height:20px; font-size:12px; color:#333;background:rgba(255, 255, 255, 0.75) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
 filter:Alpha(opacity=75); background:#fff;/*实现IE背景透明*/}
 .xl span{ position:relative; display:block;}
