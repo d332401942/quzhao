@@ -65,7 +65,7 @@ class IndexSearchView extends BaseView
 		$business = M('SearchBusiness');
 		$mapCategorys = $category;
 		
-		if ($keyword && empty($category))
+		if ($keyword && empty($category) && 0)
 		{
 			$mapCategorys = $this->getMapCategorys($keyword);
 			$mapCategorys = explode(',',$mapCategorys->categoryids);
