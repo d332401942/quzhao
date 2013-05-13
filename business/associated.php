@@ -73,7 +73,7 @@ class AssociatedBusiness extends BaseBusiness
 	public function getOneCate($name)
 	{
 		$data = new AssociatedData();
-		return $data->getOneCate($name);
+		return $data->getSearchCateId($name);
 	}
 
 
