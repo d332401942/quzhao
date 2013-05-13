@@ -44,6 +44,10 @@ class SearchData extends BaseData
 		{
 			$categorys = array($category);
 		}
+		else 
+		{
+			$categorys = $category;
+		}
 		if (isset ( $attrArr ['brandid'] ))
 		{
 			unset ( $attrArr ['brandid'] );
