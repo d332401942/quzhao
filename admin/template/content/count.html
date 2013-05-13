@@ -1,0 +1,263 @@
+<{include '__TEMPLATE__/header.html'}>
+<div class="list-div">
+<div class="content-select">
+	<div>
+	<form id="js-go-form" action="" method="get" onsubmit="return search(this)">
+		<input type="hidden" name="page" value="<{$page}>" />
+		<input type="hidden" name="state" value="<{$state}>" />
+		<table>
+			<tr>
+				<td>添加类型</td>
+				<td>
+					<select name="temp">
+						<option value="0" >全部</option>
+						<option value="2" >抓取</option>
+						<option value="1">兼职</option>
+					</select>
+				</td>
+				<td><button type="submit">筛选</button></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<table style="width:100%">
+	<tr>
+		<th>总数据</th>
+		<th>已通过</th>
+		<th>未通过</th>
+	</tr>
+		<tr>
+			<td><{$totalNum}></td>
+			<td><{$totalNumTrue}></td>
+			<td><{$totalNumFalse}></td>
+		</tr>
+	
+</table>
+</div>
+
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+var isGoPage = false;
+function goPage(page) {
+	isGoPage = true;
+	var formObj = $('#js-go-form');
+	formObj.find('input[name="page"]').val(page);
+	formObj.submit();
+	//window.location.href = '__APP__/content?page='+page;
+}
+function changeState(obj,id) {
+	var state = $(obj).val();
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	doChangeState(ids,state);
+} 
+function selectAll(obj) {
+	if ($(obj).attr('checked')) {
+		$('.js-select-all').attr('checked',true);
+	}
+	else {
+		$('.js-select-all').attr('checked',false);
+	}
+}
+
+function changeAll() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	var state = $('#js-selec-state').val();
+	doChangeState(ids,state,true)
+}
+
+function clearSort() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	if (!ids) {
+		alert('没有选中内容');
+		return;
+	}
+	if (!confirm('确定要清除所选的排序吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/clearSort?stmp='+ new Date().toString(),
+		data: {ids:ids},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function clearTj() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	if (!ids) {
+		alert('没有选中内容');
+		return;
+	}
+	if (!confirm('确定要清除所选的推荐吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/clearTj?stmp='+ new Date().toString(),
+		data: {ids:ids},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function clearHot() {
+	var ids;
+	$('.js-index-id:checked').each(function(){
+		var id = $(this).val();
+		if (!ids) {
+			ids = [];
+		}
+		ids.push(id);
+	});
+	if (!ids) {
+		alert('没有选中内容');
+		return;
+	}
+	if (!confirm('确定要清除所选的推荐吗？')) {
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/clearHot?stmp='+ new Date().toString(),
+		data: {ids:ids},
+		dataType: 'json',
+		type: 'post',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function search(obj) {
+	var formObj = $(obj);
+	if (!isGoPage) {
+		formObj.find('input[name="page"]').val(1);
+	}
+	var all = false;
+	var stateStr = '';
+	$('.js-search-state:checked').each(function(){
+		var value = $(this).val();
+		if (!value) {
+			all = true;
+		}
+		else if (!stateStr) {
+			stateStr = value;
+		}
+		else {
+			stateStr += ',' + value;
+		}
+	});
+	if (!all) {
+		formObj.find('input[name="state"]').val(stateStr);
+	}
+	return true;
+}
+
+function doChangeState(ids,state,isReload) {
+	if (!ids) {
+		alert('请选择类容');
+		return false;
+	}
+	if (!state) {
+		alert('请选择状态');
+		return false;
+	}
+	$.ajax({
+		url: '__AJAX__/content/changeState',
+		data: {ids:ids,state:state},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data && data.result) {
+				alert('修改成功');
+				window.location.reload()
+			}
+			else {
+				alert('修改失败');
+			}
+		},
+		error: function() {
+			alert('操作失败');
+		}
+	});
+}
+
+function selectClass(obj) {
+	var cid = $(obj).val();
+	if (cid) {
+		window.location.href = '__APP__/content?cid='+cid;
+	}
+	else {
+		window.location.href = '__APP__/content';
+	}
+}
+
+function del(id,pic) {
+	if (!confirm('确定要删除吗？')) {
+		return;
+	}
+	var ids;
+	if (id) {
+		ids = [id];
+	}
+	else {
+		$('.js-index-id:checked').each(function(){
+			if (!ids) {
+				ids = [];
+			}
+			ids.push($(this).val());
+		});
+	}
+	if (!ids) {
+		alert('请选择要删除的数据');
+		return;
+	}
+	$.ajax({
+		url: '__AJAX__/content/del?stmp=' + new Date().toString(),
+		data: {id:ids,pic:pic},
+		type: 'post',
+		dataType: 'json',
+		success: function(data) {
+			if (data.result) {
+				window.location.reload();
+			}
+		}
+	});
+}
+
+</script>

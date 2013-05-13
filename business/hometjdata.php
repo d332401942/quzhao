@@ -499,4 +499,30 @@ class HomeTjDataBusiness extends BaseBusiness
         $model->cid = $classModel->id;
     }
 
+	/*
+	 *得到今天总数据
+	 */
+	public function getDayNumber($cate)
+	{
+		$data = new HomeTjDataData();
+		return $data->getDayNumber($cate);
+	}	
+	
+	/*
+	 *得到今天已通过总数据
+	 */
+	public function getDayNumberTrue($cate)
+	{
+		$data = new HomeTjDataData();
+		return $data->getDayNumberTrue($cate);
+	}	
+	
+	/*
+	 *得到今天未通过总数据
+	 */
+	public function getDayNumberFalse($cate)
+	{
+		$data = new HomeTjDataData();
+		return $data->getDayNumberFalse($cate);
+	}	
 }

@@ -211,4 +211,69 @@ class HomeTjDataData extends BaseData
 		$res = $this->findOne();
 		return $res;
 	}
+	
+	/*
+	 *得到今天总数据
+	 */
+	public function getDayNumber($cate = false)
+	{
+		$where = ' AND id > 0';
+		if($cate == 1)
+		{
+			$where .= ' AND tempType = 1';
+		}
+		else if($cate == 2){
+			$where .= ' AND tempType = 0';
+		}
+		$time = date('Y-m-d');
+		$dayTimeStr = strtotime($time);
+		$dayTimeEnd = $time.' 23:59:59';
+		$dayTimeEnd = strtotime($dayTimeEnd);
+		$sql = 'select count(*) as num from home_tj_data where ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
+		$num = $this->query($sql);
+		return $num[0]['num'];
+	}
+	/*
+	 *得到今天已通过总数据
+	 */
+	public function getDayNumberTrue($cate = false)
+	{
+		$where = ' AND id > 0';
+		if($cate == 1)
+		{
+			$where .= ' AND tempType = 1';
+		}
+		else if($cate == 2){
+			$where .= ' AND tempType = 0';
+		}
+		$time = date('Y-m-d');
+		$dayTimeStr = strtotime($time);
+		$dayTimeEnd = $time.' 23:59:59';
+		$dayTimeEnd = strtotime($dayTimeEnd);
+		$sql = 'select count(*) as num from home_tj_data where state =1 and ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
+		$num = $this->query($sql);
+		return $num[0]['num'];
+	}
+	
+	/*
+	 *得到今天未通过总数据
+	 */
+	public function getDayNumberFalse($cate = false)
+	{
+		$where = ' AND id > 0';
+		if($cate == 1)
+		{
+			$where .= ' AND tempType = 1';
+		}
+		else if($cate == 2){
+			$where .= ' AND tempType = 0';
+		}
+		$time = date('Y-m-d');
+		$dayTimeStr = strtotime($time);
+		$dayTimeEnd = $time.' 23:59:59';
+		$dayTimeEnd = strtotime($dayTimeEnd);
+		$sql = 'select count(*) as num from home_tj_data where state != 1 and ltime > '.$dayTimeStr.' && ltime > '.$dayTimeEnd.$where;
+		$num = $this->query($sql);
+		return $num[0]['num'];
+	}
 }

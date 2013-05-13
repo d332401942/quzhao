@@ -23,6 +23,10 @@ class LeftIndexView extends BaseView
                     'name' => '备选库',
                     'url' => 'netdata'
                 ),
+				array(
+					'name' => '数量统计',
+					'url' => 'content/count',
+				),
             ),
             '热门商家' => array(
                 array(
@@ -158,6 +162,7 @@ class LeftIndexView extends BaseView
 					'url' => 'associated/addkey',
 				)
 			),
+			
 			
         );
         $this->assign('menu', $menu);
