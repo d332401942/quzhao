@@ -61,4 +61,14 @@ class AssociatedData extends BaseData
 		$result = $this->findOne();
 		return $result;
 	}
+	/**
+	*前台搜索获取分类ID
+	*/
+	public function getSearchCateId($name)
+	{
+		$this->selectSearchSlaveDb();
+		$this->where(array('keyname'=>$name));
+		$result = $this->findOne();
+		return $result;
+	}
 }
