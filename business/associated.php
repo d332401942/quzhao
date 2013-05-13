@@ -80,7 +80,7 @@ class AssociatedBusiness extends BaseBusiness
 	public function getMapCategorys($name)
 	{
 		$data = new AssociatedData();
-		$result =  $data->getSearchCateId($name);
+		$result =  $data->getOneCate($name);
 		$array = array();
 		if ($result)
 		{
