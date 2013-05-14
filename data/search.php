@@ -53,7 +53,6 @@ class SearchData extends BaseData
 			unset ( $attrArr ['brandid'] );
 		}
 		$sphinx = new SphinxDbLib ();
-		$sphinx->setMatchMode ( SPH_MATCH_EXTENDED2 );
 		$this->setPublicFilter ( $sphinx );
 		$sphinx->SetFilter ( 'brandid', array (
 						0 
@@ -113,10 +112,11 @@ class SearchData extends BaseData
 	public function getCategoryIdToCount($keyword)
 	{
 		$sphinx = new SphinxDbLib ();
-		$sphinx->setGroupBy ( 'categoryid', SPH_GROUPBY_ATTR, '@count desc' );
-		$this->setPublicFilter ( $sphinx );
-		$result = $sphinx->query ( $keyword, 'product' );
 		
+		$this->setWeights ( $sphinx );
+		$this->setPublicFilter ( $sphinx );
+		$sphinx->setGroupBy ( 'categoryid', SPH_GROUPBY_ATTR, '@count desc' );
+		$result = $sphinx->query ( '@title ' . $keyword, 'product' );
 		$categoryIdToCount = array ();
 		if (! empty ( $result ['matches'] ))
 		{
@@ -137,7 +137,6 @@ class SearchData extends BaseData
 	{
 		$start = ($pageCore->currentPage - 1) * $pageCore->pageSize;
 		$sphinx = M ( 'SphinxDbLib' );
-		$sphinx->setMatchMode ( SPH_MATCH_EXTENDED2 );
 		$sphinx->setLimits ( $start, $pageCore->pageSize, $start + $pageCore->pageSize );
 		$this->setWeights ( $sphinx );
 		$this->setSortMode ( $sphinx, $sort );
