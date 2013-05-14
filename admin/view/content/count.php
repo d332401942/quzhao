@@ -75,6 +75,6 @@ class CountContentView extends BaseView
 		$dateTo = FormCommon::date('time_end',date('Y-m-d H:i:s'),true);
 		$this->assign('dateTo', $dateTo);
 		$this->assign('dateFrom', $dateFrom);
-		$this->assign('title', '商品统计');
+		$this->assign('title', '商品统计'); 
 	}
 }
