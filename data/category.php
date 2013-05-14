@@ -275,7 +275,7 @@ class CategoryData extends BaseData
 	}
 
 	/**
-     *	得到所有分类，导出的时候用
+     *	得到所有分类，导出的时候用,临时方法
 	 */
 	public function getSy()
 	{
