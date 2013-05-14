@@ -11,13 +11,13 @@ class CountContentView extends BaseView
 		}
 		
 		$strtime = null;
-		if(!empty($_GET['strtime']) && (int)$_GET['strtime'])
+		if(!empty($_GET['strtime']))
 		{
 			$strtime = $_GET['strtime'];
 		}
 		
 		$endtime = null;
-		if(!empty($_GET['endtime']) && (int)$_GET['endtime'])
+		if(!empty($_GET['endtime']))
 		{
 			$endtime = $_GET['endtime'];
 		}

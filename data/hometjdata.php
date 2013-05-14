@@ -303,6 +303,7 @@ class HomeTjDataData extends BaseData
 			$dayTimeEnd = strtotime($dayTimeEnd);
 		}
 		$sql = 'select count(*) as num from home_tj_data where state != 1 and ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
+		echo $sql;
 		$num = $this->query($sql);
 		return $num[0]['num'];
 	}
