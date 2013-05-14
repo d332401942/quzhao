@@ -215,7 +215,7 @@ class HomeTjDataData extends BaseData
 	/*
 	 *得到今天总数据
 	 */
-	public function getDayNumber($cate = false, $strtime = false, $endtime = false)
+	public function getDayNumber($cate = false, $strtime = false, $endtime = false, $w = false)
 	{
 		$where = ' AND 1 = 1';
 		if($cate == 1)
@@ -239,7 +239,17 @@ class HomeTjDataData extends BaseData
 			$dayTimeEnd = $time.' 23:59:59';
 			$dayTimeEnd = strtotime($dayTimeEnd);
 		}
-		$sql = 'select t2.username,t2.id,count(*) as num from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
+		if($w == 1)
+		{
+			$sql = 'select t2.username,t2.id,count(*) as num2 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.state = 1 and t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
+		}
+		else if($w == 2){
+			$sql = 'select t2.username,t2.id,count(*) as num3 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.state != 1 and t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
+		}
+		else
+		{
+			$sql = 'select t2.username,t2.id,count(*) as num from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
+		}
 		$num = $this->query($sql);
 		return $num;
 	}

@@ -25,18 +25,10 @@ class CountContentView extends BaseView
 		/*
 		 *得到今天总数据
 		 */
-		$business = M('HomeTjDataBusiness');
-		$totalNum = $business->getDayNumber($cate, $strtime, $endtime);
-		
-		/*
-		 *得到今天已通过总数据
-		 */
-		$totalNumTrue = $business->getDayNumberTrue($cate, $strtime, $endtime);
-		
-		/*
-		 *得到今天未通过总数据
-		 */
-		$totalNumFalse = $business->getDayNumberFalse($cate, $strtime, $endtime);
+		$business = new HomeTjDataBusiness();
+		$totalNum = $business->getDayNumber($cate, $strtime, $endtime, 0);
+		$totalNumTrue = $business->getDayNumber($cate, $strtime, $endtime, 1);
+		$totalNumFalse = $business->getDayNumber($cate, $strtime, $endtime, 2);
 		
 		/*
 		 *合并查询结果
