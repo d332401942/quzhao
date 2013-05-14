@@ -239,9 +239,9 @@ class HomeTjDataData extends BaseData
 			$dayTimeEnd = $time.' 23:59:59';
 			$dayTimeEnd = strtotime($dayTimeEnd);
 		}
-		$sql = 'select count(*) as num from home_tj_data where ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
+		$sql = 'select t2.username,t2.id,count(*) as num from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
 		$num = $this->query($sql);
-		return $num[0]['num'];
+		return $num;
 	}
 	/*
 	 *得到今天已通过总数据
@@ -270,9 +270,9 @@ class HomeTjDataData extends BaseData
 			$dayTimeEnd = $time.' 23:59:59';
 			$dayTimeEnd = strtotime($dayTimeEnd);
 		}
-		$sql = 'select count(*) as num from home_tj_data where state =1 and ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
+		$sql = 'select t2.username,t2.id,count(*) as num2 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.state = 1 and t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
 		$num = $this->query($sql);
-		return $num[0]['num'];
+		return $num;
 	}
 	
 	/*
@@ -283,10 +283,10 @@ class HomeTjDataData extends BaseData
 		$where = ' AND 1 = 1';
 		if($cate == 1)
 		{
-			$where .= ' AND tempType = 1';
+			$where .= ' AND t1.tempType = 1';
 		}
 		else if($cate == 2){
-			$where .= ' AND tempType = 0';
+			$where .= ' AND t1.tempType = 0';
 		}
 		if($strtime && $endtime)
 		{
@@ -302,8 +302,9 @@ class HomeTjDataData extends BaseData
 			$dayTimeEnd = $time.' 23:59:59';
 			$dayTimeEnd = strtotime($dayTimeEnd);
 		}
-		$sql = 'select count(*) as num from home_tj_data where state != 1 and ltime > '.$dayTimeStr.' && ltime < '.$dayTimeEnd.$where;
+		$sql = 'select t2.username,t2.id,count(*) as num3 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.state != 1 and t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
 		$num = $this->query($sql);
-		return $num[0]['num'];
+		return $num;
+		
 	}
 }

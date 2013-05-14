@@ -28,16 +28,19 @@
 </div>
 <table style="width:100%">
 	<tr>
+		<th>用户名</th>
 		<th>总数据</th>
 		<th>已通过</th>
 		<th>未通过</th>
 	</tr>
+		<{foreach ($totalNum as $total)}>
 		<tr>
-			<td><{$totalNum}></td>
-			<td><{$totalNumTrue}></td>
-			<td><{$totalNumFalse}></td>
+			<td><{$total['username']}></td>
+			<td><{$total['num']}></td>
+			<td><{$total['num2']}></td>
+			<td><{$total['num3']}></td>
 		</tr>
-	
+		<{/foreach}>
 </table>
 </div>
 
