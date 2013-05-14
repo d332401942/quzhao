@@ -99,9 +99,16 @@ class UserDataModel extends BaseDataModel
 	 */
 	public $power;
 	
+	/**
+	 * 对应到第三方登录账号上
+	 * @var unknown
+	 */
+	public $userconnects = array();
+	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->setTableName('user');
+		$this->setIgoneFields('userconnects');
 	}
 }

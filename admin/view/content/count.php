@@ -4,10 +4,10 @@ class CountContentView extends BaseView
 {
 	public function index()
 	{
-		$cate = null;
+		$isPart = 0;
 		if(!empty($_GET['cate']) && (int)$_GET['cate'])
 		{
-			$cate = $_GET['cate'];
+			$isPart = (int)$_GET['cate'];
 		}
 		
 		$strtime = null;
