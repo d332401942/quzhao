@@ -1,5 +1,23 @@
 <{include '__TEMPLATE__/header.html'}>
 <div class="list-div">
+
+<table style="width:100%">
+	<tr>
+		<th>用户名</th>
+		<th>总数据</th>
+		<th>已通过</th>
+		<th>未通过</th>
+	</tr>
+		<{foreach ($totalNum as $total)}>
+		<tr>
+			<td><{$total['username']}></td>
+			<td><{$total['num']}></td>
+			<td><{$total['numTrue']}></td>
+			<td><{$total['numFalse']}></td>
+		</tr>
+		<{/foreach}>
+</table>
+</div>
 <div class="content-select">
 	<div>
 	<form id="js-go-form" action="" method="get">
@@ -17,8 +35,7 @@
 					起始时间
 				</td>
 				<td>
-					<script language="javascript" type="text/javascript" src="__RESOURCE__/js/My97DatePicker/WdatePicker.js"></script>
-					<input class="Wdate" name="strtime" type="text" onClick="WdatePicker()">--<input class="Wdate" name="endtime" type="text" onClick="WdatePicker()">
+					<{$dateFrom}>&nbsp;--&nbsp;&nbsp;<{$dateTo}>
 				</td>
 				<td><button type="submit">筛选</button></td>
 			</tr>
@@ -26,24 +43,6 @@
 	</form>
 	</div>
 </div>
-<table style="width:100%">
-	<tr>
-		<th>用户名</th>
-		<th>总数据</th>
-		<th>已通过</th>
-		<th>未通过</th>
-	</tr>
-		<{foreach ($totalNum as $total)}>
-		<tr>
-			<td><{$total['username']}></td>
-			<td><{$total['num']}></td>
-			<td><{$total['num2']}></td>
-			<td><{$total['num3']}></td>
-		</tr>
-		<{/foreach}>
-</table>
-</div>
-
 <{include '__TEMPLATE__/footer.html'}>
 <script>
 var isGoPage = false;
