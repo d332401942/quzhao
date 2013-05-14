@@ -4,6 +4,7 @@ define('APP_DIR', './www');
 define('APP_ROOT', '');
 define('APP_URL', '');
 
+
 include '../feng/main.php';
 include './request.php';
 $regulation = array(

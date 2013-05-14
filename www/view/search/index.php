@@ -122,7 +122,8 @@ class IndexSearchView extends BaseView
 		$recommendModels = $business->getRecommendModels($keyword);
 		$recommendModels = array_values($recommendModels);
 		$categoryModels = $categoryBusiness->search($keyword);
-		$productModels = array_values($productModels);
+		//P($categoryModels);
+		$productModels;// = array_values($productModels);
 		$hostCategoryModels = array_shift($categoryModels);
 		$this->assign('categoryModels', $categoryModels);
 		$this->assign('hostCategoryModels', $hostCategoryModels);

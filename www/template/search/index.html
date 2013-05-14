@@ -9,6 +9,8 @@
                 筛选分类
             </h2>
             <div class="list_nav_box">
+            <{foreach ($categoryModels as $hostCategoryModels)}>
+            
 				<{if (!empty($hostCategoryModels->children))}>
 				<{foreach ($hostCategoryModels->children as $model)}>
                 <ul>
@@ -29,19 +31,9 @@
 				<{/foreach}>
                 <{/if}>
 				<{if (!empty($categoryModels))}>
-                <ul>
-                    <h2>
-                        <a href="javascript:;">
-                            其他
-                        </a>
-                    </h2>
-					<{foreach ($categoryModels as $model)}>
-                    <li>
-                        <a href="javascript:;" onclick="searchByCategory(<{$model->categoryid}>)"><{$model->name}></a>
-                    </li>
-                    <{/foreach}>
-                </ul>
+           
 				<{/if}>
+			<{/foreach}>
             </div>
         </div>
         <div class="pp_rr2">
