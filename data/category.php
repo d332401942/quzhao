@@ -274,6 +274,17 @@ class CategoryData extends BaseData
 		return $result;
 	}
 
+	/**
+     *	得到所有分类，导出的时候用
+	 */
+	public function getSy()
+	{
+		$this->selectSearchSlaveDb();
+		//$result = $this->findAll();
+		$sql = 'select categoryid,name,level,pid1,pid2 from category';
+		$result = $this->query($sql,'CategoryDataModel');
+		return $result;
+	}
 	public function getCate($pid, $level)
 	{
 		$pidStr = 'pid' . ($level - 1);
