@@ -502,27 +502,27 @@ class HomeTjDataBusiness extends BaseBusiness
 	/*
 	 *得到今天总数据
 	 */
-	public function getDayNumber($cate)
+	public function getDayNumber($cate, $strtime, $endtime)
 	{
 		$data = new HomeTjDataData();
-		return $data->getDayNumber($cate);
+		return $data->getDayNumber($cate, $strtime, $endtime);
 	}	
 	
 	/*
 	 *得到今天已通过总数据
 	 */
-	public function getDayNumberTrue($cate)
+	public function getDayNumberTrue($cate, $strtime, $endtime)
 	{
 		$data = new HomeTjDataData();
-		return $data->getDayNumberTrue($cate);
+		return $data->getDayNumberTrue($cate, $strtime, $endtime);
 	}	
 	
 	/*
 	 *得到今天未通过总数据
 	 */
-	public function getDayNumberFalse($cate)
+	public function getDayNumberFalse($cate, $strtime, $endtime)
 	{
 		$data = new HomeTjDataData();
-		return $data->getDayNumberFalse($cate);
+		return $data->getDayNumberFalse($cate, $strtime, $endtime);
 	}	
 }
