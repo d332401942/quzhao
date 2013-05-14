@@ -124,7 +124,7 @@ class IndexSearchView extends BaseView
 		$categoryModels = $categoryBusiness->search($keyword);
 		//P($categoryModels);
 		$productModels;// = array_values($productModels);
-		$hostCategoryModels = array_shift($categoryModels);
+		$hostCategoryModels = array();// = array_shift($categoryModels);
 		$this->assign('categoryModels', $categoryModels);
 		$this->assign('hostCategoryModels', $hostCategoryModels);
 		$this->assign('productModels', $productModels);
