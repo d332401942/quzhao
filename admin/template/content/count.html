@@ -8,12 +8,12 @@
 		<th>已通过</th>
 		<th>未通过</th>
 	</tr>
-		<{foreach ($totalNum as $total)}>
+		<{foreach ($result as $arr)}>
 		<tr>
-			<td><{$total['username']}></td>
-			<td><{$total['num']}></td>
-			<td><{$total['numTrue']}></td>
-			<td><{$total['numFalse']}></td>
+			<td><{$arr[0]}></td>
+			<td><{$arr[3]}></td>
+			<td><{$arr[1]}></td>
+			<td><{$arr[2]}></td>
 		</tr>
 		<{/foreach}>
 </table>

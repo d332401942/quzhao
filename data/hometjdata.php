@@ -221,7 +221,7 @@ class HomeTjDataData extends BaseData
 	 * @param string $isPart 是否兼职发布
 	 * @return unknown	
 	 */
-	public function getDayNumber($startTime, $endTime, $state = false, $isPart = 0)
+	public function getDayNumber($startTime, $endTime, $state = false, $isPart = false)
 	{
 		$sql = 'select t2.username,t2.id,count(*) as num from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid ';
 		$where = ' where 1 = 1 ';
@@ -234,56 +234,31 @@ class HomeTjDataData extends BaseData
 			$where .= 'and t1.tempType = 0';
 		}
 		
-		$startTime = strtotime(date('Y-m-d'));
-		$endtime = strtotime(date('Y-m-d', strtotime('+1 day')));
+		$start = strtotime(date('Y-m-d'));
+		$end = strtotime(date('Y-m-d', strtotime('+1 day')));
 		if ($startTime && $endTime)
 		{
-			$startTime = strtotime($startTime);
-			$endTime = strtotime($endtime);
+			$start = strtotime($startTime);
+			$end = strtotime($endTime);
 		}
-		$where .= ' and t1.ltime >= $startTime and t1.ltime < $endtime';
-		if ($state !== false)
+		$where .= ' and t1.ltime >= '.$start.' and t1.ltime <= '.$end;
+		
+		if ($state == 1)
 		{
-			$where .= ' and state = ' . (int)$state;
+			$where .= ' and state = 1';
 		}
-		
-		
-		
+		else
+		{
+			$where .= ' and state != 1';
+		}
 		$sql .= $where;
-		$where = 'where t1.state = 1 and t1.ltime > ';
-		if($cate == 1)
+		$sql .= ' group by t2.id';
+		$statement = $this->run($sql);
+		$result = array(); 
+		while($row = $statement->fetch(PDO::FETCH_ASSOC))
 		{
-			$where .= ' AND tempType = 1';
+			$result[$row['id']] = $row;
 		}
-		else if($cate == 2){
-			$where .= ' AND tempType = 0';
-		}
-		if($strtime && $endtime)
-		{
-			$dayTimeStr = strtotime($strtime);//开始时间
-			$dayTimeEnd = $endtime.' 23:59:59';
-			$dayTimeEnd = strtotime($dayTimeEnd);
-		}
-		else
-		{
-			$time = date('Y-m-d');
-			$dayTimeStr = strtotime($time);
-			$dayTimeEnd = $time.' 23:59:59';
-			$dayTimeEnd = strtotime($dayTimeEnd);
-		}
-		$sql = 'select t2.username,t2.id,count(*) as num2 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid   && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
-		if($w == 1)
-		{
-			$sql = 'select t2.username,t2.id,count(*) as num2 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.state = 1 and t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
-		}
-		else if($w == 2){
-			$sql = 'select t2.username,t2.id,count(*) as num3 from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.state != 1 and t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
-		}
-		else
-		{
-			$sql = 'select t2.username,t2.id,count(*) as num from home_tj_data as t1 inner join brandadmin as t2 on t2.id = t1.userid  where t1.ltime > '.$dayTimeStr.' && t1.ltime < '.$dayTimeEnd.$where.' GROUP BY t2.id';
-		}
-		$num = $this->query($sql);
-		return $num;
+		return $result;
 	}
 }

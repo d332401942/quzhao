@@ -499,13 +499,19 @@ class HomeTjDataBusiness extends BaseBusiness
         $model->cid = $classModel->id;
     }
 
-	/*
-	 *得到今天总数据
+	/**
+	 * 按时间算出兼职发布的顺
+	 * @param string $isPart 是否兼职添加   0,查询所有，1查询兼职，2查询抓取
+	 * @param string $startTime 开始时间戳
+	 * @param string $endTime 结束时间戳
+	 * @param string $state false 查询全部
+	 * @param string $isPart 是否兼职发布
+	 * @return unknown	
 	 */
-	public function getDayNumber($cate, $strtime, $endtime, $where)
+    public function getDayNumber($startTime, $endTime, $state = false, $isPart = false)
 	{
 		$data = new HomeTjDataData();
-		return $data->getDayNumber($cate, $strtime, $endtime, $where);
+		return $data->getDayNumber($startTime, $endTime, $state, $isPart);
 	}	
 	
 }
