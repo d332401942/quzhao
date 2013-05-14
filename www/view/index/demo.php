@@ -4,7 +4,7 @@ class DemoIndexView extends BaseView
 {
     public function index()
     {
-		$business = M('CategoryBusiness');
+		$business = new CategoryBusiness;
 		$r = $business->suoyou();
 		
 		//一级分类90个
@@ -65,8 +65,8 @@ class DemoIndexView extends BaseView
 			}
 		}
 		$xml = new XmlVendorLib();
-		$str = $xml->getXML($level1);
-		file_put_contents('1.xml',$str);
+		$str = $xml->getXML($level1,'',true);
+		file_put_contents('1.xml', $str);
 		//P($level1);
 		//$res = fopen('arraaa.txt',"a");
 		//$a = fwrite($res,$level1);
