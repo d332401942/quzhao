@@ -70,13 +70,13 @@ class AssociatedData extends BaseData
 	
 	public function getSearchCateId($name)
 	{
-		if(!empty(self::$cateIdModels))
+		if(!empty(self::$cateIdModels [$name]))
 		{
 			return self::$cateIdModels[$name];
 		}
 		
 		self::$cateIdModels[$name] = $this->getCateIdModels($name);
-		if(!empty(self::$cateIdModels))
+		if(!empty(self::$cateIdModels[$name]))
 		{
 			return self::$cateIdModels[$name];
 		}
@@ -95,7 +95,7 @@ class AssociatedData extends BaseData
 	private function  getCateIdModels($name)
 	{
 		$memcache = M ( 'MemcacheDbLib' );
-		$json = $memcache->set(CATE_ID_CACHE.$name);
+		$json = $memcache->get(CATE_ID_CACHE.$name);
 		$data = json_decode($json,true);
 		return $data;
 	}
