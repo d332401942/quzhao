@@ -181,7 +181,7 @@ class CategoryData extends BaseData
 		if (! empty ( $attrId ))
 		{
 			$this->selectSearchSlaveDb();
-			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = " . $attrId . " And attr != 'brandid' order by attrdbid asc ,sort desc";
+			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = " . $attrId . " order by attrdbid asc ,sort desc";
 			$statement = $this->run ( $sql );
 			while ( $attrdbDataModel = $statement->fetchObject ( 'AttrdbDataModel' ) )
 			{
@@ -217,6 +217,17 @@ class CategoryData extends BaseData
 		$sql = 'select * from brand where brandid in (' . implode ( ',', $brandIds ) . ')';
 		$models = $this->query ( $sql, 'SearchBrandDataModel' );
 		return $models;
+	}
+	
+	/**
+	 * 根据品牌ID获取一个品牌
+	 * @param unknown $barndId
+	 */
+	public function getSearchOneBrandDataModel($barndId)
+	{
+		$sql = 'select * from brand where brandid = ' . (int) $barndId;
+		$model = $this->query($sql, 'SearchBrandDataModel');
+		return $model;
 	}
 
 	private function setAttrCache($attrId)
