@@ -237,7 +237,10 @@ class HomeTjDataBusiness extends BaseBusiness
 		$data->setOrder(array('state'=>'asc','ctime'=>'desc'));
         return $data->findAll();
     }
-
+	
+	/*
+	 *	得到兼职添加总次数
+	 */
 	public function getAllTotal($tempType = false, $userid = false ,$strTime = false,$endTiem =false,$yueStr = false,$yueEnd =false)
 	{
 		$data = new HomeTjDataData();
@@ -253,14 +256,17 @@ class HomeTjDataBusiness extends BaseBusiness
 		return $total[0]['num'];
 	}
 	
+	/*
+	 *	得到兼职添加已通过总次数
+	 */
 	public function tgCount($tempType = false, $userid = false,$strTime = false,$endTiem =false)
 	{
 		$data = new HomeTjDataData();
 		if($strTime && $endTiem)
 		{
-			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state in(1,4)  AND userid = '. $userid.' AND ctime > '.$strTime.' && ctime < '.$endTiem;
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state in(1,4,2)  AND userid = '. $userid.' AND ctime > '.$strTime.' && ctime < '.$endTiem;
 		}else{
-			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state in(1,4) AND userid = '. $userid;
+			$sql = 'select count(*) as num from home_tj_data where tempType = 1 AND state in(1,4,2) AND userid = '. $userid;
 		}
 		$total = $data->query($sql);
 		return $total[0]['num'];

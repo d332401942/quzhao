@@ -165,8 +165,8 @@ class HomeTjDataData extends BaseData
 		return $result;
 	}
 	 /*
-	*得到会员喜欢商品
-	*/
+	 *	得到会员喜欢商品
+	 */
 	public function getUserLove($pageCore,$userid)
 	{
 		$sql = 'select count(*) as num from love as t1 join home_tj_data as t2 on t2.id = t1.home_tj_data_id where t1.userid = '.$userid;
@@ -179,8 +179,8 @@ class HomeTjDataData extends BaseData
 	}
 	
 	 /*
-	*得到会员喜欢商品
-	*/
+	  *	得到会员喜欢商品
+	  */
 	public function getLoveModel()
 	{
 		$sql = 'select * from home_tj_data order by lovenumber desc limit 3';
