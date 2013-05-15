@@ -110,7 +110,7 @@
 					<li class="list_r_more">
 						<{if (!empty($k) && $k >= 4)}>
 						<a href="#nogo" onclick="attrShow(this,'brandid')">
-							更多
+							<span>更多</span>
 							<img src="__RESOURCE__/images/bn.gif" />
 						</a>
 						<{/if}>
@@ -139,7 +139,7 @@
                 <li class="list_r_more">
 					<{if (!empty($k) && $k >= 4)}>
                     <a href="#nogo" onclick="attrShow(this,'<{$val->attr}>')">
-                       	 更多
+                       	 <span>更多</span>
                         <img src="__RESOURCE__/images/bn.gif" />
                     </a>
 					<{/if}>
@@ -150,7 +150,7 @@
 		<{if ($key >= 2)}>
         <div class="list_r_minimo">
             <a href="#nogo" onclick="attrdbShow(this)">
-                更多
+                <span>更多</span>
                 <img src="__RESOURCE__/images/bn.gif" />
             </a>
         </div>
@@ -327,7 +327,7 @@
                 </h1>
                 <h3>
                     <a href="#nogo">
-                        更多
+                        <span>更多</span>
                     </a>
                 </h3>
             </div>
@@ -485,19 +485,23 @@ function goPage(page) {
 function attrShow(obj,attrdbid){
 	$('.js-extend-more-'+attrdbid).toggle();
 	if ($('.js-extend-more-'+attrdbid).is(':visible')) {
+		$(obj).find('span').html('收起');
 		$(obj).find('img').attr('src','__RESOURCE__/images/bn_2.gif');
 	}
 	else {
 		$(obj).find('img').attr('src','__RESOURCE__/images/bn.gif');
+		$(obj).find('span').html('更多');
 	}
 }
 function attrdbShow(obj){
 	$('.js-attrdb-more').toggle();
 	if ($('.js-attrdb-more').is(':visible')) {
+		$(obj).find('span').html('收起');
 		$(obj).find('img').attr('src','__RESOURCE__/images/bn_2.gif');
 	}
 	else {
 		$(obj).find('img').attr('src','__RESOURCE__/images/bn.gif');
+		$(obj).find('span').html('更多');
 	}
 }
 var searchLogKey = 'searchBrowseLog';
