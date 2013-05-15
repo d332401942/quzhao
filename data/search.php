@@ -9,11 +9,20 @@ class SearchData extends BaseData
 	{
 	}
 	
+	
+	public function getSearchKey($pageCore, $keyword, $categoryIds,$attrArr,$sort)
+	{
+		
+	}
+	
 	public function searchProduct($pageCore, $keyword, $categoryIds = array(), $attrArr = array(), $sort = null)
 	{
 		
+		$cacheKey = $this->getSearchKey($pageCore, $keyword, $categoryIds, $attrArr, $sort);
 		//生成memcache键值
 		$cateDb = null;
+		$categoryIds = array(1,2);
+		$categoryIds = array(2,1);
 		if(!empty($categoryIds))
 		{
 			$cateDb = implode(',',$categoryIds);
