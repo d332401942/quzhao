@@ -11,6 +11,28 @@ class SearchData extends BaseData
 
 	public function searchProduct($pageCore, $keyword, $categoryIds = array(), $attrArr = array(), $sort = null)
 	{
+		
+		//生成memcache键值
+		$cateDb = null;
+		if(!empty($categoryIds))
+		{
+			$cateDb = implode(',',$categoryIds);
+		}
+		$attrDb = null;
+		if(!empty($attrArr))
+		{
+			$attrDb = implode(',',$attrArr);
+		}
+		$key = md5($pageCore->currentPage.$keyword.$cateDb.$attrDb);
+		
+		//查询memcache
+		$dataId = $this->getSearchCache($key);
+		if(!empty($dataId))
+		{
+			$model = $this->getAllId($dataId);
+			return $model;
+		}
+		
 		$productIds = $this->getProductIds ( $pageCore, $keyword, $categoryIds, $attrArr, $sort );
 		// 通过ID查询出来结果
 		$productData = M ( 'ProductData' );
@@ -21,9 +43,39 @@ class SearchData extends BaseData
 			$productModels = $productData->searchProductByIds ( $productIds, $fileds );
 		}
 		$this->setLight ( $productModels );
+	
+		$memcache = M('MemcacheDbLib');
+		$result = array();
+		foreach($productModels as $val)
+		{
+			$result[] = $val->productid;
+		}
+		$data = json_encode($result);
+		$memcache->set($key, $data, 0, 3600);
 		return $productModels;
 	}
-
+	
+	/**
+	 *	memcache得到搜索条件
+	 */
+	 private function getSearchCache($key)
+	 {
+		$memcache = M('MemcacheDbLib');
+		$data = $memcache->get($key);
+		return $data;
+	 }
+	 
+	/**
+	 *	通过ID查询产品
+	 */
+	private function getAllId($ids)
+	{
+		$this->selectSearchSlaveDb();
+		$ids = implode(',',$ids);
+		$sql = 'select * from product where productid in('.$ids.')';
+		$data = $this->query($sql,'ProductDataModel');
+		return $data;
+	}
 	/**
 	 * 搜索关键字都有的分类和数木
 	 *

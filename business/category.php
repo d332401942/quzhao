@@ -90,10 +90,28 @@ class CategoryBusiness extends BaseBusiness
 		return $data->getCateName($id);
 	}
 	
-	public function suoyou()
+	/*public function suoyou()
 	{
 		$data = new CategoryData();
 		return $data->getSy();
 	}
+	
+	public function suoyou3()
+	{
+		$data = new CategoryData();
+		return $data->getSy3();
+	}
+	
+	public function suoyou2()
+	{
+		$data = new CategoryData();
+		return $data->getSy2();
+	}
+	
+	public function suoyou1()
+	{
+		$data = new CategoryData();
+		return $data->getSy1();
+	}*/
 	
 }

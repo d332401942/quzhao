@@ -288,14 +288,42 @@ class CategoryData extends BaseData
 	/**
      *	得到所有分类，导出的时候用,临时方法
 	 */
-	public function getSy()
+	/*public function getSy()
 	{
 		$this->selectSearchSlaveDb();
 		//$result = $this->findAll();
-		$sql = 'select categoryid,name,level,pid1,pid2 from category';
+		$sql = 'select categoryid,name from category where categoryid < 5000 and level = 3 order by categoryid asc';
 		$result = $this->query($sql,'CategoryDataModel');
 		return $result;
 	}
+	
+	public function getSy3()
+	{
+		$this->selectSearchSlaveDb();
+		//$result = $this->findAll();
+		$sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 3 order by categoryid asc';
+		$result = $this->query($sql,'CategoryDataModel');
+		return $result;
+	}
+	
+	public function getSy2()
+	{
+		$this->selectSearchSlaveDb();
+		//$result = $this->findAll();
+		$sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 2 order by categoryid asc';
+		$result = $this->query($sql,'CategoryDataModel');
+		return $result;
+	}
+	
+	public function getSy1()
+	{
+		$this->selectSearchSlaveDb();
+		//$result = $this->findAll();
+		$sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 1 order by categoryid asc';
+		$result = $this->query($sql,'CategoryDataModel');
+		return $result;
+	}*/
+	
 	public function getCate($pid, $level)
 	{
 		$pidStr = 'pid' . ($level - 1);
