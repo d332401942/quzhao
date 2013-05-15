@@ -15,56 +15,55 @@ class DemoIndexView extends BaseView
 		
 		//三级分类5490个
 		$level3 = array();
+		$result = array();
+		
 		
 		foreach($r as $key=>$val)
 		{
 			if($val->level == 1)
 			{
-				$level1[] = $val;
+				$result[$val->categoryid]['categoryid'] = $val->categoryid;
+				$result[$val->categoryid]['name'] = $val->name;
+				$result[$val->categoryid]['level'] = $val->level;
+				unset($r[$key]);
 			}
+		}
+		foreach($r as $key=>$val)
+		{
 			if($val->level == 2)
 			{
-				$level2[] = $val;
+				$pid1 = $val->pid1;
+				if (empty($result[$pid1]['children']))
+				{
+					$result[$pid1]['children'] = array();
+				}
+				$result[$pid1]['children'][$val->categoryid]['categoryid'] = $val->categoryid;
+				$result[$pid1]['children'][$val->categoryid]['name'] = $val->name;
+				$result[$pid1]['children'][$val->categoryid]['level'] = $val->level;
+				unset($r[$key]);
 			}
+		}
+		foreach($r as $key=>$val)
+		{
 			if($val->level == 3)
 			{
-				$level3[] = $val;
+				$pid1 = $val->pid1;
+				$pid2 = $val->pid2;
+				if (empty($result[$pid1]['children'][$pid2]['children']))
+				{
+					$result[$pid1]['children'][$pid2]['children'] = array();
+				}
+				$result[$pid1]['children'][$pid2]['children'][$val->categoryid]['categoryid'] = $val->categoryid;
+				$result[$pid1]['children'][$pid2]['children'][$val->categoryid]['name'] = $val->name;
+				$result[$pid1]['children'][$pid2]['children'][$val->categoryid]['level'] = $val->level;
 			}
 		}
 		
-		//二级分类 嵌套完成
-		foreach($level1 as $key=>$val)
-		{
-			foreach($level2 as $k=>$v)
-			{
-				if($val->categoryid == $v->pid1)
-				{
-					$level1[$key]->children[] = $v;
-				}
-			
-			}
-		}
-		
-		foreach($level3 as $kk=>$vv)
-		{
-			foreach($level1 as $key=>$val)
-			{
-				if(!empty($val->children))
-				{
-					foreach($val->children as $k=>$v)
-					{
-						
-						if($vv->pid2 == $v->categoryid)
-						{
-							$level1[$key]->children[$k]->children[] = $vv;
-						}
-						
-					}
-				}
-				
-			}
-		}
 		$xml = new XmlVendorLib();
+<<<<<<< HEAD
+		$str = $xml->getXML($result);
+		file_put_contents('1.xml',$str);
+=======
 		$str = $xml->getXML($level1,'',true);
 		file_put_contents('1.xml', $str);
 		//P($level1);
@@ -76,6 +75,7 @@ class DemoIndexView extends BaseView
 		//}
 		//$a = json_encode($level1);
 		//echo $a;
+>>>>>>> 2c043d2c77909ae9debaac904877d3815dffd8f4
 	}
 
 }
