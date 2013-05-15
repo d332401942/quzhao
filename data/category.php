@@ -226,7 +226,7 @@ class CategoryData extends BaseData
 	public function getSearchOneBrandDataModel($barndId)
 	{
 		$sql = 'select * from brand where brandid = ' . (int) $barndId;
-		$model = $this->query($sql, 'SearchBrandDataModel');
+		$model = $this->queryOne($sql, 'SearchBrandDataModel');
 		return $model;
 	}
 

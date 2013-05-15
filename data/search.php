@@ -156,8 +156,10 @@ class SearchData extends BaseData
 			$categoryDataModel = $data->getSearchOneBrandDataModel ( $id );
 			if (! empty ( $categoryDataModel->brandname ))
 			{
-				$keyLast = ' @(title,attrs) (' . $$categoryDataModel->brandname . ')';
+				$keyLast = ' @(title,attrs) (' . $categoryDataModel->brandname . ')';
+				
 			}
+			unset($attrArr ['brandid']);
 		}
 		$this->setAttr ( $sphinx, $attrArr );
 		$result = $sphinx->query ( '@title ' . $keyword . $keyLast, 'product' );
