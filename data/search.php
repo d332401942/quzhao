@@ -8,7 +8,7 @@ class SearchData extends BaseData
 	public function __construct()
 	{
 	}
-
+	
 	public function searchProduct($pageCore, $keyword, $categoryIds = array(), $attrArr = array(), $sort = null)
 	{
 		$productIds = $this->getProductIds ( $pageCore, $keyword, $categoryIds, $attrArr, $sort );
