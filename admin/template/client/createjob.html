@@ -1,0 +1,25 @@
+<{include '__TEMPLATE__/header.html'}>
+
+<div class="list-div">
+	<form onsubmit="return checkForm(this)">
+		采集第<input name="page" type="text" style="width:45px;" />页 <button type="submit">开始生成</button>
+		<span style="color:red">
+			生成新采集任务会删除之前的所有任务！谨慎操作！
+		</span>
+	</form>
+</div>
+
+<{include '__TEMPLATE__/footer.html'}>
+<script>
+function checkForm(obj) {
+	if (!confirm('生成新采集任务会删除之前的所有任务！谨慎操作！')) {
+		return false;
+	}
+	var page = $(obj).find('input[name="page"]').val();
+	if (!page) {
+		alert('填写页数');
+		return false;
+	}
+	return true;
+}
+</script>
