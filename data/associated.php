@@ -64,25 +64,25 @@ class AssociatedData extends BaseData
 	/**
 	*前台搜索获取分类ID
 	*/
-	private static cateIdModels = array();
+	private static $cateIdModels = array();
 	const CATE_ID_CACHE = 'cate_id_cache';
 	public function getSearchCateId($name)
 	{
-		if(!empty(self::cateIdModels))
+		if(!empty(self::$cateIdModels))
 		{
-			return self::cateIdModels[$name];
+			return self::$cateIdModels[$name];
 		}
 		
-		self::cateIdModels[$name] = $this->getCateIdModels($name);
-		if(!empty(self::cateIdModels))
+		self::$cateIdModels[$name] = $this->getCateIdModels($name);
+		if(!empty(self::$cateIdModels))
 		{
-			return self::cateIdModels[$name];
+			return self::$cateIdModels[$name];
 		}
 		
 		$this->selectSearchSlaveDb();
 		$this->where(array('keyname'=>$name));
 		$result = $this->findOne();
-		self::CATE_ID_CACHE[$name] = $result;
+		self::$cateIdModels [$name] = $result;
 		$this->setCateIdModels($name);
 		return $result;
 	}
@@ -103,7 +103,7 @@ class AssociatedData extends BaseData
 	 */
 	 private function setCateIdModels($name)
 	 {
-		$data = self::cateIdModels[$name];
+		$data = self::$cateIdModels[$name];
 		$value = json_ecode($data);
 		$memcache = M ( 'MemcacheDbLib' );
 		$memcache->set(CATE_ID_CACHE.$name, $value);
