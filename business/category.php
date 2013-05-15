@@ -62,6 +62,16 @@ class CategoryBusiness extends BaseBusiness
 		return $searchBrandModels;
 	}
 	
+	/**
+	 * 根据品牌ID获取一个品牌
+	 * @param unknown $barndId
+	 */
+	public function getSearchOneBrandDataModel($barndId)
+	{
+		$data = M('CategoryData');
+		return $data->getSearchOneBrandDataModel();
+	}
+	
 	/*
 	*	 得到所有分类
 	*/

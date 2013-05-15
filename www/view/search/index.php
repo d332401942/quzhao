@@ -36,7 +36,7 @@ class IndexSearchView extends BaseView
 		$showType = null;
 		$attrArr = $this->getAttrArr($parameters);
 		$attrModels = array();
-		$categoryBusiness = M('CategoryBusiness');
+		$categoryBusiness = new CategoryBusiness();
 		
 		if (!empty($parameters['keyword']))
 		{
@@ -62,7 +62,7 @@ class IndexSearchView extends BaseView
 			}
 		}
 		$keyword = urldecode($keyword);
-		$business = M('SearchBusiness');
+		$business = new SearchBusiness();
 		$mapCategorys = $category;
 		
 		if ($keyword && empty($category))
@@ -73,7 +73,7 @@ class IndexSearchView extends BaseView
 		$ip = $_SERVER ['REMOTE_ADDR'];
 		$business->logKeywords($keyword, $ip);
 		//得到都有的品牌ID
-		$brandIdToCount = $business->searchBrandIdToCount($keyword , $mapCategorys, $attrArr, $sort);
+		/* $brandIdToCount = $business->searchBrandIdToCount($keyword , $mapCategorys, $attrArr, $sort);
 		$brandIds = array_keys($brandIdToCount);
 		$searchBrandModels = $categoryBusiness->getSearchBrandDataModel($brandIds);
 		foreach ($searchBrandModels as $model)
@@ -82,7 +82,7 @@ class IndexSearchView extends BaseView
 			{
 				$model->num = $brandIdToCount[$model->brandid];
 			}
-		}
+		} */
 		if ($category)
 		{
 			$attrModels = $categoryBusiness->getAttrModelsByCategoryId($category);
@@ -139,7 +139,7 @@ class IndexSearchView extends BaseView
 		$this->assign('attrArr',$attrArr);
 		$this->assign('priceEnd', $priceEnd);
 		$this->assign('priceStart', $priceStart);
-		$this->assign('searchBrandModels', $searchBrandModels);
+		//$this->assign('searchBrandModels', $searchBrandModels);
 		$this->assign('searchBrowseHistoryModels', $searchBrowseHistoryModels);
 		$this->assign('recommendModels', $recommendModels);
 	}

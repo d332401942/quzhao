@@ -26,7 +26,7 @@ class SearchData extends BaseData
 
 	/**
 	 * 搜索关键字都有的分类和数木
-	 * 
+	 *
 	 * @param string $keyword        	
 	 * @param id $category
 	 *        	类别ID
@@ -36,15 +36,17 @@ class SearchData extends BaseData
 	 */
 	public function searchBrandIdToCount($keyword, $category, $attrArr)
 	{
-		if (!$category)
+		if (! $category)
 		{
-			$categorys = array();
+			$categorys = array ();
 		}
-		else if (!is_array($category))
+		else if (! is_array ( $category ))
 		{
-			$categorys = array($category);
+			$categorys = array (
+							$category 
+			);
 		}
-		else 
+		else
 		{
 			$categorys = $category;
 		}
@@ -60,7 +62,7 @@ class SearchData extends BaseData
 		$sphinx->setGroupBy ( 'brandid', SPH_GROUPBY_ATTR, '@count desc' );
 		if ($categorys)
 		{
-			$sphinx->setFilter ( 'categoryid', $categorys);
+			$sphinx->setFilter ( 'categoryid', $categorys );
 		}
 		$this->setAttr ( $sphinx, $attrArr );
 		$result = $sphinx->query ( '@title ' . $keyword, 'product' );
@@ -79,14 +81,14 @@ class SearchData extends BaseData
 		}
 		return $brandIdToCount;
 	}
-	
+
 	public function logKeywords($keywords, $ip)
 	{
 		$keywordsModel = M ( 'KeywordsDataModel' );
 		$keywordsModel->keywords = $keywords;
 		$keywordsModel->createtime = time ();
 		$keywordsModel->ip = ip2long ( $ip );
-		$this->add($keywordsModel);
+		$this->add ( $keywordsModel );
 	}
 
 	public function getRecommendModels($keyword)
@@ -145,8 +147,20 @@ class SearchData extends BaseData
 		{
 			$sphinx->setFilter ( 'categoryid', $categoryIds );
 		}
+		$keyLast = '';
+		if (! empty ( $attrArr ['brandid'] ))
+		{
+			$data = M ( 'CategoryData' );
+			$id = explode ( '_', $attrArr ['brandid'] );
+			$id = ( int ) $id [1];
+			$categoryDataModel = $data->getSearchOneBrandDataModel ( $id );
+			if (! empty ( $categoryDataModel->brandname ))
+			{
+				$keyLast = ' @(title,attrs) (' . $$categoryDataModel->brandname . ')';
+			}
+		}
 		$this->setAttr ( $sphinx, $attrArr );
-		$result = $sphinx->query ( '@title ' . $keyword, 'product' );
+		$result = $sphinx->query ( '@title ' . $keyword . $keyLast, 'product' );
 		$lightWords = $sphinx->getLightWords ( $result );
 		$this->lightWords = $sphinx->getLightWords ( $result );
 		$productIds = $sphinx->getResultIds ( $result, $pageCore );
