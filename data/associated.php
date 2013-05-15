@@ -62,10 +62,12 @@ class AssociatedData extends BaseData
 		return $result;
 	}
 	/**
-	*前台搜索获取分类ID
-	*/
+	 *	前台搜索获取分类ID
+	 */
 	private static $cateIdModels = array();
+	
 	const CATE_ID_CACHE = 'cate_id_cache';
+	
 	public function getSearchCateId($name)
 	{
 		if(!empty(self::$cateIdModels))
@@ -104,7 +106,7 @@ class AssociatedData extends BaseData
 	 private function setCateIdModels($name)
 	 {
 		$data = self::$cateIdModels[$name];
-		$value = json_ecode($data);
+		$value = json_encode($data);
 		$memcache = M ( 'MemcacheDbLib' );
 		$memcache->set(CATE_ID_CACHE.$name, $value);
 	 }
