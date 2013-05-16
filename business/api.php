@@ -8,7 +8,7 @@ class ApiBusiness extends BaseBusiness
 	 */
 	public function resetCache()
 	{
-		$ip = $_SESSION['SERVER_ADDR'];
+		$ip = $_SESSION['REMOTE_ADDR'];
 		echo $ip;
 		$data = new CategoryData();
 		$data->resetCache();
