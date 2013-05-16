@@ -139,7 +139,7 @@ class CategoryData extends BaseData
 				if ($model->level > $needModel->level)
 				{
 					//$isContinue = false;
-					//continue;
+					continue;
 				} 
 				if (in_array($id, $pathArr))
 				{
