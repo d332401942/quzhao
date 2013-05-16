@@ -3,7 +3,7 @@ class ApiAjaxView extends BaseAjaxView
 {
 	public function resetCache()
 	{
-		$business = M('ApiBusiness');
+		$business = new ApiBusiness();
 		$business->resetCache();
 	}
 }

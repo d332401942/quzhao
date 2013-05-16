@@ -152,6 +152,7 @@ class CategoryData extends BaseData
 	{
 		self::$idToCategoryModels = $this->dbFindAll ();
 		$this->setCache ();
+		$this->setCacheNameToCategoryModels();
 	}
 
 	private function cacheFindAll()
