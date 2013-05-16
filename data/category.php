@@ -30,6 +30,17 @@ class CategoryData extends BaseData
 		$memcache = new MemcacheDbLib();
 		$str = $memcache->get(self::CACHE_NAME_TO_CATEGORYMODELS . md5($name));
 		$ids = json_decode($str,true);
+		if ($ids)
+		{
+			$result = $this->getCompleteCategoryByIds($ids);
+			foreach ($result as $model)
+			{
+				if (!in_array($model->categoryid, $ids))
+				{
+					$ids[] = $model->categoryid;
+				}
+			}
+		}
 		return $ids;
 	}
 
