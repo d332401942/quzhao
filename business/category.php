@@ -6,13 +6,21 @@ class CategoryBusiness extends BaseBusiness
 	public function search($keyword)
 	{
 		$searchData = M('SearchData');
-		$categoryModels = array();
-		$categoryIdToCount = $searchData->getCategoryIdToCount($keyword);
-		if (empty($categoryIdToCount))
+		$categoryIdToCount = array();
+		
+		//如果关键词是一个分组则显示分组
+		$categoryData = new CategoryData();
+		$categoryIds = $categoryData->getCategoryIdsByName($keyword);
+		if (!$categoryIds)
 		{
-			return $categoryIdToCount;
+			$categoryModels = array();
+			$categoryIdToCount = $searchData->getCategoryIdToCount($keyword);
+			if (empty($categoryIdToCount))
+			{
+				return $categoryIdToCount;
+			}
+			$categoryIds = array_keys($categoryIdToCount);
 		}
-		$categoryIds = array_keys($categoryIdToCount);
 		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount);
 		return $categoryModels;
 	}

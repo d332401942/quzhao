@@ -6,10 +6,55 @@ class CategoryData extends BaseData
 	const CACHE_KEY = 'categorymodels';
 
 	const CACHE_ATTRDB_KEY = 'cache_attrdb_key';
+	
+	const CACHE_NAME_TO_CATEGORYMODELS = 'nametocategorymodels';
+
+	public static $categoryModels = array();
 
 	private static $idToCategoryModels = array ();
 
 	private static $attrdbModels = array ();
+
+	public function getCategoryIdsByName($name)
+	{
+		if (!self::$categoryModels)
+		{
+			self::$categoryModels = $this->getCategoryIdsByNameToCache ( $name );
+		}
+		// 走缓存获取
+		return self::$categoryModels;
+	}
+
+	private function getCategoryIdsByNameToCache($name)
+	{
+		$memcache = new MemcacheDbLib();
+		$str = $memcache->get(self::CACHE_NAME_TO_CATEGORYMODELS . md5($name));
+		$ids = json_decode($str,true);
+		return $ids;
+	}
+
+	/**
+	 * TODO
+	 * 设置名称与分类对应的缓存
+	 * @param unknown $name
+	 * @return Ambigous <multitype:, unknown>
+	 */
+	public function setCacheNameToCategoryModels()
+	{
+		$this->selectSearchSlaveDb ();
+		$categoryModels = $this->findAll();
+		$result = array();
+		foreach ($categoryModels as $model)
+		{
+			$result[$model->name][] = $model->categoryid;
+		}
+		$memcache = new MemcacheDbLib();
+		foreach ($result as $name => $ids)
+		{
+			$json = json_encode($ids);
+			$memcache->set ( self::CACHE_NAME_TO_CATEGORYMODELS . md5($name), $json,0, time () + 86400 );
+		}
+	}
 
 	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array())
 	{
@@ -20,9 +65,9 @@ class CategoryData extends BaseData
 			if (isset ( $allCategoryModels [$id] ))
 			{
 				$model = $allCategoryModels [$id];
-				if (!empty($categoryIdToCount[$id]))
+				if (! empty ( $categoryIdToCount [$id] ))
 				{
-					$model->num = $categoryIdToCount[$id];
+					$model->num = $categoryIdToCount [$id];
 				}
 				$pid2 = $model->pid2;
 				$pid1 = $model->pid1;
@@ -40,8 +85,8 @@ class CategoryData extends BaseData
 				}
 				$middleModel = null;
 				$preModel = null;
-				$middleModel = !empty($allCategoryModels [$pid2]) ? $allCategoryModels [$pid2] : null;
-				$preModel = !empty($allCategoryModels [$pid1]) ? $allCategoryModels [$pid1] : nul;
+				$middleModel = ! empty ( $allCategoryModels [$pid2] ) ? $allCategoryModels [$pid2] : null;
+				$preModel = ! empty ( $allCategoryModels [$pid1] ) ? $allCategoryModels [$pid1] : nul;
 				if (empty ( $models [$pid1] ))
 				{
 					$models [$pid1] = $preModel;
@@ -61,14 +106,16 @@ class CategoryData extends BaseData
 
 	public function getChildrenIds($id)
 	{
-		$ids = is_array($id) ? $id : array($id);
+		$ids = is_array ( $id ) ? $id : array (
+						$id 
+		);
 		$models = $this->findAll ();
 		$childrenIds = array ();
 		foreach ( $models as $model )
 		{
 			$pathArr = explode ( '-', $model->path );
 			{
-				foreach ($ids as $id)
+				foreach ( $ids as $id )
 				{
 					if (in_array ( $id, $pathArr ))
 					{
@@ -97,14 +144,14 @@ class CategoryData extends BaseData
 		$this->setCache ();
 		return self::$idToCategoryModels;
 	}
-	
+
 	/**
-	 *	重新设置分类缓存
+	 * 重新设置分类缓存
 	 */
 	public function resetCache()
 	{
-		self::$idToCategoryModels = $this->dbFindAll();
-		$this->setCache();
+		self::$idToCategoryModels = $this->dbFindAll ();
+		$this->setCache ();
 	}
 
 	private function cacheFindAll()
@@ -137,12 +184,12 @@ class CategoryData extends BaseData
 		$models = self::$idToCategoryModels;
 		$memcache = M ( 'MemcacheDbLib' );
 		$json = json_encode ( $models );
-		$memcache->set ( self::CACHE_KEY, $json, time()+86400);
+		$memcache->set ( self::CACHE_KEY, $json,0, time () + 86400 );
 	}
 
 	private function dbFindAll()
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchSlaveDb ();
 		$sql = 'select categoryid,attrid,name,level,pid1,pid2,sort,isvalid';
 		$sql .= ' from category where isvalid = 1 order by categoryid desc,sort desc';
 		$statement = $this->run ( $sql );
@@ -164,7 +211,7 @@ class CategoryData extends BaseData
 		}
 		return $result;
 	}
-	
+
 	public function getAttrDbs($attrId)
 	{
 		if (! empty ( self::$attrdbModels [$attrId] ))
@@ -180,7 +227,7 @@ class CategoryData extends BaseData
 		}
 		if (! empty ( $attrId ))
 		{
-			$this->selectSearchSlaveDb();
+			$this->selectSearchSlaveDb ();
 			$sql = "select * from attrdb  where isvalid = 1 AND  attrId = " . $attrId . " order by attrdbid asc ,sort desc";
 			$statement = $this->run ( $sql );
 			while ( $attrdbDataModel = $statement->fetchObject ( 'AttrdbDataModel' ) )
@@ -196,7 +243,7 @@ class CategoryData extends BaseData
 
 	public function getAttrId($categoryId)
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchSlaveDb ();
 		$result = array ();
 		$this->setOrder ( array (
 						'categoryid' => 'asc' 
@@ -207,26 +254,27 @@ class CategoryData extends BaseData
 
 	/**
 	 * 根据品牌ID获取品牌
-	 * 
+	 *
 	 * @param unknown $brandIds        	
 	 * @return multitype:
 	 */
 	public function getSearchBrandDataModel($brandIds)
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchSlaveDb ();
 		$sql = 'select * from brand where brandid in (' . implode ( ',', $brandIds ) . ')';
 		$models = $this->query ( $sql, 'SearchBrandDataModel' );
 		return $models;
 	}
-	
+
 	/**
 	 * 根据品牌ID获取一个品牌
-	 * @param unknown $barndId
+	 * 
+	 * @param unknown $barndId        	
 	 */
 	public function getSearchOneBrandDataModel($barndId)
 	{
-		$sql = 'select * from brand where brandid = ' . (int) $barndId;
-		$model = $this->queryOne($sql, 'SearchBrandDataModel');
+		$sql = 'select * from brand where brandid = ' . ( int ) $barndId;
+		$model = $this->queryOne ( $sql, 'SearchBrandDataModel' );
 		return $model;
 	}
 
@@ -270,74 +318,39 @@ class CategoryData extends BaseData
 		}
 		return $models;
 	}
-	
-	public function getAll($pageCore,$lev)
+
+	public function getAll($pageCore, $level)
 	{
-		$this->selectSearchSlaveDb();
+		$this->selectSearchSlaveDb ();
 		/*
-		*分页
-		$sql = "select count(*) as num from category where level = $lev";
-		$res = $this->query($sql);
-		$pageCore->count = $res [0] ['num'];
-		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );*/
-		$sql = 'select * from category where level = '.$lev.' order by sort asc ';
-		$result = $this->query($sql,'CategoryDataModel');
+		 * 分页 $sql = "select count(*) as num from category where level = $lev"; $res = $this->query($sql); $pageCore->count = $res [0] ['num']; $pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
+		 */
+		$sql = 'select * from category where level = ' . $level . ' order by sort asc ';
+		$result = $this->query ( $sql, 'CategoryDataModel' );
 		return $result;
 	}
 
 	/**
-     *	得到所有分类，导出的时候用,临时方法
+	 * 得到所有分类，导出的时候用,临时方法
 	 */
-	/*public function getSy()
-	{
-		$this->selectSearchSlaveDb();
-		//$result = $this->findAll();
-		$sql = 'select categoryid,name from category where categoryid < 5000 and level = 3 order by categoryid asc';
-		$result = $this->query($sql,'CategoryDataModel');
-		return $result;
-	}
-	
-	public function getSy3()
-	{
-		$this->selectSearchSlaveDb();
-		//$result = $this->findAll();
-		$sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 3 order by categoryid asc';
-		$result = $this->query($sql,'CategoryDataModel');
-		return $result;
-	}
-	
-	public function getSy2()
-	{
-		$this->selectSearchSlaveDb();
-		//$result = $this->findAll();
-		$sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 2 order by categoryid asc';
-		$result = $this->query($sql,'CategoryDataModel');
-		return $result;
-	}
-	
-	public function getSy1()
-	{
-		$this->selectSearchSlaveDb();
-		//$result = $this->findAll();
-		$sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 1 order by categoryid asc';
-		$result = $this->query($sql,'CategoryDataModel');
-		return $result;
-	}*/
-	
+	/*
+	 * public function getSy() { $this->selectSearchSlaveDb(); //$result = $this->findAll(); $sql = 'select categoryid,name from category where categoryid < 5000 and level = 3 order by categoryid asc'; $result = $this->query($sql,'CategoryDataModel'); return $result; } public function getSy3() { $this->selectSearchSlaveDb(); //$result = $this->findAll(); $sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 3 order by categoryid asc'; $result = $this->query($sql,'CategoryDataModel'); return $result; } public function getSy2() { $this->selectSearchSlaveDb(); //$result = $this->findAll(); $sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 2 order by categoryid asc'; $result = $this->query($sql,'CategoryDataModel'); return $result; } public function getSy1() { $this->selectSearchSlaveDb(); //$result = $this->findAll(); $sql = 'select categoryid,name,pid1,pid2 from category where categoryid >= 5000 and level = 1 order by categoryid asc'; $result = $this->query($sql,'CategoryDataModel'); return $result; }
+	 */
 	public function getCate($pid, $level)
 	{
 		$pidStr = 'pid' . ($level - 1);
-		$this->selectSearchSlaveDb();
-		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr .' = ' . $pid .' order by sort asc';
-		return $this->query($sql,'CategoryDataModel');
+		$this->selectSearchSlaveDb ();
+		$sql = 'select * from category  where level = ' . ($level) . ' and ' . $pidStr . ' = ' . $pid . ' order by sort asc';
+		return $this->query ( $sql, 'CategoryDataModel' );
 	}
-	
+
 	public function getCateName($id)
 	{
-		$id = trim($id,',');
-		$this->selectSearchSlaveDb();
-		$sql = 'select * from category where categoryid in('.$id.') order by sort asc,level asc';
-		$result =  $this->query($sql,'CategoryDataModel');
+		$id = trim ( $id, ',' );
+		$this->selectSearchSlaveDb ();
+		$sql = 'select * from category where categoryid in(' . $id . ') order by sort asc,level asc';
+		$result = $this->query ( $sql, 'CategoryDataModel' );
 		return $result;
 	}
+
 }

@@ -9,33 +9,12 @@ class SearchData extends BaseData
 	{
 	}
 	
-	
-	public function getSearchKey($pageCore, $keyword, $categoryIds,$attrArr,$sort)
-	{
-		//生成memcache键值
-		$cateDb = null;
-		if(!empty($categoryIds))
-		{
-			sort($categoryIds);
-			$cateDb = implode(',',$categoryIds);
-		}
-		$attrDb = null;
-		if(!empty($attrArr))
-		{
-			sort($attrArr);
-			$attrDb = implode(',',$attrArr);
-		}
-		$key = md5($pageCore->currentPage.$keyword.$cateDb.$attrDb.$sort);	
-		return $key;
-	}
-	
 	public function searchProduct($pageCore, $keyword, $categoryIds = array(), $attrArr = array(), $sort = null)
 	{
 		$cacheKey = $this->getSearchKey($pageCore, $keyword, $categoryIds, $attrArr, $sort);
-		
 		//查询memcache
 		$productIds = $this->getSearchCache($cacheKey);
-		if(empty($productIds))
+		if(empty($productIds) || 1)
 		{
 			$productIds = $this->getProductIds ( $pageCore, $keyword, $categoryIds, $attrArr, $sort );
 			$this->setSearchCache($cacheKey, $productIds);
@@ -192,9 +171,17 @@ class SearchData extends BaseData
 		$this->setWeights ( $sphinx );
 		$this->setSortMode ( $sphinx, $sort );
 		$this->setPublicFilter ( $sphinx );
+		//如果这个关键词是分类则直接走分类
+		$categoryData = new CategoryData();
+		$keywordCategoryIds = $categoryData->getCategoryIdsByName($keyword);
+		
 		if ($categoryIds)
 		{
 			$sphinx->setFilter ( 'categoryid', $categoryIds );
+		}
+		else if ($keywordCategoryIds)
+		{
+			$sphinx->setFilter ( 'categoryid', $keywordCategoryIds );
 		}
 		$keyLast = '';
 		if (! empty ( $attrArr ['brandid'] ))
@@ -202,16 +189,25 @@ class SearchData extends BaseData
 			$data = M ( 'CategoryData' );
 			$id = explode ( '_', $attrArr ['brandid'] );
 			$id = ( int ) $id [1];
-			$categoryDataModel = $data->getSearchOneBrandDataModel ( $id );
-			if (! empty ( $categoryDataModel->brandname ))
+			$searchBrandDataModel = $data->getSearchOneBrandDataModel ( $id );
+			if (! empty ( $searchBrandDataModel->brandname ))
 			{
-				$keyLast = ' @(title,attrs) (' . $categoryDataModel->brandname . ')';
+				$keyLast = ' @(title,attrs) (' . $searchBrandDataModel->brandname . ')';
 				
 			}
 			unset($attrArr ['brandid']);
 		}
+		
+		$needKeywords = '@title ' . $keyword . $keyLast;
+		//如果没有点分类并且这个关键词是个分类
+		if (!$categoryIds && $keywordCategoryIds)
+		{
+			$needKeywords = '';
+		}
+
 		$this->setAttr ( $sphinx, $attrArr );
-		$result = $sphinx->query ( '@title ' . $keyword . $keyLast, 'product' );
+		
+		$result = $sphinx->query ( $needKeywords, 'product' );
 		$lightWords = $sphinx->getLightWords ( $result );
 		$this->lightWords = $sphinx->getLightWords ( $result );
 		$productIds = $sphinx->getResultIds ( $result, $pageCore );
@@ -219,6 +215,25 @@ class SearchData extends BaseData
 		return $productIds;
 	}
 
+	private function getSearchKey($pageCore, $keyword, $categoryIds,$attrArr,$sort)
+	{
+		//生成memcache键值
+		$cateDb = null;
+		if(!empty($categoryIds))
+		{
+			sort($categoryIds);
+			$cateDb = implode(',',$categoryIds);
+		}
+		$attrDb = null;
+		if(!empty($attrArr))
+		{
+			sort($attrArr);
+			$attrDb = implode(',',$attrArr);
+		}
+		$key = md5($pageCore->currentPage.$keyword.$cateDb.$attrDb.$sort);
+		return $key;
+	}
+	
 	private function setAttr($sphinx, $attrArr)
 	{
 		foreach ( $attrArr as $key => $val )
