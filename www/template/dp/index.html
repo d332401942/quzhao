@@ -43,7 +43,7 @@
 						<h2 id="js-info-<{$model->id}>"><{$model->info|truncate:'300':''}>&nbsp;<a href="<{$model->href}>" target="_blank">详细</a></h2>
 						
 						<h3> 
-							<span><img src="__RESOURCE__/images/tm.gif" /><{$model->ctime|diffNow}>前更新</span>
+							<span><img src="__RESOURCE__/images/tm.gif" /><{$model->ltime|diffNow}>前更新</span>
 							
 							<span style=""><img src="__RESOURCE__/images/us.gif" /><a href="javascript:;" class="uss"><{$editorArr[$model->id % (count($editorArr))]}></a>推荐</span>
 							<span><a href="javascript:;" title="喜欢" onclick="lovenum(this,<{$model->id}>)"><img src="__RESOURCE__/images/love.gif" /><span><{$model->lovenumber}></span></a></span>
