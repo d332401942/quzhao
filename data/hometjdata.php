@@ -12,7 +12,7 @@ class HomeTjDataData extends BaseData
 	{
 		$user = json_decode($_COOKIE['UserInfo']);
 		$name = $user->UserName;
-		$sql = 'update home_tj_data set state='.$state.' , ctime = '.time().' , audit = '."'$name'".' where id in ('.implode(',',$ids).')';
+		$sql = 'update home_tj_data set state='.$state.' , ltime = '.time().' , audit = '."'$name'".' where id in ('.implode(',',$ids).')';
 		$this->exec($sql);
 	}
 	
@@ -103,7 +103,7 @@ class HomeTjDataData extends BaseData
 		$end = $pageCore->pageSize;
 		if($cateId)
 		{
-			$sql = 'select * from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE.' order by ctime desc,sort desc limit '.$start.','.$end;
+			$sql = 'select * from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE.' order by ltime desc,sort desc limit '.$start.','.$end;
 			$countSql = 'select count(*) from home_tj_data where cid = '.$cateId.' and state = '.HomeTjDataDataModel::STATE_HAVE;
 		}else{
 			$sql = 'select t1.* from home_tj_data as t1 inner join home_tj_class as t2 on t1.cid = t2.id where (t2.id = 2 or t2.pid = 2) and  t1.state = '.HomeTjDataDataModel::STATE_HAVE.' order by t1.ctime desc, t1.sort desc limit '.$start.','.$end;
