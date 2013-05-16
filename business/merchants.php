@@ -9,10 +9,10 @@ class MerchantsBusiness extends BaseBusiness
 		$data->add($model);
 	}
 	
-	public function getAll()
+	public function getAll($state = 0)
 	{
 		$data = M('MerchantsData');
-		return $data->getAll();
+		return $data->getAll($state);
 	}
 	
 	public function del($id)

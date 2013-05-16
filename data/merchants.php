@@ -1,20 +1,23 @@
 <?php
 class MerchantsData extends BaseData
 {
-	public function getAll()
+	public function getAll($state = false)
 	{
-		//$data->setOrder(array('sort'=>'asc','id'=>'desc'));
-		//return $data->findAll();
+		if($state)
+		{
+			//得到有数据的商家
+			$sql = 'select DISTINCT(name),t1.* from merchants as t1 join brand as t2 on t1.id = t2.merchantsId where t2.state = 1 and end_time > '.time().' order by sort asc,id desc';
+			return $this->query($sql,'MerchantsDataModel');
+		}
+		$this->setOrder(array('sort'=>'asc','id'=>'desc'));
+		return $this->findAll();
 		
-		//得到有数据的商家
-		$sql = 'select DISTINCT(name),t1.* from merchants as t1 join brand as t2 on t1.id = t2.merchantsId where t2.state = 1 and end_time > '.time().' order by sort asc,id desc';
-		return $this->query($sql,'MerchantsDataModel');
 	}
 	
 	public function del($id)
 	{
 		$sql = 'delete from merchants where id = '. $id;
-		$data->exec($sql);
+		$this->exec($sql);
 	}
     
 }
