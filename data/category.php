@@ -71,6 +71,12 @@ class CategoryData extends BaseData
 	{
 		$allCategoryModels = $this->findAll ();
 		$models = array ();
+		$levelModels = $this->getLevelModels($ids);
+		/* foreach ($models as $id => $model)
+		{
+			
+		}
+		P($allCategoryModels);
 		foreach ( $ids as $id )
 		{
 			if (isset ( $allCategoryModels [$id] ))
@@ -112,7 +118,48 @@ class CategoryData extends BaseData
 				}
 			}
 		}
-		return $models;
+		P($models); */
+		return $levelModels;
+	}
+	
+	public function getLevelModels($needIds = array())
+	{
+		$allCategoryModels = $this->findAll ();
+		$result = array();
+		foreach ($allCategoryModels as $model)
+		{
+			$pathArr = array();
+			$pathArr = explode('-', $model->path);
+			$pathArr = array_reverse($pathArr);
+			$isContinue = true;
+			foreach ($needIds as $id)
+			{
+				$needModel = $allCategoryModels[$id];
+				$needPathArr = explode('-', $needModel->path);
+				if ($model->level > $needModel->level)
+				{
+					//$isContinue = false;
+					//continue;
+				} 
+				if (in_array($id, $pathArr))
+				{
+					$isContinue = false;
+					continue;
+				}
+			}
+			if ($needIds && $isContinue)
+			{
+				continue;
+			}
+			foreach ($pathArr as $k => $id)
+			{
+				$parentModel = $allCategoryModels[$id];
+				$parentModel->children[$model->categoryid] = $model;
+				$model = $parentModel;
+			}
+			$result[$model->categoryid] = $model;
+		}
+		return $result;
 	}
 
 	public function getChildrenIds($id)
