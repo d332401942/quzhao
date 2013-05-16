@@ -8,8 +8,10 @@ class ApiBusiness extends BaseBusiness
 	 */
 	public function resetCache()
 	{
-		$ip = $_SERVER['REMOTE_ADDR'];
-		echo $ip;
+		if (empty($_GET['key']) || $_GET['key'] != 'agjasjgfasrgakjgfbasbgfasfaJHSFDHfgasdg')
+		{
+			return false;
+		}
 		$data = new CategoryData();
 		$data->resetCache();
 	}
