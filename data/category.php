@@ -138,10 +138,21 @@ class CategoryData extends BaseData
 				$needPathArr = explode('-', $needModel->path);
 				if ($model->level > $needModel->level)
 				{
-					//$isContinue = false;
-					//continue;
-				} 
-				if (in_array($id, $pathArr))
+					$isContinue = false;
+					continue;
+				}
+				else if ($model->level == $needModel->level)
+				{
+					if ($model->categoryid == $id)
+					{
+						$isContinue = false;
+					}
+				}
+				else
+				{
+					
+				}
+				if (in_array($model->level, $needPathArr))
 				{
 					$isContinue = false;
 					continue;
