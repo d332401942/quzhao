@@ -42,7 +42,7 @@ class Index2BrandView extends BaseView
 		$cate = $cateBusiness->getAll();
 		//得到所有商家
 		$business = M('MerchantsBusiness');
-		$merchants = $business->getAll();
+		$merchants = $business->getAll(true);
 		$this->assign('mid', $mid);
 		$this->assign('cid', $cid);
 		$this->assign('page', $page);

@@ -39,7 +39,7 @@ class BrandData extends BaseData
 		$row = $this->query ( $sql );
 		$pageCore->count = $row [0] ['num'];
 		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-		$sql = 'SELECT t1.*, t2.username AS username,t3.name as bn_name,t4.name as m_name FROM brand AS t1 left JOIN brandadmin AS t2 ON t2.id = t1.userid JOIN brand_name as t3 on t3.id = t1.brand_name_id JOIN merchants as t4 on t4.id = t1.merchantsId where '.$where.' order by id desc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+		$sql = 'SELECT t1.*, t2.username AS username,t3.name as bn_name,t4.name as m_name FROM brand AS t1 left JOIN brandadmin AS t2 ON t2.id = t1.userid left JOIN brand_name as t3 on t3.id = t1.brand_name_id JOIN merchants as t4 on t4.id = t1.merchantsId where '.$where.' order by id desc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
 		$result = $this->query($sql,'BrandDataModel');
 		return $result;
 	}
@@ -49,7 +49,7 @@ class BrandData extends BaseData
 	{
 		if($num == 1)
 		{
-			$sql = 'SELECT bn.zhekou as bn_zhekou, bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate,b.maxrebate as b_maxrebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 AND brand.istj = 1 AND brand.end_time > '.time().' order by id desc limit 10) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.istj = 1 AND b.end_time > '.time().' order by b.id desc';
+			$sql = 'SELECT bn.zhekou as bn_zhekou, bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate,b.maxrebate as b_maxrebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.state = 1 AND brand.istj = 1 AND brand.end_time > '.time().' order by brand.sort desc, brand.id desc limit 10) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.istj = 1 AND b.end_time > '.time().' order by b.sort,desc, b.id desc';
 		
 		}
 		else{
@@ -76,13 +76,13 @@ class BrandData extends BaseData
 				$row = $this->query ( $sql );
 				$pageCore->count = $row [0] ['num'];
 				$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-				$sql = 'SELECT bn.zhekou as bn_zhekou, bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate,b.maxrebate as b_maxrebate FROM merchants AS m INNER JOIN brand AS b ON b.merchantsId = m.id INNER JOIN brand_name AS bn ON bn.id = b.brand_name_id left join brand_cate as bc on bc.id = bn.cateid WHERE  b.end_time > '.time().' and m.id = '.$mid.$where2;
+				$sql = 'SELECT bn.zhekou as bn_zhekou, bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate,b.maxrebate as b_maxrebate FROM merchants AS m INNER JOIN brand AS b ON b.merchantsId = m.id INNER JOIN brand_name AS bn ON bn.id = b.brand_name_id left join brand_cate as bc on bc.id = bn.cateid WHERE  b.end_time > '.time().' and m.id = '.$mid.$where2.' order by b.sort desc, b.id desc';
 			}else{
 				$sql = 'SELECT count(*) as num FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.end_time > '.time().' and brand.state = 1 '.$where;
 				$row = $this->query ( $sql );
 				$pageCore->count = $row [0] ['num'];
 				$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-				$sql = 'SELECT bn.zhekou as bn_zhekou,bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate, b.maxrebate as b_maxrebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.end_time > '.time().' AND brand.state = 1 '.$where.'  LIMIT  '.($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize.' ) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.end_time > '.time();
+				$sql = 'SELECT bn.zhekou as bn_zhekou,bn.id AS bn_id, bn. NAME AS bn_name, bn.image AS bn_image, bn.bc_name AS bc_name, m. NAME AS m_name, m.id AS m_id, b.url AS b_url,b.rebate as b_rebate, b.maxrebate as b_maxrebate FROM ( SELECT b.*, bc.id AS bc_id, bc.`name` AS bc_name FROM brand_name AS b INNER JOIN brand_cate AS bc ON bc.id = b.cateid JOIN brand as brand on brand.brand_name_id = b.id where brand.end_time > '.time().' AND brand.state = 1 '.$where.' order by brand.sort desc, brand.id desc  LIMIT  '.($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize.' ) AS bn INNER JOIN brand AS b ON b.brand_name_id = bn.id INNER JOIN merchants AS m ON m.id = b.merchantsId where b.state = 1 AND b.end_time > '.time().' order by b.sort desc, b.id desc';
 			}	
 		}	
 		$statement = $this->run($sql);
