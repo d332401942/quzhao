@@ -39,7 +39,8 @@ class BrandData extends BaseData
 		$row = $this->query ( $sql );
 		$pageCore->count = $row [0] ['num'];
 		$pageCore->pageCount = ceil ( $pageCore->count / $pageCore->pageSize );
-		$sql = 'SELECT t1.*, t2.username AS username,t3.name as bn_name,t4.name as m_name FROM brand AS t1 left JOIN brandadmin AS t2 ON t2.id = t1.userid JOIN brand_name as t3 on t3.id = t1.brand_name_id JOIN merchants as t4 on t4.id = t1.merchantsId where '.$where.' order by id desc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+		$sql = 'SELECT t1.*, t2.username AS username,t3.name as bn_name,t4.name as m_name FROM brand AS t1 left JOIN brandadmin AS t2 ON t2.id = t1.userid left JOIN brand_name as t3 on t3.id = t1.brand_name_id JOIN merchants as t4 on t4.id = t1.merchantsId where '.$where.' order by id desc limit ' . ($pageCore->currentPage - 1) * $pageCore->pageSize . ',' . $pageCore->pageSize;
+		echo $sql;
 		$result = $this->query($sql,'BrandDataModel');
 		return $result;
 	}
