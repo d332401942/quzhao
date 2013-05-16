@@ -51,7 +51,7 @@
 <div class="sale_new_nav2">                     
 <a href="javascript:;" onclick="goSj(0)" <{if (!$mid)}>class="sale_xz2"<{/if}> >全部商家</a>
 <{foreach ($sjModel as $key=>$model)}>
-<{if ($key < 15)}>
+<{if ($key < 14)}>
 <a href="javascript:;" onclick="goSj(<{$model->id}>)" <{if ($mid == $model->id)}> class="sale_xz2" <{/if}> ><{$model->name}></a>
 <{else}>
 <a href="javascript:;" style="display:none;" class="js-hideen" onclick="goSj(<{$model->id}>)" <{if ($mid == $model->id)}> class="sale_xz2" <{/if}> ><{$model->name}></a>

@@ -12,15 +12,13 @@ class MerchantsBusiness extends BaseBusiness
 	public function getAll()
 	{
 		$data = M('MerchantsData');
-		$data->setOrder(array('sort'=>'asc','id'=>'desc'));
-		return $data->findAll();
+		return $data->getAll();
 	}
 	
 	public function del($id)
 	{
 		$data = M('MerchantsData');
-		$sql = 'delete from merchants where id = '. $id;
-		$data->exec($sql);
+		$data->del($id);
 	}
 	
 	public function update($model)
