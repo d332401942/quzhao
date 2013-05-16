@@ -67,15 +67,13 @@
 <ul>
 <{if (!empty($brandModel))}>
 <{foreach ($brandModel as $key=>$val)}>
-
+<{if ($val->total > 1)}>
 <li>
-<{if (!$mid)}>
 <span>
 <{foreach ($val->shangjia as $v)}>
 <a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
 <{/foreach}>
 </span>
-<{/if}>
 <div class="sale_new_cont_top">
 	<a href="<{$val->url}>" target="_blank"><img src="<{$val->image|parsePicpath}>" /></a>
 </div>
@@ -89,6 +87,27 @@
 	</div>
 </div>
 </li>
+<{else}>
+	<li>
+		<span onclick="jump('<{$val->url}>');" style="cursor:pointer;">
+			<{foreach ($val->shangjia as $v)}>
+				<a href="<{$v->b_url}>" target="_blank"><{$v->name}><h3><{$v->b_rebate}>折</h3></a>
+			<{/foreach}>
+		</span>
+		<div class="sale_new_cont_top">
+			<a href="<{$val->url}>" target="_blank"><img src="<{$val->image|parsePicpath}>" /></a>
+		</div>
+		<div class="sale_new_cont_tt">
+			<h2><a href="<{$val->url}>" target="_blank"><{$val->name}></a></h2>
+			<div class="sale_new_cont_jg">
+				<div class="sale_new_cont_jg_l">
+					<strong><{if ($val->zhekou)}><{$val->zhekou}><{/if}></strong>
+				</div>
+				<div class="sale_new_cont_jg_r"><a href="javascript:;"><{$val->total}>个商家</a></div>
+			</div>
+		</div>
+	</li>
+<{/if}>
 <{/foreach}>
 <{else}>
 暂无品牌数据
@@ -164,4 +183,7 @@ function formTogo() {
 	window.location.href = url;
 }
 
+function jump(url) {
+	window.open( url );
+}
 </script>

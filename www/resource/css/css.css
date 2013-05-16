@@ -914,7 +914,7 @@ filter:Alpha(opacity=95);}
 .sale_new_cont_jg_l{ float:left; font-size:12px; color:#999;}
  .sale_new_cont_jg_l strong{ color:#d8108e; font-size:18px; margin-right:3px;}
 .sale_new_cont_jg_r{ float:right; font-size:12px; color:#999; padding-top:5px;}
-.sale_new_cont ul li span{ position:absolute;line-height:20px; padding-top:3px; padding-bottom:3px;  color:#fff; background:rgba(0,0,0,0)none repeat scroll 0 0 !important;filter:Alpha(opacity=0); background-color:#000; display:inline-block; width:100%; display:none; height:198px; }
+.sale_new_cont ul li  span{ position:absolute;line-height:20px; padding-top:3px; padding-bottom:3px;  color:#fff; background:rgba(0,0,0,0)none repeat scroll 0 0 !important;filter:Alpha(opacity=0); background-color:#000; display:inline-block; width:100%; display:none; height:198px; }
 .sale_new_cont ul li span a{ width:176px; padding-left:7px; padding-right:7px; height:20px; line-height:20px;text-align:left; display:inline-block; color:#fff; position:relative;}
 .sale_new_cont ul li span a h3{ font-size:12px; color:#999; font-weight:lighter; position:absolute; right:10px; top:0px; }
 .sale_new_cont ul li span a:hover{ color:#f57bbf; text-decoration:none; background-color:#333;}

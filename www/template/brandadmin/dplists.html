@@ -35,7 +35,7 @@
 			<td align="center"><{$model->price}></td>
 			<td align="center"><{$model->jtClassName}></td>
 			<td align="center" title="<{$model->info}>"><{$model->info|truncate:'10'}></td>
-			<td align="center"><{$model->ltime|date_format:'Y-m-d'}></td>
+			<td align="center"><{$model->ctime|date_format:'Y-m-d H:m:s'}></td>
 			<td align="center"><{$model->time_end|date_format:'Y-m-d H:m:s'}></td>
 			<td align="center"><{if ($model->state == 1)}>已通过<{else if($model->state == 5)}>不合格<{else}>未通过<{/if}></td>
 			<td align="center"><{if ($model->state != 1)}><{$model->remark}><{/if}></td>
