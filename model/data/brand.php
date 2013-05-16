@@ -30,6 +30,8 @@ class BrandDataModel extends BaseDataModel
 	
 	public $end_time;
 	
+	public $sort = 0;
+	
 	public function __construct()
 	{
 		parent::__construct();

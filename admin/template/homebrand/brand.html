@@ -51,6 +51,10 @@
 				<td>有效时间：</td>
 				<td><{$dateFrom}>&nbsp;--&nbsp;&nbsp;<{$dateTo}></td>
 			</tr>
+			<tr>
+				<td>排序：</td>
+				<td><input value="<{if (isset($model->sort))}><{$model->sort}><{/if}>" type="text" name="sort" id="sort" />&nbsp;&nbsp;<span style="color:red;font-size:12px;">数值越大越靠前</span></td>
+			</tr>
 			<{if (!empty($model->image))}>
 			<tr>
 				<td>图片预览：</td>
