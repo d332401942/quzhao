@@ -155,10 +155,13 @@ class CategoryData extends BaseData
 			return self::$idToCategoryModels;
 		}
 		// todo走缓存拿去
-		self::$idToCategoryModels = $this->cacheFindAll ();
-		if (! empty ( self::$idToCategoryModels ))
+		if (Config::IS_USER_CACHE)
 		{
-			return self::$idToCategoryModels;
+			self::$idToCategoryModels = $this->cacheFindAll ();
+			if (! empty ( self::$idToCategoryModels ))
+			{
+				return self::$idToCategoryModels;
+			}
 		}
 		self::$idToCategoryModels = $this->dbFindAll ();
 		$this->setCache ();
