@@ -58,7 +58,6 @@ class CategoryData extends BaseData
 
 	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array(), $isGetAll = false)
 	{
-		$allCategoryModels = $this->findAll ();
 		$models = array ();
 		$levelModels = $this->getLevelModels($ids,$categoryIdToCount, $isGetAll);
 		return $levelModels;
@@ -82,6 +81,10 @@ class CategoryData extends BaseData
 					continue;
 				}
 				$thisModel = $allCategoryModels[$id];
+				if ($thisModel->categoryid < 4000)
+				{
+					continue;
+				}
 				if (isset($categoryIdToCount[$thisModel->categoryid]))
 				{
 					$thisModel->num = (int) $categoryIdToCount[$thisModel->categoryid];
@@ -102,6 +105,10 @@ class CategoryData extends BaseData
 		{
 			foreach ($allCategoryModels as $model)
 			{
+				if ($model->categoryid < 4000)
+				{
+					continue;
+				}
 				$pathArr = array();
 				$pathArr = explode('-', $model->path);
 				$pathArr = array_reverse($pathArr);
@@ -153,7 +160,6 @@ class CategoryData extends BaseData
 		{
 			return self::$idToCategoryModels;
 		}
-		
 		self::$idToCategoryModels = $this->dbFindAll ();
 		$this->setCache ();
 		return self::$idToCategoryModels;
@@ -199,14 +205,14 @@ class CategoryData extends BaseData
 		$models = self::$idToCategoryModels;
 		$memcache = M ( 'MemcacheDbLib' );
 		$json = json_encode ( $models );
-		$memcache->set ( self::CACHE_KEY, $json,0, time () + 86400 );
+		$memcache->set ( self::CACHE_KEY, $json,MEMCACHE_COMPRESSED, time () + 86400 );
 	}
 
 	private function dbFindAll()
 	{
 		$this->selectSearchSlaveDb ();
 		$sql = 'select categoryid,attrid,name,level,pid1,pid2,sort,isvalid';
-		$sql .= ' from category where isvalid = 1 order by categoryid desc,sort desc';
+		$sql .= ' from category where isvalid = 1  and categoryid > 4000 order by categoryid desc,sort desc';
 		$statement = $this->run ( $sql );
 		$result = array ();
 		while ( $categoryDataModel = $statement->fetchObject ( 'CategoryDataModel' ) )

@@ -16,7 +16,7 @@ class SearchData extends BaseData
 		$cacheKey = $this->getSearchKey($pageCore, $keyword, $categoryIds, $attrArr, $sort);
 		//查询memcache
 		$productIds = $this->getSearchCache($cacheKey,$pageCore);
-		if(empty($productIds) )
+		if(empty($productIds))
 		{
 			$productIds = $this->getProductIds ( $pageCore, $keyword, $categoryIds, $attrArr, $sort );
 			$this->setSearchCache($cacheKey, $productIds,$pageCore);
@@ -220,16 +220,19 @@ class SearchData extends BaseData
 			}
 			unset($attrArr ['brandid']);
 		}
+		$this->setAttr ( $sphinx, $attrArr );
 		
 		$needKeywords = '@title ' . $keyword . $keyLast;
 		//如果没有点分类并且这个关键词是个分类
+		$result = array();
 		if (!$categoryIds && $keywordCategoryIds)
 		{
-			$needKeywords = '';
+			$result = $sphinx->query ( '', 'product' );
 		}
-		$this->setAttr ( $sphinx, $attrArr );
-		
-		$result = $sphinx->query ( $needKeywords, 'product' );
+		if (empty($result['total']))
+		{
+			$result = $sphinx->query ( $needKeywords, 'product' );
+		}
 		$lightWords = $sphinx->getLightWords ( $result );
 		$this->lightWords = $sphinx->getLightWords ( $result );
 		$productIds = $sphinx->getResultIds ( $result, $pageCore );
