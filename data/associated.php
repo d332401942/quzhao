@@ -75,12 +75,14 @@ class AssociatedData extends BaseData
 			return self::$cateIdModels[$name];
 		}
 		
-		self::$cateIdModels[$name] = $this->getCateIdModels($name);
-		if(!empty(self::$cateIdModels[$name]))
+		if (Config::IS_USER_CACHE)
 		{
-			return self::$cateIdModels[$name];
+			self::$cateIdModels[$name] = $this->getCateIdModels($name);
+			if(!empty(self::$cateIdModels[$name]))
+			{
+				return self::$cateIdModels[$name];
+			}
 		}
-		
 		$this->selectSearchSlaveDb();
 		$this->where(array('keyname'=>$name));
 		$result = $this->findOne();

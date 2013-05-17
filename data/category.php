@@ -243,12 +243,15 @@ class CategoryData extends BaseData
 			return self::$attrdbModels [$attrId];
 		}
 		
-		self::$attrdbModels [$attrId] = $this->cacheAttrAll ( $attrId );
-		
-		if (! empty ( self::$attrdbModels [$attrId] ))
+		if (Config::IS_USER_CACHE)
 		{
-			return self::$attrdbModels [$attrId];
-		}
+			self::$attrdbModels [$attrId] = $this->cacheAttrAll ( $attrId );
+			
+			if (! empty ( self::$attrdbModels [$attrId] ))
+			{
+				return self::$attrdbModels [$attrId];
+			}
+		}	
 		if (! empty ( $attrId ))
 		{
 			$this->selectSearchSlaveDb ();

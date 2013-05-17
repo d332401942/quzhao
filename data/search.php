@@ -14,8 +14,12 @@ class SearchData extends BaseData
 		$categoryIds = $categoryIds ? $categoryIds : array();
 		$categoryIds = is_array($categoryIds) ? $categoryIds : array($categoryIds);
 		$cacheKey = $this->getSearchKey($pageCore, $keyword, $categoryIds, $attrArr, $sort);
-		//查询memcache
-		$productIds = $this->getSearchCache($cacheKey,$pageCore);
+		$productIds = array();
+		if (Config::IS_USER_CACHE)
+		{
+			//查询memcache
+			$productIds = $this->getSearchCache($cacheKey,$pageCore);
+		}	
 		if(empty($productIds))
 		{
 			$productIds = $this->getProductIds ( $pageCore, $keyword, $categoryIds, $attrArr, $sort );
