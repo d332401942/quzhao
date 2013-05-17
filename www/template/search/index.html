@@ -22,6 +22,7 @@
                    <h2>
                        <a href="#nogo" onclick="searchByCategory(<{$model->categoryid}>)"><{$model->name}></a>
                    </h2>
+                   <{if (!empty($model->children))}>
 				   <{foreach ($model->children as $m)}>
                    <li>
                        <a href="#nogo" onclick="searchByCategory(<{$m->categoryid}>)">
@@ -32,6 +33,7 @@
 						</a>
                    </li>
                    <{/foreach}>
+                   <{/if}>
                 </ul>
 				<{/foreach}>
                 <{/if}>
