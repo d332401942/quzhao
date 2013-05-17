@@ -125,50 +125,41 @@ class CategoryData extends BaseData
 	public function getLevelModels($needIds = array())
 	{
 		$allCategoryModels = $this->findAll ();
+		
 		$result = array();
-		foreach ($allCategoryModels as $model)
+		if ($needIds)
 		{
-			$pathArr = array();
-			$pathArr = explode('-', $model->path);
-			$pathArr = array_reverse($pathArr);
-			$isContinue = true;
+			$needIds = $this->getChildrenIds($needIds);
 			foreach ($needIds as $id)
 			{
-				$needModel = $allCategoryModels[$id];
-				$needPathArr = explode('-', $needModel->path);
-				if ($model->level > $needModel->level)
+				$thisModel = $allCategoryModels[$id];
+				$pathArr = explode('-', $thisModel->path);
+				$pathArr = array_reverse($pathArr);
+				array_shift($pathArr);
+				foreach ($pathArr as $k => $id)
 				{
-					$isContinue = false;
-					continue;
+					$parentModel = $allCategoryModels[$id];
+					$parentModel->children[$thisModel->categoryid] = $thisModel;
+					$thisModel = $parentModel;
 				}
-				else if ($model->level == $needModel->level)
-				{
-					if ($model->categoryid == $id)
-					{
-						$isContinue = false;
-					}
-				}
-				else
-				{
-					
-				}
-				if (in_array($model->level, $needPathArr))
-				{
-					$isContinue = false;
-					continue;
-				}
+				$result[$thisModel->categoryid] = $thisModel;
 			}
-			if ($needIds && $isContinue)
+		}
+		else
+		{
+			foreach ($allCategoryModels as $model)
 			{
-				continue;
+				$pathArr = array();
+				$pathArr = explode('-', $model->path);
+				$pathArr = array_reverse($pathArr);
+				foreach ($pathArr as $k => $id)
+				{
+					$parentModel = $allCategoryModels[$id];
+					$parentModel->children[$model->categoryid] = $model;
+					$model = $parentModel;
+				}
+				$result[$model->categoryid] = $model;
 			}
-			foreach ($pathArr as $k => $id)
-			{
-				$parentModel = $allCategoryModels[$id];
-				$parentModel->children[$model->categoryid] = $model;
-				$model = $parentModel;
-			}
-			$result[$model->categoryid] = $model;
 		}
 		return $result;
 	}

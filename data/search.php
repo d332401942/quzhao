@@ -177,10 +177,12 @@ class SearchData extends BaseData
 		
 		if ($categoryIds)
 		{
+			$categoryIds = $categoryData->getChildrenIds($categoryIds);
 			$sphinx->setFilter ( 'categoryid', $categoryIds );
 		}
 		else if ($keywordCategoryIds)
 		{
+			$keywordCategoryIds = $categoryData->getChildrenIds($keywordCategoryIds);
 			$sphinx->setFilter ( 'categoryid', $keywordCategoryIds );
 		}
 		$keyLast = '';
