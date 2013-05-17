@@ -11,27 +11,29 @@ class CategoryBusiness extends BaseBusiness
 		//如果关键词是一个分组则显示分组
 		$categoryData = new CategoryData();
 		$categoryIds = $categoryData->getCategoryIdsByName($keyword);
+		$isGetAll = true;
 		if (!$categoryIds)
 		{
+			$isGetAll = false; 
 			$categoryModels = array();
 			$categoryIdToCount = $searchData->getCategoryIdToCount($keyword);
 			if (empty($categoryIdToCount))
 			{
-				return $categoryIdToCount;
+				return $categoryModels;
 			}
 			$categoryIds = array_keys($categoryIdToCount);
 		}
-		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount);
+		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount, $isGetAll);
 		return $categoryModels;
 	}
 
 	/**
 	 * 通过分类ID获取他的上级已经下级的所有数据
 	 */
-	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array())
+	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array(), $isGetAll = false)
 	{
 		$data = M('CategoryData');
-		$models = $data->getCompleteCategoryByIds($ids, $categoryIdToCount);
+		$models = $data->getCompleteCategoryByIds($ids, $categoryIdToCount, $isGetAll);
 		return $models;
 	}
 	

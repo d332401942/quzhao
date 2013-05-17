@@ -56,22 +56,25 @@ class CategoryData extends BaseData
 		}
 	}
 
-	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array())
+	public function getCompleteCategoryByIds($ids, $categoryIdToCount = array(), $isGetAll = false)
 	{
 		$allCategoryModels = $this->findAll ();
 		$models = array ();
-		$levelModels = $this->getLevelModels($ids);
+		$levelModels = $this->getLevelModels($ids, $isGetAll);
 		return $levelModels;
 	}
 	
-	public function getLevelModels($needIds = array())
+	public function getLevelModels($needIds = array(), $isGetAll = false)
 	{
 		$allCategoryModels = $this->findAll ();
 		
 		$result = array();
 		if ($needIds)
 		{
-			$needIds = $this->getChildrenIds($needIds);
+			if ($isGetAll)
+			{
+				$needIds = $this->getChildrenIds($needIds);
+			}
 			foreach ($needIds as $id)
 			{
 				$thisModel = $allCategoryModels[$id];
