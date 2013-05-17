@@ -11,6 +11,8 @@ class SearchData extends BaseData
 	
 	public function searchProduct($pageCore, $keyword, $categoryIds = array(), $attrArr = array(), $sort = null)
 	{
+		$categoryIds = $categoryIds ? $categoryIds : array();
+		$categoryIds = is_array($categoryIds) ? $categoryIds : array($categoryIds);
 		$cacheKey = $this->getSearchKey($pageCore, $keyword, $categoryIds, $attrArr, $sort);
 		//查询memcache
 		$productIds = $this->getSearchCache($cacheKey,$pageCore);
