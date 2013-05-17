@@ -30,17 +30,6 @@ class CategoryData extends BaseData
 		$memcache = new MemcacheDbLib();
 		$str = $memcache->get(self::CACHE_NAME_TO_CATEGORYMODELS . md5($name));
 		$ids = json_decode($str,true);
-		if ($ids)
-		{
-			$result = $this->getCompleteCategoryByIds($ids);
-			foreach ($result as $model)
-			{
-				if (!in_array($model->categoryid, $ids))
-				{
-					$ids[] = $model->categoryid;
-				}
-			}
-		}
 		return $ids;
 	}
 
@@ -72,53 +61,6 @@ class CategoryData extends BaseData
 		$allCategoryModels = $this->findAll ();
 		$models = array ();
 		$levelModels = $this->getLevelModels($ids);
-		/* foreach ($models as $id => $model)
-		{
-			
-		}
-		P($allCategoryModels);
-		foreach ( $ids as $id )
-		{
-			if (isset ( $allCategoryModels [$id] ))
-			{
-				$model = $allCategoryModels [$id];
-				if (! empty ( $categoryIdToCount [$id] ))
-				{
-					$model->num = $categoryIdToCount [$id];
-				}
-				$pid2 = $model->pid2;
-				$pid1 = $model->pid1;
-				if ($model->level == 3)
-				{
-					$lastModel = $model;
-				}
-				else if ($model->level == 2)
-				{
-					$pid2 = $model->categoryid;
-				}
-				else if ($model->level == 1)
-				{
-					$pid1 = $model->categoryid;
-				}
-				$middleModel = null;
-				$preModel = null;
-				$middleModel = ! empty ( $allCategoryModels [$pid2] ) ? $allCategoryModels [$pid2] : null;
-				$preModel = ! empty ( $allCategoryModels [$pid1] ) ? $allCategoryModels [$pid1] : nul;
-				if (empty ( $models [$pid1] ))
-				{
-					$models [$pid1] = $preModel;
-				}
-				if (empty ( $preModel->children [$pid2] ) && $middleModel)
-				{
-					$preModel->children [$pid2] = $middleModel;
-				}
-				if (empty ( $middleModel->children [$id] ) && $model)
-				{
-					$middleModel->children [$id] = $model;
-				}
-			}
-		}
-		P($models); */
 		return $levelModels;
 	}
 	
@@ -130,7 +72,6 @@ class CategoryData extends BaseData
 		if ($needIds)
 		{
 			$needIds = $this->getChildrenIds($needIds);
-			//P($needIds);exit;
 			foreach ($needIds as $id)
 			{
 				$thisModel = $allCategoryModels[$id];
@@ -185,6 +126,7 @@ class CategoryData extends BaseData
 				}
 			}
 		}
+		$childrenIds = array_unique($childrenIds);
 		return $childrenIds;
 	}
 
