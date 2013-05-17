@@ -144,7 +144,7 @@
                     <{/foreach}>
                 </li>
                 <li class="list_r_more">
-					<{if (!empty($k) && $k >= 4)}>
+					<{if (!empty($k) && $k > 4)}>
                     <a href="#nogo" onclick="attrShow(this,'<{$val->attr}>')">
                        	 <span>更多</span>
                         <img src="__RESOURCE__/images/bn.gif" />
@@ -154,7 +154,7 @@
             </ul>
 			<{/foreach}>
         </div>
-		<{if ($key >= 2)}>
+		<{if ($key > 2)}>
         <div class="list_r_minimo">
             <a href="#nogo" onclick="attrdbShow(this)">
                 <span>更多</span>
