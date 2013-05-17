@@ -227,7 +227,6 @@ class SearchData extends BaseData
 		{
 			$needKeywords = '';
 		}
-
 		$this->setAttr ( $sphinx, $attrArr );
 		
 		$result = $sphinx->query ( $needKeywords, 'product' );

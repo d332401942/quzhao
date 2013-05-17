@@ -77,6 +77,10 @@ class CategoryData extends BaseData
 			}
 			foreach ($needIds as $id)
 			{
+				if (empty($allCategoryModels[$id]))
+				{
+					continue;
+				}
 				$thisModel = $allCategoryModels[$id];
 				if (isset($categoryIdToCount[$thisModel->categoryid]))
 				{

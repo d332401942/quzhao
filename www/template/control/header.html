@@ -40,7 +40,7 @@
 			url += '/search';
 		}
 		var keyword = $(obj).find('input[name="keyword"]').val();
-		url += '__LIMIT__keyword/' + encodeURI(keyword);
+		url += '__LIMIT__keyword/' + encodeURIComponent(keyword);
 		var type = '<{$type}>';
 		if (type == 'search') {
 			window.location.href = url;

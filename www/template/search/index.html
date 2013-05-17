@@ -421,7 +421,9 @@ function formTogo() {
 		if (i !=0) {
 			pre = '/';
 		}
-		url += pre + obj.name + '/' + obj.value;
+		var vv = encodeURIComponent(obj.value);
+		url += pre + obj.name + '/' + vv;
+		
 	}
 	window.location.href = url;
 }
