@@ -13,11 +13,11 @@ class SearchData extends BaseData
 	{
 		$cacheKey = $this->getSearchKey($pageCore, $keyword, $categoryIds, $attrArr, $sort);
 		//查询memcache
-		$productIds = $this->getSearchCache($cacheKey);
+		$productIds = $this->getSearchCache($cacheKey,$pageCore);
 		if(empty($productIds))
 		{
 			$productIds = $this->getProductIds ( $pageCore, $keyword, $categoryIds, $attrArr, $sort );
-			$this->setSearchCache($cacheKey, $productIds);
+			$this->setSearchCache($cacheKey, $productIds,$pageCore);
 		}
 		
 		// 通过ID查询出来结果
@@ -35,21 +35,31 @@ class SearchData extends BaseData
 	/**
 	 *	memcache得到搜索条件
 	 */
-	 private function getSearchCache($cacheKey)
+	 private function getSearchCache($cacheKey, $pageCore)
 	 {
 		$memcache = M('MemcacheDbLib');
 		$data = $memcache->get($cacheKey);
-		$ids = json_decode($data,true);
+		$result = json_decode($data,true);
+		$ids = array();
+		if ($result)
+		{
+			$ids = $result[0];
+			foreach ($pageCore as $k => $v) 
+			{
+				$pageCore->$k = $result[1][$k];
+			}
+		}
 		return $ids;
 	 }
 	 
 	 /**
 	 *	memcache得到搜索条件
 	 */
-	 private function setSearchCache($key,$ids)
+	 private function setSearchCache($key,$ids,$pageCore)
 	 {
 		$memcache = M('MemcacheDbLib');
-		$ids = json_encode($ids);
+		$result = array($ids, $pageCore);
+		$ids = json_encode($result);
 		$memcache->set($key, $ids, 0, 3600);
 	 }
 	/**
@@ -107,6 +117,7 @@ class SearchData extends BaseData
 				}
 			}
 		}
+		
 		return $brandIdToCount;
 	}
 
