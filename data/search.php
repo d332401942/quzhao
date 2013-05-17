@@ -163,6 +163,7 @@ class SearchData extends BaseData
 		$this->setWeights ( $sphinx );
 		$this->setPublicFilter ( $sphinx );
 		$searchKey = '@title ' . $keyword;
+		$searchKeyTmp = $searchKey;
 		if ($categoryIds)
 		{
 			$categoryData = new CategoryData();
@@ -172,6 +173,12 @@ class SearchData extends BaseData
 		}
 		$sphinx->setGroupBy ( 'categoryid', SPH_GROUPBY_ATTR, '@count desc' );
 		$result = $sphinx->query ( $searchKey, 'product' );
+		if (!$result['total'])
+		{
+			$sphinx->resetFilters();
+			$this->setPublicFilter ( $sphinx );
+			$result = $sphinx->query ( $searchKeyTmp, 'product' );
+		}
 		$categoryIdToCount = array ();
 		if (! empty ( $result ['matches'] ))
 		{
@@ -195,7 +202,7 @@ class SearchData extends BaseData
 		$sphinx->setLimits ( $start, $pageCore->pageSize, $start + $pageCore->pageSize );
 		$this->setWeights ( $sphinx );
 		$this->setSortMode ( $sphinx, $sort );
-		$this->setPublicFilter ( $sphinx );
+		
 		//如果这个关键词是分类则直接走分类
 		$categoryData = new CategoryData();
 		$keywordCategoryIds = $categoryData->getCategoryIdsByName($keyword);
@@ -231,10 +238,13 @@ class SearchData extends BaseData
 		$result = array();
 		if (!$categoryIds && $keywordCategoryIds)
 		{
+			$this->setPublicFilter ( $sphinx );
 			$result = $sphinx->query ( '', 'product' );
 		}
 		if (empty($result['total']))
 		{
+			$sphinx->resetFilters();
+			$this->setPublicFilter ( $sphinx );
 			$result = $sphinx->query ( $needKeywords, 'product' );
 		}
 		$lightWords = $sphinx->getLightWords ( $result );

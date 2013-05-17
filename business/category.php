@@ -18,6 +18,7 @@ class CategoryBusiness extends BaseBusiness
 			return $categoryModels;
 		}
 		$categoryIds = array_keys($categoryIdToCount);
+		
 		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount, false);
 		return $categoryModels;
 	}
