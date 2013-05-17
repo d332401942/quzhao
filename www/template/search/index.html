@@ -20,7 +20,12 @@
 				<{foreach ($hostCategoryModels->children as $model)}>
                 <ul>
                    <h2>
-                       <a href="#nogo" onclick="searchByCategory(<{$model->categoryid}>)"><{$model->name}></a>
+                      	<a href="#nogo" onclick="searchByCategory(<{$model->categoryid}>)">
+							<{$model->name}>
+							<{if ($model->num)}>
+							(<{$model->num}>)
+							<{/if}>
+						</a>
                    </h2>
                    <{if (!empty($model->children))}>
 				   <{foreach ($model->children as $m)}>

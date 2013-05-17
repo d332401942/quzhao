@@ -152,14 +152,22 @@ class SearchData extends BaseData
 		return $productModels;
 	}
 
-	public function getCategoryIdToCount($keyword)
+	public function getCategoryIdToCount($keyword,$categoryIds = array())
 	{
 		$sphinx = new SphinxDbLib ();
 		
 		$this->setWeights ( $sphinx );
 		$this->setPublicFilter ( $sphinx );
+		$searchKey = '@title ' . $keyword;
+		if ($categoryIds)
+		{
+			$categoryData = new CategoryData();
+			$categoryIds = $categoryData->getChildrenIds($categoryIds);
+			$sphinx->setFilter ( 'categoryid', $categoryIds );
+			$searchKey = '';
+		}
 		$sphinx->setGroupBy ( 'categoryid', SPH_GROUPBY_ATTR, '@count desc' );
-		$result = $sphinx->query ( '@title ' . $keyword, 'product' );
+		$result = $sphinx->query ( $searchKey, 'product' );
 		$categoryIdToCount = array ();
 		if (! empty ( $result ['matches'] ))
 		{

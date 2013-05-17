@@ -60,11 +60,11 @@ class CategoryData extends BaseData
 	{
 		$allCategoryModels = $this->findAll ();
 		$models = array ();
-		$levelModels = $this->getLevelModels($ids, $isGetAll);
+		$levelModels = $this->getLevelModels($ids,$categoryIdToCount, $isGetAll);
 		return $levelModels;
 	}
 	
-	public function getLevelModels($needIds = array(), $isGetAll = false)
+	public function getLevelModels($needIds = array(),$categoryIdToCount = array() ,$isGetAll = false)
 	{
 		$allCategoryModels = $this->findAll ();
 		
@@ -78,6 +78,10 @@ class CategoryData extends BaseData
 			foreach ($needIds as $id)
 			{
 				$thisModel = $allCategoryModels[$id];
+				if (isset($categoryIdToCount[$thisModel->categoryid]))
+				{
+					$thisModel->num = (int) $categoryIdToCount[$thisModel->categoryid];
+				}
 				$pathArr = explode('-', $thisModel->path);
 				$pathArr = array_reverse($pathArr);
 				array_shift($pathArr);

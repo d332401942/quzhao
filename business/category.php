@@ -11,19 +11,14 @@ class CategoryBusiness extends BaseBusiness
 		//如果关键词是一个分组则显示分组
 		$categoryData = new CategoryData();
 		$categoryIds = $categoryData->getCategoryIdsByName($keyword);
-		$isGetAll = true;
-		if (!$categoryIds)
+		$categoryModels = array();
+		$categoryIdToCount = $searchData->getCategoryIdToCount($keyword,$categoryIds);
+		if (empty($categoryIdToCount))
 		{
-			$isGetAll = false; 
-			$categoryModels = array();
-			$categoryIdToCount = $searchData->getCategoryIdToCount($keyword);
-			if (empty($categoryIdToCount))
-			{
-				return $categoryModels;
-			}
-			$categoryIds = array_keys($categoryIdToCount);
+			return $categoryModels;
 		}
-		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount, $isGetAll);
+		$categoryIds = array_keys($categoryIdToCount);
+		$categoryModels = $this->getCompleteCategoryByIds($categoryIds, $categoryIdToCount, false);
 		return $categoryModels;
 	}
 
