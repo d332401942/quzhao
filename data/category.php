@@ -129,7 +129,7 @@ class CategoryData extends BaseData
 		$result = array();
 		if ($needIds)
 		{
-			//$needIds = $this->getChildrenIds($needIds);
+			$needIds = $this->getChildrenIds($needIds);
 			//P($needIds);exit;
 			foreach ($needIds as $id)
 			{
